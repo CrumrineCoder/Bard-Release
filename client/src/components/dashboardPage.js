@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, searchPostsByTag, getPostsByIDAction, checkTagsAction, checkSourcesAction } from '../actions/linkActions';
-import { getCommentsForOnePostSaga } from '../sagas/dashboardSaga';
+import { postAction, getAllPostsAction, searchPostsByTag, getPostsByIDAction, checkTagsAction, checkSourcesAction } from '../actions/linkActions';
 
 import Post from "./Post";
-import { getPostsByIDService } from '../services/dashboardService';
 
 import tagCategories from "../utils/tagCategories";
 

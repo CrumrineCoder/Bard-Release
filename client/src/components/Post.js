@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction } from '../actions/linkActions';
-import { getCommentsForOnePostSaga } from '../sagas/dashboardSaga';
 import tagCategories from "../utils/tagCategories";
-import { set } from 'mongoose';
-import Textarea from "./Textarea.js"
 
 //,{post, postID, index, comment, response }
 function Post(props) {
