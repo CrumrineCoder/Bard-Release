@@ -29,12 +29,57 @@ function Post(props) {
   }
 
   useEffect(() => {
-    if (props.response.dashboard.response.message == "Tag added.") {
-      getTagsForOnePost(props.post._id)
-    } else if (props.response.dashboard.response.message == "Comment added.") {
-      getCommentsForOnePost(props.post._id)
+    if (props.response.dashboard.response) {
+      if (props.response.dashboard.response.message == "Tag added.") {
+        getTagsForOnePost(props.post._id)
+      } else if (props.response.dashboard.response.message == "Comment added.") {
+        getCommentsForOnePost(props.post._id)
+      }
+
+      if (props.response.dashboard.response.comment) {
+        // console.log(props.response.dashboard.response.comment[0])
+        if (props.response.dashboard.response.comment.length > 0 && props.response.dashboard.response.comment[0].postID == props.post._id) {
+          //   console.log(props.response.dashboard.response.comment[0]);
+          setCommentChain(
+            <div>
+              {props.response.dashboard.response.comment[0].comments.map((comment, index) =>
+                <li key={comment._id + index}>
+                  {comment.text}
+                </li>
+              )}
+            </div>
+          )
+        }
+      }
+      if (props.response.dashboard.response.tag) {
+        //    console.log(props.response.dashboard.response.tag)
+        if (props.response.dashboard.response.tag.length > 0 && props.response.dashboard.response.tag[0].postID == props.post._id) {
+          setTags(props.response.dashboard.response.tag[0].tags)
+
+          let parents = [];
+          let tagsToShow = props.response.dashboard.response.tag[0].tags;
+
+          Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
+            parents.push(tagCategory)
+          })
+
+          tagsToShow = tagsToShow.filter(function (el) {
+            return parents.indexOf(el.text) < 0;
+          });
+
+          setTagChain(
+            <div>
+              {tagsToShow.map(tag =>
+                <li key={tag._id}>
+                  {tag.text}
+                </li>
+              )}
+            </div>
+          )
+        }
+      }
     }
-  }, [props.response.dashboard.response.message])
+  }, [props.response.dashboard.response])
 
 
   function onHandleComment(event) {
@@ -110,54 +155,6 @@ function Post(props) {
       setExistingTags()
     }
   }, [tagToAdd])
-
-  useEffect(() => {
-    if (props.response.dashboard.response.comment) {
-      // console.log(props.response.dashboard.response.comment[0])
-      if (props.response.dashboard.response.comment.length > 0 && props.response.dashboard.response.comment[0].postID == props.post._id) {
-        //   console.log(props.response.dashboard.response.comment[0]);
-        setCommentChain(
-          <div>
-            {props.response.dashboard.response.comment[0].comments.map((comment, index) =>
-              <li key={comment._id + index}>
-                {comment.text}
-              </li>
-            )}
-          </div>
-        )
-      }
-    }
-  }, [props.response.dashboard.response.comment])
-
-  useEffect(() => {
-    if (props.response.dashboard.response.tag) {
-      //    console.log(props.response.dashboard.response.tag)
-      if (props.response.dashboard.response.tag.length > 0 && props.response.dashboard.response.tag[0].postID == props.post._id) {
-        setTags(props.response.dashboard.response.tag[0].tags)
-
-        let parents = [];
-        let tagsToShow = props.response.dashboard.response.tag[0].tags;
-
-        Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
-          parents.push(tagCategory)
-        })
-
-        tagsToShow = tagsToShow.filter(function (el) {
-          return parents.indexOf(el.text) < 0;
-        });
-
-        setTagChain(
-          <div>
-            {tagsToShow.map(tag =>
-              <li key={tag._id}>
-                {tag.text}
-              </li>
-            )}
-          </div>
-        )
-      }
-    }
-  }, [props.response.dashboard.response.tag])
 
   function getEmbed(link) {
     return link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")

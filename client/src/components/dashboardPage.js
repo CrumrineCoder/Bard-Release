@@ -82,20 +82,23 @@ function DashboardPage(props) {
           return exclude.indexOf(post.source.replace(" ", "").toLowerCase()) == -1
         })
       }
-      if (props.response.dashboard.response.message == "Successfully created new post.") {
-        setPostsContent(
-          <div>suck</div>
-        )
-      } else {
+      if (props.response.dashboard.response) {
+        if (props.response.dashboard.response.message == "Successfully created new post.") {
+          setPostsContent(
+            <div>suck</div>
+          )
+        }
+        else {
 
-        setPostsContent(
-          <div className="posts">
-            {finalizedPosts.map(post =>
-              <Post post={post} key={post._id}></Post>
-            )}
-          </div>
-        )
+          setPostsContent(
+            <div className="posts">
+              {finalizedPosts.map(post =>
+                <Post post={post} key={post._id}></Post>
+              )}
+            </div>
+          )
 
+        }
       }
     }
   }, [filteredPosts, props.response.dashboard.response, excludeSource, includeSource])
@@ -289,15 +292,15 @@ function DashboardPage(props) {
           <h3 className="dashboardToolHeader">Post a new song</h3>
           <form onSubmit={onHandlePost}>
             <div className="dashboardToolLabel">
-              <label htmlFor="source">Source <input className="dashboardToolInput" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
+              <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput" autoComplete="off" type="link" name="link" id="link" />
               </label>
             </div>
             <div className="dashboardToolLabel">
-              <label htmlFor="name">Name <input className="dashboardToolInput" autoComplete="off" type="name" name="name" id="name" />
+              <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
               </label>
             </div>
             <div className="dashboardToolLabel">
-              <label htmlFor="link">Link <input className="dashboardToolInput" autoComplete="off" type="link" name="link" id="link" />
+              <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput" autoComplete="off" type="name" name="name" id="name" />
               </label>
             </div>
             <div>
