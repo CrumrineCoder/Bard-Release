@@ -82,20 +82,23 @@ function DashboardPage(props) {
           return exclude.indexOf(post.source.replace(" ", "").toLowerCase()) == -1
         })
       }
-      if (props.response.dashboard.response.message == "Successfully created new post.") {
-        setPostsContent(
-          <div>suck</div>
-        )
-      } else {
+      if (props.response.dashboard.response) {
+        if (props.response.dashboard.response.message == "Successfully created new post.") {
+          setPostsContent(
+            <div>suck</div>
+          )
+        }
+        else {
 
-        setPostsContent(
-          <div className="posts">
-            {finalizedPosts.map(post =>
-              <Post post={post} key={post._id}></Post>
-            )}
-          </div>
-        )
+          setPostsContent(
+            <div className="posts">
+              {finalizedPosts.map(post =>
+                <Post post={post} key={post._id}></Post>
+              )}
+            </div>
+          )
 
+        }
       }
     }
   }, [filteredPosts, props.response.dashboard.response, excludeSource, includeSource])
