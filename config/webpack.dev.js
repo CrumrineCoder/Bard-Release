@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const commonConfig = require('./webpack.common');
 
@@ -18,6 +19,10 @@ module.exports = merge(commonConfig, {
     filename: 'js/[name].js',
     chunkFilename: '[id].chunk.js'
   },
+
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ],
 
   devServer: {
     contentBase: './client/public',
