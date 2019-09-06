@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const helpers = require('./helpers');
 
@@ -81,6 +82,8 @@ module.exports = {
   plugins: [
     new CompressionPlugin(),
 
+    new BundleAnalyzerPlugin(),
+    
     new webpack.HotModuleReplacementPlugin(),
 
     new webpack.DefinePlugin({
