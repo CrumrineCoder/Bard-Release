@@ -28,4 +28,7 @@ Problems I'm fixing w/ this:
 * Update messages, X messages found! 
 * Show Categorical tags
 * Loading screen
-* Redirect to login when cookies run out 
+* Redirect to login when cookies run out, cannot get dashboard when reloading. 
+* UX, and a better login screen to tell the user what everything does. (What are general tags? What are the preset tags? What's the point of the site?)
+* Discord integration
+* Tag word cloud
