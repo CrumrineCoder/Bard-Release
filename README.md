@@ -27,3 +27,5 @@ Problems I'm fixing w/ this:
 * Change volume controls, or make the youtube video at the top and larger. 
 * Update messages, X messages found! 
 * Show Categorical tags
+* Loading screen
+* Redirect to login when cookies run out 
