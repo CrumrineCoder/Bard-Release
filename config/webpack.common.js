@@ -11,11 +11,7 @@ const NODE_ENV = process.env.NODE_ENV;
 const isProd = NODE_ENV === 'production';
 
 module.exports = {
-  entry: {
-    js: ['babel-polyfill', helpers.root('client/src/index.js')],
-    vendor: ['react']
-  },
-
+  
   output: {
     path: helpers.root('dist'),
     publicPath: '/',
@@ -42,6 +38,7 @@ module.exports = {
     }
   },
   module: {
+    
     rules: [
       // JS files
       {

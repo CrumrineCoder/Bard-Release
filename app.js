@@ -16,11 +16,12 @@ const errorHandler = require('errorhandler');
 
 //const config = require('../config/config');
 const webpackConfig = require('./webpack.config');
+const compiler = webpack(webpackConfig);
 
 require('dotenv').config();
 
 const isDev = process.env.NODE_ENV !== 'production';
-const port  = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 
 // Configuration
@@ -59,8 +60,18 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 if (isDev) {
+  console.log("IS DEV");
+  app.use(
+    require("webpack-dev-middleware")(compiler, {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath
+    })
+  );
+  app.use(require("webpack-hot-middleware")(compiler));
   app.use(errorHandler());
 }
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // API routes
@@ -109,12 +120,12 @@ if (isDev) {
       modules: false
     }
   }));
-  
+
   app.use(express.static(path.resolve(__dirname, '../dist')));
- /* app.get('*', function (req, res) {
-    res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-    res.end();
-  }); */
+  /* app.get('*', function (req, res) {
+     res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+     res.end();
+   }); */
 }
 
 app.listen(port, '0.0.0.0', (err) => {
