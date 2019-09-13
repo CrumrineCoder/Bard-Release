@@ -154,11 +154,14 @@ function Post(props) {
   }, [tagToAdd])
 
   function getEmbed(link) {
-    return link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
+    let embedLink =  link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+    console.log(embedLink);
+    embedLink+="?autoplay=1"
+    return embedLink;
   }
 
   function getPopOut(link) {
-    return link.replace("https://www.youtube.com/watch?v=", "http://youtu.be/")
+    return link.replace("https://www.youtube.com/watch?v=", "http://youtu.be/");
   }
 
   function onHandleTag(event) {
@@ -215,7 +218,7 @@ function Post(props) {
       <br />
       <button className="btn btn-pumpkin btn-centered" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
       <br />
-      {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link) + "?autoplay=1"} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
+      {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
       </iframe>}
       <form onSubmit={onHandleComment}>
         <div>
