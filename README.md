@@ -27,3 +27,7 @@ Problems I'm fixing w/ this:
 * Change volume controls, or make the youtube video at the top and larger. 
 * Update messages, X messages found! 
 * Show Categorical tags
+* Register message is wrong
+* D&D aesthetic
+* Make the tags the top priority, not the song
+* Song-boards
