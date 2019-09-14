@@ -61,13 +61,6 @@ passport.deserializeUser(function (user, done) {
 });
 if (isDev) {
   console.log("IS DEV");
-  app.use(
-    require("webpack-dev-middleware")(compiler, {
-      noInfo: true,
-      publicPath: webpackConfig.output.publicPath
-    })
-  );
-  app.use(require("webpack-hot-middleware")(compiler));
   app.use(errorHandler());
 }
 
@@ -84,6 +77,7 @@ require('./config/passport');
 require('./routes')(app);
 
 if (isDev) {
+  console.log("HOT RELOAD?")
   const compiler = webpack(webpackConfig);
 
   app.use(historyApiFallback({
@@ -104,7 +98,10 @@ if (isDev) {
   }));
 
   app.use(webpackHotMiddleware(compiler));
-  app.use(express.static(path.resolve(__dirname, '../dist')));
+  app.get("/", (req, res) =>
+    res.sendFile(path.resolve(__dirname, ".public/index.html"))
+  );
+  // app.use(express.static(path.resolve(__dirname, '../dist')));
 } else {
   const compiler = webpack(webpackConfig);
 
@@ -121,12 +118,15 @@ if (isDev) {
     }
   }));
 
+  
+
   app.use(express.static(path.resolve(__dirname, '../dist')));
   /* app.get('*', function (req, res) {
      res.sendFile(path.resolve(__dirname, '../dist/index.html'));
      res.end();
    }); */
 }
+
 
 app.listen(port, '0.0.0.0', (err) => {
   if (err) {

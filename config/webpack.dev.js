@@ -16,7 +16,7 @@ module.exports = merge(commonConfig, {
       "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000",
     ]
   },
-  
+
   plugins: [new webpack.HotModuleReplacementPlugin()],
 
   output: {
@@ -24,19 +24,23 @@ module.exports = merge(commonConfig, {
     chunkFilename: '[id].chunk.js'
   },
 
+
   watchOptions: {
     aggregateTimeout: 10000,
     poll: 5000
   },
-/*
-  plugins: [
-    new BundleAnalyzerPlugin()
-  ],
-*/
+  /*
+    plugins: [
+      new BundleAnalyzerPlugin()
+    ],
+  */
   devServer: {
     contentBase: './client/public',
     historyApiFallback: true,
     stats: 'minimal', // none (or false), errors-only, minimal, normal (or true) and verbose,
-    hot: true
+    hot: true,
+    proxy: {
+      "/api": "http://localhost:3000"
+    }
   }
 });
