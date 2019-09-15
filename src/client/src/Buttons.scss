@@ -1,0 +1,110 @@
+// Bootstrap 3.3.5 mixin required by my mixin
+// bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss
+@mixin button-variant($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  &:focus, &.focus {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 25%);
+  }
+  &:hover {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 12%);
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 12%);
+
+    &:hover, &:focus, &.focus {
+      color: $color;
+      background-color: darken($background, 17%);
+      border-color: darken($border, 25%);
+    }
+  }
+  &:active, &.active, .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled, &[disabled], fieldset[disabled] & {
+    &, &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: $background;
+      border-color: $border;
+    }
+  }
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+
+// Mixin to create a bootstrap button with custom colors
+@mixin bootstrap-button($background) {
+  $color: #fff;
+  $border: 5%;
+  @if (lightness($background) >= lightness(#aaa)) {
+    $color: #333;
+    $border: .2 * lightness($background);
+  }
+  @include button-variant($color, $background, darken($background, $border));
+}
+
+// Social buttons
+.btn-facebook    { @include bootstrap-button(#3b5999); }
+.btn-twitter     { @include bootstrap-button(#55acee); }
+.btn-google-plus { @include bootstrap-button(#df4a32); }
+.btn-pinterest   { @include bootstrap-button(#cc2127); }
+
+// Gray buttons
+.btn-0 { @include bootstrap-button(#000); }
+.btn-1 { @include bootstrap-button(#111); }
+.btn-2 { @include bootstrap-button(#222); }
+.btn-3 { @include bootstrap-button(#333); }
+.btn-4 { @include bootstrap-button(#444); }
+.btn-5 { @include bootstrap-button(#555); }
+.btn-6 { @include bootstrap-button(#666); }
+.btn-7 { @include bootstrap-button(#777); }
+.btn-8 { @include bootstrap-button(#888); }
+.btn-9 { @include bootstrap-button(#999); }
+.btn-a { @include bootstrap-button(#aaa); }
+.btn-b { @include bootstrap-button(#bbb); }
+.btn-c { @include bootstrap-button(#ccc); }
+.btn-d { @include bootstrap-button(#ddd); }
+.btn-e { @include bootstrap-button(#eee); }
+.btn-f { @include bootstrap-button(#fff); }
+
+// Random colored buttons
+@for $i from 1 through 10 {
+  .btn-random-#{$i} {
+    $color: rgb(random(255), random(255), random(255));
+    @include bootstrap-button($color);
+    &::after {
+      content: "#{$color}";
+    }
+  }
+}
+
+.btn-pumpkin {@include bootstrap-button(#ff7518)}
+
+.btn-vermillion {@include bootstrap-button(#E34234)}
+
+.btn-post {@include bootstrap-button(#091540)}
+
+.btn {
+  padding: 10px 25px; 
+  cursor: pointer; 
+  border-width: 1px; 
+  border-style: solid; 
+  margin: 15px; 
+}
+
+.btnSearchContainer{
+  text-align: center;
+}
+
+.btn-centered{
+  display:  block;
+  margin: 10px auto; 
+}

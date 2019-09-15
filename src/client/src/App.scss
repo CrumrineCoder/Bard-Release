@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap');
+/*
+body, html, #app, #root, .appContainer{
+  height: 100%; 
+}
+*/
+.appContainer{
+  margin: 10px;
+  margin-top: 90px;
+}
+
+body{
+  font-family: 'Lexend Deca', sans-serif;
+  background: #085BB9;
+  color: #EEEBD0; 
+  margin: 0px; 
+}
+
+.header{
+  background: #003153;
+  padding: 15px; 
+  position: fixed; 
+  top: 0;
+  left: 0; 
+  width: 100%; 
+}
+
+.headerLink{
+  margin-left: 10px; 
+  color: #EEEBD0; 
+}
+
+.loginPage, .registerPage{
+  //display: grid;
+  height: 100vh;
+}
+
+.loginContainer, .registerContainer{
+  margin: auto;
+  max-width: 400px;
+  color: rgb(37, 37, 37); 
+ // border: 1px solid rgb(37, 37, 37); 
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.75); 
+  padding: 20px; 
+}
+
+.dashboardToolsContainer{
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+  grid-auto-rows: 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+
+  margin-bottom: 15px; 
+}
+
+.dashboardTool{
+  padding: 10px; 
+  color: rgb(37, 37, 37); 
+//  border: 1px solid rgb(37, 37, 37); 
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.75); 
+}
+
+.dashboardToolHeader{
+  text-align: center; 
+}
+
+.dashboardToolLabel{
+  margin-bottom: 5px;
+}
+
+.dashboardToolInput{
+  padding: 5px;
+  width: 90%;
+  display: block;
+  margin: 0 auto; 
+}
+
+.postContainer{
+ // float: left; 
+  padding: 10px; 
+ // max-width: 30%;
+  color: rgb(37, 37, 37); 
+ // border: 1px solid rgb(37, 37, 37); 
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.95); 
+}
+
+.posts{
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+}
+
+.postLink{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.postCommentField{
+  resize: vertical; 
+  width: 100%; 
+}
+
+.videoIframe{
+  margin: 10px auto;
+  display: block;
+}
+
+.container {
+  position: relative;
+}
+
+.textarea {
+  width: 100%;
+  outline: none;
+  min-height: 20px;
+  padding: 0;
+  box-shadow: none;
+  display: block;
+  border: 2px solid black;
+  overflow: hidden;  // Removes scrollbar
+  transition: height 0.2s ease;
+  resize: vertical; 
+}
+
+.textarea--ghost {
+  opacity: 0.3;
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;  
+  //  Uncomment below to hide the ghost div... 
+  //
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+}
