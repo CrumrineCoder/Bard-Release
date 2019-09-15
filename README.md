@@ -39,6 +39,7 @@ Problems I'm fixing w/ this:
 * Close all songs that are playing when the user searches. 
 * Register User message issue
 * Home Page
+* Allow users to go to catalog, but they have to login to use some features **DONE!**
 * Home page search **DONE!!** (still could use suggested tags, maybe?)
 * Grid but don't make each item the same height, Pinterest does it better. 
 * Check if the user is logged in for the catalog and show the right stuff.
