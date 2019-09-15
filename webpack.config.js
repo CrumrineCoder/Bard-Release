@@ -53,7 +53,7 @@ module.exports = {
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
       template: './src/client/public/index.html/',
-      // favicon: './public/favicon.ico'
+       favicon: './src/client/public/assets/img/bard.ico'
     })
   ]
 };
