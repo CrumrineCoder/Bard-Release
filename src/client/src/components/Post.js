@@ -154,9 +154,9 @@ function Post(props) {
   }, [tagToAdd])
 
   function getEmbed(link) {
-    let embedLink =  link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+    let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
     console.log(embedLink);
-    embedLink+="?autoplay=1"
+    embedLink += "?autoplay=1"
     return embedLink;
   }
 
@@ -220,31 +220,33 @@ function Post(props) {
       <br />
       {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
       </iframe>}
-      <form onSubmit={onHandleComment}>
-        <div>
-          <label htmlFor="comment">Comment</label>
-          <br />
-          <textarea className="postCommentField" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
-            onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
-        </div>
-        <div>
-          <button className="btn btn-post btn-centered" type="submit">Post</button>
-        </div>
-      </form>
-
+      {props.loggedIn ?
+        <form onSubmit={onHandleComment}>
+          <div>
+            <label htmlFor="comment">Comment</label>
+            <br />
+            <textarea className="postCommentField" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
+              onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
+          </div>
+          <div>
+            <button className="btn btn-post btn-centered" type="submit">Post</button>
+          </div>
+        </form>
+        : <p className="loginPrompt">Log in to Comment</p>}
       Comments:
       {commentChain}
       <br />
-
-      <form onSubmit={onHandleTag}>
-        <div className="dashboardToolLabel">
-          <label htmlFor="tag">Tag <input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-          </label>
-        </div>
-        <div>
-          <button className="btn btn-post btn-centered" type="submit">Post</button>
-        </div>
-      </form>
+      {props.loggedIn ?
+        <form onSubmit={onHandleTag}>
+          <div className="dashboardToolLabel">
+            <label htmlFor="tag">Tag <input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+            </label>
+          </div>
+          <div>
+            <button className="btn btn-post btn-centered" type="submit">Post</button>
+          </div>
+        </form>
+        : <p className="loginPrompt">Log in to Tag</p>}
       {existingTags}
       Tags:
       {tagChain}

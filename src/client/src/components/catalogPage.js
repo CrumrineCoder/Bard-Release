@@ -99,7 +99,7 @@ function CatalogPage(props) {
           setPostsContent(
             <div className="posts">
               {finalizedPosts.map(post =>
-                <Post post={post} key={post._id}></Post>
+                <Post post={post} key={post._id} loggedIn={loggedIn}></Post>
               )}
             </div>
           )
@@ -323,7 +323,7 @@ function CatalogPage(props) {
             </form>
             {existingSources}
           </div> 
-        : <h1>hi</h1> }
+        : <p className="loginPrompt">Log in to Post Songs</p> }
       </div>
       <div>
         {postsContent}
