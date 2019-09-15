@@ -37,3 +37,6 @@ Problems I'm fixing w/ this:
 * Check sources doesn't need to call the backend everytime. 
 * all tags should be checked in lowercase, even if written in upper.
 * Close all songs that are playing when the user searches. 
+* Register User message issue
+* Home Page
+* Grid but don't make each item the same height, Pinterest does it better. 
