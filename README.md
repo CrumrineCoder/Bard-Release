@@ -18,6 +18,8 @@ Problems I'm fixing w/ this:
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. 
 * Delete & edit tags & posts
+* 404
+* Loading screen
 * Bug with updating the posts - the newest one plays the video. hotfixed by reloading all posts when a new one is added. 
 * Filter general tags **DONE!! (make optional)**
 * Get suggested tags **DONE!!**
