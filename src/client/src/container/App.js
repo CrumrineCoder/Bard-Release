@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch, 
+  HashRouter,
+  ConnectedRouter
 } from 'react-router-dom';
 
 import PrivateRoute from './privateRoute';
@@ -14,7 +16,7 @@ import Header from '../components/Header';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div id="app">
           <Header />
           <div className="appContainer">
@@ -26,7 +28,7 @@ class App extends Component {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

@@ -20,6 +20,7 @@ Problems I'm fixing w/ this:
 * Delete & edit tags & posts
 * 404
 * Loading screen
+* Routing Issue, 404 on refresh **DONE!!**
 * Bug with updating the posts - the newest one plays the video. hotfixed by reloading all posts when a new one is added. 
 * Filter general tags **DONE!! (make optional)**
 * Get suggested tags **DONE!!**
