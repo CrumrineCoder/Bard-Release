@@ -51,6 +51,11 @@ function CatalogPage(props) {
   }, [source])
 
   useEffect(() => {
+    console.log(props);
+    if (props.location.state) {
+      setSpecificTags(props.location.state)
+      onSearchTag()
+    }
     props.dispatch(getAllPostsAction())
   }, [])
 
@@ -180,14 +185,21 @@ function CatalogPage(props) {
     }
   */
   function onSearchTag(event) {
-    event.preventDefault();
+    let searchTag;
 
-    let searchTag = event.target.searchTag.value;
+    if (event) {
+      event.preventDefault();
+
+      searchTag = event.target.searchTag.value;
+    } else {
+      searchTag = props.location.state;
+    }
     if (searchTag.indexOf(",") > - 1) {
       searchTag = searchTag.split(",");
     } else {
+      
+      let searchString = searchTag
       searchTag = [];
-      let searchString = event.target.searchTag.value
       searchString = searchString.toLowerCase();
       searchTag.push(searchString);
     }

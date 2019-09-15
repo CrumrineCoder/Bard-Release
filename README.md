@@ -41,3 +41,4 @@ Problems I'm fixing w/ this:
 * Home Page
 * Grid but don't make each item the same height, Pinterest does it better. 
 * Check if the user is logged in for the catalog. 
+* Readd Words counter functionality
