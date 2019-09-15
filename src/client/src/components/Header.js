@@ -17,9 +17,10 @@ function Header(props) {
 
   return (
     <div className="header">
+      <Link className="headerLink" to=''>Home</Link>
+      <Link className="headerLink" to='catalog'>Catalog</Link>
       {isSuccess ?
         <>
-          <Link className="headerLink" to='dashboard'>Dashboard</Link>
           <Link className="headerLink" to='login'>Logout</Link>
         </>
         :

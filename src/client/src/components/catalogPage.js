@@ -8,7 +8,7 @@ import Post from "./Post";
 import tagCategories from "../utils/tagCategories";
 
 
-function DashboardPage(props) {
+function CatalogPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [postsContent, setPostsContent] = useState("");
@@ -316,4 +316,4 @@ function DashboardPage(props) {
   );
 }
 const mapStateToProps = (response) => ({ response });
-export default connect(mapStateToProps)(DashboardPage);
+export default connect(mapStateToProps)(CatalogPage);

@@ -30,7 +30,7 @@ function LoginPage(props) {
     if (isSuccess && props.response.login.response.success) {
       setCookie('token', props.response.login.response.token, 1);
       //setIsSuccess(false);
-      props.history.push('/dashboard')
+      props.history.push('/catalog')
     }
   }, [isSuccess])
 

@@ -40,3 +40,4 @@ Problems I'm fixing w/ this:
 * Register User message issue
 * Home Page
 * Grid but don't make each item the same height, Pinterest does it better. 
+* Check if the user is logged in for the catalog. 

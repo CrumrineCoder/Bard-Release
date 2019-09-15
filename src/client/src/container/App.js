@@ -8,9 +8,10 @@ import {
 } from 'react-router-dom';
 
 import PrivateRoute from './privateRoute';
+import HomePage from '../components/homepage';
 import LoginPage from '../components/loginPage';
 import RegisterPage from '../components/registerPage';
-import DashboardPage from '../components/dashboardPage';
+import CatalogPage from '../components/catalogPage';
 import Header from '../components/Header';
 
 class App extends Component {
@@ -21,10 +22,10 @@ class App extends Component {
           <Header />
           <div className="appContainer">
             <Switch>
-              <Route path='/' exact={true} component={LoginPage} />
+              <Route path='/' exact={true} component={HomePage} />
               <Route path='/login' component={LoginPage} />
               <Route path='/register' component={RegisterPage} />
-              <PrivateRoute path='/dashboard' component={DashboardPage} />
+              <Route path='/catalog' component={CatalogPage} />
             </Switch>
           </div>
         </div>
