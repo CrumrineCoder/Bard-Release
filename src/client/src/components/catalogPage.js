@@ -6,6 +6,7 @@ import { postAction, getAllPostsAction, searchPostsByTag, getPostsByIDAction, ch
 import Post from "./Post";
 
 import tagCategories from "../utils/tagCategories";
+import { checkCookie } from '../utils/cookies';
 
 
 function CatalogPage(props) {
@@ -21,6 +22,7 @@ function CatalogPage(props) {
   const [source, setSource] = useState("");
   const [excludeSource, setExcludeSource] = useState("");
   const [includeSource, setIncludeSource] = useState("");
+  const [loggedIn, setLoggedIn] = useState();
 
   useEffect(() => {
     let searchTag;
@@ -51,11 +53,11 @@ function CatalogPage(props) {
   }, [source])
 
   useEffect(() => {
-    console.log(props);
     if (props.location.state) {
       setSpecificTags(props.location.state)
       onSearchTag()
     }
+    setLoggedIn(checkCookie() != null)
     props.dispatch(getAllPostsAction())
   }, [])
 
@@ -197,7 +199,7 @@ function CatalogPage(props) {
     if (searchTag.indexOf(",") > - 1) {
       searchTag = searchTag.split(",");
     } else {
-      
+
       let searchString = searchTag
       searchTag = [];
       searchString = searchString.toLowerCase();
@@ -299,27 +301,29 @@ function CatalogPage(props) {
           </form>
           {existingTags}
         </div>
-        <div className="dashboardTool">
-          <h3 className="dashboardToolHeader">Post a new song</h3>
-          <form onSubmit={onHandlePost}>
-            <div className="dashboardToolLabel">
-              <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput" autoComplete="off" type="link" name="link" id="link" />
-              </label>
-            </div>
-            <div className="dashboardToolLabel">
-              <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
-              </label>
-            </div>
-            <div className="dashboardToolLabel">
-              <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput" autoComplete="off" type="name" name="name" id="name" />
-              </label>
-            </div>
-            <div>
-              <button className="btn btn-post btn-centered" type="submit">Post</button>
-            </div>
-          </form>
-          {existingSources}
-        </div>
+        {loggedIn ? 
+          <div className="dashboardTool">
+            <h3 className="dashboardToolHeader">Post a new song</h3>
+            <form onSubmit={onHandlePost}>
+              <div className="dashboardToolLabel">
+                <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput" autoComplete="off" type="link" name="link" id="link" />
+                </label>
+              </div>
+              <div className="dashboardToolLabel">
+                <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
+                </label>
+              </div>
+              <div className="dashboardToolLabel">
+                <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput" autoComplete="off" type="name" name="name" id="name" />
+                </label>
+              </div>
+              <div>
+                <button className="btn btn-post btn-centered" type="submit">Post</button>
+              </div>
+            </form>
+            {existingSources}
+          </div> 
+        : <h1>hi</h1> }
       </div>
       <div>
         {postsContent}
