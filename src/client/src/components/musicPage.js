@@ -278,12 +278,12 @@ function MusicPage(props) {
         <div className="dashboardTool">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
           <div className="dashboardToolLabel">
-            <label htmlFor="excludeSource">Exclude Sources (separated by commas) <input className="dashboardToolInput" autoComplete="off" type="excludeSource" name="excludeSource" id="excludeSource" value={excludeSource}
+            <label htmlFor="excludeSource">Exclude Sources (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="excludeSource" name="excludeSource" id="excludeSource" value={excludeSource}
               onChange={e => setExcludeSource(e.target.value)} />
             </label>
           </div>
           <div className="dashboardToolLabel">
-            <label htmlFor="includeSource">Include Sources (separated by commas) <input className="dashboardToolInput" autoComplete="off" type="includeSource" name="includeSource" id="includeSource" value={includeSource}
+            <label htmlFor="includeSource">Include Sources (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="includeSource" name="includeSource" id="includeSource" value={includeSource}
               onChange={e => setIncludeSource(e.target.value)} />
             </label>
           </div>
@@ -291,13 +291,13 @@ function MusicPage(props) {
         <div className="dashboardTool">
           <h3 className="dashboardToolHeader">Search by Tags</h3>
           <div className="dashboardToolLabel">
-            <label htmlFor="generalSearchTag">Search by general tags (separated by commas) <input className="dashboardToolInput" autoComplete="off" type="generalSearchTag" name="generalSearchTag" id="generalSearchTag" value={generalTags}
+            <label htmlFor="generalSearchTag">Search by general tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="generalSearchTag" name="generalSearchTag" id="generalSearchTag" value={generalTags}
               onChange={e => setGeneralTags(e.target.value)} />
             </label>
           </div>
           <form onSubmit={onSearchTag}>
             <div className="dashboardToolLabel">
-              <label htmlFor="searchTag">Search by tags (separated by commas) <input className="dashboardToolInput" autoComplete="off" value={specificTags} onChange={e => setSpecificTags(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
+              <label htmlFor="searchTag">Search by tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" value={specificTags} onChange={e => setSpecificTags(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
               </label>
             </div>
             <div className="btnSearchContainer">
@@ -312,15 +312,15 @@ function MusicPage(props) {
             <h3 className="dashboardToolHeader">Post a new song</h3>
             <form onSubmit={onHandlePost}>
               <div className="dashboardToolLabel">
-                <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput" autoComplete="off" type="link" name="link" id="link" />
+                <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput borderImage" autoComplete="off" type="link" name="link" id="link" />
                 </label>
               </div>
               <div className="dashboardToolLabel">
-                <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
+                <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput borderImage" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
                 </label>
               </div>
               <div className="dashboardToolLabel">
-                <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput" autoComplete="off" type="name" name="name" id="name" />
+                <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput borderImage" autoComplete="off" type="name" name="name" id="name" />
                 </label>
               </div>
               <div>

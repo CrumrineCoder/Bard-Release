@@ -15,6 +15,8 @@ function Post(props) {
   const [tagToAdd, setTagToAdd] = useState("")
   const [existingTags, setExistingTags] = useState("")
   const [commentToAdd, setCommentToAdd] = useState("")
+  const [tagLength, setTagLength] = useState(3)
+  const [visualTags, setVisualTags] = useState("")
 
   function getCommentsForOnePost(postId) {
 
@@ -56,12 +58,13 @@ function Post(props) {
           )
         }
       }
+      console.log(props.response.dashboard.response.tag);
       if (props.response.dashboard.response.tag) {
         //    console.log(props.response.dashboard.response.tag)
         if (props.response.dashboard.response.tag.length > 0) {
           if (props.response.dashboard.response.tag[0].postID == props.post._id) {
             setTags(props.response.dashboard.response.tag[0].tags)
-
+            console.log(true);
             let parents = [];
             let tagsToShow = props.response.dashboard.response.tag[0].tags;
 
@@ -73,9 +76,11 @@ function Post(props) {
               return parents.indexOf(el.text) < 0;
             });
 
+            setVisualTags(tagsToShow);
+
             setTagChain(
               <div className="postsTags">
-                {tagsToShow.map(tag =>
+                {tagsToShow.slice(0, tagLength).map(tag =>
                   <li key={tag._id}>
                     {tag.text}
                   </li>
@@ -92,7 +97,7 @@ function Post(props) {
         }
       }
     }
-  }, [props.response.dashboard.response])
+  }, [props.response.dashboard.response, tagLength])
 
 
   function onHandleComment(event) {
@@ -180,6 +185,10 @@ function Post(props) {
     return link.replace("https://www.youtube.com/watch?v=", "http://youtu.be/");
   }
 
+  function showMoreTags(){
+    setTagLength(tagLength+3)
+  }
+
   function onHandleTag(event) {
     event.preventDefault();
     let tag = event.target.tag.value;
@@ -231,10 +240,12 @@ function Post(props) {
       <div className="postTagContainer">
         <h3>Tags:</h3>
         {tagChain}
+        {tagLength}
+        {tagLength < visualTags.length && <button onClick={e=>showMoreTags()}>Show More</button>}
         {props.loggedIn ?
           <form onSubmit={onHandleTag}>
             <div className="dashboardToolLabel">
-              <label htmlFor="tag"><input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+              <label htmlFor="tag"><input className="dashboardToolInput borderImage" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
               </label>
             </div>
             <div>
@@ -262,7 +273,7 @@ function Post(props) {
             <div>
               <label htmlFor="comment"></label>
               <br />
-              <textarea className="postCommentField" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
+              <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
                 onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
             </div>
             <div>
