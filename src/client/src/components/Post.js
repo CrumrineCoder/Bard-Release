@@ -74,7 +74,7 @@ function Post(props) {
             });
 
             setTagChain(
-              <div>
+              <div className="postsTags">
                 {tagsToShow.map(tag =>
                   <li key={tag._id}>
                     {tag.text}
@@ -228,43 +228,49 @@ function Post(props) {
   // </iframe>
   return (
     <div className="postContainer">
-      Tags:
-      {tagChain}
-      {props.loggedIn ?
-        <form onSubmit={onHandleTag}>
-          <div className="dashboardToolLabel">
-            <label htmlFor="tag"><input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-            </label>
-          </div>
-          <div>
-            <button className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
-          </div>
-        </form>
-        : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-      {existingTags}
-      <h2>{props.post.source}</h2>
-      <h3>{props.post.name}</h3>
-      <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
-      <br />
-      <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
-      <br />
-      {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
-      </iframe>}
-      {props.loggedIn ?
-        <form onSubmit={onHandleComment}>
-          <div>
-            <label htmlFor="comment"></label>
-            <br />
-            <textarea className="postCommentField" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
-              onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
-          </div>
-          <div>
-            <button className="btn btn-post btn-centered borderImage" type="submit">Post Comment</button>
-          </div>
-        </form>
-        : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Comment</button>}
-      Comments:
-      {commentChain}
+      <div className="postTagContainer">
+        <h3>Tags:</h3>
+        {tagChain}
+        {props.loggedIn ?
+          <form onSubmit={onHandleTag}>
+            <div className="dashboardToolLabel">
+              <label htmlFor="tag"><input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+              </label>
+            </div>
+            <div>
+              <button className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
+            </div>
+          </form>
+          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
+        {existingTags}
+      </div>
+      <div className="postVideoContainer">
+        <h3>{props.post.source}</h3>
+        <h4>{props.post.name}</h4>
+        <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
+        <br />
+        <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
+        <br />
+        {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>}
+      </div>
+      <div className="postCommentContainer">
+        <h3>Comments:</h3>
+        {commentChain}
+        {props.loggedIn ?
+          <form onSubmit={onHandleComment}>
+            <div>
+              <label htmlFor="comment"></label>
+              <br />
+              <textarea className="postCommentField" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
+                onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
+            </div>
+            <div>
+              <button className="btn btn-post btn-centered borderImage" type="submit">Post Comment</button>
+            </div>
+          </form>
+          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Comment</button>}
+      </div>
     </div>
   );
 }
