@@ -199,6 +199,7 @@ body{
   border: solid 7px #41403E;
   display: block ;
   margin: 0 auto; 
+  border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
 }
 
 .homePageSearchInput{
@@ -212,6 +213,11 @@ body{
   font-size: 18px; 
   padding: 10px 20px; 
   margin-top: 10px;
+  &:hover{
+    background: #003153;
+    cursor: pointer; 
+    color: white; 
+  }
 }
 
 .flexHomePageContainer{
