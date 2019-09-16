@@ -24,7 +24,7 @@ function Header(props) {
       </div>
       <div className="headerLinks">
         <Link className="headerLink" to=''>Home</Link>
-        <Link className="headerLink" to='catalog'>Catalog</Link>
+        <Link className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
             <Link className="headerLink" to='login'>Logout</Link>

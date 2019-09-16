@@ -10,7 +10,7 @@ function HomePage(props) {
 
     function submitTag() {
         props.history.push({
-            pathname: '/catalog',
+            pathname: '/music',
             state: tag
         })
     }

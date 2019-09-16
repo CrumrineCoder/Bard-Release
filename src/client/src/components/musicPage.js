@@ -9,7 +9,7 @@ import tagCategories from "../utils/tagCategories";
 import { checkCookie } from '../utils/cookies';
 
 
-function CatalogPage(props) {
+function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [postsContent, setPostsContent] = useState("");
@@ -332,4 +332,4 @@ function CatalogPage(props) {
   );
 }
 const mapStateToProps = (response) => ({ response });
-export default connect(mapStateToProps)(CatalogPage);
+export default connect(mapStateToProps)(MusicPage);
