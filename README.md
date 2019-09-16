@@ -47,3 +47,4 @@ Problems I'm fixing w/ this:
 * Check if the user is logged in for the catalog and show the right stuff.
 * Readd Words counter functionality
 * If no results are returned by the search, tell the user instead of showing them results they don't want. 
+* Empty comment / tag message Be the first to commment/tag!

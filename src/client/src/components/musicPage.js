@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { postAction, getAllPostsAction, searchPostsByTag, getPostsByIDAction, checkTagsAction, checkSourcesAction } from '../actions/linkActions';
 
 import Post from "./Post";
+import LoginModal from "./loginModal"
 
 import tagCategories from "../utils/tagCategories";
 import { checkCookie } from '../utils/cookies';
@@ -325,6 +326,7 @@ function MusicPage(props) {
           </div> 
         : <button className="loginPromptButton borderImage">Add a Song</button> }
       </div>
+      <LoginModal></LoginModal>
       <div>
         {postsContent}
       </div>
