@@ -232,7 +232,7 @@ function Post(props) {
             <button className="btn btn-post btn-centered" type="submit">Post</button>
           </div>
         </form>
-        : <p className="loginPrompt">Log in to Comment</p>}
+      : <button className="loginPromptButton borderImage">Comment</button> }
       Comments:
       {commentChain}
       <br />
@@ -246,7 +246,7 @@ function Post(props) {
             <button className="btn btn-post btn-centered" type="submit">Post</button>
           </div>
         </form>
-        : <p className="loginPrompt">Log in to Tag</p>}
+      : <button className="loginPromptButton borderImage">Tag</button> }
       {existingTags}
       Tags:
       {tagChain}

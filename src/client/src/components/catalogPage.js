@@ -323,7 +323,7 @@ function CatalogPage(props) {
             </form>
             {existingSources}
           </div> 
-        : <p className="loginPrompt">Log in to Post Songs</p> }
+        : <button className="loginPromptButton borderImage">Add a Song</button> }
       </div>
       <div>
         {postsContent}

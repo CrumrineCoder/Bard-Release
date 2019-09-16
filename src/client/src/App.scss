@@ -167,10 +167,20 @@ body{
   position: relative;
 }
 
-.loginPrompt{
+.loginPromptButton{
   text-align: center;  
-  font-style: italic;   
+  //font-style: italic;   
   align-self: center; 
+  font-size: 14px; 
+  margin: 15px auto; 
+  padding: 5px 20px; 
+  border-width: 5px; 
+  display: block; 
+  &:hover{
+    background: #003153;
+    cursor: pointer; 
+    color: white; 
+  }
 }
 
 // HOMEPAGE
@@ -194,12 +204,18 @@ body{
 }
 
 .homePageSearchInput, .homePageSearchButton{
-  font-family: 'Marcellus', serif;
+
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   border: solid 7px #41403E;
   display: block ;
   margin: 0 auto; 
-  border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
+}
+
+.borderImage{
+  //border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
+ // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
+ border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 50 round;
+ font-family: 'Marcellus', serif;
 }
 
 .homePageSearchInput{
