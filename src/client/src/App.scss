@@ -1,4 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Skranji&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Metamorphous&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rakkas&display=swap'); 
+@import url('https://fonts.googleapis.com/css?family=Kumar+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pirata+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Eczar&display=swap');
 /*
 body, html, #app, #root, .appContainer{
   height: 100%; 
@@ -16,11 +26,16 @@ html, body, #root, #app{
 }
 
 body{
-  font-family: 'Lexend Deca', sans-serif;
+ // font-family: 'Lexend Deca', sans-serif;
+ //font-family: 'Cinzel', serif;
+ font-family: 'Marcellus', serif;
+ //font-family: 'Eczar', serif;
   background: #085BB9;
   color: #EEEBD0; 
   margin: 0px; 
 }
+
+// HEADER 
 
 .header{
   background: #003153;
@@ -28,13 +43,42 @@ body{
   position: fixed; 
   top: 0;
   left: 0; 
+  //font-family: 'Cinzel Decorative', cursive;
+  font-family: 'Metamorphous', cursive;
 //  width: 100%; 
+  display: flex; 
+  justify-content: center;
+  //width: 100vw; 
+  position: relative; 
+}
+
+.headerLogoContainer{
+  margin-right: auto; 
+  display: flex; 
+}
+
+.headerLogo{
+  width: 30px;
+  height: 30px;
+}
+
+.headerName{
+  padding-top: 7px;
+  padding-left: 5px; 
+}
+
+.headerLinks{
+  //float: right; 
+  //padding-right: 30px;
+  padding-top: 7px;
 }
 
 .headerLink{
   margin-left: 10px; 
   color: #EEEBD0; 
 }
+
+// LOGIN
 
 .loginPage, .registerPage{
   //display: grid;
@@ -123,61 +167,55 @@ body{
   position: relative;
 }
 
-.textarea {
-  width: 100%;
-  outline: none;
-  min-height: 20px;
-  padding: 0;
-  box-shadow: none;
-  display: block;
-  border: 2px solid black;
-  overflow: hidden;  // Removes scrollbar
-  transition: height 0.2s ease;
-  resize: vertical; 
-}
-
-.textarea--ghost {
-  opacity: 0.3;
-  display: block;
-  white-space: pre-wrap;
-  word-wrap: break-word;  
-  //  Uncomment below to hide the ghost div... 
-  //
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-}
-
 .loginPrompt{
   text-align: center;  
   font-style: italic;   
   align-self: center; 
 }
 
-.headerLogo{
-  width: 30px;
-  height: 30px;
-}
+// HOMEPAGE
 
-.header{
-  display: flex; 
+.homePage{
+  /*display: flex;
+  align-items: center;
   justify-content: center;
-  //width: 100vw; 
+  flex-direction: column;
+  width: auto; 
+  align-items: flex-start;*/
+  text-align: center; 
+  padding: 30px; 
   position: relative; 
+//  font-family: 'Cinzel Decorative', cursive;
+//  font-family: 'Skranji', cursive;
+  font-family: 'Metamorphous', cursive;
+//  font-family: 'Rakkas', cursive;
+//  font-family: 'Kumar One', cursive;
+//  font-family: 'Pirata One', cursive;
 }
 
-.headerLogoContainer{
-  margin-right: auto; 
-  display: flex; 
+.homePageSearchInput, .homePageSearchButton{
+  font-family: 'Marcellus', serif;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: solid 7px #41403E;
+  display: block ;
+  margin: 0 auto; 
 }
 
-.headerName{
-  padding-top: 7px;
-  padding-left: 5px; 
+.homePageSearchInput{
+  font-size: 16px;
+  padding: 7px;
+  width: 90%;
+  margin-top: 40px;
 }
 
-.headerLinks{
-  //float: right; 
-  //padding-right: 30px;
-  padding-top: 7px;
+.homePageSearchButton{
+  font-size: 18px; 
+  padding: 10px 20px; 
+  margin-top: 10px;
+}
+
+.flexHomePageContainer{
+display: flex;
+align-items: center;
+justify-content: center;
 }

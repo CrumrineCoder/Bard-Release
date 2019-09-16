@@ -16,11 +16,13 @@ function HomePage(props) {
     }
     //state: { detail: response.data }
     return (
-        <div className="homePage">
-            <h1>Bardic Inspiration</h1>
-            <h2>Find music for your upcoming tabletop session</h2>
-            <input placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
-            <button onClick={submitTag}>Submit</button>
+        <div className="flexHomePageContainer">
+            <div className="homePage">
+                <h1>Bardic Inspiration</h1>
+                <h2>Find music for your upcoming tabletop session</h2>
+                <input className="homePageSearchInput" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
+                <button className="homePageSearchButton" onClick={submitTag}>Explore</button>
+            </div>
         </div>
     );
 }
