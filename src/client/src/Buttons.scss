@@ -85,13 +85,18 @@
     }
   }
 }
-
+/*
 .btn-pumpkin {@include bootstrap-button(#ff7518)}
 
 .btn-vermillion {@include bootstrap-button(#E34234)}
 
 .btn-post {@include bootstrap-button(#091540)}
+*/
+.btn-pumpkin {@include bootstrap-button(#f9d0b4)}
 
+.btn-vermillion {@include bootstrap-button(rgb(219, 162, 157))}
+
+.btn-post {@include bootstrap-button(#252938)}
 .btn {
   padding: 10px 25px; 
   cursor: pointer; 

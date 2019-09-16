@@ -15,10 +15,11 @@ function HomePage(props) {
         })
     }
     //state: { detail: response.data }
+    <img className="homePageLogo" src={logo} />
     return (
         <div className="flexHomePageContainer">
             <div className="homePage">
-                <img className="homePageLogo" src={logo} />
+              
                 <h1 className="homePageHeader">Bardic Inspiration</h1>
                 <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
                 <input className="homePageSearchInput borderImage" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>

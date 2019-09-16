@@ -324,12 +324,12 @@ function MusicPage(props) {
                 </label>
               </div>
               <div>
-                <button className="btn btn-post btn-centered borderImage" type="submit">Post</button>
+                <button className="btn btn-post btn-centered borderImage" type="submit">Post Song</button>
               </div>
             </form>
             {existingSources}
           </div> 
-        : <button className="loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button> }
+        : <button className="btn-post loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button> }
       </div>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       <div>

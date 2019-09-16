@@ -212,6 +212,20 @@ function Post(props) {
   // </iframe>
   return (
     <div className="postContainer">
+      Tags:
+      {tagChain}
+      {props.loggedIn ?
+        <form onSubmit={onHandleTag}>
+          <div className="dashboardToolLabel">
+            <label htmlFor="tag"><input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+            </label>
+          </div>
+          <div>
+            <button className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
+          </div>
+        </form>
+        : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
+      {existingTags}
       <h2>{props.post.source}</h2>
       <h3>{props.post.name}</h3>
       <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
@@ -223,33 +237,18 @@ function Post(props) {
       {props.loggedIn ?
         <form onSubmit={onHandleComment}>
           <div>
-            <label htmlFor="comment">Comment</label>
+            <label htmlFor="comment"></label>
             <br />
             <textarea className="postCommentField" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
               onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
           </div>
           <div>
-            <button className="btn btn-post btn-centered borderImage" type="submit">Post</button>
+            <button className="btn btn-post btn-centered borderImage" type="submit">Post Comment</button>
           </div>
         </form>
-      : <button className="loginPromptButton borderImage" onClick={e =>props.setModalOpen(true)}>Add a Comment</button> }
+        : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Comment</button>}
       Comments:
       {commentChain}
-      <br />
-      {props.loggedIn ?
-        <form onSubmit={onHandleTag}>
-          <div className="dashboardToolLabel">
-            <label htmlFor="tag">Tag <input className="dashboardToolInput" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-            </label>
-          </div>
-          <div>
-            <button className="btn btn-post btn-centered borderImage" type="submit">Post</button>
-          </div>
-        </form>
-      : <button className="loginPromptButton borderImage" onClick={e =>props.setModalOpen(true)}>Add a Tag</button> }
-      {existingTags}
-      Tags:
-      {tagChain}
     </div>
   );
 }
