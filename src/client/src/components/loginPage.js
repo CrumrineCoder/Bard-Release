@@ -60,7 +60,7 @@ function LoginPage(props) {
             <label htmlFor="password">Password <input className="dashboardToolInput" type="password" name="password" id="password" /></label>
           </div>
           <div>
-            <button type="submit" className="btn btn-pumpkin btn-centered">Login</button>
+            <button type="submit" className="btn btn-pumpkin btn-centered borderImage">Login</button>
           </div>
         </form>
         Don't have an account? <Link to='register'>Register here</Link>

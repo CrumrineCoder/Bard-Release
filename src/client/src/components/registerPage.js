@@ -50,7 +50,7 @@ function RegisterPage(props) {
             <label htmlFor="password">Password <input className="dashboardToolInput" type="password" name="password" id="password" /></label>
           </div>
           <div>
-          <button type="submit" className="btn btn-pumpkin btn-centered">Register</button>
+          <button type="submit" className="btn btn-pumpkin btn-centered borderImage">Register</button>
           </div>
         </form>
         Already have an account? <Link to='login'>Login here</Link>

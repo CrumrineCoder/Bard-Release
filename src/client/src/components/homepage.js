@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import logo from "../assets/bardLogoVersion3.png";
 function HomePage(props) {
     const [isSuccess, setIsSuccess] = useState(false);
     const [message, setMessage] = useState("");
@@ -18,7 +18,8 @@ function HomePage(props) {
     return (
         <div className="flexHomePageContainer">
             <div className="homePage">
-                <h1>Bardic Inspiration</h1>
+                <img className="homePageLogo" src={logo} />
+                <h1 className="homePageHeader">Bardic Inspiration</h1>
                 <h2>Find music for your upcoming tabletop session</h2>
                 <input className="homePageSearchInput borderImage" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
                 <button className="homePageSearchButton borderImage" onClick={submitTag}>Explore</button>

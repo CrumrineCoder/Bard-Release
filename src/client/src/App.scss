@@ -219,6 +219,15 @@ body{
  // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
  border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 50 round;
  font-family: 'Marcellus', serif;
+ border-width: 5px; //!important; 
+}
+
+.homePageLogo{
+  width: 52px; 
+}
+
+.homePageHeader{
+  margin-top: 20px; 
 }
 
 .homePageSearchInput{
@@ -251,6 +260,8 @@ body{
   left: 0px; 
   max-width: 100%;
   max-height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .loginModalContainer{

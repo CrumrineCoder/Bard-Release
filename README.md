@@ -38,7 +38,7 @@ Problems I'm fixing w/ this:
 * all tags should be checked in lowercase, even if written in upper.
 * Close all songs that are playing when the user searches. 
 * Register User message issue
-* Home Page
+* Home Page **DONE!!**
 * Button styling **DONE!!**
 * Login modal **DONE!!**
 * Allow users to go to catalog, but they have to login to use some features **DONE!**

@@ -216,7 +216,7 @@ function Post(props) {
       <h3>{props.post.name}</h3>
       <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
       <br />
-      <button className="btn btn-pumpkin btn-centered" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
+      <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
       <br />
       {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
       </iframe>}
@@ -229,7 +229,7 @@ function Post(props) {
               onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
           </div>
           <div>
-            <button className="btn btn-post btn-centered" type="submit">Post</button>
+            <button className="btn btn-post btn-centered borderImage" type="submit">Post</button>
           </div>
         </form>
       : <button className="loginPromptButton borderImage" onClick={e =>props.setModalOpen(true)}>Add a Comment</button> }
@@ -243,7 +243,7 @@ function Post(props) {
             </label>
           </div>
           <div>
-            <button className="btn btn-post btn-centered" type="submit">Post</button>
+            <button className="btn btn-post btn-centered borderImage" type="submit">Post</button>
           </div>
         </form>
       : <button className="loginPromptButton borderImage" onClick={e =>props.setModalOpen(true)}>Add a Tag</button> }

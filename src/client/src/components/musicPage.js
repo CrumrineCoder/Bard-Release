@@ -301,8 +301,8 @@ function MusicPage(props) {
               </label>
             </div>
             <div className="btnSearchContainer">
-              <button className="btn btn-pumpkin" type="submit">Search</button>
-              <button className="btn btn-vermillion" onClick={clear}>Clear</button>
+              <button className="btn btn-pumpkin borderImage" type="submit">Search</button>
+              <button className="btn btn-vermillion borderImage" onClick={clear}>Clear</button>
             </div>
           </form>
           {existingTags}
@@ -324,7 +324,7 @@ function MusicPage(props) {
                 </label>
               </div>
               <div>
-                <button className="btn btn-post btn-centered" type="submit">Post</button>
+                <button className="btn btn-post btn-centered borderImage" type="submit">Post</button>
               </div>
             </form>
             {existingSources}
