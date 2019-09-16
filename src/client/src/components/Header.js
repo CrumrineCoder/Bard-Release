@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkCookie } from '../utils/cookies';
+import logo from  "../assets/bardLogoVersion3.png"
 
 function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -17,19 +18,24 @@ function Header(props) {
 
   return (
     <div className="header">
-      <Link className="headerLink" to=''>Home</Link>
-      <Link className="headerLink" to='catalog'>Catalog</Link>
-      {isSuccess ?
-        <>
-          <Link className="headerLink" to='login'>Logout</Link>
-        </>
-        :
-        <>
-          <Link className="headerLink" to='login'>Login</Link>
-          <Link className="headerLink" to='register'>Register</Link>
-        </>
-      }
-
+      <div className="headerLogoContainer">
+        <img src={logo} className="headerLogo"/>
+        <span className="headerName">Bardic Inspiration</span>
+      </div>
+      <div className="headerLinks">
+        <Link className="headerLink" to=''>Home</Link>
+        <Link className="headerLink" to='catalog'>Catalog</Link>
+        {isSuccess ?
+          <>
+            <Link className="headerLink" to='login'>Logout</Link>
+          </>
+          :
+          <>
+            <Link className="headerLink" to='login'>Login</Link>
+            <Link className="headerLink" to='register'>Register</Link>
+          </>
+        }
+      </div>
     </div>
   )
 }
