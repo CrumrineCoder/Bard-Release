@@ -35,43 +35,59 @@ function Post(props) {
 
       if (props.response.dashboard.response.comment) {
         // console.log(props.response.dashboard.response.comment[0])
-        if (props.response.dashboard.response.comment.length > 0 && props.response.dashboard.response.comment[0].postID == props.post._id) {
-          //   console.log(props.response.dashboard.response.comment[0]);
+        if (props.response.dashboard.response.comment.length > 0) {
+          if (props.response.dashboard.response.comment[0].postID == props.post._id) {
+            //   console.log(props.response.dashboard.response.comment[0]);
+            setCommentChain(
+              <div>
+                {props.response.dashboard.response.comment[0].comments.map((comment, index) =>
+                  <li key={comment._id + index}>
+                    {comment.text}
+                  </li>
+                )}
+              </div>
+            )
+          }
+        } else {
           setCommentChain(
-            <div>
-              {props.response.dashboard.response.comment[0].comments.map((comment, index) =>
-                <li key={comment._id + index}>
-                  {comment.text}
-                </li>
-              )}
-            </div>
+            <p className="noContentDisclaimer">
+              There are no comments yet.
+            </p>
           )
         }
       }
       if (props.response.dashboard.response.tag) {
         //    console.log(props.response.dashboard.response.tag)
-        if (props.response.dashboard.response.tag.length > 0 && props.response.dashboard.response.tag[0].postID == props.post._id) {
-          setTags(props.response.dashboard.response.tag[0].tags)
+        if (props.response.dashboard.response.tag.length > 0) {
+          if (props.response.dashboard.response.tag[0].postID == props.post._id) {
+            setTags(props.response.dashboard.response.tag[0].tags)
 
-          let parents = [];
-          let tagsToShow = props.response.dashboard.response.tag[0].tags;
+            let parents = [];
+            let tagsToShow = props.response.dashboard.response.tag[0].tags;
 
-          Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
-            parents.push(tagCategory)
-          })
+            Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
+              parents.push(tagCategory)
+            })
 
-          tagsToShow = tagsToShow.filter(function (el) {
-            return parents.indexOf(el.text) < 0;
-          });
+            tagsToShow = tagsToShow.filter(function (el) {
+              return parents.indexOf(el.text) < 0;
+            });
 
+            setTagChain(
+              <div>
+                {tagsToShow.map(tag =>
+                  <li key={tag._id}>
+                    {tag.text}
+                  </li>
+                )}
+              </div>
+            )
+          }
+        } else {
           setTagChain(
-            <div>
-              {tagsToShow.map(tag =>
-                <li key={tag._id}>
-                  {tag.text}
-                </li>
-              )}
-            </div>
+            <p className="noContentDisclaimer">
+              There are no tags yet.
+            </p>
           )
         }
       }
