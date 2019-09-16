@@ -77,16 +77,8 @@ function Post(props) {
             });
 
             setVisualTags(tagsToShow);
+          //  updateTags()
 
-            setTagChain(
-              <div className="postsTags">
-                {tagsToShow.slice(0, tagLength).map(tag =>
-                  <li key={tag._id}>
-                    {tag.text}
-                  </li>
-                )}
-              </div>
-            )
           }
         } else {
           setTagChain(
@@ -97,8 +89,21 @@ function Post(props) {
         }
       }
     }
-  }, [props.response.dashboard.response, tagLength])
+  }, [props.response.dashboard.response])
 
+  useEffect(() => {
+    if (visualTags) {
+      setTagChain(
+        <div className="postsTags">
+          {visualTags.slice(0, tagLength).map(tag =>
+            <li key={tag._id}>
+              {tag.text}
+            </li>
+          )}
+        </div>
+      )
+    }
+  }, [visualTags, tagLength])
 
   function onHandleComment(event) {
     event.preventDefault();
@@ -185,8 +190,9 @@ function Post(props) {
     return link.replace("https://www.youtube.com/watch?v=", "http://youtu.be/");
   }
 
-  function showMoreTags(){
-    setTagLength(tagLength+3)
+  function showMoreTags() {
+    setTagLength(tagLength + 3)
+  //  updateTags()
   }
 
   function onHandleTag(event) {
@@ -240,8 +246,7 @@ function Post(props) {
       <div className="postTagContainer">
         <h3>Tags:</h3>
         {tagChain}
-        {tagLength}
-        {tagLength < visualTags.length && <button onClick={e=>showMoreTags()}>Show More</button>}
+        {tagLength < visualTags.length && <button className="borderImage" onClick={e => showMoreTags()}>Show More</button>}
         {props.loggedIn ?
           <form onSubmit={onHandleTag}>
             <div className="dashboardToolLabel">
