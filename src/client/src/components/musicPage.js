@@ -24,6 +24,7 @@ function MusicPage(props) {
   const [excludeSource, setExcludeSource] = useState("");
   const [includeSource, setIncludeSource] = useState("");
   const [loggedIn, setLoggedIn] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     let searchTag;
@@ -100,7 +101,7 @@ function MusicPage(props) {
           setPostsContent(
             <div className="posts">
               {finalizedPosts.map(post =>
-                <Post post={post} key={post._id} loggedIn={loggedIn}></Post>
+                <Post setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
               )}
             </div>
           )
@@ -254,6 +255,10 @@ function MusicPage(props) {
     setSpecificTags("")
     setGeneralTags("")
   }
+
+  function redirect(location){
+    props.history.push(location);
+  }
   /*
     <form onSubmit={onHandleCheck}>
         <div>
@@ -324,9 +329,9 @@ function MusicPage(props) {
             </form>
             {existingSources}
           </div> 
-        : <button className="loginPromptButton borderImage">Add a Song</button> }
+        : <button className="loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button> }
       </div>
-      <LoginModal></LoginModal>
+      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       <div>
         {postsContent}
       </div>

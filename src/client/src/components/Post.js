@@ -232,7 +232,7 @@ function Post(props) {
             <button className="btn btn-post btn-centered" type="submit">Post</button>
           </div>
         </form>
-      : <button className="loginPromptButton borderImage">Add a Comment</button> }
+      : <button className="loginPromptButton borderImage" onClick={e =>props.setModalOpen(true)}>Add a Comment</button> }
       Comments:
       {commentChain}
       <br />
@@ -246,7 +246,7 @@ function Post(props) {
             <button className="btn btn-post btn-centered" type="submit">Post</button>
           </div>
         </form>
-      : <button className="loginPromptButton borderImage">Add a Tag</button> }
+      : <button className="loginPromptButton borderImage" onClick={e =>props.setModalOpen(true)}>Add a Tag</button> }
       {existingTags}
       Tags:
       {tagChain}

@@ -40,11 +40,11 @@ Problems I'm fixing w/ this:
 * Register User message issue
 * Home Page
 * Button styling **DONE!!**
-* Login modal
+* Login modal **DONE!!**
 * Allow users to go to catalog, but they have to login to use some features **DONE!**
 * Home page search **DONE!!** (still could use suggested tags, maybe?)
 * Grid but don't make each item the same height, Pinterest does it better. 
-* Check if the user is logged in for the catalog and show the right stuff.
+* Check if the user is logged in for the catalog and show the right stuff. **DONE!!**
 * Readd Words counter functionality
 * If no results are returned by the search, tell the user instead of showing them results they don't want. 
 * Empty comment / tag message Be the first to commment/tag!

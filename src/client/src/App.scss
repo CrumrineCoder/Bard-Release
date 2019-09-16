@@ -254,6 +254,7 @@ body{
   color: white; 
   background: #021D3B; 
   z-index: 5; 
+  display: none; 
 }
 
 .loginModalButton{
@@ -277,5 +278,9 @@ body{
     left: 0; 
     z-index: 4;  
     opacity: .8;
-  //  display: none; 
+    display: none; 
+}
+
+.openModal{
+  display: block; 
 }
