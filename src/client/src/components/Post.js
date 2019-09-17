@@ -79,11 +79,11 @@ function Post(props) {
             tagsToShow = tagsToShow.map(function (el) {
         //      console.log(el);
               var o = Object.assign({}, el);
-              console.log(tagCategories);
+           //   console.log(tagCategories);
               let i=0; 
               for (var tagCategory in tagCategories) {
                 i++; 
-               console.log(tagCategory)
+           //    console.log(tagCategory)
                 let tagValues = tagCategories[tagCategory];
                // for (var i = 0; i < compareTags.length; i++) {
         //         console.log(tagValues);
@@ -106,11 +106,11 @@ function Post(props) {
                   
                // }
               }
-              console.log(i); 
+           //   console.log(i); 
           //    console.log()
               //    o["parent"] = 
             })
-            console.log(tagsToShow);
+       //     console.log(tagsToShow);
             setVisualTags(tagsToShow);
             //  updateTags()
 
@@ -134,14 +134,21 @@ function Post(props) {
     console.log(tags);
     let category; 
     if (tags.some(e => e.text === tag.category)) {
+      console.log("yES!!");
+      console.log(tag.category);
       category = tag.catgory;
+      props.dispatch(removeUserFromTagAction({ tag: e._id, user: props.currentUser, postID: props.post._id, text: e.text}))
       /* vendors contains the element we're looking for */
+    } else {
+      console.log("bad!");
+
     }
+    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
    // let category = tags.find(obj=>{
      // return obj.text = tag.category; 
     //})
-    console.log(category);
-    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
+ //   console.log(category);
+ 
   }
 
   useEffect(() => {
