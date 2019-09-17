@@ -48,6 +48,7 @@ app.use(express.json());
 // API routes
 
 
+
 require('./models/Comments')
 require('./models/Posts')
 require('./models/Tags')
@@ -57,6 +58,5 @@ require('./config/passport');
 require('./routes')(app);
 
 app.use(express.static('dist'));
-
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));

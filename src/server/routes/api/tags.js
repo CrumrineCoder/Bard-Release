@@ -152,4 +152,90 @@ module.exports = (app) => {
         })
     });
 
+    
+
+    //POST new user route (optional, everyone has access)
+    app.post('/api/tags/removeUserFromTag', checkToken, (req, res, next) => {
+        let { tag, _id } = req.body;
+        console.log(req.body);
+        console.log(req.token);
+        jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            console.log(authorizedData);
+            Tags.findOne({
+                "tags._id": req.body.tag
+            }, function (error, tag) {
+                console.log("found!");
+                
+                console.log(tag);
+              /*  if (error) throw error;
+    
+                if (!tag) {
+                    return res.send(httpResponse.onTagsNotFound);
+                }
+    
+                return res.json({ success: true, tag, message: "Check tags done." }) */
+            }, { _id: 1 })
+           /* if (err) {
+                //If error send Forbidden (403)
+                console.log('ERROR: Could not connect to the protected route');
+                res.sendStatus(403);
+            } else {
+                let user = authorizedData.user;
+                let email = user.email;
+
+                let tagToInsert = {
+                    emails: [email],
+                    text: tag
+                }
+
+                Tags.findOneAndUpdate(
+                    {
+                        postID: _id,
+                        "tags.emails": { "$nin": [email] },
+                        "tags.text": tag
+                    },
+                    {
+                        "$push": {
+                            "tags.$.emails": email
+                        }
+                    },
+                    {
+                        useFindAndModify: false
+                    },
+                    function (error, success) {
+                        if (success === null || success === undefined) {
+                            Tags.findOneAndUpdate(
+                                {
+                                    _id: _id,
+                                    "tags.text": { "$ne": tag }
+                                },
+                                {
+                                    postID: _id,
+                                    $addToSet: {
+                                        tags: tagToInsert
+                                    }
+                                },
+                                {
+                                    upsert: true,
+                                    useFindAndModify: false
+                                },
+                                function (error, success) {
+                                    if (error) {
+                                        return res.json(httpResponses.onTagSaveError);
+                                    }
+                                    res.json(httpResponses.onTagSaveSuccess);
+                                }
+                            )
+                        } else {
+                            if (error) {
+                                return res.json(httpResponses.onTagSaveError);
+                            }
+                            res.json(httpResponses.onTagSaveSuccess);
+                        }
+                    }
+                )
+            } */
+        })
+    });
+
 }

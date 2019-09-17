@@ -51,4 +51,7 @@ Problems I'm fixing w/ this:
 * Figure out color scheme
 * Sort out the response system
 * Fix success inconsistency in header, need to sort out the response and redux structure
-* Kill server on change, getting eardarinuse 8080
+* Kill server on change, getting eardarinuse 8080 **DONE!**
+* About & Credits page
+* Tag upvotes? 
+* Reset password

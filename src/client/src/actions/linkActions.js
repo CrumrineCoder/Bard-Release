@@ -70,3 +70,10 @@ export const checkSourcesAction = (post) => {
     post
   }
 }
+
+export const removeUserFromTagAction = (post) => {
+  return{
+    type: types.REMOVE_USER_FROM_TAG, 
+    post
+  }
+}

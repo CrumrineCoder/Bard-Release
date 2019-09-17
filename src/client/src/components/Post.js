@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction } from '../actions/linkActions';
+import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction} from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
 
 //,{post, postID, index, comment, response }
@@ -91,19 +91,26 @@ function Post(props) {
     }
   }, [props.response.dashboard.response])
 
+  function removeUserFromTag(tag){
+    console.log(tag);
+    console.log(props.currentUser);
+    console.log(props.post._id);
+    props.dispatch(removeUserFromTagAction({tag: tag._id, user: props.currentUser}))
+  }
+
   useEffect(() => {
     if (visualTags) {
       setTagChain(
         <div className="postsTags">
           {visualTags.slice(0, tagLength).map(
             function (tag) {
-              console.log(props.currentUser)
-              console.log(tag);
+           //   console.log(props.currentUser)
+           //   console.log(tag);
               if(tag.emails.indexOf(props.currentUser)!=-1){
                 return (
                   <li key={tag._id}>
                     {tag.text}
-                    <i className="fas fa-times removeTag"></i>
+                    <i className="fas fa-times removeTag" onClick={e => removeUserFromTag(tag)}></i>
                   </li>
                 )
               } else{

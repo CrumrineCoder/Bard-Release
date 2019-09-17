@@ -1,5 +1,5 @@
 import { put, call  } from 'redux-saga/effects';
-import { postService, getAllPostsService, commentService, getAllCommentsForOnePost, getAllTagsForOnePost, postTagService, searchPostsByTagService, getPostsByIDService, checkTagService, checkSourceService } from '../services/dashboardService';
+import { postService, getAllPostsService, commentService, getAllCommentsForOnePost, getAllTagsForOnePost, postTagService, searchPostsByTagService, getPostsByIDService, checkTagService, checkSourceService, removeUserFromTagService } from '../services/dashboardService';
 
 import * as types from '../actions';
 
@@ -102,3 +102,12 @@ export function* checkSourceSaga(payload) {
   }
 }
 
+export function* removeUserFromTagSaga(payload) {
+  //console.log(payload);
+  try {
+    const response = yield call(removeUserFromTagService, payload);
+    yield put({ type: types.REMOVE_USER_FROM_TAG_SUCCESS, response });
+  } catch (error) {
+    yield put({ type: types.REMOVE_USER_FROM_TAG_ERROR, error });
+  }
+}
