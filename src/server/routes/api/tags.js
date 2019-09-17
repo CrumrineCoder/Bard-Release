@@ -176,6 +176,10 @@ module.exports = (app) => {
                 console.log("found!");
                 
                 console.log(tag);
+                if (error) {
+                    return res.json(httpResponses.onTagSaveError);
+                }
+                res.json(httpResponses.onTagSaveSuccess);
               /*  if (error) throw error;
     
                 if (!tag) {
