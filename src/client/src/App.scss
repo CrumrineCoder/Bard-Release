@@ -14,6 +14,16 @@ body, html, #app, #root, .appContainer{
   height: 100%; 
 }
 */
+
+.borderImage{
+  //border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
+ // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
+ border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 50 round;
+ font-family: 'Marcellus', serif;
+ border-width: 5px; //!important; 
+ border-style: solid;
+}
+
 .appContainer{
   margin: 10px;
  // margin-top: 90px;
@@ -115,6 +125,7 @@ body{
   background: rgba(255, 255, 255, 0.75); 
   background-size: cover; 
   background-repeat: no-repeat;
+  border-width: 10px; 
   //background-image: url("http://www.westjerseyartillery.com/wp-content/uploads/2016/04/Parchment-Background.jpg")
 }
 
@@ -135,7 +146,7 @@ body{
 
 .postContainer{
  // float: left; 
-  padding: 10px; 
+  //padding: 10px; 
  // max-width: 30%;
   color: rgb(37, 37, 37); 
  // border: 1px solid rgb(37, 37, 37); 
@@ -144,6 +155,7 @@ body{
  // background-image: url("https://img.freepik.com/free-vector/yellow-parchment_53876-91513.jpg?size=626&ext=jpg");
   background-size: cover; 
   background-repeat: no-repeat; 
+  border-width: 7px; 
 }
 
 .posts{
@@ -222,14 +234,6 @@ body{
   border: solid 7px #41403E;
   display: block ;
   margin: 0 auto; 
-}
-
-.borderImage{
-  //border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
- // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
- border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 50 round;
- font-family: 'Marcellus', serif;
- border-width: 5px; //!important; 
 }
 
 .homePageLogo{
@@ -330,9 +334,16 @@ body{
   margin-bottom: 15px; 
 }
 
+.showMoreTags{
+  margin-bottom: 15px; 
+  cursor: pointer; 
+}
+
 .postCommentContainer, .postVideoContainer, .postTagContainer{
   background: white; 
   padding: 10px; 
-  margin-bottom: 10px; 
+  &:not(:last-child){
+   margin-bottom: 10px; 
+  }
   border-radius: 5px; 
 }

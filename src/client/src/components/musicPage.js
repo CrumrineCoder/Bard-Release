@@ -275,7 +275,7 @@ function MusicPage(props) {
     <div>
       <p>{message}</p>
       <div className="dashboardToolsContainer">
-        <div className="dashboardTool">
+        <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
           <div className="dashboardToolLabel">
             <label htmlFor="excludeSource">Exclude Sources (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="excludeSource" name="excludeSource" id="excludeSource" value={excludeSource}
@@ -288,7 +288,7 @@ function MusicPage(props) {
             </label>
           </div>
         </div>
-        <div className="dashboardTool">
+        <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Search by Tags</h3>
           <div className="dashboardToolLabel">
             <label htmlFor="generalSearchTag">Search by general tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="generalSearchTag" name="generalSearchTag" id="generalSearchTag" value={generalTags}
@@ -308,7 +308,7 @@ function MusicPage(props) {
           {existingTags}
         </div>
         {loggedIn ? 
-          <div className="dashboardTool">
+          <div className="dashboardTool borderImage">
             <h3 className="dashboardToolHeader">Post a new song</h3>
             <form onSubmit={onHandlePost}>
               <div className="dashboardToolLabel">

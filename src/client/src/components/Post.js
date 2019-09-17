@@ -242,11 +242,11 @@ function Post(props) {
   //      <iframe width="300" height="300" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
   // </iframe>
   return (
-    <div className="postContainer">
+    <div className="borderImage postContainer">
       <div className="postTagContainer">
         <h3>Tags:</h3>
         {tagChain}
-        {tagLength < visualTags.length && <button className="borderImage" onClick={e => showMoreTags()}>Show More</button>}
+        {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
         {props.loggedIn ?
           <form onSubmit={onHandleTag}>
             <div className="dashboardToolLabel">
