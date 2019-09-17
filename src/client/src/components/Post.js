@@ -95,7 +95,7 @@ function Post(props) {
     console.log(tag);
     console.log(props.currentUser);
     console.log(props.post._id);
-    props.dispatch(removeUserFromTagAction({tag: tag._id, user: props.currentUser}))
+    props.dispatch(removeUserFromTagAction({tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text}))
   }
 
   useEffect(() => {

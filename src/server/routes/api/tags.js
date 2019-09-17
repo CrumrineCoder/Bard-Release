@@ -135,6 +135,7 @@ module.exports = (app) => {
                                 },
                                 function (error, success) {
                                     if (error) {
+                                        console.log(error);
                                         return res.json(httpResponses.onTagSaveError);
                                     }
                                     res.json(httpResponses.onTagSaveSuccess);
@@ -142,6 +143,7 @@ module.exports = (app) => {
                             )
                         } else {
                             if (error) {
+                                console.log(error);
                                 return res.json(httpResponses.onTagSaveError);
                             }
                             res.json(httpResponses.onTagSaveSuccess);
@@ -176,7 +178,27 @@ module.exports = (app) => {
                 console.log("found!");
                 
                 console.log(tag);
+                console.log(tag.tags[0].emails)
+                if(tag.tags[0].emails.length == 1){
+                    Tags.findOneAndUpdate({
+                        "postID": req.body.postID
+                    }, 
+                    {
+                        $pull: {
+                            "tags" : {
+                                "text": req.body.text
+                            } 
+                        }
+                    }, 
+                    {
+                        useFindAndModify: false
+                    }, function(error, tag){
+                        console.log("suepr inside!");
+                        console.log(tag);
+                    });
+                }
                 if (error) {
+                    console.log(error);
                     return res.json(httpResponses.onTagSaveError);
                 }
                 res.json(httpResponses.onTagSaveSuccess);
