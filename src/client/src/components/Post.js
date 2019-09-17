@@ -63,6 +63,7 @@ function Post(props) {
         //    console.log(props.response.dashboard.response.tag)
         if (props.response.dashboard.response.tag.length > 0) {
           if (props.response.dashboard.response.tag[0].postID == props.post._id) {
+          //  console.log(props.response.dashboard.response.tag[0].tags)
             setTags(props.response.dashboard.response.tag[0].tags)
             // console.log(true);
             let parents = [];
@@ -76,25 +77,36 @@ function Post(props) {
               return parents.indexOf(el.text) < 0;
             });
             tagsToShow = tagsToShow.map(function (el) {
-          //    console.log(el);
+        //      console.log(el);
               var o = Object.assign({}, el);
+              console.log(tagCategories);
+              let i=0; 
               for (var tagCategory in tagCategories) {
+                i++; 
+               console.log(tagCategory)
                 let tagValues = tagCategories[tagCategory];
                // for (var i = 0; i < compareTags.length; i++) {
+        //         console.log(tagValues);
+             //   console.log(tagCategories);
+           //     console.log(el.text);
                   if (tagValues.indexOf(el.text) > -1 || el.text == tagCategory) {
                   //  console.log(tagCategory)
                     o["category"] = tagCategory; 
-                    console.log(o);
-                  
+             //       console.log(o);
+                    return o; 
              //       console.log(tagCategory);
                  //   categories.push(tagCategory);
-                  }  else{
-                    o["category"] = undefined; 
+                  }  else if (i==13){
+                    return o
                   }
-                    return o; 
+                    // else{
+             //       o["category"] = undefined; 
+            //      }
+                    
                   
                // }
               }
+              console.log(i); 
           //    console.log()
               //    o["parent"] = 
             })
@@ -118,12 +130,23 @@ function Post(props) {
     console.log(tag);
     console.log(props.currentUser);
     console.log(props.post._id);
+    console.log(existingTags);
+    console.log(tags);
+    let category; 
+    if (tags.some(e => e.text === tag.category)) {
+      category = tag.catgory;
+      /* vendors contains the element we're looking for */
+    }
+   // let category = tags.find(obj=>{
+     // return obj.text = tag.category; 
+    //})
+    console.log(category);
     props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
   }
 
   useEffect(() => {
     if (visualTags) {
-      console.log(visualTags);
+  //    console.log(visualTags);
       setTagChain(
         <div className="postsTags">
           {visualTags.slice(0, tagLength).map(
