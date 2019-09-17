@@ -161,9 +161,18 @@ module.exports = (app) => {
         console.log(req.token);
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
             console.log(authorizedData);
-            Tags.findOne({
+            Tags.findOneAndUpdate({
                 "tags._id": req.body.tag
-            }, function (error, tag) {
+            }, 
+            {
+                $pull: {
+                    "tags.$.emails" : req.body.user
+                }
+            }, 
+            {
+                useFindAndModify: false
+            },
+            function (error, tag) {
                 console.log("found!");
                 
                 console.log(tag);
@@ -174,7 +183,7 @@ module.exports = (app) => {
                 }
     
                 return res.json({ success: true, tag, message: "Check tags done." }) */
-            }, { _id: 1 })
+            })
            /* if (err) {
                 //If error send Forbidden (403)
                 console.log('ERROR: Could not connect to the protected route');
