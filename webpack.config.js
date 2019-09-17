@@ -10,10 +10,10 @@ module.exports = {
     path: path.join(__dirname, outputDirectory),
     filename: 'bundle.js',
     publicPath: '/'
-  },
+  },/*
   devServer: {
     historyApiFallback: true,
-  },
+  },*/
   module: {
     rules: [{
       test: /\.(js|jsx)$/,

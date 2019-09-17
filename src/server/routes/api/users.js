@@ -31,6 +31,22 @@ const httpResponse = {
   }
 }
 
+const checkToken = (req, res, next) => {
+  const header = req.headers['authorization'];
+  //   console.log("header", header)
+  if (typeof header !== 'undefined') {
+      const bearer = header.split(' ');
+      //    console.log("bearer", bearer);
+      const token = bearer[1];
+      //    console.log("token", token);
+      req.token = token;
+      next();
+  } else {
+      //If header is undefined return Forbidden (403)
+      res.sendStatus(403)
+  }
+}
+
 module.exports = (app) => {
 
   //POST new user route (optional, everyone has access)
@@ -125,7 +141,7 @@ module.exports = (app) => {
   });
 
   //GET current route (required, only authenticated users have access)
-  app.get('/api/users/current', auth.required, (req, res, next) => {
+  /*app.get('/api/users/current', auth.required, (req, res, next) => {
     const { payload: { id } } = req;
     console.log(payload);
     return Users.findById(id)
@@ -133,8 +149,16 @@ module.exports = (app) => {
         if (!user) {
           return res.sendStatus(400);
         }
-
+        console.log(user);
         return res.json({ user: user.toAuthJSON() });
       });
+  }); */
+  app.get('/api/users/current', checkToken, (req, res, next) => {
+    jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+      console.log(authorizedData)
+      let user = authorizedData.user.email;
+     // return authorizedData.user.email;
+     return res.json({ success: true, user, message: "User found." })
+    });
   });
 }

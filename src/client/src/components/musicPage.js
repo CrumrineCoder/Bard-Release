@@ -8,6 +8,7 @@ import LoginModal from "./loginModal"
 
 import tagCategories from "../utils/tagCategories";
 import { checkCookie } from '../utils/cookies';
+import { getCurrentUserAction } from '../actions/authenticationActions';
 
 
 function MusicPage(props) {
@@ -250,6 +251,11 @@ function MusicPage(props) {
 
   }
 
+  function getCurrentUser(){
+    console.log("test");
+    props.dispatch(getCurrentUserAction())
+  }
+
   function clear() {
     props.dispatch(getAllPostsAction())
     setSpecificTags("")
@@ -275,6 +281,7 @@ function MusicPage(props) {
     <div>
       <p>{message}</p>
       <div className="dashboardToolsContainer">
+        <button onClick={e=> getCurrentUser()}>Get Current User</button>
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
           <div className="dashboardToolLabel">

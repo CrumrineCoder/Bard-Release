@@ -48,3 +48,4 @@ Problems I'm fixing w/ this:
 * Readd Words counter functionality *IMPORTANT*
 * If no results are returned by the search, tell the user instead of showing them results they don't want. 
 * Empty comment / tag message Be the first to commment/tag!
+* Figure out color scheme

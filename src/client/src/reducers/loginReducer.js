@@ -9,9 +9,13 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.LOGIN_USER_ERROR:
       return { ...state, response };
+    case types.GET_CURRENT_USER_SUCCESS:
+      return { ...state, response };
+    case types.GET_CURRENT_USER_ERROR:
+      return { ...state, response }
     case types.LOGOUT_USER:
       //   console.log(response);
-      return { ...state, response: {success: false}};
+      return { ...state, response: { success: false } };
     default:
       return state;
   }

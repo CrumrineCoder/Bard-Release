@@ -58,7 +58,7 @@ function Post(props) {
           )
         }
       }
-      console.log(props.response.dashboard.response.tag);
+      //console.log(props.response.dashboard.response.tag);
       if (props.response.dashboard.response.tag) {
         //    console.log(props.response.dashboard.response.tag)
         if (props.response.dashboard.response.tag.length > 0) {

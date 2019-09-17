@@ -1,5 +1,5 @@
 import { takeLatest, takeEvery } from 'redux-saga/effects';
-import { registerSaga, loginSaga } from './authenticationSaga';
+import { registerSaga, loginSaga, getCurrentUserSaga } from './authenticationSaga';
 import {postSaga, getAllSaga, commentSaga, getCommentsForOnePostSaga, getTagsForOnePostSaga, postTagSaga, searchPostsByTagSaga, getPostByIDSaga, checkTagSaga, checkSourceSaga} from "./dashboardSaga"
 
 import * as types from '../actions';
@@ -20,7 +20,7 @@ export default function* watchUserAuthentication() {
   yield takeEvery(types.CHECK_TAG, checkTagSaga);
   yield takeEvery(types.SEARCH_POSTS_BY_TAG, searchPostsByTagSaga);
   yield takeEvery(types.CHECK_SOURCE, checkSourceSaga);
-
+  yield takeEvery(types.GET_CURRENT_USER, getCurrentUserSaga);
   
 }
 
