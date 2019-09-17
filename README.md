@@ -8,7 +8,7 @@ Problems I'm fixing w/ this:
 * Good tracks don't have prevalence
 * No record keeping of actual  use in games **DONE!**
 * No division between tags, descriptors, places to use it, where they were used, and categories of tags **DONE! for now**
-* No playlists
+* No user playlists
 * No ex/including OSTs **DONE!!**
 * No community help
 * No updating YT links / getting extended versions
@@ -17,7 +17,7 @@ Problems I'm fixing w/ this:
 * Sorting
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. 
-* Delete & edit tags & posts
+* Delete & edit tags & posts *IMPORTANT*
 * 404
 * Loading screen
 * Routing Issue, 404 on refresh **DONE!!**
@@ -31,8 +31,8 @@ Problems I'm fixing w/ this:
 * Update messages, X messages found!
 * Show Categorical tags
 * Register message is wrong
-* D&D aesthetic
-* Make the tags the top priority, not the song
+* D&D aesthetic **WORKING ON IT!**
+* Make the tags the top priority, not the song **DONE!!**
 * Song-boards
 * Check sources doesn't need to call the backend everytime. 
 * all tags should be checked in lowercase, even if written in upper.
@@ -43,8 +43,8 @@ Problems I'm fixing w/ this:
 * Login modal **DONE!!**
 * Allow users to go to catalog, but they have to login to use some features **DONE!**
 * Home page search **DONE!!** (still could use suggested tags, maybe?)
-* Grid but don't make each item the same height, Pinterest does it better. 
+* Grid but don't make each item the same height, Pinterest does it better. **DONE!!**
 * Check if the user is logged in for the catalog and show the right stuff. **DONE!!**
-* Readd Words counter functionality
+* Readd Words counter functionality *IMPORTANT*
 * If no results are returned by the search, tell the user instead of showing them results they don't want. 
 * Empty comment / tag message Be the first to commment/tag!

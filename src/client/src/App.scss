@@ -18,7 +18,7 @@ body, html, #app, #root, .appContainer{
 .borderImage{
   //border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
  // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
- border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 50 round;
+ border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 40 round;
  font-family: 'Marcellus', serif;
  border-width: 3px; //!important; 
  border-style: solid;
@@ -44,9 +44,13 @@ body{
  //font-family: 'Cinzel', serif;
  font-family: 'Marcellus', serif;
  //font-family: 'Eczar', serif;
-  background: #085BB9;
+  background: #d3b14d;
   color: #EEEBD0; 
   margin: 0px; 
+
+  //51626a
+  // ad3f26
+  //d3b14d
 }
 
 // HEADER 
@@ -155,7 +159,7 @@ body{
   color: rgb(37, 37, 37); 
  // border: 1px solid rgb(37, 37, 37); 
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.95); 
+  background: rgba(255, 255, 255, 0.7); 
  // background-image: url("https://img.freepik.com/free-vector/yellow-parchment_53876-91513.jpg?size=626&ext=jpg");
   background-size: cover; 
   background-repeat: no-repeat; 
@@ -345,7 +349,7 @@ body{
 }
 
 .postCommentContainer, .postVideoContainer, .postTagContainer{
-  background: white; 
+  background: rgba(255, 255, 255, 0.8); 
   padding: 10px; 
   &:not(:last-child){
    margin-bottom: 10px; 

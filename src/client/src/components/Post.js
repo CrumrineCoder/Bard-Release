@@ -64,7 +64,7 @@ function Post(props) {
         if (props.response.dashboard.response.tag.length > 0) {
           if (props.response.dashboard.response.tag[0].postID == props.post._id) {
             setTags(props.response.dashboard.response.tag[0].tags)
-            console.log(true);
+           // console.log(true);
             let parents = [];
             let tagsToShow = props.response.dashboard.response.tag[0].tags;
 
