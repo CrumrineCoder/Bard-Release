@@ -65,6 +65,12 @@ function MusicPage(props) {
   }, [])
 
   useEffect(() => {
+    if (props.response.login.response) {
+      console.log(props.response.login.response.user);
+    }
+  }, [props.response.login.response])
+
+  useEffect(() => {
     //console.log(props.response.dashboard.response);
     if (filteredPosts && unfilteredPosts) {
       //   console.log(filteredPosts);
@@ -251,7 +257,7 @@ function MusicPage(props) {
 
   }
 
-  function getCurrentUser(){
+  function getCurrentUser() {
     console.log("test");
     props.dispatch(getCurrentUserAction())
   }
@@ -262,7 +268,7 @@ function MusicPage(props) {
     setGeneralTags("")
   }
 
-  function redirect(location){
+  function redirect(location) {
     props.history.push(location);
   }
   /*
@@ -281,7 +287,7 @@ function MusicPage(props) {
     <div>
       <p>{message}</p>
       <div className="dashboardToolsContainer">
-        <button onClick={e=> getCurrentUser()}>Get Current User</button>
+        <button onClick={e => getCurrentUser()}>Get Current User</button>
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
           <div className="dashboardToolLabel">
@@ -314,7 +320,7 @@ function MusicPage(props) {
           </form>
           {existingTags}
         </div>
-        {loggedIn ? 
+        {loggedIn ?
           <div className="dashboardTool borderImage">
             <h3 className="dashboardToolHeader">Post a new song</h3>
             <form onSubmit={onHandlePost}>
@@ -335,8 +341,8 @@ function MusicPage(props) {
               </div>
             </form>
             {existingSources}
-          </div> 
-        : <button className="btn-post loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button> }
+          </div>
+          : <button className="btn-post loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button>}
       </div>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       <div>
