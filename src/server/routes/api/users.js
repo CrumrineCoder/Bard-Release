@@ -35,15 +35,15 @@ const checkToken = (req, res, next) => {
   const header = req.headers['authorization'];
   //   console.log("header", header)
   if (typeof header !== 'undefined') {
-      const bearer = header.split(' ');
-      //    console.log("bearer", bearer);
-      const token = bearer[1];
-      //    console.log("token", token);
-      req.token = token;
-      next();
+    const bearer = header.split(' ');
+    //    console.log("bearer", bearer);
+    const token = bearer[1];
+    //    console.log("token", token);
+    req.token = token;
+    next();
   } else {
-      //If header is undefined return Forbidden (403)
-      res.sendStatus(403)
+    //If header is undefined return Forbidden (403)
+    res.sendStatus(403)
   }
 }
 
@@ -129,7 +129,7 @@ module.exports = (app) => {
             } else {
               jwt.sign({ user }, process.env.SECRET, { expiresIn: '1h' }, (err, token) => {
                 if (err) { console.log(err) }
-                return res.json({ success: true, token: 'JWT ' + token });
+                return res.json({ success: true, token: 'JWT ' + token, message: "User login" });
               });
             }
           });
@@ -155,10 +155,14 @@ module.exports = (app) => {
   }); */
   app.get('/api/users/current', checkToken, (req, res, next) => {
     jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
-  //    console.log(authorizedData)
-      let user = authorizedData.user.email;
-     // return authorizedData.user.email;
-     return res.json({ success: true, user, message: "User found." })
+      //    console.log(authorizedData)
+      if (authorizedData) {
+        let user = authorizedData.user.email;
+        // return authorizedData.user.email;
+        return res.json({ success: true, user, message: "User found." })
+      } else{
+        return res.json({success: false, message: "User not found."})
+      }
     });
   });
 }

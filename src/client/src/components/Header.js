@@ -9,6 +9,7 @@ function Header(props) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    console.log(props.response.login.response);
     if (props.response.login.response) {
       setIsSuccess(props.response.login.response.success);
     } else {
@@ -25,7 +26,7 @@ function Header(props) {
       <div className="headerLinks">
         <Link className="headerLink" to=''>Home</Link>
         <Link className="headerLink" to='music'>Music</Link>
-        {isSuccess ?
+        {isSuccess?
           <>
             <Link className="headerLink" to='login'>Logout</Link>
           </>

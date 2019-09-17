@@ -110,7 +110,7 @@ function MusicPage(props) {
           setPostsContent(
             <div className="posts">
               {finalizedPosts.map(post =>
-                <Post setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
+                <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
               )}
             </div>
           )

@@ -26,7 +26,7 @@ Problems I'm fixing w/ this:
 * Get suggested tags **DONE!!**
 * Hide / progressively(infinite) comments
 * Logout **DONE!!**
-* Mini mode to just show songs
+* Mini mode to just show TAGS, and you can open to see the video and comments on a button press.
 * Change volume controls, or make the youtube video at the top and larger. 
 * Update messages, X messages found!
 * Show Categorical tags
@@ -49,3 +49,6 @@ Problems I'm fixing w/ this:
 * If no results are returned by the search, tell the user instead of showing them results they don't want. 
 * Empty comment / tag message Be the first to commment/tag!
 * Figure out color scheme
+* Sort out the response system
+* Fix success inconsistency in header, need to sort out the response and redux structure
+* Kill server on change, getting eardarinuse 8080

@@ -64,7 +64,7 @@ function Post(props) {
         if (props.response.dashboard.response.tag.length > 0) {
           if (props.response.dashboard.response.tag[0].postID == props.post._id) {
             setTags(props.response.dashboard.response.tag[0].tags)
-           // console.log(true);
+            // console.log(true);
             let parents = [];
             let tagsToShow = props.response.dashboard.response.tag[0].tags;
 
@@ -77,7 +77,7 @@ function Post(props) {
             });
 
             setVisualTags(tagsToShow);
-          //  updateTags()
+            //  updateTags()
 
           }
         } else {
@@ -95,10 +95,28 @@ function Post(props) {
     if (visualTags) {
       setTagChain(
         <div className="postsTags">
-          {visualTags.slice(0, tagLength).map(tag =>
-            <li key={tag._id}>
-              {tag.text}
-            </li>
+          {visualTags.slice(0, tagLength).map(
+            function (tag) {
+              console.log(props.currentUser)
+              console.log(tag);
+              if(tag.emails.indexOf(props.currentUser)!=-1){
+                return (
+                  <li key={tag._id}>
+                    {tag.text}
+                    <i className="fas fa-times removeTag"></i>
+                  </li>
+                )
+              } else{
+                return (
+                  <li key={tag._id}>
+                    {tag.text}
+                  </li>
+                )
+              }
+              
+            }
+
+
           )}
         </div>
       )
@@ -181,7 +199,7 @@ function Post(props) {
 
   function getEmbed(link) {
     let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-   // console.log(embedLink);
+    // console.log(embedLink);
     embedLink += "?autoplay=1"
     return embedLink;
   }
@@ -192,7 +210,7 @@ function Post(props) {
 
   function showMoreTags() {
     setTagLength(tagLength + 3)
-  //  updateTags()
+    //  updateTags()
   }
 
   function onHandleTag(event) {
