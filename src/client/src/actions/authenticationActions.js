@@ -27,7 +27,7 @@ export const logoutUserAction = (user) => {
 };
 
 export const getCurrentUserAction = (user) =>{
-  console.log(user);
+  //console.log(user);
   return {
     type: types.GET_CURRENT_USER,
     user

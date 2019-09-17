@@ -26,10 +26,10 @@ export function* loginSaga(payload) {
 }
 
 export function* getCurrentUserSaga(payload) {
-  console.log(payload);
+  //console.log(payload);
   try {
     const response = yield call(getCurrentUserService, payload);
-    console.log(response);
+    //console.log(response);
     //    console.log(types.LOGIN_USER_SUCCESS)
     yield put({ type: types.GET_CURRENT_USER_SUCCESS, response });
   } catch (error) {

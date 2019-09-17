@@ -44,11 +44,11 @@ export const loginUserService = (request) => {
 };
 
 export const getCurrentUserService = (request) => {
-  console.log(request);
+  //console.log(request);
   const LOGIN_API_ENDPOINT = '/api/users/current';
   let authToken = getCookie('token');
-  console.log(authToken);
-  console.log(authToken.slice(4, authToken.length));
+  //console.log(authToken);
+  //console.log(authToken.slice(4, authToken.length));
   //let token = "Bearer " + authToken.slice(4, authToken.length);
   let token = "Bearer authToken";
   const parameters = {
@@ -63,11 +63,11 @@ export const getCurrentUserService = (request) => {
     },
     credentials: "same-origin"
   };
-  console.log(parameters);
-  console.log(LOGIN_API_ENDPOINT);
+  //console.log(parameters);
+  //console.log(LOGIN_API_ENDPOINT);
   return fetch(LOGIN_API_ENDPOINT, parameters)
     .then(response => {
-      console.log(response.clone().json())
+      //console.log(response.clone().json())
       return response.clone().json();
     })
     .then(json => {

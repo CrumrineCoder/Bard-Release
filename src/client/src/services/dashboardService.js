@@ -148,7 +148,7 @@ export const getAllTagsForOnePost = (request) => {
 
 
 export const checkTagService = (request) => {
-  console.log(request);
+  //console.log(request);
 
     const GET_API_ENDPOINT = '/api/tags/checkTags/' + request.post.searchTag;
     let authToken = getCookie('token');
@@ -221,7 +221,7 @@ export const postTagService = (request) => {
 };
 
 export const checkSourceService = (request) => {
-  console.log(request);
+ // console.log(request);
 
     const GET_API_ENDPOINT = '/api/posts/checkSource/' + request.post.searchSource;
     let authToken = getCookie('token');

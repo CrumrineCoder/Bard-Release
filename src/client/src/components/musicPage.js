@@ -26,6 +26,7 @@ function MusicPage(props) {
   const [includeSource, setIncludeSource] = useState("");
   const [loggedIn, setLoggedIn] = useState();
   const [modalOpen, setModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState("")
 
   useEffect(() => {
     let searchTag;
@@ -56,6 +57,7 @@ function MusicPage(props) {
   }, [source])
 
   useEffect(() => {
+    props.dispatch(getCurrentUserAction())
     if (props.location.state) {
       setSpecificTags(props.location.state)
       onSearchTag()
@@ -66,7 +68,7 @@ function MusicPage(props) {
 
   useEffect(() => {
     if (props.response.login.response) {
-      console.log(props.response.login.response.user);
+      setCurrentUser(props.response.login.response.user);
     }
   }, [props.response.login.response])
 
@@ -257,11 +259,6 @@ function MusicPage(props) {
 
   }
 
-  function getCurrentUser() {
-    console.log("test");
-    props.dispatch(getCurrentUserAction())
-  }
-
   function clear() {
     props.dispatch(getAllPostsAction())
     setSpecificTags("")
@@ -287,7 +284,6 @@ function MusicPage(props) {
     <div>
       <p>{message}</p>
       <div className="dashboardToolsContainer">
-        <button onClick={e => getCurrentUser()}>Get Current User</button>
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
           <div className="dashboardToolLabel">

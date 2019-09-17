@@ -155,7 +155,7 @@ module.exports = (app) => {
   }); */
   app.get('/api/users/current', checkToken, (req, res, next) => {
     jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
-      console.log(authorizedData)
+  //    console.log(authorizedData)
       let user = authorizedData.user.email;
      // return authorizedData.user.email;
      return res.json({ success: true, user, message: "User found." })
