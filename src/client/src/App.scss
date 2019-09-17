@@ -20,8 +20,12 @@ body, html, #app, #root, .appContainer{
  // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
  border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 50 round;
  font-family: 'Marcellus', serif;
- border-width: 5px; //!important; 
+ border-width: 3px; //!important; 
  border-style: solid;
+}
+
+.blackBorder{
+  border: 3px solid black; 
 }
 
 .appContainer{
@@ -125,7 +129,7 @@ body{
   background: rgba(255, 255, 255, 0.75); 
   background-size: cover; 
   background-repeat: no-repeat;
-  border-width: 10px; 
+  border-width: 8px; 
   //background-image: url("http://www.westjerseyartillery.com/wp-content/uploads/2016/04/Parchment-Background.jpg")
 }
 
@@ -231,9 +235,10 @@ body{
 .homePageSearchInput, .homePageSearchButton{
 
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  border: solid 7px #41403E;
+  //border: solid 7px #41403E;
   display: block ;
   margin: 0 auto; 
+  border-width: 7px; 
 }
 
 .homePageLogo{
