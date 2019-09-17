@@ -238,8 +238,8 @@ function MusicPage(props) {
             categories.push(tagCategory);
           }
         }
-
       }
+      
       searchTag.push(categories);
     }
 
