@@ -8,8 +8,12 @@ module.exports = {
   entry: ['babel-polyfill', './src/client/src/index.js'],
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: 'bundle.js'
-  },
+    filename: 'bundle.js',
+    publicPath: '/'
+  },/*
+  devServer: {
+    historyApiFallback: true,
+  },*/
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
@@ -48,8 +52,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
-      template: './src/client/public/index.html',
-      // favicon: './public/favicon.ico'
+      template: './src/client/public/index.html/',
+       favicon: './src/client/public/assets/img/bard.ico'
     })
   ]
 };
