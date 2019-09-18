@@ -127,11 +127,6 @@ function Post(props) {
   }, [props.response.dashboard.response])
 
   function removeUserFromTag(tag) {
-    console.log(tag);
-    console.log(props.currentUser);
-    console.log(props.post._id);
-    console.log(existingTags);
-    console.log(tags);
     let category = tags.find(function(el){
       return el.text === tag.category;
     })
