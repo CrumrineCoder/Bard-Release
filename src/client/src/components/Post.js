@@ -132,18 +132,25 @@ function Post(props) {
     console.log(props.post._id);
     console.log(existingTags);
     console.log(tags);
-    let category; 
+    let category = tags.find(function(el){
+      return el.text === tag.category;
+    })
+    if(category){
+      props.dispatch(removeUserFromTagAction({ tag:category._id, user: props.currentUser, postID: props.post._id, text: category.text}));
+    }
+    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text}))
+  /*  console.log(category);
     if (tags.some(e => e.text === tag.category)) {
       console.log("yES!!");
       console.log(tag.category);
       category = tag.catgory;
-      props.dispatch(removeUserFromTagAction({ tag: e._id, user: props.currentUser, postID: props.post._id, text: e.text}))
+      
       /* vendors contains the element we're looking for */
-    } else {
+  /*  } else {
       console.log("bad!");
 
     }
-    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
+    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))*/
    // let category = tags.find(obj=>{
      // return obj.text = tag.category; 
     //})
