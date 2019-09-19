@@ -287,7 +287,7 @@ function Post(props) {
         tag,
         _id
       };
-
+      console.log(data);
       props.dispatch(tagAction(data));
 
       let parent;
@@ -298,19 +298,23 @@ function Post(props) {
         }
       }
       let obj;
+      console.log(tags);
       if (tags) {
         obj = tags.find(o => o.text === parent);
       } else if (tag == parent) {
         obj = tag;
       }
-
-      if (parent != undefined && obj == undefined) {
+      console.log(parent);
+      console.log(obj);
+     // if (parent != undefined && obj == undefined) {
+      if(parent!=undefined){
 
         const parentData = {
           tag: parent,
-          _id
+          _id,
+          isParent: true
         }
-
+        console.log(parentData);
         props.dispatch(tagAction(parentData));
       }
     }
