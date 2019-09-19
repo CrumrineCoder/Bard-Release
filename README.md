@@ -55,4 +55,6 @@ Problems I'm fixing w/ this:
 * About & Credits page
 * Tag upvotes? 
 * Reset password
-* There are No Tags Yet bug when searching for 'Western' in general tab
+* There are No Tags Yet bug when searching for 'Western' in general tab **DONE!!**
+* Inclusive vs Exclusive tag search
+* No Posts found for those tags **DONE!!**

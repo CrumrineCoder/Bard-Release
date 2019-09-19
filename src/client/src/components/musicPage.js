@@ -106,14 +106,19 @@ function MusicPage(props) {
           )
         }
         else {
-
-          setPostsContent(
-            <div className="posts">
-              {finalizedPosts.map(post =>
-                <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
-              )}
-            </div>
-          )
+          if(props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0){
+              setPostsContent(
+                <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
+              )
+          } else if(props.response.dashboard.response.message != "Check sources done." && props.response.dashboard.response.message != "Check tags done."){
+            setPostsContent(
+              <div className="posts">
+                {finalizedPosts.map(post =>
+                  <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
+                )}
+              </div>
+            )
+          }
 
         }
       }
