@@ -54,12 +54,22 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/api/tags/searchPostsByTag/:tag', (req, res) => {
-        let tags = req.params.tag.split(",");
-
+    app.post('/api/tags/searchPostsByTag/', (req, res) => {
+        console.log("BODY!");
+        console.log(req.body);
+        // let tags = req.params.tag.split(",");
+        let findPosts = {}; 
+        if(req.body.exclusiveTags.length > 0){
+            findPosts["$all"] = req.body.exclusiveTags
+        }
+        if(req.body.inclusiveTags.length > 0){
+            findPosts["$in"] =  req.body.inclusiveTags
+        }
+        console.log(findPosts);
         Tags.find({
-            "tags.text": { "$all": tags }
+            "tags.text": findPosts
         }, function (error, tag) {
+            console.log(tag);
             //      console.log(tag);
             if (error) throw error;
 
@@ -101,7 +111,7 @@ module.exports = (app) => {
                     emails: [email],
                     text: tag
                 }
-
+                console.log(tagToInsert);
                 Tags.findOneAndUpdate(
                     {
                         postID: _id,

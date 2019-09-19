@@ -58,20 +58,15 @@ function Post(props) {
           )
         }
       }
-      console.log("Tag!")
-      console.log(props.response.dashboard.response);
-      console.log("Post!")
-      console.log(props.post);
-      console.log(props);
+
       if (props.response.dashboard.response.tag) {
-        console.log(props.response.dashboard.response.message);
         if (props.response.dashboard.response.message == "Tags for post done.") {
           if (props.response.dashboard.response.tag.length > 0) {
             if (props.response.dashboard.response.tag[0].postID == props.post._id) {
 
-              //setTags(props.response.dashboard.response.tag[0].tags)
-              //setVisualTags(props.response.dashboard.response.tag[0].tags);
-              console.log("INNNIT!")
+              setTags(props.response.dashboard.response.tag[0].tags)
+              setVisualTags(props.response.dashboard.response.tag[0].tags);
+              /*
               setTags(props.response.dashboard.response.tag[0].tags)
               let parents = [];
               let tagsToShow = props.response.dashboard.response.tag[0].tags;
@@ -99,6 +94,7 @@ function Post(props) {
                 }
               })
               setVisualTags(tagsToShow);
+              */
             } else {
               setTagChain(
                 <p className="noContentDisclaimer">

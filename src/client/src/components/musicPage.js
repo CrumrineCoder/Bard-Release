@@ -203,26 +203,29 @@ function MusicPage(props) {
     }
   */
   function onSearchTag(event) {
-    let searchTag;
+    let exclusiveTags;
 
     if (event) {
       event.preventDefault();
 
-      searchTag = event.target.searchTag.value;
+      exclusiveTags = event.target.searchTag.value;
     } else {
-      searchTag = props.location.state;
+      exclusiveTags = props.location.state;
     }
-    if (searchTag.indexOf(",") > - 1) {
-      searchTag = searchTag.split(",");
+    if (exclusiveTags.indexOf(",") > - 1) {
+      exclusiveTags = exclusiveTags.split(",");
     } else {
 
-      let searchString = searchTag
-      searchTag = [];
+      let searchString = exclusiveTags;
+      exclusiveTags = [];
       searchString = searchString.toLowerCase();
-      searchTag.push(searchString);
+      exclusiveTags.push(searchString);
     }
 
-    searchTag = searchTag.map(str => str.replace(/\s/g, ''));
+    exclusiveTags = exclusiveTags.map(str => str.replace(/\s/g, ''));
+    exclusiveTags = exclusiveTags.filter(Boolean);
+
+    let inclusiveTags = [];
     let compareTags;
     if (generalTags.length > 0) {
 
@@ -245,22 +248,27 @@ function MusicPage(props) {
           }
         }
       }
-      searchTag.push(categories);
+      inclusiveTags.push(categories);
+      inclusiveTags = inclusiveTags.flat(Infinity);
     }
 
-
-    searchTag = searchTag.filter(function (str) {
+    inclusiveTags = inclusiveTags.filter(function (str) {
       return /\S/.test(str);
     });
 
-    searchTag = searchTag.filter(Boolean);
-
-    if (searchTag.length > 0) {
+    inclusiveTags = inclusiveTags.filter(Boolean);
+    
+    if (exclusiveTags.length > 0 || inclusiveTags.length > 0) {
       const data = {
+        inclusiveTags, 
+        exclusiveTags
+      }
+      props.dispatch(searchPostsByTag(data))
+     /* const data = {
         searchTag
       };
       console.log(data);
-      props.dispatch(searchPostsByTag(data));
+      props.dispatch(searchPostsByTag(data)); */
     }
 
   }
@@ -306,7 +314,7 @@ function MusicPage(props) {
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Search by Tags</h3>
           <div className="dashboardToolLabel">
-            <label htmlFor="generalSearchTag">Search by general tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="generalSearchTag" name="generalSearchTag" id="generalSearchTag" value={generalTags}
+            <label htmlFor="generalSearchTag">Search by categorical tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="generalSearchTag" name="generalSearchTag" id="generalSearchTag" value={generalTags}
               onChange={e => setGeneralTags(e.target.value)} />
             </label>
           </div>
