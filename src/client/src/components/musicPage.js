@@ -106,18 +106,24 @@ function MusicPage(props) {
           )
         }
         else {
-          if(props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0){
-              setPostsContent(
-                <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
-              )
-          } else if(props.response.dashboard.response.message != "Check sources done." && props.response.dashboard.response.message != "Check tags done."){
+          if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
             setPostsContent(
-              <div className="posts">
-                {finalizedPosts.map(post =>
-                  <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
-                )}
-              </div>
+              <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
             )
+          } else if (props.response.dashboard.response.message != "Check sources done." && props.response.dashboard.response.message != "Check tags done.") {
+            if (finalizedPosts.length == 0) {
+              setPostsContent(
+                <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
+              )
+            } else {
+              setPostsContent(
+                <div className="posts">
+                  {finalizedPosts.map(post =>
+                    <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
+                  )}
+                </div>
+              )
+            }
           }
 
         }
@@ -257,18 +263,18 @@ function MusicPage(props) {
     });
 
     inclusiveTags = inclusiveTags.filter(Boolean);
-    
+
     if (exclusiveTags.length > 0 || inclusiveTags.length > 0) {
       const data = {
-        inclusiveTags, 
+        inclusiveTags,
         exclusiveTags
       }
       props.dispatch(searchPostsByTag(data))
-     /* const data = {
-        searchTag
-      };
-      console.log(data);
-      props.dispatch(searchPostsByTag(data)); */
+      /* const data = {
+         searchTag
+       };
+       console.log(data);
+       props.dispatch(searchPostsByTag(data)); */
     }
 
   }
