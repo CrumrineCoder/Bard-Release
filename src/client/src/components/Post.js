@@ -39,7 +39,7 @@ function Post(props) {
         // console.log(props.response.dashboard.response.comment[0])
         if (props.response.dashboard.response.comment.length > 0) {
           if (props.response.dashboard.response.comment[0].postID == props.post._id) {
-            //   console.log(props.response.dashboard.response.comment[0]);
+       //     console.log(props.response.dashboard.response.comment[0]);
             setCommentChain(
               <div>
                 {props.response.dashboard.response.comment[0].comments.map((comment, index) =>
@@ -95,13 +95,7 @@ function Post(props) {
               })
               setVisualTags(tagsToShow);
               */
-            } else {
-              setTagChain(
-                <p className="noContentDisclaimer">
-                  There are no tags yet.
-                </p>
-              )
-            }
+            } 
           } 
         }
       }
@@ -158,6 +152,13 @@ function Post(props) {
             }
           )}
         </div>
+      )
+    }
+    else {
+      setTagChain(
+        <p className="noContentDisclaimer">
+          There are no tags yet.
+        </p>
       )
     }
   }, [visualTags, tagLength])
@@ -263,7 +264,7 @@ function Post(props) {
         tag,
         _id
       };
-      console.log(data);
+    //  console.log(data);
       props.dispatch(tagAction(data));
       // Parent add - defunct for now
       /*

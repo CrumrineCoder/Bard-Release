@@ -9,7 +9,7 @@ function Header(props) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    console.log(props.response.login.response);
+  //  console.log(props.response.login.response);
     if (props.response.login.response) {
       setIsSuccess(props.response.login.response.success);
     } else {

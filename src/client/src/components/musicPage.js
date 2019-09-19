@@ -300,9 +300,9 @@ function MusicPage(props) {
       </form>
       */
   //       <a href="/login">Login</a>
+  //      <p>{message}</p>
   return (
     <div>
-      <p>{message}</p>
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
