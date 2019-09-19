@@ -173,32 +173,32 @@ module.exports = (app) => {
         let { tag, _id } = req.body;
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
             Tags.findOneAndUpdate({
-                "tags._id": req.body.tag
+                "tags._id": req.body.tag,
+                "tags.emails": { "$in": [req.body.user] },
+              //  "tags.$.emails": req.body.user
             },
-                /*      {
-                          $pull: {
-                              "tags.$.emails": req.body.user
+                     {
+                          $set: {
+                              "tags.$.emails": "Peter"
                           }
-                      }, */
+                      },
                 {
-                    $unset: {
-                        "tags.$.emails": req.body.user
+               
+                },
+                 function(error, tag){
+                    console.log(tag)
+                    if (error) {
+                        console.log(error);
+                        return res.json(httpResponses.onTagSaveError);
                     }
-                },
-                {
-                    useFindAndModify: false
-                },
-                function (error, tag) {
+                    res.json(httpResponses.onTagSaveSuccess);
+                })
+            /*    function (error, tag) {
                     console.log("lOOK AT THIS!")
-                    console.log(tag);
+                    console.log(tag.tags[0].emails);
                     Tags.findOneAndUpdate({
                         "tags._id": req.body.tag
                     },
-                        /*      {
-                                  $pull: {
-                                      "tags.$.emails": req.body.user
-                                  }
-                              }, */
                         {
                             $pull: {
                                 "tags.$.emails": null
@@ -208,8 +208,10 @@ module.exports = (app) => {
                             useFindAndModify: false
                         },
                         function (error, tag) {
+                            console.log("zipzop AT THIS!")
+                            console.log(tag.tags[0].emails);
                             console.log(tag.tags[0].emails.length)
-                            if (tag.tags[0].emails.length == 0) {
+                            if (tag.tags[0].emails.length == 0 || tag.tags[0].emails.length == 1) {
                                 Tags.findOneAndUpdate({
                                     "postID": req.body.postID
                                 },
@@ -230,75 +232,9 @@ module.exports = (app) => {
                                 return res.json(httpResponses.onTagSaveError);
                             }
                             res.json(httpResponses.onTagSaveSuccess);
-                            /*  if (error) throw error;
-                  
-                              if (!tag) {
-                                  return res.send(httpResponse.onTagsNotFound);
-                              }
-                  
-                              return res.json({ success: true, tag, message: "Check tags done." }) */
                         })
                 })
-            /* if (err) {
-                 //If error send Forbidden (403)
-                 console.log('ERROR: Could not connect to the protected route');
-                 res.sendStatus(403);
-             } else {
-                 let user = authorizedData.user;
-                 let email = user.email;
- 
-                 let tagToInsert = {
-                     emails: [email],
-                     text: tag
-                 }
- 
-                 Tags.findOneAndUpdate(
-                     {
-                         postID: _id,
-                         "tags.emails": { "$nin": [email] },
-                         "tags.text": tag
-                     },
-                     {
-                         "$push": {
-                             "tags.$.emails": email
-                         }
-                     },
-                     {
-                         useFindAndModify: false
-                     },
-                     function (error, success) {
-                         if (success === null || success === undefined) {
-                             Tags.findOneAndUpdate(
-                                 {
-                                     _id: _id,
-                                     "tags.text": { "$ne": tag }
-                                 },
-                                 {
-                                     postID: _id,
-                                     $addToSet: {
-                                         tags: tagToInsert
-                                     }
-                                 },
-                                 {
-                                     upsert: true,
-                                     useFindAndModify: false
-                                 },
-                                 function (error, success) {
-                                     if (error) {
-                                         return res.json(httpResponses.onTagSaveError);
-                                     }
-                                     res.json(httpResponses.onTagSaveSuccess);
-                                 }
-                             )
-                         } else {
-                             if (error) {
-                                 return res.json(httpResponses.onTagSaveError);
-                             }
-                             res.json(httpResponses.onTagSaveSuccess);
-                         }
-                     }
-                 )
-             } */
+      */
         })
     });
 
