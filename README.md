@@ -55,3 +55,4 @@ Problems I'm fixing w/ this:
 * About & Credits page
 * Tag upvotes? 
 * Reset password
+* There are No Tags Yet bug when searching for 'Western' in general tab

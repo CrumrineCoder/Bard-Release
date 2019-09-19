@@ -58,62 +58,46 @@ function Post(props) {
           )
         }
       }
-      //console.log(props.response.dashboard.response.tag);
+      console.log("Tag!")
+      console.log(props.response.dashboard.response);
+      console.log("Post!")
+      console.log(props.post);
+      console.log(props);
       if (props.response.dashboard.response.tag) {
-        //    console.log(props.response.dashboard.response.tag)
         if (props.response.dashboard.response.tag.length > 0) {
           if (props.response.dashboard.response.tag[0].postID == props.post._id) {
-          //  console.log(props.response.dashboard.response.tag[0].tags)
-            setTags(props.response.dashboard.response.tag[0].tags)
-            // console.log(true);
-            let parents = [];
-            let tagsToShow = props.response.dashboard.response.tag[0].tags;
+            if (props.response.dashboard.response.message == "Tags for post done.") {
+              //setTags(props.response.dashboard.response.tag[0].tags)
+              //setVisualTags(props.response.dashboard.response.tag[0].tags);
 
-            Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
-              parents.push(tagCategory)
-            })
+              setTags(props.response.dashboard.response.tag[0].tags)
+              let parents = [];
+              let tagsToShow = props.response.dashboard.response.tag[0].tags;
 
-            tagsToShow = tagsToShow.filter(function (el) {
-              return parents.indexOf(el.text) < 0;
-            });
-            tagsToShow = tagsToShow.map(function (el) {
-        //      console.log(el);
-              var o = Object.assign({}, el);
-           //   console.log(tagCategories);
-              let i=0; 
-              for (var tagCategory in tagCategories) {
-                i++; 
-           //    console.log(tagCategory)
-                let tagValues = tagCategories[tagCategory];
-               // for (var i = 0; i < compareTags.length; i++) {
-        //         console.log(tagValues);
-             //   console.log(tagCategories);
-           //     console.log(el.text);
+              Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
+                parents.push(tagCategory)
+              })
+
+              tagsToShow = tagsToShow.filter(function (el) {
+                return parents.indexOf(el.text) < 0;
+              });
+
+              tagsToShow = tagsToShow.map(function (el) {
+                var o = Object.assign({}, el);
+                let i = 0;
+                for (var tagCategory in tagCategories) {
+                  i++;
+                  let tagValues = tagCategories[tagCategory];
                   if (tagValues.indexOf(el.text) > -1 || el.text == tagCategory) {
-                  //  console.log(tagCategory)
-                    o["category"] = tagCategory; 
-             //       console.log(o);
-                    return o; 
-             //       console.log(tagCategory);
-                 //   categories.push(tagCategory);
-                  }  else if (i==13){
+                    o["category"] = tagCategory;
+                    return o;
+                  } else if (i == 13) {
                     return o
                   }
-                    // else{
-             //       o["category"] = undefined; 
-            //      }
-                    
-                  
-               // }
-              }
-           //   console.log(i); 
-          //    console.log()
-              //    o["parent"] = 
-            })
-       //     console.log(tagsToShow);
-            setVisualTags(tagsToShow);
-            //  updateTags()
-
+                }
+              })
+              setVisualTags(tagsToShow);
+            }
           }
         } else {
           setTagChain(
@@ -127,41 +111,38 @@ function Post(props) {
   }, [props.response.dashboard.response])
 
   function removeUserFromTag(tag) {
-    let category = tags.find(function(el){
+    let category = tags.find(function (el) {
       return el.text === tag.category;
     })
-    if(category){
-      props.dispatch(removeUserFromTagAction({ tag:category._id, user: props.currentUser, postID: props.post._id, text: category.text}));
+    if (category) {
+      props.dispatch(removeUserFromTagAction({ tag: category._id, user: props.currentUser, postID: props.post._id, text: category.text }));
     }
-    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text}))
-  /*  console.log(category);
-    if (tags.some(e => e.text === tag.category)) {
-      console.log("yES!!");
-      console.log(tag.category);
-      category = tag.catgory;
-      
-      /* vendors contains the element we're looking for */
-  /*  } else {
-      console.log("bad!");
-
-    }
-    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))*/
-   // let category = tags.find(obj=>{
-     // return obj.text = tag.category; 
+    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
+    /*  console.log(category);
+      if (tags.some(e => e.text === tag.category)) {
+        console.log("yES!!");
+        console.log(tag.category);
+        category = tag.catgory;
+        
+        /* vendors contains the element we're looking for */
+    /*  } else {
+        console.log("bad!");
+  
+      }
+      props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))*/
+    // let category = tags.find(obj=>{
+    // return obj.text = tag.category; 
     //})
- //   console.log(category);
- 
+    //   console.log(category);
+
   }
 
   useEffect(() => {
     if (visualTags) {
-  //    console.log(visualTags);
       setTagChain(
         <div className="postsTags">
           {visualTags.slice(0, tagLength).map(
             function (tag) {
-              //   console.log(props.currentUser)
-              //   console.log(tag);
               if (tag.emails.indexOf(props.currentUser) != -1) {
                 return (
                   <li key={tag._id}>
@@ -176,10 +157,7 @@ function Post(props) {
                   </li>
                 )
               }
-
             }
-
-
           )}
         </div>
       )
@@ -289,7 +267,8 @@ function Post(props) {
       };
       console.log(data);
       props.dispatch(tagAction(data));
-
+      // Parent add - defunct for now
+      /*
       let parent;
       for (var tagCategory in tagCategories) {
         let tagValues = tagCategories[tagCategory];
@@ -315,8 +294,8 @@ function Post(props) {
           isParent: true
         }
         console.log(parentData);
-        props.dispatch(tagAction(parentData));
-      }
+        props.dispatch(tagAction(parentData)); 
+      } */
     }
     setTagToAdd("")
   }

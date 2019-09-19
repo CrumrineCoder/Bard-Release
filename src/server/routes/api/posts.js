@@ -109,7 +109,7 @@ module.exports = (app) => {
                 return res.send(httpResponse.onPostsNotFound);
             }
 
-            return res.json({ success: true, post });
+            return res.json({ success: true, post, message: "Get all posts done." });
 
         }).sort({ _id: -1 });
 

@@ -218,30 +218,31 @@ function MusicPage(props) {
     }
 
     searchTag = searchTag.map(str => str.replace(/\s/g, ''));
-
+    let compareTags;
     if (generalTags.length > 0) {
-      let compareTags
+
       if (generalTags.indexOf(",") > - 1) {
         compareTags = generalTags.split(",");
       } else {
         compareTags = [];
         compareTags.push(generalTags);
       }
-
       compareTags = compareTags.map(str => str.replace(/\s/g, ''));
       let categories = [];
 
       for (var tagCategory in tagCategories) {
         let tagValues = tagCategories[tagCategory];
         for (var i = 0; i < compareTags.length; i++) {
-          if (tagValues.indexOf(compareTags[i]) > -1 || compareTags[0] == tagCategory) {
+          if (tagValues.indexOf(compareTags[i]) > -1 || compareTags[i] == tagCategory) {
             categories.push(tagCategory);
+            categories.push(tagCategories[tagCategory]);
+            categories = categories.flat(Infinity);
           }
         }
       }
-      
       searchTag.push(categories);
     }
+
 
     searchTag = searchTag.filter(function (str) {
       return /\S/.test(str);
@@ -253,7 +254,7 @@ function MusicPage(props) {
       const data = {
         searchTag
       };
-
+      console.log(data);
       props.dispatch(searchPostsByTag(data));
     }
 
