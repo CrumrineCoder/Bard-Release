@@ -47,7 +47,7 @@ Problems I'm fixing w/ this:
 * Check if the user is logged in for the catalog and show the right stuff. **DONE!!**
 * Readd Words counter functionality *IMPORTANT*
 * If no results are returned by the search, tell the user instead of showing them results they don't want. 
-* Empty comment / tag message Be the first to commment/tag!
+* Empty comment / tag message Be the first to commment/tag! **DONE!!**
 * Figure out color scheme
 * Sort out the response system
 * Fix success inconsistency in header, need to sort out the response and redux structure

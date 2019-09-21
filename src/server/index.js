@@ -47,8 +47,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // API routes
 
-
-
 require('./models/Comments')
 require('./models/Posts')
 require('./models/Tags')

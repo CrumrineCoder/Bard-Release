@@ -11,12 +11,13 @@ function Post(props) {
   const [commentChain, setCommentChain] = useState("");
   const [tagChain, setTagChain] = useState("");
   const [playVideo, setPlayVideo] = useState(false);
-  const [tags, setTags] = useState("")
-  const [tagToAdd, setTagToAdd] = useState("")
-  const [existingTags, setExistingTags] = useState("")
-  const [commentToAdd, setCommentToAdd] = useState("")
-  const [tagLength, setTagLength] = useState(3)
-  const [visualTags, setVisualTags] = useState("")
+  const [tags, setTags] = useState("");
+  const [comments, setComments] = useState("")
+  const [tagToAdd, setTagToAdd] = useState("");
+  const [existingTags, setExistingTags] = useState("");
+  const [commentToAdd, setCommentToAdd] = useState("");
+  const [tagLength, setTagLength] = useState(3);
+  const [visualTags, setVisualTags] = useState("");
 
   function getCommentsForOnePost(postId) {
 
@@ -39,23 +40,11 @@ function Post(props) {
         // console.log(props.response.dashboard.response.comment[0])
         if (props.response.dashboard.response.comment.length > 0) {
           if (props.response.dashboard.response.comment[0].postID == props.post._id) {
-       //     console.log(props.response.dashboard.response.comment[0]);
-            setCommentChain(
-              <div>
-                {props.response.dashboard.response.comment[0].comments.map((comment, index) =>
-                  <li key={comment._id + index}>
-                    {comment.text}
-                  </li>
-                )}
-              </div>
-            )
+            console.log(props.response.dashboard.response.comment[0]);
+            if (props.response.dashboard.response.comment[0].comments) {
+              setComments(props.response.dashboard.response.comment[0].comments);
+            }
           }
-        } else {
-          setCommentChain(
-            <p className="noContentDisclaimer">
-              There are no comments yet.
-            </p>
-          )
         }
       }
 
@@ -95,12 +84,14 @@ function Post(props) {
               })
               setVisualTags(tagsToShow);
               */
-            } 
-          } 
+            }
+          }
         }
       }
     }
   }, [props.response.dashboard.response])
+
+
 
   function removeUserFromTag(tag) {
     let category = tags.find(function (el) {
@@ -162,6 +153,39 @@ function Post(props) {
       )
     }
   }, [visualTags, tagLength])
+
+  useEffect(() => {
+    if (comments) {
+      setCommentChain(
+        <div className="postsComments">
+          {props.response.dashboard.response.comment[0].comments.map(
+            function (comment, index) {
+              if (comment.email == (props.currentUser)) {
+                return (
+                  <li key={comment._id + index}>
+                    {comment.text}
+                    DELETE
+                </li>
+                )
+              } else {
+                return (
+                  <li key={comment._id + index}>
+                    {comment.text}
+                  </li>
+                )
+              }
+            }
+          )}
+        </div>
+      )
+    } else {
+      setCommentChain(
+        <p className="noContentDisclaimer">
+          There are no comments yet.
+        </p>
+      )
+    }
+  }, [comments])
 
   function onHandleComment(event) {
     event.preventDefault();
@@ -264,7 +288,7 @@ function Post(props) {
         tag,
         _id
       };
-    //  console.log(data);
+      //  console.log(data);
       props.dispatch(tagAction(data));
       // Parent add - defunct for now
       /*
