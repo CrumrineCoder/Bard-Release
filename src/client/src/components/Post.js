@@ -360,7 +360,7 @@ function Post(props) {
         <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
         <br />
         <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
-        {playVideo && <iframe className="videoIframe" width="200" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
+        {playVideo && <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
         </iframe>}
       </div>
       <div className="postCommentContainer">

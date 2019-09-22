@@ -84,3 +84,10 @@ export const deleteCommentAction = (post) => {
     post
   }
 }
+
+export const editCommentAction = (post) => {
+  return{
+    type: types.EDIT_COMMENT, 
+    post
+  }
+}
