@@ -38,55 +38,81 @@ const checkToken = (req, res, next) => {
 }
 
 module.exports = (app) => {
-//POST new user route (optional, everyone has access)
-app.post('/api/comments/postComment', checkToken, (req, res, next) => {
-    let { comment, _id } = req.body;
-    jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
-        if (err) {
-            //If error send Forbidden (403)
-            console.log('ERROR: Could not connect to the protected route');
-            res.sendStatus(403);
-        } else {
-            let user = authorizedData.user;
-            let commentToInsert = {
-                email: user.email,
-                text: comment
+    //POST new user route (optional, everyone has access)
+    app.post('/api/comments/postComment', checkToken, (req, res, next) => {
+        let { comment, _id } = req.body;
+        jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            if (err) {
+                //If error send Forbidden (403)
+                console.log('ERROR: Could not connect to the protected route');
+                res.sendStatus(403);
+            } else {
+                let user = authorizedData.user;
+                let commentToInsert = {
+                    email: user.email,
+                    text: comment
+                }
+                Comments.findOneAndUpdate(
+                    { _id: _id },
+                    {
+                        postID: _id,
+                        $push: {
+                            comments: commentToInsert
+                        }
+                    },
+                    {
+                        upsert: true
+                    },
+                    function (error, success) {
+                        if (error) {
+                            return res.json(httpResponses.onCommentSaveError);
+                        }
+                        res.json(httpResponses.onCommentSaveSuccess);
+                    },
+                );
+
             }
-            Comments.findOneAndUpdate(
-                { _id: _id },
-                {
-                    postID: _id,
-                    $push: {
-                        comments: commentToInsert
-                    }
-                },
-                {
-                    upsert: true
-                },
-                function (error, success) {
-                    if (error) {
-                        return res.json(httpResponses.onCommentSaveError);
-                    }
-                    res.json(httpResponses.onCommentSaveSuccess);
-                },
-            );
-
-        }
-    })
-});
-
-app.get('/api/comments/getCommentsForPost/:id', (req, res) => {
-    Comments.find({ 
-        postID: req.params.id 
-    }, function (error, comment) {
-        if (error) throw error;
-        console.log(comment);
-        if (!comment) {
-            return res.send(httpResponse.onCommentsNotFound);
-        }
-
-        return res.json({ success: true, comment })
+        })
     });
-});
 
+    app.get('/api/comments/getCommentsForPost/:id', (req, res) => {
+        Comments.find({
+            postID: req.params.id
+        }, function (error, comment) {
+            if (error) throw error;
+            console.log(comment);
+            if (!comment) {
+                return res.send(httpResponse.onCommentsNotFound);
+            }
+
+            return res.json({ success: true, comment })
+        });
+    });
+    app.post('/api/comments/deleteComment', checkToken, (req, res, next) => {
+        // let { tag, _id } = req.body;
+        console.log(req.body);
+        jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            Comments.findOneAndUpdate({
+                "comments._id": req.body._id
+            },
+                {
+                    $pull: {
+                        "comments": {
+                            "text": req.body.text
+                        }
+                    }
+                },
+                {
+                    useFindAndModify: false
+                },
+                function (error, comment) {
+
+                    if (error) {
+                        console.log(error);
+                        return res.json(httpResponses.onTagSaveError);
+                    }
+                    return res.json({ success: true, comment })
+                })
+        })
+    })
 }

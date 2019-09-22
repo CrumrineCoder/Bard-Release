@@ -272,3 +272,32 @@ export const checkSourceService = (request) => {
         return json;
       });
   };
+
+
+  export const deleteCommentService = (request) => {
+    //   console.log(request);
+    const POST_API_ENDPOINT = '/api/comments/deleteComment';
+    let authToken = getCookie('token');
+    const parameters = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        credentials: 'include',
+        withCredentials: true,
+        'Authorization': 'Bearer' + authToken
+      },
+      body: JSON.stringify(request.post),
+      credentials: "same-origin"
+      // credientials: 'include'
+    };
+  
+    return fetch(POST_API_ENDPOINT, parameters)
+      .then(response => {
+        //     console.log(response.clone().json())
+        return response.clone().json();
+      })
+      .then(json => {
+        //     console.log(json);
+        return json;
+      });
+  };

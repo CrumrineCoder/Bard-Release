@@ -59,6 +59,11 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.REMOVE_USER_FROM_TAG_ERROR:
       return { ...state, response };
+    case types.DELETE_COMMENT_SUCCESS:
+      //    console.log(response);
+      return { ...state, response };
+    case types.DELETE_COMMENT_ERROR:
+      return { ...state, response };
     default:
       return state;
   }

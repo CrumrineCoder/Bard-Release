@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction } from '../actions/linkActions';
+import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction } from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
 
 //,{post, postID, index, comment, response }
@@ -120,6 +120,11 @@ function Post(props) {
 
   }
 
+  function deleteComment(comment){
+    console.log(comment);
+    props.dispatch(deleteCommentAction(comment));
+  }
+
   useEffect(() => {
     if (visualTags) {
       setTagChain(
@@ -164,7 +169,7 @@ function Post(props) {
                 return (
                   <li key={comment._id + index}>
                     {comment.text}
-                    DELETE
+                    <i className="fas fa-times removeTag" onClick={() => deleteComment(comment)}></i>
                 </li>
                 )
               } else {

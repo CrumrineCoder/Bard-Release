@@ -77,3 +77,10 @@ export const removeUserFromTagAction = (post) => {
     post
   }
 }
+
+export const deleteCommentAction = (post) => {
+  return{
+    type: types.DELETE_COMMENT, 
+    post
+  }
+}
