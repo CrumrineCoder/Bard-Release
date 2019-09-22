@@ -368,15 +368,24 @@ body{
   height: 100%;
 }
 
-.removeTag{
-  margin-left: 5px; 
-  font-size: 12px; 
+.iconAction{
+  margin-left: 15px; 
+  font-size: 14px; 
+  cursor: pointer; 
+// float: right; 
+}
+
+.removeIcon{
   &:hover{
     color: red; 
-    cursor: pointer; 
   }
 }
 
+.editIcon{
+  &:hover{
+    color: #003153; 
+  }
+}
 .noPostsDisclaimer{
   text-align: center;
   margin-top: 30px;   
@@ -386,4 +395,14 @@ body{
 
 .editCommentButtonContainer{
   text-align: center; 
+}
+
+.postVideoHeader{
+  margin: 1em 0px; 
+  h3, h4{
+    display: inline;
+  }
+  h4{
+    margin-left: 10px; 
+  }
 }

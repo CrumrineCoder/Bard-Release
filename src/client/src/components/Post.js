@@ -145,7 +145,7 @@ function Post(props) {
                 return (
                   <li key={tag._id}>
                     {tag.text}
-                    <i className="fas fa-times removeTag" onClick={e => removeUserFromTag(tag)}></i>
+                    <i className="fas fa-times iconAction removeIcon" onClick={e => removeUserFromTag(tag)}></i>
                   </li>
                 )
               } else {
@@ -191,8 +191,8 @@ function Post(props) {
                   return (
                     <li key={comment._id + index}>
                       {comment.text}
-                      <i className="fas fa-times removeTag" onClick={() => deleteComment(comment)}></i>
-                      <i className="fas fa-edit removeTag" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
+                      <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
+                      <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>    
                     </li>
                   )
                 }
@@ -377,8 +377,10 @@ function Post(props) {
         {existingTags}
       </div>
       <div className="postVideoContainer">
-        <h3>{props.post.source}</h3>
-        <h4>{props.post.name}</h4>
+        <div className="postVideoHeader">
+          <h3>{props.post.source}</h3>
+          <h4>{props.post.name}</h4>
+        </div>
         <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
         <br />
         <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
