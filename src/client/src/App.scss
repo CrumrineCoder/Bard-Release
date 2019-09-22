@@ -415,6 +415,7 @@ body{
 }
 
 .postVideoContainer{
+  position: relative; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -424,4 +425,10 @@ body{
   a{
     font-size: 12px; 
   }
+}
+
+.postEditButton{
+  position: absolute;
+  top: 15px; 
+  right: 5px; 
 }

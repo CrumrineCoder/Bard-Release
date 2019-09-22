@@ -20,6 +20,7 @@ function Post(props) {
   const [visualTags, setVisualTags] = useState("");
   const [commentUpdatedText, setCommentUpdatedText] = useState("");
   const [openCommentEdit, setOpenCommentEdit] = useState(false);
+  const [openPostEdit, setOpenPostEdit] = useState(false);
 
   function getCommentsForOnePost(postId) {
 
@@ -180,7 +181,7 @@ function Post(props) {
                 if (openCommentEdit) {
                   return (
                     <label htmlFor="commentToBeEdited">
-                        <textarea autoFocus className="postCommentField borderImage" value={commentUpdatedText} rows="5" cols="25" autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
+                      <textarea autoFocus className="postCommentField borderImage" value={commentUpdatedText} rows="5" cols="25" autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
                       <div className="editCommentButtonContainer">
                         <button className="btn btn-post smallBtn borderImage" onClick={() => { editComment(comment) }}>Update</button>
                         <button className="btn btn-vermillion smallBtn borderImage" onClick={() => { setOpenCommentEdit(false) }} >Cancel</button>
@@ -192,7 +193,7 @@ function Post(props) {
                     <li key={comment._id + index}>
                       {comment.text}
                       <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
-                      <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>    
+                      <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
                     </li>
                   )
                 }
@@ -357,7 +358,7 @@ function Post(props) {
   // <button onClick={() => getTagsForOnePost(props.post._id)}>Get Tags</button>
   //      <iframe width="300" height="300" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
   // </iframe>
-  
+
   //  <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
   return (
     <div className="borderImage postContainer">
@@ -379,16 +380,27 @@ function Post(props) {
         {existingTags}
       </div>
       <div className="postVideoContainer">
-        <div className="postVideoHeader">
-          <h3>{props.post.source}</h3>
-          <h4>{props.post.name}</h4>
-        </div>
-        <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
-        
-        <br />
-        <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
-        {playVideo && <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
-        </iframe>}
+        {openPostEdit ?
+          <>
+            Edit
+          </>
+          :
+          <>
+            {props.post.email == props.currentUser && <i onClick={()=>{setOpenPostEdit(true)}}className="fas fa-edit postEditButton iconAction editIcon"></i>}
+            <div className="postVideoHeader">
+              <h3>{props.post.source}</h3>
+              <h4>{props.post.name}</h4>
+            </div>
+
+            <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
+
+            <br />
+            <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
+            {playVideo && <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>}
+          </>
+        }
+
       </div>
       <div className="postCommentContainer">
         <h3>Comments:</h3>
