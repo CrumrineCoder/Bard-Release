@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction} from '../actions/linkActions';
+import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction } from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
 
 //,{post, postID, index, comment, response }
@@ -18,6 +18,8 @@ function Post(props) {
   const [commentToAdd, setCommentToAdd] = useState("");
   const [tagLength, setTagLength] = useState(3);
   const [visualTags, setVisualTags] = useState("");
+  const [commentUpdatedText, setCommentUpdatedText] = useState("");
+  const [openCommentEdit, setOpenCommentEdit] = useState(false);
 
   function getCommentsForOnePost(postId) {
 
@@ -37,13 +39,13 @@ function Post(props) {
       }
 
       if (props.response.dashboard.response.comment) {
-      //   console.log(props.response.dashboard.response.comment[0])
+        //   console.log(props.response.dashboard.response.comment[0])
         if (props.response.dashboard.response.comment.length > 0) {
           if (props.response.dashboard.response.comment[0].postID == props.post._id) {
-        //    console.log(props.response.dashboard.response.comment[0]);
+            //    console.log(props.response.dashboard.response.comment[0]);
             setComments(props.response.dashboard.response.comment[0].comments);
             if (props.response.dashboard.response.comment[0].comments) {
-             
+
             }
           }
         }
@@ -121,12 +123,12 @@ function Post(props) {
 
   }
 
-  function deleteComment(comment){
+  function deleteComment(comment) {
     console.log(comment);
     props.dispatch(deleteCommentAction(comment));
   }
 
-  function editComment(comment){
+  function editComment(comment) {
     console.log(comment);
     comment["text"] = "BOGGA";
     props.dispatch(editCommentAction(comment));
@@ -167,20 +169,29 @@ function Post(props) {
   }, [visualTags, tagLength])
 
   useEffect(() => {
-   // console.log(comments);
+    // console.log(comments);
     if (comments.length > 0) {
       setCommentChain(
         <div className="postsComments">
-          {props.response.dashboard.response.comment[0].comments.map(
+          {comments.map(
             function (comment, index) {
               if (comment.email == (props.currentUser)) {
-                return (
-                  <li key={comment._id + index}>
-                    {comment.text}
-                    <i className="fas fa-times removeTag" onClick={() => deleteComment(comment)}></i>
-                    <i className="fas fa-edit removeTag" onClick={() => editComment(comment)}></i>
-                </li>
-                )
+                if (openCommentEdit) {
+                  return (
+                    <li key={comment._id + index}>
+                      {comment.text}
+                      CANCEL
+                   </li>
+                  )
+                } else {
+                  return (
+                    <li key={comment._id + index}>
+                      {comment.text}
+                      <i className="fas fa-times removeTag" onClick={() => deleteComment(comment)}></i>
+                      <i className="fas fa-edit removeTag" onClick={() => setOpenCommentEdit(true)}></i>
+                    </li>
+                  )
+                }
               } else {
                 return (
                   <li key={comment._id + index}>
@@ -199,7 +210,7 @@ function Post(props) {
         </p>
       )
     }
-  }, [comments])
+  }, [comments, openCommentEdit])
 
   function onHandleComment(event) {
     event.preventDefault();
