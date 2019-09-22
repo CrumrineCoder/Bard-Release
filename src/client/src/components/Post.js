@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction } from '../actions/linkActions';
+import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction} from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
 
 //,{post, postID, index, comment, response }
@@ -126,6 +126,12 @@ function Post(props) {
     props.dispatch(deleteCommentAction(comment));
   }
 
+  function editComment(comment){
+    console.log(comment);
+    comment["text"] = "BOGGA";
+    props.dispatch(editCommentAction(comment));
+  }
+
   useEffect(() => {
     if (visualTags.length > 0) {
       setTagChain(
@@ -172,6 +178,7 @@ function Post(props) {
                   <li key={comment._id + index}>
                     {comment.text}
                     <i className="fas fa-times removeTag" onClick={() => deleteComment(comment)}></i>
+                    <i className="fas fa-edit removeTag" onClick={() => editComment(comment)}></i>
                 </li>
                 )
               } else {

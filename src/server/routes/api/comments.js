@@ -115,4 +115,35 @@ module.exports = (app) => {
                 })
         })
     })
+
+    app.post('/api/comments/editComment', checkToken, (req, res, next) => {
+        // let { tag, _id } = req.body;
+        console.log(req.body);
+        jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            Comments.findOneAndUpdate({
+                "comments._id": req.body._id
+            },
+                {
+                    $set: {
+                /*        "comments": {
+                            "text": req.body.text, 
+                            "email": req.body.email,
+                            "_id": req.body._id
+                        } */
+                        "comments.$.text": req.body.text
+                    }
+                },
+                {
+                    useFindAndModify: false
+                },
+                function (error, comment) {
+
+                    if (error) {
+                        console.log(error);
+                        return res.json(httpResponses.onTagSaveError);
+                    }
+                    res.json(httpResponses.onCommentSaveSuccess);
+                })
+        }) 
+    })
 }

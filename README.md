@@ -46,7 +46,7 @@ Problems I'm fixing w/ this:
 * Grid but don't make each item the same height, Pinterest does it better. **DONE!!**
 * Check if the user is logged in for the catalog and show the right stuff. **DONE!!**
 * Readd Words counter functionality *IMPORTANT*
-* If no results are returned by the search, tell the user instead of showing them results they don't want. 
+* If no results are returned by the search, tell the user instead of showing them results they don't want. **DONE!!**
 * Empty comment / tag message Be the first to commment/tag! **DONE!!**
 * Figure out color scheme
 * Sort out the response system
@@ -57,4 +57,3 @@ Problems I'm fixing w/ this:
 * Reset password
 * There are No Tags Yet bug when searching for 'Western' in general tab **DONE!!**
 * Inclusive vs Exclusive tag search **DONE!!**
-* No Posts found for those tags **DONE!!**

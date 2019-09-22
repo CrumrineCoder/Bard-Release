@@ -172,6 +172,7 @@ body{
   grid-auto-rows: minmax(min-content, max-content);
   grid-column-gap: 5px;
   grid-row-gap: 25px;
+  align-items: center; 
 }
 
 .posts{
@@ -180,7 +181,7 @@ body{
   //grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-columns: repeat(auto-fit, minmax(1fr));
   //grid-auto-columns: auto;
- // grid-auto-rows: 1fr;
+  //grid-auto-rows: 1fr;
   grid-auto-rows: minmax(min-content, max-content);
   grid-column-gap: 5px;
   grid-row-gap: 25px;
@@ -360,10 +361,11 @@ body{
 .postCommentContainer, .postVideoContainer, .postTagContainer{
   background: rgba(255, 255, 255, 0.8); 
   padding: 10px; 
-  &:not(:last-child){
+  /*&:not(:last-child){
    margin-bottom: 10px; 
-  }
+  }*/
   border-radius: 5px; 
+  height: 100%;
 }
 
 .removeTag{
