@@ -37,12 +37,13 @@ function Post(props) {
       }
 
       if (props.response.dashboard.response.comment) {
-        // console.log(props.response.dashboard.response.comment[0])
+      //   console.log(props.response.dashboard.response.comment[0])
         if (props.response.dashboard.response.comment.length > 0) {
           if (props.response.dashboard.response.comment[0].postID == props.post._id) {
-            console.log(props.response.dashboard.response.comment[0]);
+        //    console.log(props.response.dashboard.response.comment[0]);
+            setComments(props.response.dashboard.response.comment[0].comments);
             if (props.response.dashboard.response.comment[0].comments) {
-              setComments(props.response.dashboard.response.comment[0].comments);
+             
             }
           }
         }
@@ -126,7 +127,7 @@ function Post(props) {
   }
 
   useEffect(() => {
-    if (visualTags) {
+    if (visualTags.length > 0) {
       setTagChain(
         <div className="postsTags">
           {visualTags.slice(0, tagLength).map(
@@ -160,7 +161,8 @@ function Post(props) {
   }, [visualTags, tagLength])
 
   useEffect(() => {
-    if (comments) {
+   // console.log(comments);
+    if (comments.length > 0) {
       setCommentChain(
         <div className="postsComments">
           {props.response.dashboard.response.comment[0].comments.map(

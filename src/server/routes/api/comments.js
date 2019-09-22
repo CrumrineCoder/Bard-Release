@@ -111,7 +111,7 @@ module.exports = (app) => {
                         console.log(error);
                         return res.json(httpResponses.onTagSaveError);
                     }
-                    return res.json({ success: true, comment })
+                    res.json(httpResponses.onCommentSaveSuccess);
                 })
         })
     })
