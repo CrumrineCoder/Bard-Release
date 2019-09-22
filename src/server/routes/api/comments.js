@@ -140,7 +140,7 @@ module.exports = (app) => {
 
                     if (error) {
                         console.log(error);
-                        return res.json(httpResponses.onTagSaveError);
+                        return res.json(httpResponses.onCommentSaveError);
                     }
                     res.json(httpResponses.onCommentSaveSuccess);
                 })

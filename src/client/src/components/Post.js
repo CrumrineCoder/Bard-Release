@@ -129,15 +129,24 @@ function Post(props) {
   }
 
   function deleteComment(comment) {
-    console.log(comment);
+  //  console.log(comment);
     props.dispatch(deleteCommentAction(comment));
   }
 
   function editComment(comment) {
-    console.log(comment);
+   // console.log(comment);
     comment["text"] = commentUpdatedText;
     props.dispatch(editCommentAction(comment));
     setOpenCommentEdit(false);
+  }
+
+  function editPost(){
+    let updatedPost = props.post;
+    updatedPost["link"] = postUpdatedLink;
+    updatedPost["source"] = postUpdatedSource;
+    updatedPost["name"] = postUpdatedName;
+    props.dispatch(editPostAction(updatedPost));
+    setOpenPostEdit(false);
   }
 
   useEffect(() => {
@@ -392,7 +401,7 @@ function Post(props) {
                 </label>
               </div>
               <div className="dashboardToolLabel">
-                <label htmlFor="source">Source <input className="dashboardToolInput borderImage" value={postUpdatedSource} onChange={e => setPostUpdatedSource(e.target.value)} autoComplete="off" onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
+                <label htmlFor="source">Source <input className="dashboardToolInput borderImage" value={postUpdatedSource} onChange={e => setPostUpdatedSource(e.target.value)} autoComplete="off" type="source" name="source" id="source" />
                 </label>
               </div>
               <div className="dashboardToolLabel">
@@ -400,8 +409,8 @@ function Post(props) {
                 </label>
               </div>
               <div>
-                <button className="btn btn-post smallBtn borderImage" type="submit">Update</button>
-                <button className="btn btn-vermillion smallBtn borderImage" type="submit">Cancel</button>
+                <button className="btn btn-post smallBtn borderImage" onClick={()=>editPost()} type="submit">Update</button>
+                <button className="btn btn-vermillion smallBtn borderImage" onClick={()=>setOpenPostEdit(false)}>Cancel</button>
               </div>
             </div>
           </>

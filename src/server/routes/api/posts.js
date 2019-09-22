@@ -135,28 +135,30 @@ module.exports = (app) => {
 
     app.post('/api/posts/editPost', checkToken, (req, res, next) => {
         // let { tag, _id } = req.body;
-        console.log(req.body);
-      /*  jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
-            Comments.findOneAndUpdate({
-                "comments._id": req.body._id
+       // console.log(req.body);
+        jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            Posts.findOneAndUpdate({
+                "_id": req.body._id
             },
                 {
                     $set: {
-                        "comments.$.text": req.body.text
+                        "link": req.body.link,
+                        "source": req.body.source, 
+                        "name": req.body.name
                     }
                 },
                 {
                     useFindAndModify: false
                 },
-                function (error, comment) {
+                function (error, post) {
 
                     if (error) {
                         console.log(error);
-                        return res.json(httpResponses.onTagSaveError);
+                        return res.json(httpResponses.onPostSaveError);
                     }
-                    res.json(httpResponses.onCommentSaveSuccess);
+                    res.json(httpResponses.onPostSaveSuccess);
                 })
-        })  */
+        })  
     })
 
     
