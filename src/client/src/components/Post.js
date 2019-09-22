@@ -130,7 +130,7 @@ function Post(props) {
 
   function editComment(comment) {
     console.log(comment);
-    comment["text"] = "BOGGA";
+    comment["text"] = commentUpdatedText;
     props.dispatch(editCommentAction(comment));
   }
 
@@ -178,17 +178,16 @@ function Post(props) {
               if (comment.email == (props.currentUser)) {
                 if (openCommentEdit) {
                   return (
-                    <li key={comment._id + index}>
-                      {comment.text}
-                      CANCEL
-                   </li>
+                      <label htmlFor="commentToBeEdited">Update comment text:<input className="dashboardToolInput borderImage" value={commentUpdatedText} autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" /><button onClick={() => { editComment(comment) }}>Submit</button> <button>Cancel</button>
+                      </label>
+
                   )
                 } else {
                   return (
                     <li key={comment._id + index}>
                       {comment.text}
                       <i className="fas fa-times removeTag" onClick={() => deleteComment(comment)}></i>
-                      <i className="fas fa-edit removeTag" onClick={() => setOpenCommentEdit(true)}></i>
+                      <i className="fas fa-edit removeTag" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
                     </li>
                   )
                 }
@@ -210,7 +209,7 @@ function Post(props) {
         </p>
       )
     }
-  }, [comments, openCommentEdit])
+  }, [comments, openCommentEdit, commentUpdatedText])
 
   function onHandleComment(event) {
     event.preventDefault();
