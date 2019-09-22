@@ -17,7 +17,7 @@ Problems I'm fixing w/ this:
 * Sorting
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. 
-* Delete & edit tags & posts *IMPORTANT*
+* Delete & edit tags & posts **DONE!!!**
 * 404
 * Loading screen
 * Routing Issue, 404 on refresh **DONE!!**
@@ -45,7 +45,7 @@ Problems I'm fixing w/ this:
 * Home page search **DONE!!** (still could use suggested tags, maybe?)
 * Grid but don't make each item the same height, Pinterest does it better. **DONE!!**
 * Check if the user is logged in for the catalog and show the right stuff. **DONE!!**
-* Readd Words counter functionality *IMPORTANT*
+* Readd Words counter functionality **DONE!!!**
 * If no results are returned by the search, tell the user instead of showing them results they don't want. **DONE!!**
 * Empty comment / tag message Be the first to commment/tag! **DONE!!**
 * Figure out color scheme
