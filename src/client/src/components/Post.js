@@ -20,6 +20,10 @@ function Post(props) {
   const [visualTags, setVisualTags] = useState("");
   const [commentUpdatedText, setCommentUpdatedText] = useState("");
   const [openCommentEdit, setOpenCommentEdit] = useState(false);
+
+  const [postUpdatedLink, setPostUpdatedLink] = useState(props.post.link);
+  const [postUpdatedSource, setPostUpdatedSource] = useState(props.post.source);
+  const [postUpdatedName, setPostUpdatedName] = useState(props.post.name);
   const [openPostEdit, setOpenPostEdit] = useState(false);
 
   function getCommentsForOnePost(postId) {
@@ -382,11 +386,28 @@ function Post(props) {
       <div className="postVideoContainer">
         {openPostEdit ?
           <>
-            Edit
+            <div className="updatePostForm">
+              <div className="dashboardToolLabel">
+                <label htmlFor="link">Link <input className="dashboardToolInput borderImage" value={postUpdatedLink} onChange={e => setPostUpdatedLink(e.target.value)} autoComplete="off" type="link" name="link" id="link" />
+                </label>
+              </div>
+              <div className="dashboardToolLabel">
+                <label htmlFor="source">Source <input className="dashboardToolInput borderImage" value={postUpdatedSource} onChange={e => setPostUpdatedSource(e.target.value)} autoComplete="off" onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
+                </label>
+              </div>
+              <div className="dashboardToolLabel">
+                <label htmlFor="name">Name <input  className="dashboardToolInput borderImage" value={postUpdatedName} onChange={e => setPostUpdatedName(e.target.value)} autoComplete="off" type="name" name="name" id="name" />
+                </label>
+              </div>
+              <div>
+                <button className="btn btn-post smallBtn borderImage" type="submit">Update</button>
+                <button className="btn btn-vermillion smallBtn borderImage" type="submit">Cancel</button>
+              </div>
+            </div>
           </>
           :
           <>
-            {props.post.email == props.currentUser && <i onClick={()=>{setOpenPostEdit(true)}}className="fas fa-edit postEditButton iconAction editIcon"></i>}
+            {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit postEditButton iconAction editIcon"></i>}
             <div className="postVideoHeader">
               <h3>{props.post.source}</h3>
               <h4>{props.post.name}</h4>
