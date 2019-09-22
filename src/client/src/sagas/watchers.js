@@ -1,6 +1,6 @@
 import { takeLatest, takeEvery } from 'redux-saga/effects';
 import { registerSaga, loginSaga, getCurrentUserSaga } from './authenticationSaga';
-import {postSaga, getAllSaga, commentSaga, getCommentsForOnePostSaga, getTagsForOnePostSaga, postTagSaga, searchPostsByTagSaga, getPostByIDSaga, checkTagSaga, checkSourceSaga, removeUserFromTagSaga, deleteCommentSaga, editCommentSaga} from "./dashboardSaga"
+import {postSaga, getAllSaga, commentSaga, getCommentsForOnePostSaga, getTagsForOnePostSaga, postTagSaga, searchPostsByTagSaga, getPostByIDSaga, checkTagSaga, checkSourceSaga, removeUserFromTagSaga, deleteCommentSaga, editCommentSaga, editPostSaga} from "./dashboardSaga"
 
 import * as types from '../actions';
 
@@ -24,5 +24,6 @@ export default function* watchUserAuthentication() {
   yield takeEvery(types.REMOVE_USER_FROM_TAG, removeUserFromTagSaga)
   yield takeEvery(types.DELETE_COMMENT, deleteCommentSaga)
   yield takeEvery(types.EDIT_COMMENT, editCommentSaga)
+  yield takeEvery(types.EDIT_POST, editPostSaga)
 }
 

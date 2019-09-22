@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction } from '../actions/linkActions';
+import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction, editPostAction } from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
 
 //,{post, postID, index, comment, response }
@@ -179,10 +179,10 @@ function Post(props) {
               if (comment.email == (props.currentUser)) {
                 if (openCommentEdit) {
                   return (
-                    <label htmlFor="commentToBeEdited">Update comment text:
-                        <input autoFocus className="dashboardToolInput borderImage" value={commentUpdatedText} autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
+                    <label htmlFor="commentToBeEdited">
+                        <textarea autoFocus className="postCommentField borderImage" value={commentUpdatedText} rows="5" cols="25" autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
                       <div className="editCommentButtonContainer">
-                        <button className="btn btn-post smallBtn borderImage" onClick={() => { editComment(comment) }}>Submit</button>
+                        <button className="btn btn-post smallBtn borderImage" onClick={() => { editComment(comment) }}>Update</button>
                         <button className="btn btn-vermillion smallBtn borderImage" onClick={() => { setOpenCommentEdit(false) }} >Cancel</button>
                       </div>
                     </label>

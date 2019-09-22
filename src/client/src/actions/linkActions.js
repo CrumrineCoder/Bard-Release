@@ -91,3 +91,10 @@ export const editCommentAction = (post) => {
     post
   }
 }
+
+export const editPostAction = (post) => {
+  return{
+    type: types.EDIT_POST, 
+    post
+  }
+}

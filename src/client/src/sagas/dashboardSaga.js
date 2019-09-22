@@ -1,5 +1,5 @@
 import { put, call  } from 'redux-saga/effects';
-import { postService, getAllPostsService, commentService, getAllCommentsForOnePost, getAllTagsForOnePost, postTagService, searchPostsByTagService, getPostsByIDService, checkTagService, checkSourceService, removeUserFromTagService, deleteCommentService, editCommentService} from '../services/dashboardService';
+import { postService, getAllPostsService, commentService, getAllCommentsForOnePost, getAllTagsForOnePost, postTagService, searchPostsByTagService, getPostsByIDService, checkTagService, checkSourceService, removeUserFromTagService, deleteCommentService, editCommentService, editPostService} from '../services/dashboardService';
 
 import * as types from '../actions';
 
@@ -129,5 +129,15 @@ export function* editCommentSaga(payload) {
     yield put({ type: types.EDIT_COMMENT_SUCCESS, response });
   } catch (error) {
     yield put({ type: types.EDIT_COMMENT_ERROR, error });
+  }
+}
+
+export function* editPostSaga(payload) {
+  //console.log(payload);
+  try {
+    const response = yield call(editPostService, payload);
+    yield put({ type: types.EDIT_POST_SUCCESS, response });
+  } catch (error) {
+    yield put({ type: types.EDIT_POST_ERROR, error });
   }
 }

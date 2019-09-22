@@ -112,7 +112,6 @@ module.exports = (app) => {
             return res.json({ success: true, post, message: "Get all posts done." });
 
         }).sort({ _id: -1 });
-
     });
 
     app.get('/api/posts/getPostById/:id', (req, res) => {
@@ -132,4 +131,33 @@ module.exports = (app) => {
             return res.json({ success: true, post, message: "Posts found." })
         })
     });
+
+
+    app.post('/api/posts/editPost', checkToken, (req, res, next) => {
+        // let { tag, _id } = req.body;
+        console.log(req.body);
+      /*  jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            Comments.findOneAndUpdate({
+                "comments._id": req.body._id
+            },
+                {
+                    $set: {
+                        "comments.$.text": req.body.text
+                    }
+                },
+                {
+                    useFindAndModify: false
+                },
+                function (error, comment) {
+
+                    if (error) {
+                        console.log(error);
+                        return res.json(httpResponses.onTagSaveError);
+                    }
+                    res.json(httpResponses.onCommentSaveSuccess);
+                })
+        })  */
+    })
+
+    
 }
