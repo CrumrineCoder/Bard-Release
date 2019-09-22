@@ -132,6 +132,7 @@ function Post(props) {
     console.log(comment);
     comment["text"] = commentUpdatedText;
     props.dispatch(editCommentAction(comment));
+    setOpenCommentEdit(false);
   }
 
   useEffect(() => {
@@ -178,9 +179,13 @@ function Post(props) {
               if (comment.email == (props.currentUser)) {
                 if (openCommentEdit) {
                   return (
-                      <label htmlFor="commentToBeEdited">Update comment text:<input className="dashboardToolInput borderImage" value={commentUpdatedText} autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" /><button onClick={() => { editComment(comment) }}>Submit</button> <button>Cancel</button>
-                      </label>
-
+                    <label htmlFor="commentToBeEdited">Update comment text:
+                        <input autoFocus className="dashboardToolInput borderImage" value={commentUpdatedText} autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
+                      <div className="editCommentButtonContainer">
+                        <button className="btn btn-post smallBtn borderImage" onClick={() => { editComment(comment) }}>Submit</button>
+                        <button className="btn btn-vermillion smallBtn borderImage" onClick={() => { setOpenCommentEdit(false) }} >Cancel</button>
+                      </div>
+                    </label>
                   )
                 } else {
                   return (
