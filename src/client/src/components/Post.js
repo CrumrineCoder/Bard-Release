@@ -357,6 +357,8 @@ function Post(props) {
   // <button onClick={() => getTagsForOnePost(props.post._id)}>Get Tags</button>
   //      <iframe width="300" height="300" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
   // </iframe>
+  
+  //  <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
   return (
     <div className="borderImage postContainer">
       <div className="postTagContainer">
@@ -382,8 +384,9 @@ function Post(props) {
           <h4>{props.post.name}</h4>
         </div>
         <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
+        
         <br />
-        <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
+        <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
         {playVideo && <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
         </iframe>}
       </div>

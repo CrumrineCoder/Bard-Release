@@ -370,8 +370,9 @@ body{
 
 .iconAction{
   margin-left: 15px; 
-  font-size: 14px; 
+  font-size: 16px; 
   cursor: pointer; 
+  color: black; 
 // float: right; 
 }
 
@@ -383,7 +384,13 @@ body{
 
 .editIcon{
   &:hover{
-    color: #003153; 
+    color: #d3b14d;
+  }
+}
+
+.videoIcon{
+  &:hover{
+    color: #f39e65;
   }
 }
 .noPostsDisclaimer{
@@ -404,5 +411,16 @@ body{
   }
   h4{
     margin-left: 10px; 
+  }
+}
+
+.postVideoContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  a{
+    font-size: 12px; 
   }
 }
