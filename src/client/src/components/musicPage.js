@@ -19,7 +19,6 @@ function MusicPage(props) {
   const [unfilteredPosts, setUnfilteredPosts] = useState("");
   const [generalTags, setGeneralTags] = useState("");
   const [specificTags, setSpecificTags] = useState("");
-  const [existingTags, setExistingTags] = useState("");
   const [existingSources, setExistingSources] = useState("");
   const [source, setSource] = useState("");
   const [excludeSource, setExcludeSource] = useState("");
@@ -30,6 +29,9 @@ function MusicPage(props) {
 
   const [searchTags, setSearchTags] = useState([]);
   const [tagToAdd, setTagToAdd] = useState("");
+
+  //const [existingTags, setExistingTags] = useState("");
+  const [suggestedTags, setSuggestedTags] = useState("");
 
   /*
   useEffect(() => {
@@ -51,17 +53,17 @@ function MusicPage(props) {
   }, [specificTags])
   */
 
- useEffect(() => {
-  let searchTag = tagToAdd.toLowerCase().trim(); 
-  if (searchTag) {
-    const data = {
-      searchTag
-    };
-    props.dispatch(checkTagsAction(data));
-  } else {
-    setExistingTags(<></>);
-  }
-}, [tagToAdd])
+  useEffect(() => {
+    let searchTag = tagToAdd.toLowerCase().trim();
+    if (searchTag) {
+      const data = {
+        searchTag
+      };
+      props.dispatch(checkTagsAction(data));
+    } else {
+      setSuggestedTags(<></>);
+    }
+  }, [tagToAdd])
 
   useEffect(() => {
     let searchSource = source;
@@ -76,7 +78,7 @@ function MusicPage(props) {
   useEffect(() => {
     props.dispatch(getCurrentUserAction())
     if (props.location.state) {
-    //  setSpecificTags(props.location.state)
+      //  setSpecificTags(props.location.state)
       onSearchTag(props.location.state)
     }
     setLoggedIn(checkCookie() != null)
@@ -174,12 +176,12 @@ function MusicPage(props) {
         // Now we have the post IDs, we have to find all posts by ID. 
       } else if (props.response.dashboard.response.message == "Check tags done.") {
 
-        setExistingTags(
+        setSuggestedTags(
           <div>
             {props.response.dashboard.response.tag.map(tag =>
-              <li className="tagBubble" onClick={()=>{onSearchTag(tag._id)}}>
+              <li className="tagBubble" onClick={() => { onSearchTag(tag._id) }}>
                 {tag._id}
-                <i class="fas fa-plus tagBubbleIcon"></i>
+                <i className="fas fa-plus tagBubbleIcon"></i>
               </li>
             )}
           </div>)
@@ -228,19 +230,31 @@ function MusicPage(props) {
   */
   function onSearchTag(tag) {
     let localTagToAdd;
-
-    tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd; 
-
-    let newTag = searchTags; 
-    console.log(searchTags);
-   // props.location.state != undefined ? newTag.push(props.location.state) : newTag.push(localTagToAdd);
-    newTag.push(localTagToAdd);
-    console.log(newTag);
-    newTag = newTag.map(str => str.replace(/\s/g, ''));
-    newTag = newTag.filter(Boolean);
-    setSearchTags(newTag);
+    tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
+    let newTags = searchTags;
+    // props.location.state != undefined ? newTag.push(props.location.state) : newTag.push(localTagToAdd);
+    newTags.push(localTagToAdd);
+    newTags = newTags.map(str => str.replace(/\s/g, ''));
+    newTags = newTags.filter(Boolean);
+    setSearchTags(newTags);
     setTagToAdd("")
-    props.dispatch(searchPostsByTag(newTag))
+    props.dispatch(searchPostsByTag(newTags))
+  }
+
+  function removeTag(tag) {
+    let newTags = searchTags;
+    let tagToRemoveIndex = newTags.indexOf(tag);
+
+    if (tagToRemoveIndex > -1) {
+      newTags.splice(tagToRemoveIndex, 1);
+    }
+    setSearchTags(newTags);
+
+    if (newTags.length) {
+      props.dispatch(searchPostsByTag(newTags))
+    } else{
+      props.dispatch(getAllPostsAction());
+    }
   }
 
   function clear() {
@@ -268,11 +282,18 @@ function MusicPage(props) {
   return (
     <div>
       <div className="musicSearchBarContainer">
-          <i className="fas fa-search musicSearchBarIcon borderImage btn-pumpkin" onClick={()=>{onSearchTag()}}></i>
-          <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />     
+        <i className="fas fa-search musicSearchBarIcon borderImage btn-pumpkin" onClick={() => { onSearchTag() }}></i>
+        <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
       </div>
-      {searchTags}
-      {existingTags}
+      <div>
+        {searchTags.map(tag =>
+          <li className="tagBubble" onClick={() => { removeTag(tag) }}>
+            {tag}
+            <i className="fas fa-minus tagBubbleIcon"></i>
+          </li>
+        )}
+      </div>
+      {suggestedTags}
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
@@ -304,7 +325,7 @@ function MusicPage(props) {
               <button className="btn btn-vermillion borderImage" onClick={clear}>Clear</button>
             </div>
           </form>
-          {existingTags}
+          {suggestedTags}
         </div>
         {loggedIn ?
           <div className="dashboardTool borderImage">

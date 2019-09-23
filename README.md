@@ -57,9 +57,9 @@ Problems I'm fixing w/ this:
 * Reset password
 * There are No Tags Yet bug when searching for 'Western' in general tab **DONE!!**
 * Inclusive vs Exclusive tag search **DONE!!**
-* Inclusive & Exclusive "Apply" and "Clear" buttons
+* Inclusive & Exclusive "Apply" and "Clear" buttons -Irrelevant-
 * Responsive
-* Comment formatting
+* Comment formatting & turn into notes 
 * Improve Search from Home page 
 * Search bar in nav *Important!*
 * Ellipis logout, and post song in nav. 

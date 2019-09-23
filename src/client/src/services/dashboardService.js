@@ -171,7 +171,7 @@ export const checkTagService = (request) => {
   };
 
 export const searchPostsByTagService = (request) => {
-   console.log(request);
+ //  console.log(request);
   //const GET_API_ENDPOINT = '/api/tags/searchPostsByTag/' + request.post.searchTag;
   const GET_API_ENDPOINT = '/api/tags/searchPostsByTag/';
   let authToken = getCookie('token');
