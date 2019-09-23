@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { postAction, getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction, editPostAction } from '../actions/linkActions';
+import { getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction, editPostAction } from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
 
-//,{post, postID, index, comment, response }
 function Post(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -44,10 +43,8 @@ function Post(props) {
       }
 
       if (props.response.dashboard.response.comment) {
-        //   console.log(props.response.dashboard.response.comment[0])
         if (props.response.dashboard.response.comment.length > 0) {
           if (props.response.dashboard.response.comment[0].postID == props.post._id) {
-            //    console.log(props.response.dashboard.response.comment[0]);
             setComments(props.response.dashboard.response.comment[0].comments);
             if (props.response.dashboard.response.comment[0].comments) {
 
@@ -63,35 +60,7 @@ function Post(props) {
 
               setTags(props.response.dashboard.response.tag[0].tags)
               setVisualTags(props.response.dashboard.response.tag[0].tags);
-              /*
-              setTags(props.response.dashboard.response.tag[0].tags)
-              let parents = [];
-              let tagsToShow = props.response.dashboard.response.tag[0].tags;
-
-              Object.keys(tagCategories).forEach((tagCategory, index, arr) => {
-                parents.push(tagCategory)
-              })
-
-              tagsToShow = tagsToShow.filter(function (el) {
-                return parents.indexOf(el.text) < 0;
-              });
-
-              tagsToShow = tagsToShow.map(function (el) {
-                var o = Object.assign({}, el);
-                let i = 0;
-                for (var tagCategory in tagCategories) {
-                  i++;
-                  let tagValues = tagCategories[tagCategory];
-                  if (tagValues.indexOf(el.text) > -1 || el.text == tagCategory) {
-                    o["category"] = tagCategory;
-                    return o;
-                  } else if (i == 13) {
-                    return o
-                  }
-                }
-              })
-              setVisualTags(tagsToShow);
-              */
+             
             }
           }
         }
@@ -109,38 +78,19 @@ function Post(props) {
       props.dispatch(removeUserFromTagAction({ tag: category._id, user: props.currentUser, postID: props.post._id, text: category.text }));
     }
     props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
-    /*  console.log(category);
-      if (tags.some(e => e.text === tag.category)) {
-        console.log("yES!!");
-        console.log(tag.category);
-        category = tag.catgory;
-        
-        /* vendors contains the element we're looking for */
-    /*  } else {
-        console.log("bad!");
-  
-      }
-      props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))*/
-    // let category = tags.find(obj=>{
-    // return obj.text = tag.category; 
-    //})
-    //   console.log(category);
-
   }
 
   function deleteComment(comment) {
-  //  console.log(comment);
     props.dispatch(deleteCommentAction(comment));
   }
 
   function editComment(comment) {
-   // console.log(comment);
     comment["text"] = commentUpdatedText;
     props.dispatch(editCommentAction(comment));
     setOpenCommentEdit(false);
   }
 
-  function editPost(){
+  function editPost() {
     let updatedPost = props.post;
     updatedPost["link"] = postUpdatedLink;
     updatedPost["source"] = postUpdatedSource;
@@ -184,7 +134,6 @@ function Post(props) {
   }, [visualTags, tagLength])
 
   useEffect(() => {
-    // console.log(comments);
     if (comments.length > 0) {
       setCommentChain(
         <div className="postsComments">
@@ -233,7 +182,6 @@ function Post(props) {
   function onHandleComment(event) {
     event.preventDefault();
     let comment = event.target.comment.value;
-    // let _id = props.response.dashboard.response.post[0]._id;
     let _id = props.post._id;
     const data = {
       comment,
@@ -248,10 +196,6 @@ function Post(props) {
     getTagsForOnePost(props.post._id);
     getCommentsForOnePost(props.post._id);
   }, [])
-
-  useEffect(() => {
-    // console.log(props);
-  })
 
   function flatten(array, mutable) {
     var toString = Object.prototype.toString;
@@ -306,18 +250,12 @@ function Post(props) {
 
   function getEmbed(link) {
     let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-    // console.log(embedLink);
     embedLink += "?autoplay=1"
     return embedLink;
   }
 
-  function getPopOut(link) {
-    return link.replace("https://www.youtube.com/watch?v=", "http://youtu.be/");
-  }
-
   function showMoreTags() {
     setTagLength(tagLength + 3)
-    //  updateTags()
   }
 
   function onHandleTag(event) {
@@ -325,54 +263,15 @@ function Post(props) {
     let tag = event.target.tag.value;
     if (tag != undefined && tag != "") {
       tag = tag.toLowerCase();
-      // let _id = props.response.dashboard.response.post[0]._id;
       let _id = props.post._id;
       const data = {
         tag,
         _id
       };
-      //  console.log(data);
       props.dispatch(tagAction(data));
-      // Parent add - defunct for now
-      /*
-      let parent;
-      for (var tagCategory in tagCategories) {
-        let tagValues = tagCategories[tagCategory];
-        if (tagValues.indexOf(tag) > -1) {
-          parent = tagCategory;
-        }
-      }
-      let obj;
-      console.log(tags);
-      if (tags) {
-        obj = tags.find(o => o.text === parent);
-      } else if (tag == parent) {
-        obj = tag;
-      }
-      console.log(parent);
-      console.log(obj);
-     // if (parent != undefined && obj == undefined) {
-      if(parent!=undefined){
-
-        const parentData = {
-          tag: parent,
-          _id,
-          isParent: true
-        }
-        console.log(parentData);
-        props.dispatch(tagAction(parentData)); 
-      } */
     }
     setTagToAdd("")
   }
-  //      <Textarea value={commentToAdd} onChange={e=> setCommentToAdd(e.target.value)}/>
-  //getTagsForOnePost(props.post._id)
-  // <button onClick={() => getCommentsForOnePost(props.post._id)}>Get Comments</button>
-  // <button onClick={() => getTagsForOnePost(props.post._id)}>Get Tags</button>
-  //      <iframe width="300" height="300" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
-  // </iframe>
-
-  //  <button className="btn btn-pumpkin btn-centered borderImage" onClick={() => setPlayVideo(!playVideo)}>{playVideo ? "Close Song" : "Play Song"}</button>
   return (
     <div className="borderImage postContainer">
       <div className="postTagContainer">
@@ -405,12 +304,12 @@ function Post(props) {
                 </label>
               </div>
               <div className="dashboardToolLabel">
-                <label htmlFor="name">Name <input  className="dashboardToolInput borderImage" value={postUpdatedName} onChange={e => setPostUpdatedName(e.target.value)} autoComplete="off" type="name" name="name" id="name" />
+                <label htmlFor="name">Name <input className="dashboardToolInput borderImage" value={postUpdatedName} onChange={e => setPostUpdatedName(e.target.value)} autoComplete="off" type="name" name="name" id="name" />
                 </label>
               </div>
               <div>
-                <button className="btn btn-post smallBtn borderImage" onClick={()=>editPost()} type="submit">Update</button>
-                <button className="btn btn-vermillion smallBtn borderImage" onClick={()=>setOpenPostEdit(false)}>Cancel</button>
+                <button className="btn btn-post smallBtn borderImage" onClick={() => editPost()} type="submit">Update</button>
+                <button className="btn btn-vermillion smallBtn borderImage" onClick={() => setOpenPostEdit(false)}>Cancel</button>
               </div>
             </div>
           </>
