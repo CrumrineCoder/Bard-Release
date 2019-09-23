@@ -99,6 +99,7 @@ body{
   //float: right; 
   //padding-right: 30px;
   padding-top: 7px;
+  padding-right: 40px;
 }
 
 .headerLink, .dropdownEllipsis{
@@ -107,13 +108,45 @@ body{
   cursor: pointer; 
 }
 
+.dropdownEllipsis{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 23px 15px 21px 15px;
+  margin: 0px;
+
+  &:hover, &.active{
+    background: #00111e;
+  }
+}
+
 .headerEllipsisDropdown{
   position: absolute; 
   right: 0px; 
   top: 60px;
-  padding: 10px;
-  background: black;
+
+  background: #00111e;
   color: white; 
+
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.headerEllipsisDropdownItem{
+  cursor: pointer; 
+  .headerLink{
+    padding: 10px;
+    display: block; 
+    margin: 0px;
+  }
+  &:hover{
+    background-color: #eee;
+   .headerLink{
+    color: #2f364a;
+     .ellipsisIcon{
+      color: #2f364a;
+     }
+   }
+  } 
 }
 .ellipsisIcon{
   margin-right: 10px;

@@ -7,7 +7,7 @@ import logo from "../assets/bardLogoVersion3.png"
 function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
-  const [showDropdown, setShowDropdown] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     //  console.log(props.response.login.response);
@@ -29,8 +29,8 @@ function Header(props) {
         <Link className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
-            <i className="fas fa-ellipsis-h dropdownEllipsis"></i>
-          </>
+            <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
+          </> 
           :
           <>
             <Link className="headerLink" to='login'>Login</Link>
@@ -38,13 +38,15 @@ function Header(props) {
           </>
         }
       </div>
-      <div className="headerEllipsisDropdown">
-        <div className="headerEllipsisDropdownItem">
-          <Link className="headerLink" to='login'>
-            <i className="fas fa-times ellipsisIcon"></i>Logout
-          </Link>
+      {showDropdown &&
+        <div className="headerEllipsisDropdown">
+          <div className="headerEllipsisDropdownItem">
+            <Link onClick={()=>setShowDropdown(false)} className="headerLink" to='login'>
+              <i className="fas fa-times ellipsisIcon"></i>Logout
+            </Link>
+          </div>
         </div>
-      </div>
+      }
     </div>
   )
 }
