@@ -60,3 +60,8 @@ Problems I'm fixing w/ this:
 * Inclusive & Exclusive "Apply" and "Clear" buttons
 * Responsive
 * Comment formatting
+* Improve Search from Home page 
+* Search bar in nav
+* Ellipis logout, and post song in nav. 
+* Drafts/unlisted playlists for broken links. 
+* Profile. 
