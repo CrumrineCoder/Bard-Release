@@ -32,6 +32,8 @@ function MusicPage(props) {
   const [tagToAdd, setTagToAdd] = useState("");
 
   //const [existingTags, setExistingTags] = useState("");
+
+  const [suggestedTagsLength, setSuggestedTagsLength] = useState(0);
   const [suggestedTags, setSuggestedTags] = useState("");
 
   /*
@@ -62,6 +64,7 @@ function MusicPage(props) {
       };
       props.dispatch(checkTagsAction(data));
     } else {
+      setSuggestedTagsLength(0);
       setSuggestedTags(<></>);
     }
   }, [tagToAdd])
@@ -187,6 +190,7 @@ function MusicPage(props) {
               )}
             </ul>)
             */
+           setSuggestedTagsLength(props.response.dashboard.response.tag.length);
         setSuggestedTags(
           <ul className="tagSuggestionsContainer borderImage">
             {props.response.dashboard.response.tag.map(tag =>
@@ -246,7 +250,7 @@ function MusicPage(props) {
     newTags.push(localTagToAdd);
     let checkTags = newTags.map(str => str.replace(/\s/g, ''));
     checkTags = checkTags.filter(Boolean);
-    if(checkTags.length){
+    if (checkTags.length) {
       setSearchTags(newTags);
       setTagToAdd("")
       props.dispatch(searchPostsByTag(newTags))
@@ -292,6 +296,7 @@ function MusicPage(props) {
   //       <a href="/login">Login</a>
   //      <p>{message}</p>
   function _handleKeyDown(e) {
+    console.log(e);
     if (e.key === 'Enter') {
       onSearchTag();
     }
@@ -300,17 +305,18 @@ function MusicPage(props) {
     <div>
       <div className="musicSearchContainer">
         <div className="musicSearchBarContainer">
-        <ReactCSSTransitionGroup
-          transitionName="icon"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
-          {tagToAdd != "" && 
-            <i className="fas fa-times musicSearchBarIcon btn-vermillion" onClick={() => { setTagToAdd("") }}></i>
-          }
-             </ReactCSSTransitionGroup>
+          <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
           <input className="dashboardToolInput borderImage" placeholder="Search by tag" onKeyDown={_handleKeyDown} autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
+          <ReactCSSTransitionGroup
+            transitionName="icon"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {tagToAdd != "" &&
+              <i className="fas fa-times musicSearchBarCancelIcon btn-vermillion" onClick={() => { setTagToAdd("") }}></i>
+            }
+          </ReactCSSTransitionGroup>
         </div>
-        {suggestedTags}
+        {suggestedTagsLength > 0 && suggestedTags}
       </div>
       <div>
         {searchTags.map(tag =>

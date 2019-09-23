@@ -448,13 +448,22 @@ body{
 .musicSearchBarContainer{
   position: relative;  
   input{
-    padding-right: 0px; 
+    padding-right: 0px;
+    padding-left: 30px; 
     margin: 0px; 
     width: 100%; 
     font-size: 17px; 
     border-width: 8px; 
   }
   .musicSearchBarIcon{
+    position: absolute; 
+    padding: 0px;
+    left: 15px;
+    top: 15px;
+    cursor: pointer; 
+    color: black;
+  }
+  .musicSearchBarCancelIcon{
     position: absolute; 
     padding: 8px 20px;
     right: 8px;
