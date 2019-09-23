@@ -244,11 +244,13 @@ function MusicPage(props) {
     let newTags = searchTags;
     // props.location.state != undefined ? newTag.push(props.location.state) : newTag.push(localTagToAdd);
     newTags.push(localTagToAdd);
-    newTags = newTags.map(str => str.replace(/\s/g, ''));
-    newTags = newTags.filter(Boolean);
-    setSearchTags(newTags);
-    setTagToAdd("")
-    props.dispatch(searchPostsByTag(newTags))
+    let checkTags = newTags.map(str => str.replace(/\s/g, ''));
+    checkTags = checkTags.filter(Boolean);
+    if(checkTags.length){
+      setSearchTags(newTags);
+      setTagToAdd("")
+      props.dispatch(searchPostsByTag(newTags))
+    }
   }
 
   function removeTag(tag) {
