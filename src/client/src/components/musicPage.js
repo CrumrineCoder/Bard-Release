@@ -36,7 +36,9 @@ function MusicPage(props) {
   const [autocompleteTagsLength, setAutocompleteTagsLength] = useState(0);
   const [autocompleteTags, setAutocompleteTags] = useState("");
 
-  const [suggestedTags, setSuggestedTags] = useState([])
+  const [suggestedTags, setSuggestedTags] = useState([]);
+
+  const [sources, setSources] = useState([]);
 
   /*
   useEffect(() => {
@@ -135,6 +137,8 @@ function MusicPage(props) {
       //  comment={props.response.dashboard.response.comment}
       let postsToTransform = unfilteredPosts;
       let finalizedPosts = postsToTransform;
+      console.log(finalizedPosts);
+      setSources(finalizedPosts.map(a=>a.source));
       if (includeSource) {
         let include = includeSource.split(",")
         include = include.map(str => str.replace(/\s/g, ''));
@@ -231,6 +235,7 @@ function MusicPage(props) {
       } else if (props.response.dashboard.response.message == "Successfully created new post.") {
         props.dispatch(getAllPostsAction());
       } else if (props.response.dashboard.response.message == "Check sources done.") {
+        console.log(props.response.dashboard.response.source);
         setExistingSources(
           <div>
             {props.response.dashboard.response.source.map(source =>
@@ -343,13 +348,13 @@ function MusicPage(props) {
   //       <a href="/login">Login</a>
   //      <p>{message}</p>
   function _handleKeyDown(e) {
-    console.log(e);
     if (e.key === 'Enter') {
       onSearchTag();
     }
   }
   return (
     <div>
+      {sources}
       <div className="musicSearchContainer">
         <div className="musicSearchBarContainer">
           <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
