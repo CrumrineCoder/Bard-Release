@@ -410,64 +410,6 @@ function MusicPage(props) {
         )}
       </ul>
       {renderSources}
-      <div className="dashboardToolsContainer">
-        <div className="dashboardTool borderImage">
-          <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
-          <div className="dashboardToolLabel">
-            <label htmlFor="excludeSource">Exclude Sources (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="excludeSource" name="excludeSource" id="excludeSource" value={excludeSource}
-              onChange={e => setExcludeSource(e.target.value)} />
-            </label>
-          </div>
-          <div className="dashboardToolLabel">
-            <label htmlFor="includeSource">Include Sources (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="includeSource" name="includeSource" id="includeSource" value={includeSource}
-              onChange={e => setIncludeSource(e.target.value)} />
-            </label>
-          </div>
-        </div>
-        <div className="dashboardTool borderImage">
-          <h3 className="dashboardToolHeader">Search by Tags</h3>
-          <div className="dashboardToolLabel">
-            <label htmlFor="generalSearchTag">Search by categorical tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" type="generalSearchTag" name="generalSearchTag" id="generalSearchTag" value={generalTags}
-              onChange={e => setGeneralTags(e.target.value)} />
-            </label>
-          </div>
-          <form onSubmit={onSearchTag}>
-            <div className="dashboardToolLabel">
-              <label htmlFor="searchTag">Search by tags (separated by commas) <input className="dashboardToolInput borderImage" autoComplete="off" value={specificTags} onChange={e => setSpecificTags(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
-              </label>
-            </div>
-            <div className="btnSearchContainer">
-              <button className="btn btn-pumpkin borderImage" type="submit">Search</button>
-              <button className="btn btn-vermillion borderImage" onClick={clear}>Clear</button>
-            </div>
-          </form>
-
-        </div>
-        {loggedIn ?
-          <div className="dashboardTool borderImage">
-            <h3 className="dashboardToolHeader">Post a new song</h3>
-            <form onSubmit={onHandlePost}>
-              <div className="dashboardToolLabel">
-                <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput borderImage" autoComplete="off" type="link" name="link" id="link" />
-                </label>
-              </div>
-              <div className="dashboardToolLabel">
-                <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput borderImage" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
-                </label>
-              </div>
-              <div className="dashboardToolLabel">
-                <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput borderImage" autoComplete="off" type="name" name="name" id="name" />
-                </label>
-              </div>
-              <div>
-                <button className="btn btn-post btn-centered borderImage" type="submit">Post Song</button>
-              </div>
-            </form>
-            {existingSources}
-          </div>
-          : <button className="btn-post loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button>}
-      </div>
-      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       <div>
         {postsContent}
       </div>
