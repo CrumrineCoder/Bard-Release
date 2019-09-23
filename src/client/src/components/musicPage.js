@@ -33,8 +33,10 @@ function MusicPage(props) {
 
   //const [existingTags, setExistingTags] = useState("");
 
-  const [suggestedTagsLength, setSuggestedTagsLength] = useState(0);
-  const [suggestedTags, setSuggestedTags] = useState("");
+  const [autocompleteTagsLength, setAutocompleteTagsLength] = useState(0);
+  const [autocompleteTags, setAutocompleteTags] = useState("");
+
+  const [suggestedTags, setSuggestedTags] = useState([])
 
   /*
   useEffect(() => {
@@ -56,6 +58,33 @@ function MusicPage(props) {
   }, [specificTags])
   */
 
+
+  function flatten(array, mutable) {
+    var toString = Object.prototype.toString;
+    var arrayTypeStr = '[object Array]';
+
+    var result = [];
+    var nodes = (mutable && array) || array.slice();
+    var node;
+
+    if (!array.length) {
+      return result;
+    }
+
+    node = nodes.pop();
+
+    do {
+      if (toString.call(node) === arrayTypeStr) {
+        nodes.push.apply(nodes, node);
+      } else {
+        result.push(node);
+      }
+    } while (nodes.length && (node = nodes.pop()) !== undefined);
+
+    result.reverse(); // we reverse result to restore the original order
+    return result;
+  }
+
   useEffect(() => {
     let searchTag = tagToAdd.toLowerCase().trim();
     if (searchTag) {
@@ -64,8 +93,8 @@ function MusicPage(props) {
       };
       props.dispatch(checkTagsAction(data));
     } else {
-      setSuggestedTagsLength(0);
-      setSuggestedTags(<></>);
+      setAutocompleteTagsLength(0);
+      setAutocompleteTags(<></>);
     }
   }, [tagToAdd])
 
@@ -190,8 +219,8 @@ function MusicPage(props) {
               )}
             </ul>)
             */
-           setSuggestedTagsLength(props.response.dashboard.response.tag.length);
-        setSuggestedTags(
+        setAutocompleteTagsLength(props.response.dashboard.response.tag.length);
+        setAutocompleteTags(
           <ul className="tagSuggestionsContainer borderImage">
             {props.response.dashboard.response.tag.map(tag =>
               <li className="tagSuggestion" onClick={() => { onSearchTag(tag._id) }}>
@@ -253,7 +282,25 @@ function MusicPage(props) {
     if (checkTags.length) {
       setSearchTags(newTags);
       setTagToAdd("")
-      props.dispatch(searchPostsByTag(newTags))
+      props.dispatch(searchPostsByTag(newTags));
+
+      let categories = [];
+      let inclusiveTags = [];
+
+      for (var tagCategory in tagCategories) {
+        let tagValues = tagCategories[tagCategory];
+        for (var i = 0; i < newTags.length; i++) {
+          if (tagValues.indexOf(newTags[i]) > -1) {
+            categories.push(tagCategories[tagCategory]);
+            categories = categories.flat(Infinity);
+          }
+        }
+      }
+      inclusiveTags.push(categories);
+      inclusiveTags = inclusiveTags.flat(Infinity);
+      inclusiveTags = inclusiveTags.filter((el) => !newTags.includes(el));
+      inclusiveTags = [...new Set(inclusiveTags)];
+      setSuggestedTags(inclusiveTags);
     }
   }
 
@@ -316,7 +363,7 @@ function MusicPage(props) {
             }
           </ReactCSSTransitionGroup>
         </div>
-        {suggestedTagsLength > 0 && suggestedTags}
+        {autocompleteTagsLength > 0 && autocompleteTags}
       </div>
       <div>
         {searchTags.map(tag =>
@@ -326,7 +373,14 @@ function MusicPage(props) {
           </li>
         )}
       </div>
-
+      <ul>
+        {suggestedTags.map(tag =>
+          <li className="tagBubble" onClick={() => { onSearchTag(tag) }}>
+            {tag}
+            <i className="fas fa-plus tagBubbleIcon"></i>
+          </li>
+        )}
+      </ul>
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
