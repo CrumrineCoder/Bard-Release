@@ -29,6 +29,7 @@ function Header(props) {
         <Link className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
+            <i class="far fa-plus-square headerAddPost"></i>
             <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
           </> 
           :

@@ -99,7 +99,7 @@ body{
   //float: right; 
   //padding-right: 30px;
   padding-top: 7px;
-  padding-right: 40px;
+  padding-right: 85px;
 }
 
 .headerLink, .dropdownEllipsis{
@@ -119,6 +119,21 @@ body{
     background: #00111e;
   }
 }
+
+.headerAddPost{
+  position: absolute;
+  top: 0px;
+  right: 46px;
+  padding: 23px 15px 17px 15px;
+  margin: 0px;
+  font-size: 20px;
+  cursor: pointer; 
+  &:hover, &.active{
+    background: #00111e;
+  }
+}
+
+
 
 .headerEllipsisDropdown{
   position: absolute; 
@@ -517,6 +532,9 @@ body{
     top: 8px;
     cursor: pointer; 
     color: black; 
+    &:hover{
+      color: rgb(219, 162, 157);
+    }
   }
 }
 
