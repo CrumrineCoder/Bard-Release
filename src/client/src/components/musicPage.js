@@ -41,6 +41,8 @@ function MusicPage(props) {
   const [sources, setSources] = useState([]);
   const [blacklist, setBlacklist] = useState([]);
 
+  const [renderSources, setRenderSources] = useState();
+
   /*
   useEffect(() => {
     let searchTag;
@@ -60,33 +62,6 @@ function MusicPage(props) {
     }
   }, [specificTags])
   */
-
-
-  function flatten(array, mutable) {
-    var toString = Object.prototype.toString;
-    var arrayTypeStr = '[object Array]';
-
-    var result = [];
-    var nodes = (mutable && array) || array.slice();
-    var node;
-
-    if (!array.length) {
-      return result;
-    }
-
-    node = nodes.pop();
-
-    do {
-      if (toString.call(node) === arrayTypeStr) {
-        nodes.push.apply(nodes, node);
-      } else {
-        result.push(node);
-      }
-    } while (nodes.length && (node = nodes.pop()) !== undefined);
-
-    result.reverse(); // we reverse result to restore the original order
-    return result;
-  }
 
   useEffect(() => {
     let searchTag = tagToAdd.toLowerCase().trim();
@@ -139,9 +114,9 @@ function MusicPage(props) {
       let postsToTransform = unfilteredPosts;
       let finalizedPosts = postsToTransform;
       console.log(finalizedPosts);
-      setSources(finalizedPosts.map(a=>a.source));
+      setSources(finalizedPosts.map(a => a.source));
 
-      finalizedPosts = finalizedPosts.filter(function(post){
+      finalizedPosts = finalizedPosts.filter(function (post) {
         return blacklist.indexOf(post.source) == -1;
       })
 
@@ -241,7 +216,6 @@ function MusicPage(props) {
       } else if (props.response.dashboard.response.message == "Successfully created new post.") {
         props.dispatch(getAllPostsAction());
       } else if (props.response.dashboard.response.message == "Check sources done.") {
-        console.log(props.response.dashboard.response.source);
         setExistingSources(
           <div>
             {props.response.dashboard.response.source.map(source =>
@@ -342,11 +316,38 @@ function MusicPage(props) {
     props.history.push(location);
   }
 
-  function addToBlacklist(source){
+  function addToBlacklist(source) {
     let newBlacklist = blacklist;
     newBlacklist.push(source);
     setBlacklist(newBlacklist);
   }
+
+  useEffect(() => {
+    setRenderSources(
+      <div className="">
+        {sources.map(
+          function (source) {
+            if (blacklist.indexOf(source) != -1) {
+              return (
+                <li className="tagBubble" key={source}>
+                  {source}
+                  <i className="fas fa-times tagBubbleIcon"></i>
+                </li>
+              )
+            } else {
+              return (
+                <li className="tagBubble" key={source} onClick={() => { addToBlacklist(source) }}>
+                  {source}
+                  <i className="fas fa-minus tagBubbleIcon"></i>
+                </li>
+              )
+            }
+          }
+        )}
+      </div>
+    )
+  }, [sources, blacklist])
+
   /*
     <form onSubmit={onHandleCheck}>
         <div>
@@ -367,14 +368,6 @@ function MusicPage(props) {
   }
   return (
     <div>
-      <div>
-        {blacklist.map(blackSource =>
-          <li className="tagBubble" onClick={() => { addToBlacklist(blackSource) }}>
-            {blackSource}
-            <i className="fas fa-times tagBubbleIcon"></i>
-          </li>
-        )}
-      </div>
       <div className="musicSearchContainer">
         <div className="musicSearchBarContainer">
           <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
@@ -406,12 +399,7 @@ function MusicPage(props) {
           </li>
         )}
       </ul>
-      {sources.map(source =>
-          <li className="tagBubble" onClick={() => { addToBlacklist(source) }}>
-            {source}
-            <i className="fas fa-minus tagBubbleIcon"></i>
-          </li>
-        )}
+      {renderSources}
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
