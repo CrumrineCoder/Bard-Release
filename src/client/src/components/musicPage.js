@@ -166,7 +166,7 @@ function MusicPage(props) {
         }
       }
     }
-  }, [filteredPosts, props.response.dashboard.response, excludeSource, includeSource])
+  }, [filteredPosts, props.response.dashboard.response, excludeSource, includeSource, blacklist])
 
   useEffect(() => {
     if (props.response.dashboard.response != undefined) {
@@ -322,6 +322,16 @@ function MusicPage(props) {
     setBlacklist(newBlacklist);
   }
 
+  function removeFromBlacklist(source) {
+    let newBlacklist = [...blacklist];
+    var index = newBlacklist.indexOf(source);
+    console.log(index);
+    if (index > -1) {
+      newBlacklist.splice(index, 1);
+      setBlacklist(newBlacklist);
+    }
+  }
+
   useEffect(() => {
     setRenderSources(
       <div className="">
@@ -329,7 +339,7 @@ function MusicPage(props) {
           function (source) {
             if (blacklist.indexOf(source) != -1) {
               return (
-                <li className="tagBubble" key={source}>
+                <li className="tagBubble" key={source} onClick={() => { removeFromBlacklist(source) }}>
                   {source}
                   <i className="fas fa-times tagBubbleIcon"></i>
                 </li>
