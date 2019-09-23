@@ -56,7 +56,7 @@ module.exports = (app) => {
 
     app.post('/api/tags/searchPostsByTag/', (req, res) => {
         // let tags = req.params.tag.split(",");
-        console.log(req.body);
+        //console.log(req.body);
         let findPosts = {}; 
         findPosts["$all"] = req.body;
         /*

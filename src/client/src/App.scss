@@ -465,3 +465,20 @@ body{
     border-width: 5px;
   }
 }
+
+.tagBubble{
+  background: white; 
+  color: black; 
+  border-radius: 25px; 
+  padding: 10px 15px 10px 25px; 
+  display: inline-block;
+  cursor: pointer;
+  &:hover{
+    background: grey; 
+  }
+}
+.tagBubbleIcon{
+  font-size: 12px; 
+  margin-left: 15px; 
+  margin-right: 0px; 
+}

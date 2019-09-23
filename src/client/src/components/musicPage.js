@@ -76,8 +76,8 @@ function MusicPage(props) {
   useEffect(() => {
     props.dispatch(getCurrentUserAction())
     if (props.location.state) {
-      setSpecificTags(props.location.state)
-      onSearchTag()
+    //  setSpecificTags(props.location.state)
+      onSearchTag(props.location.state)
     }
     setLoggedIn(checkCookie() != null)
     props.dispatch(getAllPostsAction())
@@ -177,8 +177,9 @@ function MusicPage(props) {
         setExistingTags(
           <div>
             {props.response.dashboard.response.tag.map(tag =>
-              <li>
+              <li className="tagBubble" onClick={()=>{onSearchTag(tag._id)}}>
                 {tag._id}
+                <i class="fas fa-plus tagBubbleIcon"></i>
               </li>
             )}
           </div>)
@@ -225,12 +226,20 @@ function MusicPage(props) {
       }
     }
   */
-  function onSearchTag() {
+  function onSearchTag(tag) {
+    let localTagToAdd;
+
+    tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd; 
+
     let newTag = searchTags; 
-    props.location.state != undefined ? newTag.push(props.location.state) : newTag.push(tagToAdd);
+    console.log(searchTags);
+   // props.location.state != undefined ? newTag.push(props.location.state) : newTag.push(localTagToAdd);
+    newTag.push(localTagToAdd);
+    console.log(newTag);
     newTag = newTag.map(str => str.replace(/\s/g, ''));
     newTag = newTag.filter(Boolean);
     setSearchTags(newTag);
+    setTagToAdd("")
     props.dispatch(searchPostsByTag(newTag))
   }
 
