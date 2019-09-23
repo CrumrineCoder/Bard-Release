@@ -303,6 +303,10 @@ function MusicPage(props) {
   //      <p>{message}</p>
   return (
     <div>
+      <div className="musicSearchBar">
+          <i class="fas fa-search"></i>
+          <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={specificTags} onChange={e => setSpecificTags(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />     
+      </div>
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>

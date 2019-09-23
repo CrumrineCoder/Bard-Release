@@ -24,6 +24,13 @@ body, html, #app, #root, .appContainer{
  border-style: solid;
 }
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .blackBorder{
   border: 3px solid black; 
 }
@@ -435,4 +442,23 @@ body{
 
 .updatePostForm{
   width: 90%; 
+}
+
+.musicSearchBar{
+  position: relative; 
+  width: 90%; 
+  margin-bottom: 10px; 
+  input{
+    padding-right: 0px; 
+    margin: 0px; 
+    width: 100%; 
+    font-size: 19px; 
+  }
+  i{
+    position: absolute; 
+    padding: 12px 20px;
+    right: 0px; 
+    color: white;
+    background: black; 
+  }
 }
