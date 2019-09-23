@@ -483,21 +483,32 @@ body{
     right: 8px;
     top: 8px;
     cursor: pointer; 
-    
+    color: black; 
   }
 }
 
 .tagBubble{
   background: white; 
   color: black; 
-  border-radius: 25px; 
   padding: 10px 15px 10px 25px; 
   display: inline-block;
   cursor: pointer;
+  margin: 5px;
+}
+
+.removeBubble{
   &:hover{
-    background: grey; 
+    background: rgb(219, 162, 157); 
   }
 }
+
+.addBubble{
+  font-size: 10px;
+  &:hover{
+    background: rgb(157, 219, 161); 
+  }
+}
+
 .tagBubbleIcon{
   font-size: 12px; 
   margin-left: 15px; 
