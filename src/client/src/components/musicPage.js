@@ -317,7 +317,7 @@ function MusicPage(props) {
   }
 
   function addToBlacklist(source) {
-    let newBlacklist = blacklist;
+    let newBlacklist = [...blacklist];
     newBlacklist.push(source);
     setBlacklist(newBlacklist);
   }
