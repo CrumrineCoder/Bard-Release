@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
 import { postAction, getAllPostsAction, searchPostsByTag, getPostsByIDAction, checkTagsAction, checkSourcesAction } from '../actions/linkActions';
@@ -288,12 +289,24 @@ function MusicPage(props) {
       */
   //       <a href="/login">Login</a>
   //      <p>{message}</p>
+  function _handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      onSearchTag();
+    }
+  }
   return (
     <div>
       <div className="musicSearchContainer">
         <div className="musicSearchBarContainer">
-          <i className="fas fa-search musicSearchBarIcon borderImage btn-pumpkin" onClick={() => { onSearchTag() }}></i>
-          <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
+        <ReactCSSTransitionGroup
+          transitionName="icon"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+          {tagToAdd != "" && 
+            <i className="fas fa-times musicSearchBarIcon btn-vermillion" onClick={() => { setTagToAdd("") }}></i>
+          }
+             </ReactCSSTransitionGroup>
+          <input className="dashboardToolInput borderImage" placeholder="Search by tag" onKeyDown={_handleKeyDown} autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
         </div>
         {suggestedTags}
       </div>

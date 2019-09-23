@@ -452,14 +452,15 @@ body{
     margin: 0px; 
     width: 100%; 
     font-size: 17px; 
-    border-width: 5px; 
+    border-width: 8px; 
   }
   .musicSearchBarIcon{
     position: absolute; 
     padding: 8px 20px;
-    right: 0px;
+    right: 8px;
+    top: 8px;
     cursor: pointer; 
-    border-width: 5px;
+    
   }
 }
 
@@ -483,7 +484,7 @@ body{
 .tagSuggestionsContainer{
   display: block;
   position: absolute;
-  top: 42px;
+  top: 47px;
   width: 100%;
   //border: 2px solid #aaa;
   background-color: #fff;
@@ -509,4 +510,19 @@ body{
   position: relative; 
   margin: 15px auto;
   width: 90%;
+}
+
+.icon-enter {
+  transform: translate(300%);
+}
+.icon-enter.icon-enter-active {
+  transform: translate(0%);
+  transition: transform 500ms ease-in-out;
+}
+.icon-leave {
+  transform: translate(0%);
+}
+.icon-leave.icon-leave-active {
+  transform: translate(300%);
+  transition: transform 300ms ease-in-out;
 }
