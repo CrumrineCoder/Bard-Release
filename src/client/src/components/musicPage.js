@@ -175,16 +175,25 @@ function MusicPage(props) {
         } // else do something
         // Now we have the post IDs, we have to find all posts by ID. 
       } else if (props.response.dashboard.response.message == "Check tags done.") {
-
+        /*
         setSuggestedTags(
-          <div>
+            <ul>
+              {props.response.dashboard.response.tag.map(tag =>
+                <li className="tagSuggestions" onClick={() => { onSearchTag(tag._id) }}>
+                  {tag._id}
+                  <i className="fas fa-plus tagBubbleIcon"></i>
+                </li>
+              )}
+            </ul>)
+            */
+        setSuggestedTags(
+          <ul className="tagSuggestionsContainer borderImage">
             {props.response.dashboard.response.tag.map(tag =>
-              <li className="tagBubble" onClick={() => { onSearchTag(tag._id) }}>
+              <li className="tagSuggestion" onClick={() => { onSearchTag(tag._id) }}>
                 {tag._id}
-                <i className="fas fa-plus tagBubbleIcon"></i>
               </li>
             )}
-          </div>)
+          </ul>)
       } else if (props.response.dashboard.response.message == "Successfully created new post.") {
         props.dispatch(getAllPostsAction());
       } else if (props.response.dashboard.response.message == "Check sources done.") {
@@ -252,7 +261,7 @@ function MusicPage(props) {
 
     if (newTags.length) {
       props.dispatch(searchPostsByTag(newTags))
-    } else{
+    } else {
       props.dispatch(getAllPostsAction());
     }
   }
@@ -281,9 +290,12 @@ function MusicPage(props) {
   //      <p>{message}</p>
   return (
     <div>
-      <div className="musicSearchBarContainer">
-        <i className="fas fa-search musicSearchBarIcon borderImage btn-pumpkin" onClick={() => { onSearchTag() }}></i>
-        <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
+      <div className="musicSearchContainer">
+        <div className="musicSearchBarContainer">
+          <i className="fas fa-search musicSearchBarIcon borderImage btn-pumpkin" onClick={() => { onSearchTag() }}></i>
+          <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
+        </div>
+        {suggestedTags}
       </div>
       <div>
         {searchTags.map(tag =>
@@ -293,7 +305,7 @@ function MusicPage(props) {
           </li>
         )}
       </div>
-      {suggestedTags}
+
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
@@ -325,7 +337,7 @@ function MusicPage(props) {
               <button className="btn btn-vermillion borderImage" onClick={clear}>Clear</button>
             </div>
           </form>
-          {suggestedTags}
+
         </div>
         {loggedIn ?
           <div className="dashboardTool borderImage">

@@ -430,7 +430,6 @@ body{
   align-items: center;
   flex-direction: column;
   text-align: center;
-  border-radius: 10px; 
   a{
     font-size: 12px; 
   }
@@ -447,9 +446,7 @@ body{
 }
 
 .musicSearchBarContainer{
-  position: relative; 
-  width: 90%; 
-  margin: 15px auto;  
+  position: relative;  
   input{
     padding-right: 0px; 
     margin: 0px; 
@@ -481,4 +478,35 @@ body{
   font-size: 12px; 
   margin-left: 15px; 
   margin-right: 0px; 
+}
+
+.tagSuggestionsContainer{
+  display: block;
+  position: absolute;
+  top: 42px;
+  width: 100%;
+  //border: 2px solid #aaa;
+  background-color: #fff;
+  color: black; 
+  border-top: none; 
+  font-weight: 300;
+  font-size: 16px;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.tagSuggestion{
+  cursor: pointer;
+  padding: 10px 20px;
+  &:hover{
+    background: grey; 
+  }
+}
+
+.musicSearchContainer{
+  position: relative; 
+  margin: 15px auto;
+  width: 90%;
 }
