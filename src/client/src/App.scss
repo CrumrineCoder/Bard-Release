@@ -19,7 +19,9 @@ body, html, #app, #root, .appContainer{
   //border-image: url("https://www.sccpre.cat/mypng/full/12-125039_free-celtic-border-celtic-border-design-png.png") 25 round;
  // border-image: url("http://pluspng.com/img-png/celtic-border-png-hd-free-clipart-of-a-celtic-rectangle-frame-border-design-element-in-4000.png") 300 round;
  border-image: url("http://www.newdesignfile.com/postpic/2012/02/celtic-border-design_172602.png") 40 round;
- font-family: 'Marcellus', serif;
+ &:not(.fas){
+  font-family: 'Marcellus', serif;
+ }
  border-width: 3px; //!important; 
  border-style: solid;
 }
@@ -286,9 +288,9 @@ body{
   padding: 10px 20px; 
   margin-top: 10px;
   &:hover{
-    background: #003153;
+//    background: #003153;
     cursor: pointer; 
-    color: white; 
+ //   color: white; 
   }
 }
 
@@ -444,21 +446,22 @@ body{
   width: 90%; 
 }
 
-.musicSearchBar{
+.musicSearchBarContainer{
   position: relative; 
   width: 90%; 
-  margin-bottom: 10px; 
+  margin: 15px auto;  
   input{
     padding-right: 0px; 
     margin: 0px; 
     width: 100%; 
-    font-size: 19px; 
+    font-size: 17px; 
+    border-width: 5px; 
   }
-  i{
+  .musicSearchBarIcon{
     position: absolute; 
-    padding: 12px 20px;
-    right: 0px; 
-    color: white;
-    background: black; 
+    padding: 8px 20px;
+    right: 0px;
+    cursor: pointer; 
+    border-width: 5px;
   }
 }

@@ -26,8 +26,12 @@ function MusicPage(props) {
   const [includeSource, setIncludeSource] = useState("");
   const [loggedIn, setLoggedIn] = useState();
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState("")
+  const [currentUser, setCurrentUser] = useState("");
 
+  const [searchTags, setSearchTags] = useState([]);
+  const [tagToAdd, setTagToAdd] = useState("");
+
+  /*
   useEffect(() => {
     let searchTag;
     searchTag = specificTags.split(",");
@@ -45,6 +49,19 @@ function MusicPage(props) {
       setExistingTags(<></>);
     }
   }, [specificTags])
+  */
+
+ useEffect(() => {
+  let searchTag = tagToAdd.toLowerCase().trim(); 
+  if (searchTag) {
+    const data = {
+      searchTag
+    };
+    props.dispatch(checkTagsAction(data));
+  } else {
+    setExistingTags(<></>);
+  }
+}, [tagToAdd])
 
   useEffect(() => {
     let searchSource = source;
@@ -208,75 +225,13 @@ function MusicPage(props) {
       }
     }
   */
-  function onSearchTag(event) {
-    let exclusiveTags;
-
-    if (event) {
-      event.preventDefault();
-
-      exclusiveTags = event.target.searchTag.value;
-    } else {
-      exclusiveTags = props.location.state;
-    }
-    if (exclusiveTags.indexOf(",") > - 1) {
-      exclusiveTags = exclusiveTags.split(",");
-    } else {
-
-      let searchString = exclusiveTags;
-      exclusiveTags = [];
-      searchString = searchString.toLowerCase();
-      exclusiveTags.push(searchString);
-    }
-
-    exclusiveTags = exclusiveTags.map(str => str.replace(/\s/g, ''));
-    exclusiveTags = exclusiveTags.filter(Boolean);
-
-    let inclusiveTags = [];
-    let compareTags;
-    if (generalTags.length > 0) {
-
-      if (generalTags.indexOf(",") > - 1) {
-        compareTags = generalTags.split(",");
-      } else {
-        compareTags = [];
-        compareTags.push(generalTags);
-      }
-      compareTags = compareTags.map(str => str.replace(/\s/g, ''));
-      let categories = [];
-
-      for (var tagCategory in tagCategories) {
-        let tagValues = tagCategories[tagCategory];
-        for (var i = 0; i < compareTags.length; i++) {
-          if (tagValues.indexOf(compareTags[i]) > -1 || compareTags[i] == tagCategory) {
-            categories.push(tagCategory);
-            categories.push(tagCategories[tagCategory]);
-            categories = categories.flat(Infinity);
-          }
-        }
-      }
-      inclusiveTags.push(categories);
-      inclusiveTags = inclusiveTags.flat(Infinity);
-    }
-
-    inclusiveTags = inclusiveTags.filter(function (str) {
-      return /\S/.test(str);
-    });
-
-    inclusiveTags = inclusiveTags.filter(Boolean);
-
-    if (exclusiveTags.length > 0 || inclusiveTags.length > 0) {
-      const data = {
-        inclusiveTags,
-        exclusiveTags
-      }
-      props.dispatch(searchPostsByTag(data))
-      /* const data = {
-         searchTag
-       };
-       console.log(data);
-       props.dispatch(searchPostsByTag(data)); */
-    }
-
+  function onSearchTag() {
+    let newTag = searchTags; 
+    props.location.state != undefined ? newTag.push(props.location.state) : newTag.push(tagToAdd);
+    newTag = newTag.map(str => str.replace(/\s/g, ''));
+    newTag = newTag.filter(Boolean);
+    setSearchTags(newTag);
+    props.dispatch(searchPostsByTag(newTag))
   }
 
   function clear() {
@@ -303,10 +258,12 @@ function MusicPage(props) {
   //      <p>{message}</p>
   return (
     <div>
-      <div className="musicSearchBar">
-          <i class="fas fa-search"></i>
-          <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={specificTags} onChange={e => setSpecificTags(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />     
+      <div className="musicSearchBarContainer">
+          <i className="fas fa-search musicSearchBarIcon borderImage btn-pumpkin" onClick={()=>{onSearchTag()}}></i>
+          <input className="dashboardToolInput borderImage" placeholder="Search by tag" autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />     
       </div>
+      {searchTags}
+      {existingTags}
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>

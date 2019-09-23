@@ -90,7 +90,7 @@ module.exports = (app) => {
     });
     app.post('/api/comments/deleteComment', checkToken, (req, res, next) => {
         // let { tag, _id } = req.body;
-        console.log(req.body);
+    //    console.log(req.body);
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
             Comments.findOneAndUpdate({
                 "comments._id": req.body._id

@@ -16,7 +16,7 @@ Problems I'm fixing w/ this:
 * Message functionality for when the user posts the same links, 403s, etc.
 * Sorting
 * Handle non-Youtube links (like soundcloud)
-* Break up dashboard & its reducer. 
+* Break up dashboard & its reducer. *IMPORTANT!*
 * Delete & edit tags & posts **DONE!!!**
 * 404
 * Loading screen
@@ -61,7 +61,7 @@ Problems I'm fixing w/ this:
 * Responsive
 * Comment formatting
 * Improve Search from Home page 
-* Search bar in nav
+* Search bar in nav *Important!*
 * Ellipis logout, and post song in nav. 
 * Drafts/unlisted playlists for broken links. 
 * Profile. 

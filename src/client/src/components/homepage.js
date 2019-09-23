@@ -23,7 +23,7 @@ function HomePage(props) {
                 <h1 className="homePageHeader">Bardic Inspiration</h1>
                 <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
                 <input className="homePageSearchInput borderImage" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
-                <button className="homePageSearchButton borderImage" onClick={submitTag}>Explore</button>
+                <button className="homePageSearchButton borderImage btn-pumpkin" onClick={submitTag}>Explore</button>
             </div>
         </div>
     );
