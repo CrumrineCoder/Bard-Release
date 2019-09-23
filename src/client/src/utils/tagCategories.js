@@ -2,7 +2,7 @@ const tagCategories = {
     "ooc": ["presession", "postsession", "recap"],
     "exploration": ["town", "dungeon", "location"],
     "combat": ["standard battle", "large", "boss", "duel", "betrayal", "combat preparation", "victory", "chase", "sneak"],
-    "social": ["calm", "intrigue", "interrogation", "confrontation", "goodbye", "reveal", "character theme"],
+    "social": ["intrigue", "interrogation", "confrontation", "goodbye", "reveal", "character theme"],
     "downtime": ["shopping", "investigation", "travel", "decision", "crafting"],
     "set piece": ["tension", "denouement"],
 

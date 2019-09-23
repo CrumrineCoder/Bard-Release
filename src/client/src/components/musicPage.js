@@ -39,6 +39,7 @@ function MusicPage(props) {
   const [suggestedTags, setSuggestedTags] = useState([]);
 
   const [sources, setSources] = useState([]);
+  const [blacklist, setBlacklist] = useState([]);
 
   /*
   useEffect(() => {
@@ -139,6 +140,11 @@ function MusicPage(props) {
       let finalizedPosts = postsToTransform;
       console.log(finalizedPosts);
       setSources(finalizedPosts.map(a=>a.source));
+
+      finalizedPosts = finalizedPosts.filter(function(post){
+        return blacklist.indexOf(post.source) == -1;
+      })
+
       if (includeSource) {
         let include = includeSource.split(",")
         include = include.map(str => str.replace(/\s/g, ''));
@@ -322,6 +328,7 @@ function MusicPage(props) {
       props.dispatch(searchPostsByTag(newTags))
     } else {
       props.dispatch(getAllPostsAction());
+      setSuggestedTags([]);
     }
   }
 
@@ -333,6 +340,12 @@ function MusicPage(props) {
 
   function redirect(location) {
     props.history.push(location);
+  }
+
+  function addToBlacklist(source){
+    let newBlacklist = blacklist;
+    newBlacklist.push(source);
+    setBlacklist(newBlacklist);
   }
   /*
     <form onSubmit={onHandleCheck}>
@@ -354,7 +367,14 @@ function MusicPage(props) {
   }
   return (
     <div>
-      {sources}
+      <div>
+        {blacklist.map(blackSource =>
+          <li className="tagBubble" onClick={() => { addToBlacklist(blackSource) }}>
+            {blackSource}
+            <i className="fas fa-times tagBubbleIcon"></i>
+          </li>
+        )}
+      </div>
       <div className="musicSearchContainer">
         <div className="musicSearchBarContainer">
           <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
@@ -386,6 +406,12 @@ function MusicPage(props) {
           </li>
         )}
       </ul>
+      {sources.map(source =>
+          <li className="tagBubble" onClick={() => { addToBlacklist(source) }}>
+            {source}
+            <i className="fas fa-minus tagBubbleIcon"></i>
+          </li>
+        )}
       <div className="dashboardToolsContainer">
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Exclude and Include Sources</h3>
