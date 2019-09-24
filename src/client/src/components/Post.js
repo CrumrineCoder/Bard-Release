@@ -269,7 +269,6 @@ function Post(props) {
         tag: localTagToAdd,
         _id
       };
-      console.log(data);
       props.dispatch(tagAction(data));
     }
     setTagToAdd("")

@@ -95,6 +95,19 @@ module.exports = (app) => {
         }, { _id: 1 })
     })
 
+    app.get("/api/tags/checkTags/", (req, res) => {
+
+        Words.find({ "value.Src": "Tag" }, function (error, tag) {
+            if (error) throw error;
+
+            if (!tag) {
+                return res.send(httpResponse.onTagsNotFound);
+            }
+
+            return res.json({ success: true, tag, message: "Check tags done." })
+        }, { _id: 1 })
+    })
+
     //POST new user route (optional, everyone has access)
     app.post('/api/tags/postTag', checkToken, (req, res, next) => {
         let { tag, _id } = req.body;

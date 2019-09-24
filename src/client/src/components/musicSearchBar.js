@@ -17,7 +17,7 @@ function MusicSearchBar(props) {
 
     const [suggestedTags, setSuggestedTags] = useState([]);
 
-    String.prototype.isEmpty = function() {
+    String.prototype.isEmpty = function () {
         return (this.length === 0 || !this.trim());
     };
 
@@ -77,7 +77,7 @@ function MusicSearchBar(props) {
     }
 
     function _handleKeyDown(e) {
-      //  props.dispatch(turnoffOverlayAction());
+        //  props.dispatch(turnoffOverlayAction());
         if (e.key === 'Enter') {
             onSearchTag();
         }
@@ -86,10 +86,14 @@ function MusicSearchBar(props) {
     useEffect(() => {
         let searchTag = tagToAdd.toLowerCase().trim();
         if (searchTag) {
-            const data = {
-                searchTag
-            };
-            props.dispatch(checkTagsAction(data));
+            if (searchTag.length > 0) {
+                const data = {
+                    searchTag
+                };
+                console.log(data);
+                props.dispatch(checkTagsAction(data));
+            }
+
         } else {
             setAutocompleteTagsLength(0);
             setAutocompleteTags(<></>);
@@ -97,12 +101,12 @@ function MusicSearchBar(props) {
     }, [tagToAdd])
 
     useEffect(() => {
-     //   console.log(props.response.dashboard.response);
+        //   console.log(props.response.dashboard.response);
         if (props.response.dashboard.response != undefined) {
             if (props.response.dashboard.response.message == "Successfully created new post.") {
                 props.dispatch(getAllPostsAction());
                 props.dispatch(turnoffOverlayAction());
-           //     props.dispatch(turnoffOverlayAction());
+                //     props.dispatch(turnoffOverlayAction());
             }
 
             setIsSuccess(props.response.dashboard.response.success);
