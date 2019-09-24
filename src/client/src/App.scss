@@ -471,6 +471,10 @@ body{
 }
 
 .videoIcon{
+  font-size: 30px;
+  &.fa-play{
+    font-size: 70px;
+  }
   &:hover{
     color: #f39e65;
   }
@@ -505,6 +509,9 @@ body{
   text-align: center;
   a{
     font-size: 12px; 
+  }
+  .postVideoTagContainer{
+    width:100%;
   }
 }
 
@@ -556,6 +563,12 @@ body{
   display: inline-block;
   cursor: pointer;
   margin: 5px;
+
+  &.smallTagBubble{
+    padding: 3px 5px 3px 8px;
+    font-size: 12px;
+    margin: 2px; 
+  }
 }
 
 .removeBubble{

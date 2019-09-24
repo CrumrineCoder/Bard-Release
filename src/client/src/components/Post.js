@@ -60,7 +60,7 @@ function Post(props) {
 
               setTags(props.response.dashboard.response.tag[0].tags)
               setVisualTags(props.response.dashboard.response.tag[0].tags);
-             
+
             }
           }
         }
@@ -107,14 +107,14 @@ function Post(props) {
             function (tag) {
               if (tag.emails.indexOf(props.currentUser) != -1) {
                 return (
-                  <li key={tag._id}>
+                  <li className="tagBubble borderImage smallTagBubble" key={tag._id}>
                     {tag.text}
                     <i className="fas fa-times iconAction removeIcon" onClick={e => removeUserFromTag(tag)}></i>
                   </li>
                 )
               } else {
                 return (
-                  <li key={tag._id}>
+                  <li className="tagBubble borderImage smallTagBubble" key={tag._id}>
                     {tag.text}
                   </li>
                 )
@@ -274,23 +274,13 @@ function Post(props) {
   }
   return (
     <div className="borderImage postContainer">
-      <div className="postTagContainer">
-        <h3>Tags:</h3>
-        {tagChain}
-        {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
-        {props.loggedIn ?
-          <form onSubmit={onHandleTag}>
-            <div className="dashboardToolLabel">
-              <label htmlFor="tag"><input className="dashboardToolInput borderImage" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-              </label>
-            </div>
-            <div>
-              <button className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
-            </div>
-          </form>
-          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-        {existingTags}
+      <div className="postVideoContainer">
+        <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
+        {playVideo &&
+          <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>}
       </div>
+
       <div className="postVideoContainer">
         {openPostEdit ?
           <>
@@ -324,15 +314,28 @@ function Post(props) {
             <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
 
             <br />
-            <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
-            {playVideo && <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
-            </iframe>}
+
+            <div className="postVideoTagContainer">
+              {tagChain}
+              {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
+              {props.loggedIn ?
+                <form onSubmit={onHandleTag}>
+                  <div className="dashboardToolLabel">
+                    <label htmlFor="tag"><input className="dashboardToolInput borderImage" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+                    </label>
+                  </div>
+                  <div>
+                    <button className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
+                  </div>
+                </form>
+                : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
+              {existingTags}
+            </div>
           </>
         }
-
       </div>
+
       <div className="postCommentContainer">
-        <h3>Notes:</h3>
         {commentChain}
         {props.loggedIn ?
           <form onSubmit={onHandleComment}>
