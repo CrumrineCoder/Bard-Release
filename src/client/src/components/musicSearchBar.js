@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { getAllPostsAction, searchPostsByTag, checkTagsAction, swapOverlayAction, turnoffOverlayAction, turnonOverlayAction, toggleOverlayAction } from '../actions/linkActions';
 
@@ -124,7 +124,7 @@ function MusicSearchBar(props) {
     useEffect(() => {
         if (props.location) {
             if (props.location.state) {
-                onSearchTag(props.location.state)
+                onSearchTag(props.location.state);
             }
         }
     }, [])
@@ -161,4 +161,4 @@ function MusicSearchBar(props) {
     )
 }
 const mapStateToProps = (response) => ({ response });
-export default connect(mapStateToProps)(MusicSearchBar);
+export default withRouter(connect(mapStateToProps)(MusicSearchBar));
