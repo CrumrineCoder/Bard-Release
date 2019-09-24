@@ -98,3 +98,25 @@ export const editPostAction = (post) => {
     post
   }
 }
+
+export const turnoffOverlayAction = (post) => {
+  return{
+    type: types.TURNOFF_OVERLAY, 
+    post
+  }
+}
+
+export const turnonOverlayAction = (post) => {
+  return{
+    type: types.TURNON_OVERLAY, 
+    post
+  }
+}
+
+export const toggleOverlayAction = () => {
+  return{
+    type: types.TOGGLE_OVERLAY
+  }
+}
+
+

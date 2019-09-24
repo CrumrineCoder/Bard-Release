@@ -21,9 +21,6 @@ function MusicPage(props) {
 
   useEffect(() => {
     props.dispatch(getCurrentUserAction())
-    if (props.location.state) {
-      onSearchTag(props.location.state)
-    }
     setLoggedIn(checkCookie() != null)
     props.dispatch(getAllPostsAction())
   }, [])
@@ -40,10 +37,8 @@ function MusicPage(props) {
       let finalizedPosts = postsToTransform;
 
       if (props.response.dashboard.response) {
-        if (props.response.dashboard.response.message == "Successfully created new post.") {
-          
-        }
-        else {
+        
+
           if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
             setPostsContent(
               <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
@@ -64,7 +59,7 @@ function MusicPage(props) {
             }
           }
 
-        }
+        
       }
     }
   }, [filteredPosts, props.response.dashboard.response])

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { checkCookie } from '../utils/cookies';
 import logo from "../assets/bardLogoVersion3.png"
 
-import { postAction } from '../actions/linkActions';
+import { postAction, turnonOverlayAction, toggleOverlayAction } from '../actions/linkActions';
 import { getCurrentUserAction } from '../actions/authenticationActions';
 
 function Header(props) {
@@ -60,6 +60,17 @@ function Header(props) {
 
 
   useEffect(() => {
+    
+   /* if(props.overlay){
+      props.setOverlay(props)
+    }*/
+    console.log(props);
+  /* if (props.response.dashboard) {
+      console.log(props.store.dashboard.response);
+      if (props.response.dashboard.response.message == "Successfully created new post.") {
+        props.setOverlay(false);
+      }
+    } */
     if (props.store.login.user) {
       if (props.store.login.user.message == "User login" && props.store.login.user.token != undefined) {
         setIsSuccess(props.store.login.user.success);
@@ -96,7 +107,7 @@ function Header(props) {
         <Link className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
-            <i onClick={()=> props.setOverlay(!props.overlay)} class="far fa-plus-square headerAddPost"></i>
+            <i onClick={() => props.dispatch(toggleOverlayAction())} class="far fa-plus-square headerAddPost"></i>
             <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
           </>
           :
@@ -115,7 +126,7 @@ function Header(props) {
           </div>
         </div>
       }
-      {isSuccess ? props.overlay && 
+      {isSuccess ? props.overlay &&
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Post a new song</h3>
           <form onSubmit={onHandlePost}>

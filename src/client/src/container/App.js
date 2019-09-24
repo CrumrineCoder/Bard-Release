@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -6,6 +6,7 @@ import {
   HashRouter,
   ConnectedRouter
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import PrivateRoute from './privateRoute';
 import HomePage from '../components/homepage';
@@ -17,12 +18,26 @@ import Header from '../components/Header';
 function App(props) {
   const [overlay, setOverlay] = useState(false);
 
+  useEffect(() => {
+    console.log(overlay);
+  }, [overlay])
+
+  useEffect(() => {
+    console.log(props.store.overlay);
+    if (props.store.overlay) {
+      if (props.store.overlay.response) {
+        setOverlay(props.store.overlay.response.overlay);
+      }
+    }
+
+  }, [props.store.overlay])
+
   return (
     <HashRouter>
       <div id="app">
-        {overlay}
-        <Header setOverlay={setOverlay} overlay={overlay}/>
-        <div onClick={()=>setOverlay(false)} className={overlay ?"appContainer active" : "appContainer"}>
+        <Header setOverlay={setOverlay} overlay={overlay} />
+
+        <div onClick={() => setOverlay(false)} className={overlay ? "appContainer active" : "appContainer"}>
           <Switch>
             <Route path='/' exact={true} component={HomePage} />
             <Route path='/login' component={LoginPage} />
@@ -36,4 +51,5 @@ function App(props) {
 
 }
 
-export default App;
+const mapStateToProps = (store) => ({ store });
+export default connect(mapStateToProps)(App);
