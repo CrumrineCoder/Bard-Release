@@ -61,13 +61,14 @@ function Header(props) {
 
   useEffect(() => {
     //  console.log(props.response.login.response);
-    if (props.response.login.response) {
+    console.log(props.user.login.user);
+    if (props.type == "LOGIN_USER" && props.user != undefined) {
       setIsSuccess(props.response.login.response.success);
     } else {
       setIsSuccess(checkCookie() != null);
     }
-  }, [props.response.login])
-
+  }, [props.user])
+/*
   useEffect(() => {
     console.log(props.response);
     if (props.response.dashboard.response) {
@@ -82,7 +83,7 @@ function Header(props) {
           </div>)
       }
     }
-  }, [props.response.dashboard])
+  }, [props]) */
   // 
   return (
     <div className="header">
@@ -141,5 +142,5 @@ function Header(props) {
     </div>
   )
 }
-const mapStateToProps = (response) => ({ response });
+const mapStateToProps = (user) => ({user});
 export default connect(mapStateToProps)(Header);

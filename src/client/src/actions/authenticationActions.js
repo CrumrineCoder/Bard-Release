@@ -1,5 +1,7 @@
 import * as types from './index';
 
+import * as login from './constants/login.js';
+
 export const registerUserAction = (user) => {
   //console.log(user);
   return {
@@ -13,7 +15,7 @@ export const registerUserAction = (user) => {
 export const loginUserAction = (user) => {
   //console.log(user);
   return {
-    type: types.LOGIN_USER,
+    type: login.LOGIN_USER,
     user
   }
 };
