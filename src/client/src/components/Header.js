@@ -60,17 +60,14 @@ function Header(props) {
 
 
   useEffect(() => {
-    //  console.log(props.response.login.response);
-    console.log(props.user.login.user);
-    if (props.user.login.user) {
-      if (props.user.login.user.message == "User login" && props.user.login.user.token != undefined) {
-        console.log("ture");
-        setIsSuccess(props.user.login.user.success);
+    if (props.store.login.user) {
+      if (props.store.login.user.message == "User login" && props.store.login.user.token != undefined) {
+        setIsSuccess(props.store.login.user.success);
       } else {
         setIsSuccess(checkCookie() != null);
       }
     }
-  }, [props.user.login.user])
+  }, [props.store.login.user])
   /*
     useEffect(() => {
       console.log(props.response);
@@ -145,5 +142,5 @@ function Header(props) {
     </div>
   )
 }
-const mapStateToProps = (user) => ({ user });
+const mapStateToProps = (store) => ({ store });
 export default connect(mapStateToProps)(Header);

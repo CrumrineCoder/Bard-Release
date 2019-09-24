@@ -20,15 +20,15 @@ function LoginPage(props) {
   }, [])
 
   useEffect(() => {
-    if (props.response.login.response != undefined) {
-      setIsSuccess(props.response.login.response.success);
-      setMessage(props.response.login.response.message);
+    if (props.store.login.user != undefined) {
+      setIsSuccess(props.store.login.user.success);
+      setMessage(props.store.login.user.message);
     }
-  }, [props.response.login.response])
+  }, [props.store.login.user])
 
   useEffect(() => {
-    if (isSuccess && props.response.login.response.success) {
-      setCookie('token', props.response.login.response.token, 1);
+    if (isSuccess && props.store.login.user.success) {
+      setCookie('token', props.store.login.user.token, 1);
       //setIsSuccess(false);
       props.history.push('/music')
     }
@@ -68,5 +68,5 @@ function LoginPage(props) {
     </div>
   );
 }
-const mapStateToProps = (response) => ({ response });
+const mapStateToProps = (store) => ({ store });
 export default connect(mapStateToProps)(LoginPage);
