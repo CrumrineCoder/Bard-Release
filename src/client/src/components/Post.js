@@ -173,7 +173,7 @@ function Post(props) {
     } else {
       setCommentChain(
         <p className="noContentDisclaimer">
-          There are no comments yet.
+          There are no notes yet.
         </p>
       )
     }
@@ -332,7 +332,7 @@ function Post(props) {
 
       </div>
       <div className="postCommentContainer">
-        <h3>Comments:</h3>
+        <h3>Notes:</h3>
         {commentChain}
         {props.loggedIn ?
           <form onSubmit={onHandleComment}>
@@ -343,10 +343,10 @@ function Post(props) {
                 onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
             </div>
             <div>
-              <button className="btn btn-post btn-centered borderImage" type="submit">Post Comment</button>
+              <button className="btn btn-post btn-centered borderImage" type="submit">Post Note</button>
             </div>
           </form>
-          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Comment</button>}
+          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Note</button>}
       </div>
     </div>
   );

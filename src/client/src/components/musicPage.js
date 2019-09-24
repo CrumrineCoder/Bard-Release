@@ -11,6 +11,7 @@ import { getCurrentUserAction } from '../actions/authenticationActions';
 
 function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
+  // const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [postsContent, setPostsContent] = useState("");
   const [filteredPosts, setFilteredPosts] = useState("");
@@ -26,10 +27,18 @@ function MusicPage(props) {
   }, [])
 
   useEffect(() => {
-    if (props.response.login.response) {
-      setCurrentUser(props.response.login.response.user);
+    if (props.response.login) {
+      if(props.response.login.user){
+        if(props.response.login.user.user){
+          setCurrentUser(props.response.login.user.user);
+        }
+      }
+      
     }
-  }, [props.response.login.response])
+  }, [props.response.login.user])
+
+
+
 
   useEffect(() => {
     if (filteredPosts && unfilteredPosts) {
@@ -37,29 +46,29 @@ function MusicPage(props) {
       let finalizedPosts = postsToTransform;
 
       if (props.response.dashboard.response) {
-        
+        //    console.log(props);
 
-          if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
+        if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
+          setPostsContent(
+            <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
+          )
+        } else if (props.response.dashboard.response.message != "Check sources done." && props.response.dashboard.response.message != "Check tags done.") {
+          if (finalizedPosts.length == 0) {
             setPostsContent(
-              <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
+              <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
-          } else if (props.response.dashboard.response.message != "Check sources done." && props.response.dashboard.response.message != "Check tags done.") {
-            if (finalizedPosts.length == 0) {
-              setPostsContent(
-                <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
-              )
-            } else {
-              setPostsContent(
-                <div className="posts">
-                  {finalizedPosts.map(post =>
-                    <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
-                  )}
-                </div>
-              )
-            }
+          } else {
+            setPostsContent(
+              <div className="posts">
+                {finalizedPosts.map(post =>
+                  <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
+                )}
+              </div>
+            )
           }
+        }
 
-        
+
       }
     }
   }, [filteredPosts, props.response.dashboard.response])

@@ -21,6 +21,12 @@ function Header(props) {
     event.preventDefault();
 
     let link = event.target.link.value;
+    
+    //let videoID = link.split('v=')[1];
+
+    
+   // console.log("https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=" + videoID);
+
     let source = event.target.source.value;
     let name = event.target.name.value;
 
@@ -70,14 +76,14 @@ function Header(props) {
         props.setOverlay(false);
       }
     } */
-    if (props.store.login.user) {
-      if (props.store.login.user.message == "User login" && props.store.login.user.token != undefined) {
-        setIsSuccess(props.store.login.user.success);
+    if (props.backendData.login.user) {
+      if (props.backendData.login.user.message == "User login" && props.backendData.login.user.token != undefined) {
+        setIsSuccess(props.backendData.login.user.success);
       } else {
         setIsSuccess(checkCookie() != null);
       }
     }
-  }, [props.store.login.user])
+  }, [props.backendData.login.user])
   /*
     useEffect(() => {
       console.log(props.response);
@@ -144,15 +150,15 @@ function Header(props) {
           <h3 className="dashboardToolHeader">Post a new song</h3>
           <form onSubmit={onHandlePost}>
             <div className="dashboardToolLabel">
-              <label htmlFor="link">Link <input placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput borderImage" autoComplete="off" type="link" name="link" id="link" />
+              <label htmlFor="link">Link <input required placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput borderImage" autoComplete="off" type="link" name="link" id="link" />
               </label>
             </div>
             <div className="dashboardToolLabel">
-              <label htmlFor="source">Source <input placeholder="Chrono Trigger" className="dashboardToolInput borderImage" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
+              <label htmlFor="source">Source <input required placeholder="Chrono Trigger" className="dashboardToolInput borderImage" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
               </label>
             </div>
             <div className="dashboardToolLabel">
-              <label htmlFor="name">Name <input placeholder="Frog's Theme" className="dashboardToolInput borderImage" autoComplete="off" type="name" name="name" id="name" />
+              <label htmlFor="name">Name <input required placeholder="Frog's Theme" className="dashboardToolInput borderImage" autoComplete="off" type="name" name="name" id="name" />
               </label>
             </div>
             <div>
@@ -166,5 +172,5 @@ function Header(props) {
     </div>
   )
 }
-const mapStateToProps = (store) => ({ store });
+const mapStateToProps = (backendData) => ({ backendData });
 export default withRouter(connect(mapStateToProps)(Header));

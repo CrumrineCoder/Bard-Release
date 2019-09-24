@@ -66,3 +66,4 @@ Problems I'm fixing w/ this:
 * Drafts/unlisted playlists for broken links. 
 * Profile. 
 * SCSS cleanup
+* Check if video is valid 
