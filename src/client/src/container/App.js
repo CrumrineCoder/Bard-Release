@@ -14,16 +14,12 @@ import LoginPage from '../components/loginPage';
 import RegisterPage from '../components/registerPage';
 import MusicPage from '../components/musicPage';
 import Header from '../components/Header';
+import { turnoffOverlayAction } from '../actions/linkActions';
 
 function App(props) {
   const [overlay, setOverlay] = useState(false);
 
   useEffect(() => {
-    console.log(overlay);
-  }, [overlay])
-
-  useEffect(() => {
-    console.log(props.store.overlay);
     if (props.store.overlay) {
       if (props.store.overlay.response) {
         setOverlay(props.store.overlay.response.overlay);
@@ -37,7 +33,7 @@ function App(props) {
       <div id="app">
         <Header setOverlay={setOverlay} overlay={overlay} />
 
-        <div onClick={() => setOverlay(false)} className={overlay ? "appContainer active" : "appContainer"}>
+        <div onClick={() => props.dispatch(turnoffOverlayAction())} className={overlay ? "appContainer active" : "appContainer"}>
           <Switch>
             <Route path='/' exact={true} component={HomePage} />
             <Route path='/login' component={LoginPage} />

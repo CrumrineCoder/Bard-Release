@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkCookie } from '../utils/cookies';
 import logo from "../assets/bardLogoVersion3.png"
 
-import { postAction, turnonOverlayAction, toggleOverlayAction } from '../actions/linkActions';
+import { postAction, turnonOverlayAction, toggleOverlayAction, turnoffOverlayAction } from '../actions/linkActions';
 import { getCurrentUserAction } from '../actions/authenticationActions';
 
 function Header(props) {
@@ -64,7 +64,6 @@ function Header(props) {
    /* if(props.overlay){
       props.setOverlay(props)
     }*/
-    console.log(props);
   /* if (props.response.dashboard) {
       console.log(props.store.dashboard.response);
       if (props.response.dashboard.response.message == "Successfully created new post.") {
@@ -96,6 +95,20 @@ function Header(props) {
       }
     }, [props]) */
   // 
+
+  function handleOverlayButton(){
+    if(props.location.pathname != "/music"){
+      props.history.push('/music');
+    }
+    props.dispatch(toggleOverlayAction());
+  }
+
+  function handleNonOverlayButton(){
+    if(props.overlay){
+      props.dispatch(turnoffOverlayAction());
+    }
+  }
+
   return (
     <div className="header">
       <div className="headerLogoContainer">
@@ -103,11 +116,11 @@ function Header(props) {
         <span className="headerName">Bardic Inspiration</span>
       </div>
       <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
-        <Link className="headerLink" to=''>Home</Link>
-        <Link className="headerLink" to='music'>Music</Link>
+        <Link onClick={() => handleNonOverlayButton()} className="headerLink" to=''>Home</Link>
+        <Link onClick={() => handleNonOverlayButton()}  className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
-            <i onClick={() => props.dispatch(toggleOverlayAction())} class="far fa-plus-square headerAddPost"></i>
+            <i onClick={() => handleOverlayButton()} class="far fa-plus-square headerAddPost"></i>
             <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
           </>
           :
@@ -118,7 +131,7 @@ function Header(props) {
         }
       </div>
       {showDropdown &&
-        <div ref={node} className="headerEllipsisDropdown">
+        <div ref={node} onClick={() => handleNonOverlayButton()}  className="headerEllipsisDropdown">
           <div className="headerEllipsisDropdownItem">
             <Link onClick={() => setShowDropdown(false)} className="headerLink" to='login'>
               <i className="fas fa-times ellipsisIcon"></i>Logout
@@ -126,7 +139,7 @@ function Header(props) {
           </div>
         </div>
       }
-      {isSuccess ? props.overlay &&
+      {props.overlay &&
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Post a new song</h3>
           <form onSubmit={onHandlePost}>
@@ -148,10 +161,10 @@ function Header(props) {
           </form>
           {existingSources}
         </div>
-        : <button className="btn-post loginPromptButton borderImage" onClick={e => setModalOpen(true)}>Add a Song</button>}
+       }
 
     </div>
   )
 }
 const mapStateToProps = (store) => ({ store });
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));
