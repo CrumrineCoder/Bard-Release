@@ -62,28 +62,31 @@ function Header(props) {
   useEffect(() => {
     //  console.log(props.response.login.response);
     console.log(props.user.login.user);
-    if (props.type == "LOGIN_USER" && props.user != undefined) {
-      setIsSuccess(props.response.login.response.success);
-    } else {
-      setIsSuccess(checkCookie() != null);
-    }
-  }, [props.user])
-/*
-  useEffect(() => {
-    console.log(props.response);
-    if (props.response.dashboard.response) {
-      if (props.response.dashboard.response.message == "Check sources done.") {
-        setExistingSources(
-          <div>
-            {props.response.dashboard.response.source.map(source =>
-              <li key={source._id}>
-                {source._id}
-              </li>
-            )}
-          </div>)
+    if (props.user.login.user) {
+      if (props.user.login.user.message == "User login" && props.user.login.user.token != undefined) {
+        console.log("ture");
+        setIsSuccess(props.user.login.user.success);
+      } else {
+        setIsSuccess(checkCookie() != null);
       }
     }
-  }, [props]) */
+  }, [props.user.login.user])
+  /*
+    useEffect(() => {
+      console.log(props.response);
+      if (props.response.dashboard.response) {
+        if (props.response.dashboard.response.message == "Check sources done.") {
+          setExistingSources(
+            <div>
+              {props.response.dashboard.response.source.map(source =>
+                <li key={source._id}>
+                  {source._id}
+                </li>
+              )}
+            </div>)
+        }
+      }
+    }, [props]) */
   // 
   return (
     <div className="header">
@@ -91,10 +94,10 @@ function Header(props) {
         <img src={logo} className="headerLogo" />
         <span className="headerName">Bardic Inspiration</span>
       </div>
-      <div className={loggedIn ? "headerLinks active" : "headerLinks"}>
+      <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
         <Link className="headerLink" to=''>Home</Link>
         <Link className="headerLink" to='music'>Music</Link>
-        {loggedIn ?
+        {isSuccess ?
           <>
             <i class="far fa-plus-square headerAddPost"></i>
             <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
@@ -115,7 +118,7 @@ function Header(props) {
           </div>
         </div>
       }
-      {loggedIn ?
+      {isSuccess ?
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Post a new song</h3>
           <form onSubmit={onHandlePost}>
@@ -142,5 +145,5 @@ function Header(props) {
     </div>
   )
 }
-const mapStateToProps = (user) => ({user});
+const mapStateToProps = (user) => ({ user });
 export default connect(mapStateToProps)(Header);
