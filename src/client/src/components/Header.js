@@ -96,7 +96,7 @@ function Header(props) {
         <Link className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
-            <i class="far fa-plus-square headerAddPost"></i>
+            <i onClick={()=> props.setOverlay(!props.overlay)} class="far fa-plus-square headerAddPost"></i>
             <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
           </>
           :
@@ -115,7 +115,7 @@ function Header(props) {
           </div>
         </div>
       }
-      {isSuccess ?
+      {isSuccess ? props.overlay && 
         <div className="dashboardTool borderImage">
           <h3 className="dashboardToolHeader">Post a new song</h3>
           <form onSubmit={onHandlePost}>

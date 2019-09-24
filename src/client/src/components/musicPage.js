@@ -41,9 +41,7 @@ function MusicPage(props) {
 
       if (props.response.dashboard.response) {
         if (props.response.dashboard.response.message == "Successfully created new post.") {
-          setPostsContent(
-            <div>suck</div>
-          )
+          
         }
         else {
           if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {

@@ -38,8 +38,10 @@ html {
 }
 
 .appContainer{
-  margin: 10px;
- // margin-top: 90px;
+  padding: 10px;
+  &.active{
+    opacity: .1;
+  }
 }
 
 html, body, #root, #app{
@@ -143,6 +145,8 @@ body{
   right: 0px; 
   top: 60px;
 
+  z-index: 4; 
+
   background: #00111e;
   color: white; 
 
@@ -204,10 +208,14 @@ body{
   color: rgb(37, 37, 37); 
 //  border: 1px solid rgb(37, 37, 37); 
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.75); 
+  background: rgb(255, 255, 255); 
   background-size: cover; 
   background-repeat: no-repeat;
   border-width: 8px; 
+  position: absolute; 
+  top: 150px;
+  min-width: 400px;
+  z-index: 3; 
   //background-image: url("http://www.westjerseyartillery.com/wp-content/uploads/2016/04/Parchment-Background.jpg")
 }
 
