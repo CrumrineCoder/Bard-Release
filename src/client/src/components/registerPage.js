@@ -8,27 +8,23 @@ import { setCookie } from '../utils/cookies';
 function RegisterPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [requestSent, setRequestSent] = useState(false);
 
   useEffect(() => {
-    if (message == "User registered.") {
-      console.log("TEST#")
-      setCookie('token', props.response.register.response.token, 1);
-      props.history.push('/login')
+    if (requestSent) {
+      if (message == "User registered.") {
+        setCookie('token', props.response.register.response.token, 1);
+        props.history.push('/login')
+      }
     }
   }, [isSuccess])
 
   useEffect(() => {
-    console.log(props);
     if (props.response.register.hasOwnProperty('response')) {
       setIsSuccess(props.response.register.response.success);
       setMessage(props.response.register.response.message);
     }
   }, [props.response.register.response])
-
-  useEffect(() => {
-    props.dispatch(getCurrentUserAction())
-    console.log(props);
-  }, [])
 
   function onHandleRegistration(event) {
     event.preventDefault();
@@ -42,6 +38,8 @@ function RegisterPage(props) {
     };
 
     props.dispatch(registerUserAction(data));
+
+    setRequestSent(true);
   }
 
   return (
@@ -57,7 +55,7 @@ function RegisterPage(props) {
             <label htmlFor="password">Password <input className="dashboardToolInput" type="password" name="password" id="password" /></label>
           </div>
           <div>
-          <button type="submit" className="btn btn-pumpkin btn-centered borderImage">Register</button>
+            <button type="submit" className="btn btn-pumpkin btn-centered borderImage">Register</button>
           </div>
         </form>
         Already have an account? <Link to='login'>Login here</Link>

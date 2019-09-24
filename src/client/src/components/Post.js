@@ -235,10 +235,11 @@ function Post(props) {
       let flattenedTags = flatten(nestedTags, true)
 
       setExistingTags(
-        <div>
+        <div className="tagBubbleSuggestionContainer">
           {flattenedTags.map(tag =>
-            <li key={tag}>
+            <li onClick={()=>onHandleTag(tag)} className="tagBubbleSuggestion tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
               {tag}
+              <i className="fas fa-plus tagBubbleIcon"></i>
             </li>
           )}
         </div>
@@ -258,16 +259,17 @@ function Post(props) {
     setTagLength(tagLength + 3)
   }
 
-  function onHandleTag(event) {
-    event.preventDefault();
-    let tag = event.target.tag.value;
-    if (tag != undefined && tag != "") {
-      tag = tag.toLowerCase();
+  function onHandleTag(tag) {
+   let localTagToAdd;
+   tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
+    if (localTagToAdd != undefined && localTagToAdd != "") {
+      localTagToAdd = localTagToAdd.toLowerCase();
       let _id = props.post._id;
       const data = {
-        tag,
+        tag: localTagToAdd,
         _id
       };
+      console.log(data);
       props.dispatch(tagAction(data));
     }
     setTagToAdd("")
@@ -319,17 +321,18 @@ function Post(props) {
               {tagChain}
               {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
               {props.loggedIn ?
-                <form onSubmit={onHandleTag}>
+                <div>
                   <div className="dashboardToolLabel">
                     <label htmlFor="tag"><input className="dashboardToolInput borderImage" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
                     </label>
+                    {existingTags}
                   </div>
                   <div>
-                    <button className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
+                    <button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
                   </div>
-                </form>
+                </div>
                 : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-              {existingTags}
+
             </div>
           </>
         }
