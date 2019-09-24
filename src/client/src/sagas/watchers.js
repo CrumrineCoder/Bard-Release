@@ -3,12 +3,12 @@ import { registerSaga, loginSaga, getCurrentUserSaga } from './authenticationSag
 import {postSaga, getAllSaga, commentSaga, getCommentsForOnePostSaga, getTagsForOnePostSaga, postTagSaga, searchPostsByTagSaga, getPostByIDSaga, checkTagSaga, checkSourceSaga, removeUserFromTagSaga, deleteCommentSaga, editCommentSaga, editPostSaga} from "./dashboardSaga"
 
 import * as types from '../actions';
-import * as login from '../actions/constants/login.js'
+//import * as login from '../actions/constants/login.js'
 
 export default function* watchUserAuthentication() {
 
   yield takeLatest(types.REGISTER_USER, registerSaga);
-  yield takeLatest(login.LOGIN_USER, loginSaga);
+  yield takeLatest(types.LOGIN_USER, loginSaga);
   // yield takeLatest(types.LOGOUT_USER, logoutSaga);
   yield takeLatest(types.MAKE_POST, postSaga);
   yield takeLatest(types.GET_ALL_POSTS, getAllSaga);
