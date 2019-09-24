@@ -1,6 +1,6 @@
 import * as types from '../actions';
 
-export default function (state = [], action) {
+export function login (state = [], action) {
   const response = action.response;
   //  console.log(response);
   switch (action.type) {
@@ -17,6 +17,7 @@ export default function (state = [], action) {
       //   console.log(response);
       return { ...state, response: { success: false } };
     default:
-      return state;
+      return {...state, response};
   }
 };
+
