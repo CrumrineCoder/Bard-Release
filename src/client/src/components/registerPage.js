@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { registerUserAction } from '../actions/authenticationActions';
+import { registerUserAction, getCurrentUserAction } from '../actions/authenticationActions';
 import { setCookie } from '../utils/cookies';
 
 function RegisterPage(props) {
@@ -10,18 +10,25 @@ function RegisterPage(props) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (isSuccess) {
+    if (message == "User registered.") {
+      console.log("TEST#")
       setCookie('token', props.response.register.response.token, 1);
       props.history.push('/login')
     }
   }, [isSuccess])
 
   useEffect(() => {
+    console.log(props);
     if (props.response.register.hasOwnProperty('response')) {
       setIsSuccess(props.response.register.response.success);
       setMessage(props.response.register.response.message);
     }
   }, [props.response.register.response])
+
+  useEffect(() => {
+    props.dispatch(getCurrentUserAction())
+    console.log(props);
+  }, [])
 
   function onHandleRegistration(event) {
     event.preventDefault();

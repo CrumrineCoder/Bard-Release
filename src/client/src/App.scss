@@ -561,13 +561,16 @@ body{
   color: black; 
   padding: 10px 15px 10px 25px; 
   display: inline-block;
-  cursor: pointer;
   margin: 5px;
 
   &.smallTagBubble{
     padding: 3px 5px 3px 8px;
     font-size: 12px;
     margin: 2px; 
+  }
+
+  &.editableTagBubble{
+    cursor: pointer;
   }
 }
 

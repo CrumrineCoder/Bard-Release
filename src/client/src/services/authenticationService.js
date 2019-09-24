@@ -1,7 +1,7 @@
 import { getCookie } from '../utils/cookies';
 export const registerUserService = (request) => {
   //  console.log(request);
-  const REGISTER_API_ENDPOINT = '/api/users';
+  const REGISTER_API_ENDPOINT = '/api/users/register';
 
   const parameters = {
     method: 'POST',
@@ -13,11 +13,11 @@ export const registerUserService = (request) => {
 
   return fetch(REGISTER_API_ENDPOINT, parameters)
     .then(response => {
-      //   console.log(response.clone().json())
+      console.log(response.clone().json())
       return response.clone().json();
     })
     .then(json => {
-      //    console.log(json);
+      console.log(json);
       return json;
     });
 };

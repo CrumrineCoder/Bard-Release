@@ -28,6 +28,10 @@ const httpResponse = {
   missingPassword: {
     success: false,
     message: "A password is required"
+  },
+  onSuccessfulRegister: {
+    success: true,
+    message: "User registered."
   }
 }
 
@@ -50,7 +54,7 @@ const checkToken = (req, res, next) => {
 module.exports = (app) => {
 
   //POST new user route (optional, everyone has access)
-  app.post('/api/users', auth.optional, (req, res, next) => {
+  app.post('/api/users/register', auth.optional, (req, res, next) => {
     const user = req.body;
     const email = user.email;
     const password = user.password;
@@ -81,9 +85,8 @@ module.exports = (app) => {
           const finalUser = new Users(user);
 
           finalUser.setPassword(password);
-
-          return finalUser.save()
-            .then(() => res.json({ success: true, user: finalUser.toAuthJSON() }));
+          finalUser.save();
+          return res.json(httpResponse.onSuccessfulRegister);
         }
       });
   });

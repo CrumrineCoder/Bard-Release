@@ -61,9 +61,10 @@ Problems I'm fixing w/ this:
 * Responsive
 * Comment formatting & turn into notes 
 * Improve Search from Home page 
-* Search bar in nav *Important!*
-* Ellipis logout, and post song in nav. 
+* Search bar in nav **DONE FOR NOW**
+* Ellipis logout, and post song in nav. **DONE**
 * Drafts/unlisted playlists for broken links. 
 * Profile. 
 * SCSS cleanup
 * Check if video is valid 
+* get background of video behind Play icon. 

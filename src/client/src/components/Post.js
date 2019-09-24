@@ -107,9 +107,9 @@ function Post(props) {
             function (tag) {
               if (tag.emails.indexOf(props.currentUser) != -1) {
                 return (
-                  <li className="tagBubble borderImage smallTagBubble" key={tag._id}>
+                  <li className="tagBubble borderImage smallTagBubble editableTagBubble" onClick={e => removeUserFromTag(tag)} key={tag._id}>
                     {tag.text}
-                    <i className="fas fa-times iconAction removeIcon" onClick={e => removeUserFromTag(tag)}></i>
+                    <i className="fas fa-times iconAction removeIcon"></i>
                   </li>
                 )
               } else {
