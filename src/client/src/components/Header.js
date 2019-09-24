@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkCookie } from '../utils/cookies';
@@ -8,6 +8,30 @@ function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const node = useRef();
+
+  const handleClickOutside = e => {
+    console.log("clicking anywhere");
+    if (node.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    setShowDropdown(false);
+  };
+
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
+
 
   useEffect(() => {
     //  console.log(props.response.login.response);
@@ -24,14 +48,14 @@ function Header(props) {
         <img src={logo} className="headerLogo" />
         <span className="headerName">Bardic Inspiration</span>
       </div>
-      <div className="headerLinks">
+      <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
         <Link className="headerLink" to=''>Home</Link>
         <Link className="headerLink" to='music'>Music</Link>
         {isSuccess ?
           <>
             <i class="far fa-plus-square headerAddPost"></i>
             <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>
-          </> 
+          </>
           :
           <>
             <Link className="headerLink" to='login'>Login</Link>
@@ -40,9 +64,9 @@ function Header(props) {
         }
       </div>
       {showDropdown &&
-        <div className="headerEllipsisDropdown">
+        <div ref={node} className="headerEllipsisDropdown">
           <div className="headerEllipsisDropdownItem">
-            <Link onClick={()=>setShowDropdown(false)} className="headerLink" to='login'>
+            <Link onClick={() => setShowDropdown(false)} className="headerLink" to='login'>
               <i className="fas fa-times ellipsisIcon"></i>Logout
             </Link>
           </div>

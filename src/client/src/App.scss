@@ -99,7 +99,10 @@ body{
   //float: right; 
   //padding-right: 30px;
   padding-top: 7px;
-  padding-right: 85px;
+  &.active{
+    padding-right: 85px;
+  }
+  
 }
 
 .headerLink, .dropdownEllipsis{
