@@ -104,7 +104,7 @@ module.exports = (app) => {
                 return res.send(httpResponse.onTagsNotFound);
             }
 
-            return res.json({ success: true, tag, message: "Check tags done." })
+            return res.json({ success: true, tag, message: "Get all tags done." })
         }, { _id: 1 })
     })
 
