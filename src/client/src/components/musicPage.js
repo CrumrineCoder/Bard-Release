@@ -37,6 +37,7 @@ function MusicPage(props) {
     const data = {
       searchTag: ""
     };
+    console.log('test')
     props.dispatch(getAllTagsAction(data));
   }, [])
 
@@ -60,16 +61,20 @@ function MusicPage(props) {
     if (filteredPosts && unfilteredPosts) {
       let postsToTransform = unfilteredPosts;
       let finalizedPosts = postsToTransform;
-
-      if (props.response.dashboard.response) {
-       // console.log(props.response.dashboard.response.message);
-        if (props.response.dashboard.response.message == "Get all tags done.") {
-          if (props.response.dashboard.response.tag.length > 0) {
-            let returnedArray = shuffle(props.response.dashboard.response.tag);
-         //   console.log(returnedArray);
-            setAllTags(returnedArray);
+      console.log(props.response.tags.response.message);
+     // console.log(props);
+      if (props.response.tags.response) {
+        if (props.response.tags.response.message == "Get all tags done.") {
+          if (props.response.tags.response.tag) {
+            if (props.response.tags.response.tag.length > 0) {
+              let returnedArray = shuffle(props.response.tags.response.tag);
+           //   console.log(returnedArray);
+              setAllTags(returnedArray);
+            }
           }
         }
+      }
+      if (props.response.dashboard.response) {
         if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
           setPostsContent(
             <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
@@ -80,7 +85,7 @@ function MusicPage(props) {
               <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
           } else {
-         //   console.log(allTags);
+            //   console.log(allTags);
             setPostsContent(
               <div className="posts">
                 {finalizedPosts.map(post =>
@@ -94,7 +99,7 @@ function MusicPage(props) {
 
       }
     }
-  }, [filteredPosts, props.response.dashboard.response, allTags])
+  }, [filteredPosts, props.response.dashboard.response, props.response.tags.response])
 
   useEffect(() => {
     if (props.response.dashboard.response != undefined) {

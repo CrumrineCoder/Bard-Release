@@ -237,17 +237,12 @@ function Post(props) {
     if (tagToAdd.length > 0) {
       var re = new RegExp("^" + tagToAdd)
 
-      let nestedTags = allTags;
-      // console.log(nestedTags);
+      let nestedTags = [];
       for (var i = 0; i < Object.keys(tagCategories).length; i++) {
         nestedTags.push(Object.values(tagCategories)[i].filter(value => re.test(value)));
       }
-      ///  console.log(allTags);
-      //nestedTags.push(allTags);
-      //  console.log(nestedTags);
+      nestedTags.push(allTags);
       let flattenedTags = nestedTags.flat(Infinity);
-      //let flattenedTags = flatten(nestedTags, true)
-      console.log(flattenedTags);
       flattenedTags = flattenedTags.filter((tag) => tag.startsWith(tagToAdd));
       flattenedTags = [...new Set(flattenedTags)];
       setExistingTags(
