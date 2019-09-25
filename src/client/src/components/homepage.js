@@ -34,12 +34,12 @@ function HomePage(props) {
     }, [])
 
     useEffect(() => {
-        console.log(props);
+    //    console.log(props);
     }, [props])
 
     useEffect(() => {
         if (props.response.dashboard.response != undefined) {
-            console.log(props.response.dashboard.response.message);
+       //     console.log(props.response.dashboard.response.message);
             if (props.response.dashboard.response.message == "Get all tags done.") {
                 if (props.response.dashboard.response.tag.length > 0) {
                     let returnedArray = shuffle(props.response.dashboard.response.tag);

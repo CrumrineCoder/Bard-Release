@@ -133,7 +133,7 @@ function MusicSearchBar(props) {
     useEffect(() => {
         if (props.location) {
             if (props.location.state) {
-                if (typeof props.location.state == String) {
+                if (typeof props.location.state === "string") {
                     onSearchTag(props.location.state);
                 }
             }
