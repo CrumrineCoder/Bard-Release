@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getAllPostsAction, getPostsByIDAction } from '../actions/linkActions';
+import { getAllPostsAction, getPostsByIDAction, getAllTagsAction } from '../actions/linkActions';
 
 import Post from "./Post";
 import MusicSearchBar from "./musicSearchBar";
@@ -20,21 +20,34 @@ function MusicPage(props) {
   const [loggedIn, setLoggedIn] = useState();
   const [modalOpen, setModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
+  const [allTags, setAllTags] = useState([]);
+
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
 
   useEffect(() => {
     props.dispatch(getCurrentUserAction())
     setLoggedIn(checkCookie() != null)
     props.dispatch(getAllPostsAction())
+    const data = {
+      searchTag: ""
+    };
+    props.dispatch(getAllTagsAction(data));
   }, [])
 
   useEffect(() => {
     if (props.response.login) {
-      if(props.response.login.user){
-        if(props.response.login.user.user){
+      if (props.response.login.user) {
+        if (props.response.login.user.user) {
           setCurrentUser(props.response.login.user.user);
         }
       }
-      
+
     }
   }, [props.response.login.user])
 
@@ -50,7 +63,12 @@ function MusicPage(props) {
 
       if (props.response.dashboard.response) {
         //    console.log(props);
-
+        if (props.response.dashboard.response.message == "Get all tags done.") {
+          if (props.response.dashboard.response.tag.length > 0) {
+            let returnedArray = shuffle(props.response.dashboard.response.tag);
+            setAllTags(returnedArray);
+          }
+        }
         if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
           setPostsContent(
             <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
@@ -64,7 +82,7 @@ function MusicPage(props) {
             setPostsContent(
               <div className="posts">
                 {finalizedPosts.map(post =>
-                  <Post currentUser={currentUser} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
+                  <Post currentUser={currentUser} allTags={allTags} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
                 )}
               </div>
             )

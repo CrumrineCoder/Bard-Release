@@ -68,7 +68,9 @@ function Post(props) {
     }
   }, [props.response.dashboard.response])
 
-
+  useEffect(() => {
+    console.log(props);
+  }, [props])
 
   function removeUserFromTag(tag) {
     let category = tags.find(function (el) {
@@ -237,7 +239,7 @@ function Post(props) {
       setExistingTags(
         <div className="tagBubbleSuggestionContainer">
           {flattenedTags.map(tag =>
-            <li onClick={()=>onHandleTag(tag)} className="tagBubbleSuggestion tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
+            <li onClick={() => onHandleTag(tag)} className="tagBubbleSuggestion tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
               {tag}
               <i className="fas fa-plus tagBubbleIcon"></i>
             </li>
@@ -260,8 +262,8 @@ function Post(props) {
   }
 
   function onHandleTag(tag) {
-   let localTagToAdd;
-   tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
+    let localTagToAdd;
+    tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
     if (localTagToAdd != undefined && localTagToAdd != "") {
       localTagToAdd = localTagToAdd.toLowerCase();
       let _id = props.post._id;
