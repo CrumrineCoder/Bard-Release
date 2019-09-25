@@ -27,7 +27,10 @@ MongoClient.connect(process.env.DATABASE, function (err, client) {
     if (err) throw err
 
     var db = client.db('music');
-
+    db.collection("words").deleteMany({}, function (err, obj) {
+        if (err) throw err;
+        console.log(obj.result.n + " document(s) deleted");
+    });
     db.collection("tags").mapReduce(
         // Map function
         function () {
@@ -51,18 +54,6 @@ MongoClient.connect(process.env.DATABASE, function (err, client) {
         // Reduce function
         function (k, v) {
             return { k, v }
-            // Kind of ugly, but works.
-            // Improvements more than welcome!
-            var values = { 'documents': [] };
-            v.forEach(
-                function (vs) {
-                    if (values.documents.indexOf(vs) > -1) {
-                        return
-                    }
-                    values.documents.push(vs)
-                }
-            )
-            return values
         },
 
         {
@@ -71,43 +62,6 @@ MongoClient.connect(process.env.DATABASE, function (err, client) {
 
                 function (key, reducedValue) {
                     return { "Src": "Tag" }
-                    // First, we ensure that each resulting document
-                    // has the documents field in order to unify access
-                    var finalValue = { documents: [] }
-
-                    // Second, we ensure that each document is unique in said field
-                    if (reducedValue.documents) {
-
-                        // We filter the existing documents array
-                        finalValue.documents = reducedValue.documents.filter(
-
-                            function (item, pos, self) {
-
-                                // The default return value
-                                var loc = -1;
-
-                                for (var i = 0; i < self.length; i++) {
-                                    // We have to do it this way since indexOf only works with primitives
-
-                                    if (self[i].valueOf() === item.valueOf()) {
-                                        // We have found the value of the current item...
-                                        loc = i;
-                                        //... so we are done for now
-                                        break
-                                    }
-                                }
-
-                                // If the location we found equals the position of item, they are equal
-                                // If it isn't equal, we have a duplicate
-                                return loc === pos;
-                            }
-                        );
-                    } else {
-                        finalValue.documents.push(reducedValue)
-                    }
-                    // We have sanitized our data, now we can return it        
-                    return finalValue
-
                 },
             // Our result are written to a collection called "words"
             out: { reduce: "words" }
@@ -130,26 +84,11 @@ MongoClient.connect(process.env.DATABASE, function (err, client) {
                 }
 
                 emit(document[prop], document._id)
-
-                // We are only interested in strings and explicitly not in _id
-
             }
         },
         // Reduce function
         function (k, v) {
             return { k, v }
-            // Kind of ugly, but works.
-            // Improvements more than welcome!
-            var values = { 'documents': [] };
-            v.forEach(
-                function (vs) {
-                    if (values.documents.indexOf(vs) > -1) {
-                        return
-                    }
-                    values.documents.push(vs)
-                }
-            )
-            return values
         },
 
         {
@@ -158,43 +97,6 @@ MongoClient.connect(process.env.DATABASE, function (err, client) {
 
                 function (key, reducedValue) {
                     return { "Src": "Post" }
-                    // First, we ensure that each resulting document
-                    // has the documents field in order to unify access
-                    var finalValue = { documents: [] }
-
-                    // Second, we ensure that each document is unique in said field
-                    if (reducedValue.documents) {
-
-                        // We filter the existing documents array
-                        finalValue.documents = reducedValue.documents.filter(
-
-                            function (item, pos, self) {
-
-                                // The default return value
-                                var loc = -1;
-
-                                for (var i = 0; i < self.length; i++) {
-                                    // We have to do it this way since indexOf only works with primitives
-
-                                    if (self[i].valueOf() === item.valueOf()) {
-                                        // We have found the value of the current item...
-                                        loc = i;
-                                        //... so we are done for now
-                                        break
-                                    }
-                                }
-
-                                // If the location we found equals the position of item, they are equal
-                                // If it isn't equal, we have a duplicate
-                                return loc === pos;
-                            }
-                        );
-                    } else {
-                        finalValue.documents.push(reducedValue)
-                    }
-                    // We have sanitized our data, now we can return it        
-                    return finalValue
-
                 },
             // Our result are written to a collection called "words"
             out: { reduce: "words" }

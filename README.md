@@ -18,6 +18,7 @@ Problems I'm fixing w/ this:
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. *IMPORTANT!*
 * Delete & edit tags & posts **DONE!!!**
+* Tag bubbles **DONE!!**
 * 404
 * Loading screen
 * Routing Issue, 404 on refresh **DONE!!**
@@ -37,12 +38,12 @@ Problems I'm fixing w/ this:
 * Check sources doesn't need to call the backend everytime. 
 * all tags should be checked in lowercase, even if written in upper.
 * Close all songs that are playing when the user searches. 
-* Register User message issue
+* Register User message issue **DONE!!**
 * Home Page **DONE!!**
 * Button styling **DONE!!**
 * Login modal **DONE!!**
 * Allow users to go to catalog, but they have to login to use some features **DONE!**
-* Home page search **DONE!!** (still could use suggested tags, maybe?)
+* Home page search **DONE!!** 
 * Grid but don't make each item the same height, Pinterest does it better. **DONE!!**
 * Check if the user is logged in for the catalog and show the right stuff. **DONE!!**
 * Readd Words counter functionality **DONE!!!**
@@ -60,7 +61,7 @@ Problems I'm fixing w/ this:
 * Inclusive & Exclusive "Apply" and "Clear" buttons -Irrelevant-
 * Responsive
 * Comment formatting & turn into notes 
-* Improve Search from Home page 
+* Improve Search from Home page **DONE**
 * Search bar in nav **DONE FOR NOW**
 * Ellipis logout, and post song in nav. **DONE**
 * Drafts/unlisted playlists for broken links. 
@@ -68,3 +69,6 @@ Problems I'm fixing w/ this:
 * SCSS cleanup
 * Check if video is valid 
 * get background of video behind Play icon. 
+* Whimsical has no results but returns everything
+* Autocomplete on homepage
+* Autocomplete add tag should include Words document

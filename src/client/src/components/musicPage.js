@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { getAllPostsAction, getPostsByIDAction } from '../actions/linkActions';
 
 import Post from "./Post";
-import MusicSearchBar from "./musicSearchBar"
+import MusicSearchBar from "./musicSearchBar";
+import LoginModal from "./loginModal";
 
 import { checkCookie } from '../utils/cookies';
 import { getCurrentUserAction } from '../actions/authenticationActions';
@@ -37,7 +38,9 @@ function MusicPage(props) {
     }
   }, [props.response.login.user])
 
-
+  function redirect(location) {
+    props.history.push(location);
+  }
 
 
   useEffect(() => {
@@ -99,6 +102,7 @@ function MusicPage(props) {
   return (
     <div>
       <MusicSearchBar></MusicSearchBar>
+      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}
     </div >
   );
