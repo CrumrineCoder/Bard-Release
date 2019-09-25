@@ -26,37 +26,40 @@ function MusicSearchBar(props) {
     function onSearchTag(tag) {
         let localTagToAdd;
         tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
-        if (!localTagToAdd.isEmpty()) {
-            let newTags = searchTags;
-            newTags.push(localTagToAdd);
-            let checkTags = newTags.map(str => str.replace(/\s/g, ''));
-            checkTags = checkTags.filter(Boolean);
-            if (checkTags.length) {
-                newTags = newTags.filter(function (el) {
-                    return el != null;
-                });
+        if (localTagToAdd) {
+            console.log(localTagToAdd);
+            if (!localTagToAdd.isEmpty()) {
+                let newTags = searchTags;
+                newTags.push(localTagToAdd);
+                let checkTags = newTags.map(str => str.replace(/\s/g, ''));
+                checkTags = checkTags.filter(Boolean);
+                if (checkTags.length) {
+                    newTags = newTags.filter(function (el) {
+                        return el != null;
+                    });
 
-                setSearchTags(newTags);
-                setTagToAdd("")
-                props.dispatch(searchPostsByTag(newTags));
+                    setSearchTags(newTags);
+                    setTagToAdd("")
+                    props.dispatch(searchPostsByTag(newTags));
 
-                let categories = [];
-                let inclusiveTags = [];
+                    let categories = [];
+                    let inclusiveTags = [];
 
-                for (var tagCategory in tagCategories) {
-                    let tagValues = tagCategories[tagCategory];
-                    for (var i = 0; i < newTags.length; i++) {
-                        if (tagValues.indexOf(newTags[i]) > -1) {
-                            categories.push(tagCategories[tagCategory]);
-                            categories = categories.flat(Infinity);
+                    for (var tagCategory in tagCategories) {
+                        let tagValues = tagCategories[tagCategory];
+                        for (var i = 0; i < newTags.length; i++) {
+                            if (tagValues.indexOf(newTags[i]) > -1) {
+                                categories.push(tagCategories[tagCategory]);
+                                categories = categories.flat(Infinity);
+                            }
                         }
                     }
+                    inclusiveTags.push(categories);
+                    inclusiveTags = inclusiveTags.flat(Infinity);
+                    inclusiveTags = inclusiveTags.filter((el) => !newTags.includes(el));
+                    inclusiveTags = [...new Set(inclusiveTags)];
+                    setSuggestedTags(inclusiveTags);
                 }
-                inclusiveTags.push(categories);
-                inclusiveTags = inclusiveTags.flat(Infinity);
-                inclusiveTags = inclusiveTags.filter((el) => !newTags.includes(el));
-                inclusiveTags = [...new Set(inclusiveTags)];
-                setSuggestedTags(inclusiveTags);
             }
         }
     }
@@ -130,7 +133,9 @@ function MusicSearchBar(props) {
     useEffect(() => {
         if (props.location) {
             if (props.location.state) {
-                onSearchTag(props.location.state);
+                if (typeof props.location.state == String) {
+                    onSearchTag(props.location.state);
+                }
             }
         }
     }, [])
