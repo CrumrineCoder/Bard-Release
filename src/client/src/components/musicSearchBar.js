@@ -17,6 +17,8 @@ function MusicSearchBar(props) {
 
     const [suggestedTags, setSuggestedTags] = useState([]);
 
+    const [hasSearched, setHasSearched] = useState(false);
+
     String.prototype.isEmpty = function () {
         return (this.length === 0 || !this.trim());
     };
@@ -90,8 +92,8 @@ function MusicSearchBar(props) {
                 const data = {
                     searchTag
                 };
-                console.log(data);
                 props.dispatch(checkTagsAction(data));
+                setHasSearched(true);
             }
 
         } else {
@@ -111,7 +113,7 @@ function MusicSearchBar(props) {
 
             setIsSuccess(props.response.dashboard.response.success);
             setMessage(props.response.dashboard.response.message);
-            if (props.response.dashboard.response.message == "Check tags done.") {
+            if (props.response.dashboard.response.message == "Check tags done." && hasSearched) {
                 setAutocompleteTagsLength(props.response.dashboard.response.tag.length);
                 setAutocompleteTags(
                     <ul className="tagSuggestionsContainer borderImage">

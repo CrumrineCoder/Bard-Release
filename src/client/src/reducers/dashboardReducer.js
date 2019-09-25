@@ -74,6 +74,11 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.EDIT_POST_ERROR:
       return { ...state, response };
+    case types.GET_ALL_TAGS_SUCCESS:
+      //    console.log(response);
+      return { ...state, response };
+    case types.GET_ALL_TAGS_ERROR:
+      return { ...state, response };
     default:
       return state;
   }

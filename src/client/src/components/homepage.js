@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { checkTagsAction } from '../actions/linkActions';
+import { getAllTagsAction } from '../actions/linkActions';
 
 function HomePage(props) {
     const [isSuccess, setIsSuccess] = useState(false);
@@ -9,7 +9,7 @@ function HomePage(props) {
     const [tag, setTag] = useState('');
     const [recommendedTags, setRecommendedTags] = useState([]);
 
-    function submitTag() {
+    function submitTag(tag) {
         props.history.push({
             pathname: '/music',
             state: tag
@@ -28,7 +28,7 @@ function HomePage(props) {
         const data = {
             searchTag: ""
         };
-        props.dispatch(checkTagsAction(data));
+        props.dispatch(getAllTagsAction(data));
     }, [])
 
     useEffect(() => {
@@ -51,19 +51,18 @@ function HomePage(props) {
             <div className="homePage">
 
                 <h1 className="homePageHeader">Bardic Inspiration</h1>
+                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
+                <input className="homePageSearchInput borderImage" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
                 {recommendedTags.slice(0, 5).map(
                     function (tag) {
-                        console.log(tag);
                         return (
-                            <li className="tagBubble borderImage smallTagBubble editableTagBubble" onClick={e => removeUserFromTag(tag)} key={tag._id}>
+                            <li className="tagBubble borderImage smallTagBubble editableTagBubble" onClick={()=>{submitTag(tag._id)}} key={tag._id}>
                                 {tag._id}
-                                <i className="fas fa-times iconAction removeIcon"></i>
+                                <i className="fas fa-plus iconAction"></i>
                             </li>
                         )
                     }
                 )}
-                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
-                <input className="homePageSearchInput borderImage" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
                 <button className="homePageSearchButton borderImage btn-pumpkin" onClick={submitTag}>Explore</button>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { put, call  } from 'redux-saga/effects';
-import { postService, getAllPostsService, commentService, getAllCommentsForOnePost, getAllTagsForOnePost, postTagService, searchPostsByTagService, getPostsByIDService, checkTagService, checkSourceService, removeUserFromTagService, deleteCommentService, editCommentService, editPostService} from '../services/dashboardService';
+import { postService, getAllPostsService, commentService, getAllCommentsForOnePost, getAllTagsForOnePost, postTagService, searchPostsByTagService, getPostsByIDService, checkTagService, checkSourceService, removeUserFromTagService, deleteCommentService, editCommentService, editPostService, getAllTagsService} from '../services/dashboardService';
 
 import * as types from '../actions';
 
@@ -81,6 +81,17 @@ export function* checkTagSaga(payload) {
     yield put({ type: types.CHECK_TAG_ERROR, error });
   }
 }
+
+export function* getAllTagsSaga(payload) {
+  //console.log(payload);
+  try {
+    const response = yield call(getAllTagsService, payload);
+    yield put({ type: types.GET_ALL_TAGS_SUCCESS, response });
+  } catch (error) {
+    yield put({ type: types.GET_ALL_TAGS_ERROR, error });
+  }
+}
+
 
 export function* searchPostsByTagSaga(payload) {
   //console.log(payload);

@@ -170,6 +170,30 @@ export const checkTagService = (request) => {
       });
   };
 
+
+export const getAllTagsService = (request) => {
+  //console.log(request);
+
+    const GET_API_ENDPOINT = '/api/tags/getAllTags/' 
+    let authToken = getCookie('token');
+    const parameters = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer' + authToken
+      }
+    };
+  
+    return fetch(GET_API_ENDPOINT, parameters)
+      .then(response => {
+        return response.clone().json();
+      })
+      .then(json => {
+        //     console.log(json);
+        return json;
+      });
+  };
+
 export const searchPostsByTagService = (request) => {
  //  console.log(request);
   //const GET_API_ENDPOINT = '/api/tags/searchPostsByTag/' + request.post.searchTag;

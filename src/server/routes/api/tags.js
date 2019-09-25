@@ -95,7 +95,7 @@ module.exports = (app) => {
         }, { _id: 1 })
     })
 
-    app.get("/api/tags/checkTags/", (req, res) => {
+    app.get("/api/tags/getAllTags/", (req, res) => {
 
         Words.find({ "value.Src": "Tag" }, function (error, tag) {
             if (error) throw error;

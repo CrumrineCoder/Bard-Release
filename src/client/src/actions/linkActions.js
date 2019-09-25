@@ -119,4 +119,8 @@ export const toggleOverlayAction = () => {
   }
 }
 
-
+export const getAllTagsAction = () => {
+  return{
+    type: types.GET_ALL_TAGS
+  }
+}
