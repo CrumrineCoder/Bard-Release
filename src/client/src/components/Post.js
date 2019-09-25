@@ -25,6 +25,8 @@ function Post(props) {
   const [postUpdatedName, setPostUpdatedName] = useState(props.post.name);
   const [openPostEdit, setOpenPostEdit] = useState(false);
 
+  const [allTags, setAllTags] = useState([])
+
   function getCommentsForOnePost(postId) {
 
     props.dispatch(getAllCommentsForOnePostAction(postId));
@@ -67,10 +69,6 @@ function Post(props) {
       }
     }
   }, [props.response.dashboard.response])
-
-  useEffect(() => {
-    console.log(props);
-  }, [props])
 
   function removeUserFromTag(tag) {
     let category = tags.find(function (el) {
@@ -226,16 +224,32 @@ function Post(props) {
   }
 
   useEffect(() => {
+    let newArr = allTags.concat(props.allTags);
+    //   console.log(props.allTags);
+    newArr = props.allTags.map(function (i) {
+      return i._id;
+    });
+    // console.log(newArr); 
+    setAllTags(newArr);
+  }, [props.allTags])
+
+  useEffect(() => {
     if (tagToAdd.length > 0) {
       var re = new RegExp("^" + tagToAdd)
 
-      let nestedTags = []
+      let nestedTags = allTags;
+      // console.log(nestedTags);
       for (var i = 0; i < Object.keys(tagCategories).length; i++) {
         nestedTags.push(Object.values(tagCategories)[i].filter(value => re.test(value)));
       }
-
-      let flattenedTags = flatten(nestedTags, true)
-
+      ///  console.log(allTags);
+      //nestedTags.push(allTags);
+      //  console.log(nestedTags);
+      let flattenedTags = nestedTags.flat(Infinity);
+      //let flattenedTags = flatten(nestedTags, true)
+      console.log(flattenedTags);
+      flattenedTags = flattenedTags.filter((tag) => tag.startsWith(tagToAdd));
+      flattenedTags = [...new Set(flattenedTags)];
       setExistingTags(
         <div className="tagBubbleSuggestionContainer">
           {flattenedTags.map(tag =>
@@ -249,7 +263,7 @@ function Post(props) {
     } else {
       setExistingTags()
     }
-  }, [tagToAdd])
+  }, [tagToAdd, allTags])
 
   function getEmbed(link) {
     let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");

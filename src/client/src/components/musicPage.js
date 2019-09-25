@@ -62,10 +62,11 @@ function MusicPage(props) {
       let finalizedPosts = postsToTransform;
 
       if (props.response.dashboard.response) {
-        //    console.log(props);
+       // console.log(props.response.dashboard.response.message);
         if (props.response.dashboard.response.message == "Get all tags done.") {
           if (props.response.dashboard.response.tag.length > 0) {
             let returnedArray = shuffle(props.response.dashboard.response.tag);
+         //   console.log(returnedArray);
             setAllTags(returnedArray);
           }
         }
@@ -79,6 +80,7 @@ function MusicPage(props) {
               <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
           } else {
+         //   console.log(allTags);
             setPostsContent(
               <div className="posts">
                 {finalizedPosts.map(post =>
@@ -92,7 +94,7 @@ function MusicPage(props) {
 
       }
     }
-  }, [filteredPosts, props.response.dashboard.response])
+  }, [filteredPosts, props.response.dashboard.response, allTags])
 
   useEffect(() => {
     if (props.response.dashboard.response != undefined) {
