@@ -223,6 +223,13 @@ function Post(props) {
     return result;
   }
 
+  function _handleKeyDown(e) {
+    //  props.dispatch(turnoffOverlayAction());
+    if (e.key === 'Enter') {
+      onHandleTag();
+    }
+  }
+
   useEffect(() => {
     let newArr = allTags.concat(props.allTags);
     //   console.log(props.allTags);
@@ -267,7 +274,7 @@ function Post(props) {
   }
 
   function showMoreTags() {
-    setTagLength(tagLength + 3)
+    setTagLength(tagLength + 5)
   }
 
   function onHandleTag(tag) {
@@ -333,7 +340,7 @@ function Post(props) {
               {props.loggedIn ?
                 <div>
                   <div className="dashboardToolLabel">
-                    <label htmlFor="tag"><input className="dashboardToolInput borderImage" value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+                    <label htmlFor="tag"><input className="dashboardToolInput borderImage" onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
                     </label>
                     {existingTags}
                   </div>
