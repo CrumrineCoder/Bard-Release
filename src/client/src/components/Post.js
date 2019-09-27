@@ -15,7 +15,7 @@ function Post(props) {
   const [tagToAdd, setTagToAdd] = useState("");
   const [existingTags, setExistingTags] = useState("");
   const [commentToAdd, setCommentToAdd] = useState("");
-  const [tagLength, setTagLength] = useState(5);
+  const [tagLength, setTagLength] = useState(7);
   const [visualTags, setVisualTags] = useState("");
   const [commentUpdatedText, setCommentUpdatedText] = useState("");
   const [openCommentEdit, setOpenCommentEdit] = useState(false);

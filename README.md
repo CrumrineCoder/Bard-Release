@@ -72,3 +72,5 @@ Problems I'm fixing w/ this:
 * Whimsical has no results but returns everything
 * Autocomplete on homepage
 * Autocomplete add tag should include Words document
+* Audio player fixed
+* Bug: Multiple comments, edit one. 
