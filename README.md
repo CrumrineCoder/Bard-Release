@@ -74,3 +74,5 @@ Problems I'm fixing w/ this:
 * Autocomplete add tag should include Words document
 * Audio player fixed
 * Bug: Multiple comments, edit one. 
+* Move cards back to vertical but make smaller, cut excess and make two tab
+* Make home and music page the same thing with parallex z indes scrolling. 

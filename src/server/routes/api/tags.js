@@ -18,6 +18,10 @@ const httpResponses = {
         success: true,
         message: 'Tag added.'
     },
+    onTagRemoveSuccess: {
+        success: true,
+        message: 'Tag removed.'
+    },
     onTagsNotFound: {
         success: false,
         message: 'Tag not found.'
@@ -182,6 +186,8 @@ module.exports = (app) => {
     //POST new user route (optional, everyone has access)
     app.post('/api/tags/removeUserFromTag', checkToken, (req, res, next) => {
         let { tag, _id } = req.body;
+        console.log(tag);
+        console.log(req.body.user);
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
             Tags.findOneAndUpdate({
                 "tags._id": req.body.tag
@@ -193,8 +199,10 @@ module.exports = (app) => {
                 },
                 {
                     useFindAndModify: false
+                    
                 },
                 function (error, tag) {
+                    console.log(tag);
                     if (tag.tags[0].emails.length == 1) {
                         Tags.findOneAndUpdate({
                             "postID": req.body.postID
@@ -213,9 +221,9 @@ module.exports = (app) => {
                     }
                     if (error) {
                         console.log(error);
-                        return res.json(httpResponses.onTagSaveError);
+                        return res.json(httpResponses.onTagRemoveError);
                     }
-                    res.json(httpResponses.onTagSaveSuccess);
+                    res.json(httpResponses.onTagRemoveSuccess);
                     /*  if (error) throw error;
           
                       if (!tag) {

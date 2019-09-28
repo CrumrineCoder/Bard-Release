@@ -37,7 +37,6 @@ function MusicPage(props) {
     const data = {
       searchTag: ""
     };
-    console.log('test')
     props.dispatch(getAllTagsAction(data));
   }, [])
 
@@ -66,12 +65,13 @@ function MusicPage(props) {
           if (props.response.tags.response.tag) {
             if (props.response.tags.response.tag.length > 0) {
               let returnedArray = shuffle(props.response.tags.response.tag);
-           //   console.log(returnedArray);
+              //   console.log(returnedArray);
               setAllTags(returnedArray);
             }
           }
         }
       }
+
       if (props.response.dashboard.response) {
         if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
           setPostsContent(
@@ -83,19 +83,22 @@ function MusicPage(props) {
               <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
           } else {
+            console.log("Redisplay")
             //   console.log(allTags);
-            setPostsContent(
-              <div className="posts">
-                {finalizedPosts.map(post =>
-                  <Post currentUser={currentUser} allTags={allTags} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
-                )}
-              </div>
-            )
+
           }
         }
-
-
       }
+      console.log("bottom");
+      console.log(allTags);
+      let cut = finalizedPosts.slice(0, 1);
+      setPostsContent(
+        <div className="posts">
+          {cut.map(post =>
+            <Post currentUser={currentUser} allTags={allTags} setModalOpen={setModalOpen} post={post} key={post._id} loggedIn={loggedIn}></Post>
+          )}
+        </div>
+      )
     }
   }, [filteredPosts, props.response.dashboard.response, props.response.tags.response])
 
@@ -107,10 +110,17 @@ function MusicPage(props) {
         setUnfilteredPosts(props.response.dashboard.response.post)
         //  console.log(props.response.dashboard.response.post);
         setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")))
-      } else if (props.response.dashboard.response.message == "Search by tag done.") {
-        //   console.log("HEYA HERE'S THE TAGS", props.response.dashboard.response.tag);
+      }
+    }
+  }, [props.response.dashboard.response])
 
-        let postIDs = props.response.dashboard.response.tag.map(function (a) {
+  useEffect(() => {
+    //  console.log(props.response.tags.response)
+    if (props.response.tags.response) {
+      if (props.response.tags.response.message == "Search by tag done.") {
+        console.log("HEYA HERE'S THE TAGS", props.response.tags.response.tag);
+
+        let postIDs = props.response.tags.response.tag.map(function (a) {
           return a.postID
         });
         //    console.log(postIDs);
@@ -120,7 +130,7 @@ function MusicPage(props) {
         // Now we have the post IDs, we have to find all posts by ID. 
       }
     }
-  }, [props.response.dashboard.response])
+  }, [props.response.tags.response])
 
   return (
     <div>

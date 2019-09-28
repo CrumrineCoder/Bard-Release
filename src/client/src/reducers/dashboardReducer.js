@@ -29,11 +29,6 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.GET_COMMENTS_FOR_ONE_POST_ERROR:
       return { ...state, response };
-    case types.GET_TAGS_FOR_ONE_POST_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.GET_TAGS_FOR_ONE_POST_ERROR:
-      return { ...state, response };
     case types.MAKE_TAG_SUCCESS:
       //    console.log(response);
       return { ...state, response };
@@ -44,20 +39,10 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.CHECK_TAG_ERROR:
       return { ...state, response };
-    case types.SEARCH_POSTS_BY_TAG_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.SEARCH_POSTS_BY_TAG_ERROR:
-      return { ...state, response };
     case types.CHECK_SOURCE_SUCCESS:
       //    console.log(response);
       return { ...state, response };
     case types.CHECK_SOURCE_ERROR:
-      return { ...state, response };
-    case types.REMOVE_USER_FROM_TAG_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.REMOVE_USER_FROM_TAG_ERROR:
       return { ...state, response };
     case types.DELETE_COMMENT_SUCCESS:
       //    console.log(response);
@@ -73,11 +58,6 @@ export default function (state = [], action) {
       //    console.log(response);
       return { ...state, response };
     case types.EDIT_POST_ERROR:
-      return { ...state, response };
-    case types.GET_ALL_TAGS_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.GET_ALL_TAGS_ERROR:
       return { ...state, response };
     default:
       return state;

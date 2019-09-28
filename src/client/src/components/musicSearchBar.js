@@ -27,7 +27,7 @@ function MusicSearchBar(props) {
         let localTagToAdd;
         tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
         if (localTagToAdd) {
-            console.log(localTagToAdd);
+         //   console.log(localTagToAdd);
             if (!localTagToAdd.isEmpty()) {
                 let newTags = searchTags;
                 newTags.push(localTagToAdd);

@@ -10,6 +10,21 @@ export default function tags(state = {}, action) {
             return { ...state, response };
         case types.GET_ALL_TAGS_ERROR:
             return { ...state, response };
+        case types.GET_TAGS_FOR_ONE_POST_SUCCESS:
+            //console.log(response);
+            return { ...state, response };
+        case types.GET_TAGS_FOR_ONE_POST_ERROR:
+            return { ...state, response };
+        case types.SEARCH_POSTS_BY_TAG_SUCCESS:
+            //    console.log(response);
+            return { ...state, response };
+        case types.SEARCH_POSTS_BY_TAG_ERROR:
+            return { ...state, response };
+        case types.REMOVE_USER_FROM_TAG_SUCCESS:
+            //    console.log(response);
+            return { ...state, response };
+        case types.REMOVE_USER_FROM_TAG_ERROR:
+            return { ...state, response };
         default:
             return state;
     }

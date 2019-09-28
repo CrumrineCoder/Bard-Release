@@ -34,18 +34,12 @@ function HomePage(props) {
     }, [])
 
     useEffect(() => {
-    //    console.log(props);
+        //    console.log(props);
     }, [props])
 
     useEffect(() => {
         if (props.response.dashboard.response != undefined) {
-       //     console.log(props.response.dashboard.response.message);
-            if (props.response.dashboard.response.message == "Get all tags done.") {
-                if (props.response.dashboard.response.tag.length > 0) {
-                    let returnedArray = shuffle(props.response.dashboard.response.tag);
-                    setRecommendedTags(returnedArray);
-                }
-            } else if (props.response.dashboard.response.message == "Check tags done.") {
+            if (props.response.dashboard.response.message == "Check tags done.") {
                 setAutocompleteTagsLength(props.response.dashboard.response.tag.length);
                 setAutocompleteTags(
                     <ul className="tagSuggestionsContainer borderImage">
@@ -58,6 +52,17 @@ function HomePage(props) {
             }
         }
     }, [props.response.dashboard.response])
+
+    useEffect(() => {
+        if (props.response.tags.response) {
+            if (props.response.tags.response.message == "Get all tags done.") {
+                if (props.response.tags.response.tag.length > 0) {
+                    let returnedArray = shuffle(props.response.tags.response.tag);
+                    setRecommendedTags(returnedArray);
+                }
+            }
+        }
+    }, [props.response.tags.response])
 
     useEffect(() => {
         let searchTag = tag.toLowerCase().trim();

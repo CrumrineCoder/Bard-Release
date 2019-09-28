@@ -55,28 +55,40 @@ function Post(props) {
         }
       }
 
-      if (props.response.dashboard.response.tag) {
-        if (props.response.dashboard.response.message == "Tags for post done.") {
-          if (props.response.dashboard.response.tag.length > 0) {
-            if (props.response.dashboard.response.tag[0].postID == props.post._id) {
 
-              setTags(props.response.dashboard.response.tag[0].tags)
-              setVisualTags(props.response.dashboard.response.tag[0].tags);
+    }
+  }, [props.response.dashboard.response])
+
+  useEffect(() => {
+    console.log(props.response.tags.response);
+    if (props.response.tags.response) {
+      console.log(props.response.tags.response.tag);
+      if (props.response.tags.response.tag) {
+        if (props.response.tags.response.message == "Tags for post done.") {
+          if (props.response.tags.response.tag.length > 0) {
+            if (props.response.tags.response.tag[0].postID == props.post._id) {
+
+              setTags(props.response.tags.response.tag[0].tags)
+              setVisualTags(props.response.tags.response.tag[0].tags);
 
             }
           }
         }
+      } else if (props.response.tags.response.message == "Tag removed.") {
+        console.log("true");
+        getTagsForOnePost(props.post._id)
       }
     }
-  }, [props.response.dashboard.response])
-
+  }, [props.response.tags.response])
   function removeUserFromTag(tag) {
+    /*
     let category = tags.find(function (el) {
       return el.text === tag.category;
     })
     if (category) {
       props.dispatch(removeUserFromTagAction({ tag: category._id, user: props.currentUser, postID: props.post._id, text: category.text }));
     }
+    */
     props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
   }
 
