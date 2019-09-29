@@ -137,6 +137,7 @@ function Post(props) {
               }
             }
           )}
+          {tagLength < visualTags.length && <i class="fas fa-arrow-circle-right showMoreTags" onClick={e => showMoreTags()}></i>}
         </div>
       )
     }
@@ -315,6 +316,7 @@ function Post(props) {
           <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
           </iframe>}
       
+            {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
       
       <    button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
           */
@@ -377,7 +379,8 @@ function Post(props) {
       {section == "tags" ?
         <div className="postVideoContainer">
           {tagChain}
-          {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
+          
+          
           {props.loggedIn ?
             <div className="postDashboardContainer">
               <div className="dashboardToolLabel">

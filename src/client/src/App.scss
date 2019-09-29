@@ -527,8 +527,12 @@ body{
 }
 
 .showMoreTags{
-  margin-bottom: 15px; 
+  margin-left: 10px; 
+  font-size: 19px;
   cursor: pointer; 
+  &:hover{
+    color:#ffbf00;
+  }
 }
 
 .postCommentContainer, .postVideoContainer, .postTagContainer{
