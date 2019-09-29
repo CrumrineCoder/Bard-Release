@@ -168,10 +168,12 @@ function Post(props) {
                   )
                 } else {
                   return (
-                    <li key={comment._id + index}>
+                    <li className="commentArea" key={comment._id + index}>
                       {comment.text}
-                      <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
-                      <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
+                      <span className="commentIcons">
+                        <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
+                        <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
+                      </span>
                     </li>
                   )
                 }
@@ -320,7 +322,7 @@ function Post(props) {
     <div className="borderImage postContainer">
       {overlay &&
         <div className="postContainerOverlay">
-          <p className="postContainerOverlayCancel fas fa-times" onClick={()=>setOverlay(false)}></p>
+          <p className="postContainerOverlayCancel fas fa-times" onClick={() => setOverlay(false)}></p>
           <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>
         </div>
       }

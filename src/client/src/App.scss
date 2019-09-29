@@ -269,7 +269,7 @@ body{
   span{
     position: relative;
     display:inline-block;
-    padding: 0px 10px 10px 10px;
+    padding: 0px 10px 5px 10px;
 		text-decoration: none;
     text-transform: uppercase;
     //background: #d3b14d4a;
@@ -343,6 +343,30 @@ body{
   margin: 0 auto;
   display: block;
   margin-bottom: 5px;
+}
+
+.commentArea{
+  background: rgba(128, 128, 128, 0.31); 
+   list-style-type: none;
+   border-radius: 10px;
+   padding: 8px;
+   position: relative; 
+   padding-right: 50px;
+   word-wrap: break-word;
+   overflow-wrap: break-word;
+   max-width: 350px;
+   margin: 0 auto; 
+}
+
+.commentIcons{
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+.postsComments{
+  width: 95%;
+  margin: 10px auto; 
 }
 
 .videoIframe{

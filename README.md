@@ -82,3 +82,5 @@ Problems I'm fixing w/ this:
 * Bug with reaching end of infinite scroll **DONE!!** 
 * Default instead of youtube iframe with a generated preview? 
 * Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. 
+* copy link
+* # of notes
