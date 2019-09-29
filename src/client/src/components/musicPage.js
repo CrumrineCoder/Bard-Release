@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 
 import { getAllPostsAction, getPostsByIDAction, getAllTagsAction } from '../actions/linkActions';
 
+import InfiniteScroll from 'react-infinite-scroller';
+
 import Post from "./Post";
 import MusicSearchBar from "./musicSearchBar";
 import LoginModal from "./loginModal";
 
 import { checkCookie } from '../utils/cookies';
 import { getCurrentUserAction } from '../actions/authenticationActions';
+import useInfiniteScroll from "./useInfiniteScroll";
 
 function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -21,6 +24,15 @@ function MusicPage(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [allTags, setAllTags] = useState([]);
+
+  const [amountOfPosts, setAmountOfPosts] = useState(5);
+  /*
+  const [loading, setLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  */
+
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -62,7 +74,6 @@ function MusicPage(props) {
       let finalizedPosts = postsToTransform;
 
       if (props.response.tags.response) {
-        console.log(props.response.tags.response.message);
         if (props.response.tags.response.message == "Get all tags done.") {
           if (props.response.tags.response.tag) {
             if (props.response.tags.response.tag.length > 0) {
@@ -85,15 +96,15 @@ function MusicPage(props) {
               <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
           } else {
-       //     console.log("Redisplay")
+            //     console.log("Redisplay")
             //   console.log(allTags);
 
           }
         }
       }
-    //  console.log("bottom");
-  //    console.log(allTags);
-      let cut = finalizedPosts.slice(0, 1);
+      //  console.log("bottom");
+      //    console.log(allTags);
+      let cut = finalizedPosts.slice(0, amountOfPosts);
       setPostsContent(
         <div className="posts">
           {cut.map(post =>
@@ -102,7 +113,7 @@ function MusicPage(props) {
         </div>
       )
     }
-  }, [filteredPosts, props.response.dashboard.response, props.response.tags.response])
+  }, [filteredPosts, props.response.dashboard.response, props.response.tags.response, amountOfPosts])
 
   useEffect(() => {
     if (props.response.dashboard.response != undefined) {
@@ -120,7 +131,7 @@ function MusicPage(props) {
     //  console.log(props.response.tags.response)
     if (props.response.tags.response) {
       if (props.response.tags.response.message == "Search by tag done.") {
-       // console.log("HEYA HERE'S THE TAGS", props.response.tags.response.tag);
+        // console.log("HEYA HERE'S THE TAGS", props.response.tags.response.tag);
 
         let postIDs = props.response.tags.response.tag.map(function (a) {
           return a.postID
@@ -134,11 +145,20 @@ function MusicPage(props) {
     }
   }, [props.response.tags.response])
 
+  function fetchMoreListItems() {
+    setTimeout(() => {
+   //   console.log("more posts");
+      setAmountOfPosts(amountOfPosts + 5);
+      setIsFetching(false);
+    }, 200);
+  }
+
   return (
     <div>
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}
+      {isFetching && 'Fetching more list items...'}
     </div >
   );
 }

@@ -7,7 +7,6 @@ export default function comments(state = {}, action) {
     //  console.log(state);
     switch (action.type) {
         case types.MAKE_COMMENT_SUCCESS:
-            console.log(response);
             return { ...state, response };
         case types.MAKE_COMMENT_ERROR:
             return { ...state, response };

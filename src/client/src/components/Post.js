@@ -37,7 +37,6 @@ function Post(props) {
   }
 
   useEffect(() => {
-    console.log(props.response);
     if (props.response.comments.response) {
       if (props.response.comments.response.message == "Comment added.") {
         getCommentsForOnePost(props.post._id)
@@ -63,7 +62,6 @@ function Post(props) {
     if (props.response.tags.response) {
       // console.log(props.response.tags.response.tag);
       if (props.response.tags.response.tag) {
-        console.log(props.response.tags.response.message)
           if (props.response.tags.response.message == "Tags for post done.") {
             if (props.response.tags.response.tag.length > 0) {
               if (props.response.tags.response.tag[0].postID == props.post._id) {
