@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction, editPostAction } from '../actions/linkActions';
@@ -28,6 +28,8 @@ function Post(props) {
   const [allTags, setAllTags] = useState([])
 
   const [section, setSection] = useState("tags");
+
+  const [overlay, setOverlay] = useState(false);
 
   function getCommentsForOnePost(postId) {
 
@@ -313,6 +315,13 @@ function Post(props) {
           */
   return (
     <div className="borderImage postContainer">
+      {overlay &&
+        <div className="postContainerOverlay">
+          <p className="postContainerOverlayCancel" onClick={()=>setOverlay(false)}>Close</p>
+          <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>
+        </div>
+      }
+
       <div className="postVideoContainer">
         {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
         </iframe>}
@@ -344,15 +353,12 @@ function Post(props) {
           <>
             <div className="postVideoIcons">
               {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit postEditButton iconAction editIcon"></i>}
-              <i class="fas fa-link editIcon iconAction"></i>
+              <i onClick={() => setOverlay(true)} class="fas fa-link editIcon iconAction"></i>
             </div>
             <div className="postVideoHeader">
               <h3>{props.post.source}</h3>
               <h4>{props.post.name}</h4>
             </div>
-
-            <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
-
           </>
         }
       </div>
