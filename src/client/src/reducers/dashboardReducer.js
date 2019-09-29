@@ -29,11 +29,6 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.GET_COMMENTS_FOR_ONE_POST_ERROR:
       return { ...state, response };
-    case types.MAKE_TAG_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.MAKE_TAG_ERROR:
-      return { ...state, response };
     case types.CHECK_SOURCE_SUCCESS:
       //    console.log(response);
       return { ...state, response };

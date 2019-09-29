@@ -60,6 +60,7 @@ function MusicPage(props) {
     if (filteredPosts && unfilteredPosts) {
       let postsToTransform = unfilteredPosts;
       let finalizedPosts = postsToTransform;
+      console.log(props.response.tags.response.message);
       if (props.response.tags.response) {
         if (props.response.tags.response.message == "Get all tags done.") {
           if (props.response.tags.response.tag) {

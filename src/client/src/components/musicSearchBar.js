@@ -123,7 +123,7 @@ function MusicSearchBar(props) {
     useEffect(() => {
         if (props.response.tags) {
             if (props.response.tags.response) {
-                console.log(props.response.tags.response);
+           //     console.log(props.response.tags.response);
                 if (props.response.tags.response.message == "Check tags done." && hasSearched) {
                     setAutocompleteTagsLength(props.response.tags.response.tag.length);
                     setAutocompleteTags(
