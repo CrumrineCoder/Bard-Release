@@ -83,14 +83,14 @@ function MusicPage(props) {
               <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
           } else {
-            console.log("Redisplay")
+       //     console.log("Redisplay")
             //   console.log(allTags);
 
           }
         }
       }
-      console.log("bottom");
-      console.log(allTags);
+    //  console.log("bottom");
+  //    console.log(allTags);
       let cut = finalizedPosts.slice(0, 1);
       setPostsContent(
         <div className="posts">
@@ -118,7 +118,7 @@ function MusicPage(props) {
     //  console.log(props.response.tags.response)
     if (props.response.tags.response) {
       if (props.response.tags.response.message == "Search by tag done.") {
-        console.log("HEYA HERE'S THE TAGS", props.response.tags.response.tag);
+       // console.log("HEYA HERE'S THE TAGS", props.response.tags.response.tag);
 
         let postIDs = props.response.tags.response.tag.map(function (a) {
           return a.postID

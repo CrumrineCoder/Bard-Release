@@ -60,9 +60,9 @@ function Post(props) {
   }, [props.response.dashboard.response])
 
   useEffect(() => {
-    console.log(props.response.tags.response);
+  //  console.log(props.response.tags.response);
     if (props.response.tags.response) {
-      console.log(props.response.tags.response.tag);
+     // console.log(props.response.tags.response.tag);
       if (props.response.tags.response.tag) {
         if (props.response.tags.response.message == "Tags for post done.") {
           if (props.response.tags.response.tag.length > 0) {
@@ -75,7 +75,7 @@ function Post(props) {
           }
         }
       } else if (props.response.tags.response.message == "Tag removed.") {
-        console.log("true");
+      //  console.log("true");
         getTagsForOnePost(props.post._id)
       }
     }

@@ -27,7 +27,7 @@ function MusicSearchBar(props) {
         let localTagToAdd;
         tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
         if (localTagToAdd) {
-         //   console.log(localTagToAdd);
+            //   console.log(localTagToAdd);
             if (!localTagToAdd.isEmpty()) {
                 let newTags = searchTags;
                 newTags.push(localTagToAdd);
@@ -116,19 +116,28 @@ function MusicSearchBar(props) {
 
             setIsSuccess(props.response.dashboard.response.success);
             setMessage(props.response.dashboard.response.message);
-            if (props.response.dashboard.response.message == "Check tags done." && hasSearched) {
-                setAutocompleteTagsLength(props.response.dashboard.response.tag.length);
-                setAutocompleteTags(
-                    <ul className="tagSuggestionsContainer borderImage">
-                        {props.response.dashboard.response.tag.map(tag =>
-                            <li className="tagSuggestion" onClick={() => { onSearchTag(tag._id) }}>
-                                {tag._id}
-                            </li>
-                        )}
-                    </ul>)
-            }
+
         }
     }, [props.response.dashboard.response])
+
+    useEffect(() => {
+        if (props.response.tags) {
+            if (props.response.tags.response) {
+                console.log(props.response.tags.response);
+                if (props.response.tags.response.message == "Check tags done." && hasSearched) {
+                    setAutocompleteTagsLength(props.response.tags.response.tag.length);
+                    setAutocompleteTags(
+                        <ul className="tagSuggestionsContainer borderImage">
+                            {props.response.tags.response.tag.map(tag =>
+                                <li className="tagSuggestion" onClick={() => { onSearchTag(tag._id) }}>
+                                    {tag._id}
+                                </li>
+                            )}
+                        </ul>)
+                }
+            }
+        }
+    }, [props.response.tags])
 
     useEffect(() => {
         if (props.location) {
