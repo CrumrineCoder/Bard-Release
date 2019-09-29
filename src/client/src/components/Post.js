@@ -367,7 +367,7 @@ function Post(props) {
           {props.loggedIn ?
             <div>
               <div className="dashboardToolLabel">
-                <label htmlFor="tag"><input className="dashboardToolInput borderImage" onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+                <label htmlFor="tag"><input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
                 </label>
                 {existingTags}
               </div>

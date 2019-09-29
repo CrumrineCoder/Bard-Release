@@ -151,9 +151,9 @@ function MusicPage(props) {
     if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
-        setAmountOfPosts(amountOfPosts + 6);
-        setIsFetching(false);
-      }, 200);
+          setAmountOfPosts(amountOfPosts + 6);
+          setIsFetching(false);
+      }, 400);
     }
   }
 
