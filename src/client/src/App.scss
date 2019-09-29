@@ -223,6 +223,11 @@ body{
   text-align: center; 
 }
 
+.postDashboardContainer{
+  margin-top: 10px;
+  width: 100%;
+}
+
 .dashboardToolLabel{
   margin-bottom: 5px;
   position: relative; 
@@ -245,8 +250,26 @@ body{
     margin-left: 15px; 
   }
   .active{
-    text-decoration: underline; 
+		border-bottom: 3px solid #d3b14d;
   }
+  span{
+    position: relative;
+    display:inline-block;
+    padding: 0px 10px 10px 10px;
+		text-decoration: none;
+    text-transform: uppercase;
+    //background: #d3b14d4a;
+		font-size: 14px;
+		font-weight: 600;
+		color: #424f5a;
+		text-align: center;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.263);
+  }
+
+  position: relative;
+	display: block;
+	padding:0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .postContainer{
@@ -474,7 +497,9 @@ body{
 }
 
 .iconAction{
-  margin-left: 15px; 
+  &:nth-of-type(2){
+    margin-left: 25px; 
+  }
   font-size: 14px; 
   cursor: pointer; 
   color: black; 
@@ -523,6 +548,19 @@ body{
   }
 }
 
+.postVideoIcons{
+  position: absolute;
+  top: 0px;
+}
+
+/*
+
+.postEditButton{
+  position: absolute;
+  top: 0px;
+  margin: 0px; 
+}
+*/
 .postVideoContainer{
   position: relative; 
   display: flex;
@@ -538,11 +576,6 @@ body{
   }
 }
 
-.postEditButton{
-  position: absolute;
-  top: 0px;
-  margin: 0px; 
-}
 
 .updatePostForm{
   width: 90%; 
@@ -577,6 +610,10 @@ body{
       color: rgb(219, 162, 157);
     }
   }
+}
+
+.tagBubbleSuggestionContainer{
+  margin-top: 5px;
 }
 
 .tagBubble{

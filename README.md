@@ -74,9 +74,9 @@ Problems I'm fixing w/ this:
 * Whimsical has no results but returns everything
 * Autocomplete on homepage **DONE!!**
 * Autocomplete add tag should include Words document **DONE!!**
-* Audio player fixed
+* Audio player fixed position?
 * Bug: Multiple comments, edit one. 
-* Move cards back to vertical but make smaller, cut excess and make two tab
+* Move cards back to vertical but make smaller, cut excess and make two tabl **DONE!**
 * Make home and music page the same thing with parallex z indes scrolling. 
 * Infinite scroll **DONE!!**
 * Bug with reaching end of infinite scroll **DONE!!** 

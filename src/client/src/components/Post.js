@@ -342,7 +342,10 @@ function Post(props) {
           </>
           :
           <>
-            {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit postEditButton iconAction editIcon"></i>}
+            <div className="postVideoIcons">
+              {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit postEditButton iconAction editIcon"></i>}
+              <i class="fas fa-link editIcon iconAction"></i>
+            </div>
             <div className="postVideoHeader">
               <h3>{props.post.source}</h3>
               <h4>{props.post.name}</h4>
@@ -356,7 +359,7 @@ function Post(props) {
 
       <div className="postChooseSectionContainer">
         <span className={section == "tags" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("tags")}>Tags</span>
-        
+
         <span className={section == "notes" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("notes")}>Notes</span>
       </div>
 
@@ -365,7 +368,7 @@ function Post(props) {
           {tagChain}
           {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
           {props.loggedIn ?
-            <div>
+            <div className="postDashboardContainer">
               <div className="dashboardToolLabel">
                 <label htmlFor="tag"><input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
                 </label>
@@ -381,7 +384,7 @@ function Post(props) {
         <div className="postCommentContainer">
           {commentChain}
           {props.loggedIn ?
-            <form onSubmit={onHandleComment}>
+            <form className="postDashboardContainer" onSubmit={onHandleComment}>
               <div>
                 <label htmlFor="comment"></label>
                 <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
