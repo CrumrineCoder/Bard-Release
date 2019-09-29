@@ -317,9 +317,7 @@ function Post(props) {
         {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
         </iframe>}
       </div>
-      <button onClick={() => setSection("tags")}>Tags</button>
-      <button onClick={() => setSection("notes")}>Notes</button>
-      {section}
+
       <div className="postVideoContainer">
         {openPostEdit ?
           <>
@@ -356,40 +354,46 @@ function Post(props) {
         }
       </div>
 
-      <div className="postVideoTagContainer">
-        {tagChain}
-        {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
-        {props.loggedIn ?
-          <div>
-            <div className="dashboardToolLabel">
-              <label htmlFor="tag"><input className="dashboardToolInput borderImage" onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-              </label>
-              {existingTags}
-            </div>
-            <div>
-              <button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
-            </div>
-          </div>
-          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-
+      <div className="postChooseSectionContainer">
+        <span className={section == "tags" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("tags")}>Tags</span>
+        
+        <span className={section == "notes" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("notes")}>Notes</span>
       </div>
 
-      <div className="postCommentContainer">
-        {commentChain}
-        {props.loggedIn ?
-          <form onSubmit={onHandleComment}>
+      {section == "tags" ?
+        <div className="postVideoContainer">
+          {tagChain}
+          {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
+          {props.loggedIn ?
             <div>
-              <label htmlFor="comment"></label>
-              <br />
-              <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
-                onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
+              <div className="dashboardToolLabel">
+                <label htmlFor="tag"><input className="dashboardToolInput borderImage" onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+                </label>
+                {existingTags}
+              </div>
+              <div>
+                <button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
+              </div>
             </div>
-            <div>
-              <button className="btn btn-post btn-centered borderImage" type="submit">Post Note</button>
-            </div>
-          </form>
-          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Note</button>}
-      </div>
+            : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
+        </div>
+        :
+        <div className="postCommentContainer">
+          {commentChain}
+          {props.loggedIn ?
+            <form onSubmit={onHandleComment}>
+              <div>
+                <label htmlFor="comment"></label>
+                <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
+                  onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
+              </div>
+              <div>
+                <button className="btn btn-post btn-centered borderImage" type="submit">Post Note</button>
+              </div>
+            </form>
+            : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Note</button>}
+        </div>
+      }
     </div>
   );
 }

@@ -235,6 +235,20 @@ body{
   margin: 0 auto; 
 }
 
+.postChooseSectionContainer{
+  text-align: center; 
+  font-size: 18px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  margin-top: 10px;
+  span:nth-child(2){
+    margin-left: 15px; 
+  }
+  .active{
+    text-decoration: underline; 
+  }
+}
+
 .postContainer{
  // float: left; 
   //padding: 10px; 
@@ -242,7 +256,8 @@ body{
   color: rgb(37, 37, 37); 
  // border: 1px solid rgb(37, 37, 37); 
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.7); 
+  background: white; 
+  //background: rgba(255, 255, 255, 0.7); 
  // background-image: url("https://img.freepik.com/free-vector/yellow-parchment_53876-91513.jpg?size=626&ext=jpg");
   background-size: cover; 
   background-repeat: no-repeat; 
@@ -436,6 +451,7 @@ body{
 .noContentDisclaimer{
   text-align: center; 
   font-style: italic; 
+  margin: 5px; 
 }
 
 .postsTags{

@@ -140,7 +140,7 @@ function Header(props) {
         <div ref={node} onClick={() => handleNonOverlayButton()}  className="headerEllipsisDropdown">
           <div className="headerEllipsisDropdownItem">
             <Link onClick={() => setShowDropdown(false)} className="headerLink" to='login'>
-              <i className="fas fa-times ellipsisIcon"></i>Logout
+              <i className="fas fa-sign-out-alt ellipsisIcon"></i>Logout
             </Link>
           </div>
         </div>
