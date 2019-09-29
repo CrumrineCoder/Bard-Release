@@ -37,16 +37,17 @@ function Post(props) {
   }
 
   useEffect(() => {
-    if (props.response.dashboard.response) {
-      if (props.response.dashboard.response.message == "Comment added.") {
+    console.log(props.response);
+    if (props.response.comments.response) {
+      if (props.response.comments.response.message == "Comment added.") {
         getCommentsForOnePost(props.post._id)
       }
 
-      if (props.response.dashboard.response.comment) {
-        if (props.response.dashboard.response.comment.length > 0) {
-          if (props.response.dashboard.response.comment[0].postID == props.post._id) {
-            setComments(props.response.dashboard.response.comment[0].comments);
-            if (props.response.dashboard.response.comment[0].comments) {
+      if (props.response.comments.response.comment) {
+        if (props.response.comments.response.comment.length > 0) {
+          if (props.response.comments.response.comment[0].postID == props.post._id) {
+            setComments(props.response.comments.response.comment[0].comments);
+            if (props.response.comments.response.comment[0].comments) {
 
             }
           }
@@ -55,7 +56,7 @@ function Post(props) {
 
 
     }
-  }, [props.response.dashboard.response])
+  }, [props.response.comments.response])
 
   useEffect(() => {
     //  console.log(props.response.tags.response);

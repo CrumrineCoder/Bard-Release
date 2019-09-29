@@ -9,11 +9,6 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.MAKE_POST_ERROR:
       return { ...state, response };
-    case types.MAKE_COMMENT_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.MAKE_COMMENT_ERROR:
-      return { ...state, response };
     case types.GET_ALL_POSTS_SUCCESS:
       //    console.log(response);
       return { ...state, response };
@@ -24,25 +19,11 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.GET_POST_BY_ID_ERROR:
       return { ...state, response };
-    case types.GET_COMMENTS_FOR_ONE_POST_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.GET_COMMENTS_FOR_ONE_POST_ERROR:
-      return { ...state, response };
+    
     case types.CHECK_SOURCE_SUCCESS:
       //    console.log(response);
       return { ...state, response };
     case types.CHECK_SOURCE_ERROR:
-      return { ...state, response };
-    case types.DELETE_COMMENT_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.DELETE_COMMENT_ERROR:
-      return { ...state, response };
-    case types.EDIT_COMMENT_SUCCESS:
-      //    console.log(response);
-      return { ...state, response };
-    case types.EDIT_COMMENT_ERROR:
       return { ...state, response };
     case types.EDIT_POST_SUCCESS:
       //    console.log(response);
