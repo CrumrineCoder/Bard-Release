@@ -250,22 +250,27 @@ body{
 
   display: grid;
   overflow: hidden;
-  grid-template-columns: repeat(3, 1fr);
+  //grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-auto-rows: 1fr;
   grid-auto-rows: minmax(min-content, max-content);
-  grid-column-gap: 5px;
-  grid-row-gap: 25px;
+  //grid-column-gap: 5px;
+  //grid-row-gap: 25px;
   align-items: center; 
 }
 
 .posts{
   display: grid;
   overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+  // old vert
   //grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-template-columns: repeat(auto-fit, minmax(1fr));
+  // hor
+  //grid-template-columns: repeat(auto-fit, minmax(1fr));//
   //grid-auto-columns: auto;
   //grid-auto-rows: 1fr;
-  grid-auto-rows: minmax(min-content, max-content);
+  // hor
+  //grid-auto-rows: minmax(min-content, max-content); //
   grid-column-gap: 5px;
   grid-row-gap: 25px;
 }

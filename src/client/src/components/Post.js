@@ -27,6 +27,8 @@ function Post(props) {
 
   const [allTags, setAllTags] = useState([])
 
+  const [section, setSection] = useState("tags");
+
   function getCommentsForOnePost(postId) {
 
     props.dispatch(getAllCommentsForOnePostAction(postId));
@@ -62,16 +64,16 @@ function Post(props) {
     if (props.response.tags.response) {
       // console.log(props.response.tags.response.tag);
       if (props.response.tags.response.tag) {
-          if (props.response.tags.response.message == "Tags for post done.") {
-            if (props.response.tags.response.tag.length > 0) {
-              if (props.response.tags.response.tag[0].postID == props.post._id) {
+        if (props.response.tags.response.message == "Tags for post done.") {
+          if (props.response.tags.response.tag.length > 0) {
+            if (props.response.tags.response.tag[0].postID == props.post._id) {
 
-                setTags(props.response.tags.response.tag[0].tags)
-                setVisualTags(props.response.tags.response.tag[0].tags);
+              setTags(props.response.tags.response.tag[0].tags)
+              setVisualTags(props.response.tags.response.tag[0].tags);
 
-              }
             }
           }
+        }
       } else if (props.response.tags.response.message == "Tag added.") {
         getTagsForOnePost(props.post._id)
       } else if (props.response.tags.response.message == "Tag removed.") {
@@ -281,7 +283,7 @@ function Post(props) {
 
   function getEmbed(link) {
     let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-    embedLink += "?autoplay=1"
+    //embedLink += "?autoplay=1"
     return embedLink;
   }
 
@@ -303,15 +305,21 @@ function Post(props) {
     }
     setTagToAdd("")
   }
+  /*
+  <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
+  {playVideo &&
+          <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>}
+          */
   return (
     <div className="borderImage postContainer">
       <div className="postVideoContainer">
-        <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
-        {playVideo &&
-          <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
-          </iframe>}
+        {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>}
       </div>
-
+      <button onClick={() => setSection("tags")}>Tags</button>
+      <button onClick={() => setSection("notes")}>Notes</button>
+      {section}
       <div className="postVideoContainer">
         {openPostEdit ?
           <>
@@ -344,27 +352,26 @@ function Post(props) {
 
             <a className="postLink" href={props.post.link} target="_blank">{props.post.link}</a>
 
-            <br />
-
-            <div className="postVideoTagContainer">
-              {tagChain}
-              {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
-              {props.loggedIn ?
-                <div>
-                  <div className="dashboardToolLabel">
-                    <label htmlFor="tag"><input className="dashboardToolInput borderImage" onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-                    </label>
-                    {existingTags}
-                  </div>
-                  <div>
-                    <button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
-                  </div>
-                </div>
-                : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-
-            </div>
           </>
         }
+      </div>
+
+      <div className="postVideoTagContainer">
+        {tagChain}
+        {tagLength < visualTags.length && <button className="borderImage showMoreTags" onClick={e => showMoreTags()}>Show More</button>}
+        {props.loggedIn ?
+          <div>
+            <div className="dashboardToolLabel">
+              <label htmlFor="tag"><input className="dashboardToolInput borderImage" onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
+              </label>
+              {existingTags}
+            </div>
+            <div>
+              <button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
+            </div>
+          </div>
+          : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
+
       </div>
 
       <div className="postCommentContainer">

@@ -80,3 +80,4 @@ Problems I'm fixing w/ this:
 * Make home and music page the same thing with parallex z indes scrolling. 
 * Infinite scroll **DONE!!**
 * Bug with reaching end of infinite scroll **DONE!!** 
+* Default instead of youtube iframe with a generated preview? 

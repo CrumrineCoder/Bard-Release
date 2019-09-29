@@ -26,7 +26,7 @@ function MusicPage(props) {
   const [currentUser, setCurrentUser] = useState("");
   const [allTags, setAllTags] = useState([]);
 
-  const [amountOfPosts, setAmountOfPosts] = useState(5);
+  const [amountOfPosts, setAmountOfPosts] = useState(6);
   /*
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -151,7 +151,7 @@ function MusicPage(props) {
     if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
-        setAmountOfPosts(amountOfPosts + 5);
+        setAmountOfPosts(amountOfPosts + 6);
         setIsFetching(false);
       }, 200);
     }
