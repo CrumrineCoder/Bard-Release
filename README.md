@@ -30,8 +30,8 @@ Problems I'm fixing w/ this:
 * Mini mode to just show TAGS, and you can open to see the video and comments on a button press.
 * Change volume controls, or make the youtube video at the top and larger. 
 * Update messages, X messages found!
-* Show Categorical tags
-* Register message is wrong
+* Show Categorical tags **DONE!!**
+* Register message is wrong **DONE!!**
 * D&D aesthetic **WORKING ON IT!**
 * Make the tags the top priority, not the song **DONE!!**
 * Song-boards
@@ -50,7 +50,7 @@ Problems I'm fixing w/ this:
 * If no results are returned by the search, tell the user instead of showing them results they don't want. **DONE!!**
 * Empty comment / tag message Be the first to commment/tag! **DONE!!**
 * Figure out color scheme
-* Sort out the response system
+* Sort out the response system ***KINDA DONE!***
 * Fix success inconsistency in header, need to sort out the response and redux structure
 * Kill server on change, getting eardarinuse 8080 **DONE!**
 * About & Credits page

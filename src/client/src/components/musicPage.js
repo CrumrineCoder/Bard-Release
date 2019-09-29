@@ -33,7 +33,7 @@ function MusicPage(props) {
   */
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
-
+  const [finalizedLength, setFinalizedLength] = useState(0);
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -105,6 +105,7 @@ function MusicPage(props) {
       }
       //  console.log("bottom");
       //    console.log(allTags);
+      setFinalizedLength(finalizedPosts.length);
       let cut = finalizedPosts.slice(0, amountOfPosts);
       setPostsContent(
         <div className="posts">
@@ -161,7 +162,7 @@ function MusicPage(props) {
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}
-      {isFetching && (amountOfPosts < filteredPosts.length) && 'Fetching more list items...'}
+      {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
     </div >
   );
 }
