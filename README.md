@@ -61,7 +61,7 @@ Problems I'm fixing w/ this:
 * Inclusive vs Exclusive tag search **DONE!!**
 * Inclusive & Exclusive "Apply" and "Clear" buttons -Irrelevant-
 * Responsive
-* Comment formatting & turn into notes 
+* Comment formatting & turn into notes **DONE!!**
 * Improve Search from Home page **DONE**
 * Search bar in nav **DONE FOR NOW**
 * Ellipis logout, and post song in nav. **DONE**
@@ -70,7 +70,6 @@ Problems I'm fixing w/ this:
 * Profile. 
 * SCSS cleanup
 * Check if video is valid 
-* get background of video behind Play icon. 
 * Whimsical has no results but returns everything
 * Autocomplete on homepage **DONE!!**
 * Autocomplete add tag should include Words document **DONE!!**
