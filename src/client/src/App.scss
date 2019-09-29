@@ -224,13 +224,25 @@ body{
 }
 
 .postDashboardContainer{
-  margin-top: 10px;
+  padding: 5px 10px 15px 10px;
   width: 100%;
 }
 
 .dashboardToolLabel{
   margin-bottom: 5px;
   position: relative; 
+}
+
+.addTagIcon{
+  position: absolute;
+  padding: 0px;
+  right: 25px;
+  top: 7px;
+  cursor: pointer;
+  color: black;
+  &:hover{
+    color: rgb(219, 162, 157);
+  }
 }
 
 .dashboardToolInput{
@@ -596,6 +608,9 @@ body{
   text-transform: uppercase;
   cursor: pointer; 
   color: white;
+  &:hover{
+    color: #ffbf00;
+  }
 }
 
 .postContainerOverlayLink{
@@ -603,6 +618,9 @@ body{
   color: white;
   width: 75%;
   font-size: 12px;
+  &:hover{
+    color: #ffbf00;
+  }
 }
 
 .postVideoContainer{

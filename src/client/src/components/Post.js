@@ -312,12 +312,15 @@ function Post(props) {
   {playVideo &&
           <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">
           </iframe>}
+      
+      
+      <    button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
           */
   return (
     <div className="borderImage postContainer">
       {overlay &&
         <div className="postContainerOverlay">
-          <p className="postContainerOverlayCancel" onClick={()=>setOverlay(false)}>Close</p>
+          <p className="postContainerOverlayCancel fas fa-times" onClick={()=>setOverlay(false)}></p>
           <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>
         </div>
       }
@@ -376,13 +379,9 @@ function Post(props) {
           {props.loggedIn ?
             <div className="postDashboardContainer">
               <div className="dashboardToolLabel">
-                <label htmlFor="tag"><input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" />
-                </label>
-                {existingTags}
+                <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon fas fa-plus-square"></i>
               </div>
-              <div>
-                <button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
-              </div>
+              {existingTags}
             </div>
             : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
         </div>
