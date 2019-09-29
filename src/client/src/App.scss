@@ -231,12 +231,14 @@ body{
 .dashboardToolLabel{
   margin-bottom: 5px;
   position: relative; 
+  width: 90%;
+  margin: 0 auto; 
 }
 
 .addTagIcon{
   position: absolute;
   padding: 0px;
-  right: 25px;
+  right: 10px;
   top: 7px;
   cursor: pointer;
   color: black;
@@ -247,7 +249,7 @@ body{
 
 .dashboardToolInput{
   padding: 5px;
-  width: 90%;
+  width: 100%;
   display: block;
   margin: 0 auto; 
 }
