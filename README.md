@@ -15,6 +15,7 @@ Problems I'm fixing w/ this:
 * Autocomplete tags & sources **DONE!!**
 * Message functionality for when the user posts the same links, 403s, etc.
 * Sorting
+* Why is the sorting reversed when the user searches?
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. **DONE**
 * Delete & edit tags & posts **DONE!!!**
@@ -78,4 +79,4 @@ Problems I'm fixing w/ this:
 * Move cards back to vertical but make smaller, cut excess and make two tab
 * Make home and music page the same thing with parallex z indes scrolling. 
 * Infinite scroll **DONE!!**
-* Bug with reaching end of infinite scroll **DONE!!**
+* Bug with reaching end of infinite scroll **DONE!!** 

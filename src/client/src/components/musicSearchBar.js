@@ -129,7 +129,7 @@ function MusicSearchBar(props) {
                     setAutocompleteTags(
                         <ul className="tagSuggestionsContainer borderImage">
                             {props.response.tags.response.tag.map(tag =>
-                                <li className="tagSuggestion" onClick={() => { onSearchTag(tag._id) }}>
+                                <li key={tag._id} className="tagSuggestion" onClick={() => { onSearchTag(tag._id) }}>
                                     {tag._id}
                                 </li>
                             )}
@@ -153,7 +153,7 @@ function MusicSearchBar(props) {
         <div className="musicSearchAreaContainer">
             <div>
                 {searchTags.map(tag =>
-                    <li className="tagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
+                    <li key={tag} className="tagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
                         {tag}
                         <i className="fas fa-minus tagBubbleIcon"></i>
                     </li>
@@ -171,7 +171,7 @@ function MusicSearchBar(props) {
             </div>
             <ul>
                 {suggestedTags.map(tag =>
-                    <li className="tagBubble borderImage addBubble editableTagBubble" onClick={() => { onSearchTag(tag) }}>
+                    <li key={tag} className="tagBubble borderImage addBubble editableTagBubble" onClick={() => { onSearchTag(tag) }}>
                         {tag}
                         <i className="fas fa-plus tagBubbleIcon"></i>
                     </li>
