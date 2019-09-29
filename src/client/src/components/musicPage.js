@@ -12,6 +12,7 @@ import LoginModal from "./loginModal";
 import { checkCookie } from '../utils/cookies';
 import { getCurrentUserAction } from '../actions/authenticationActions';
 import useInfiniteScroll from "./useInfiniteScroll";
+import { filter } from 'minimatch';
 
 function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -32,7 +33,7 @@ function MusicPage(props) {
   */
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
-  
+
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -146,11 +147,13 @@ function MusicPage(props) {
   }, [props.response.tags.response])
 
   function fetchMoreListItems() {
-    setTimeout(() => {
-   //   console.log("more posts");
-      setAmountOfPosts(amountOfPosts + 5);
-      setIsFetching(false);
-    }, 200);
+    if (amountOfPosts < filteredPosts.length) {
+      setTimeout(() => {
+        //   console.log("more posts");
+        setAmountOfPosts(amountOfPosts + 5);
+        setIsFetching(false);
+      }, 200);
+    }
   }
 
   return (
@@ -158,7 +161,7 @@ function MusicPage(props) {
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}
-      {isFetching && 'Fetching more list items...'}
+      {isFetching && (amountOfPosts < filteredPosts.length) && 'Fetching more list items...'}
     </div >
   );
 }

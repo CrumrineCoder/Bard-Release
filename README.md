@@ -16,7 +16,7 @@ Problems I'm fixing w/ this:
 * Message functionality for when the user posts the same links, 403s, etc.
 * Sorting
 * Handle non-Youtube links (like soundcloud)
-* Break up dashboard & its reducer. *IMPORTANT!*
+* Break up dashboard & its reducer. **DONE**
 * Delete & edit tags & posts **DONE!!!**
 * Tag bubbles **DONE!!**
 * 404
@@ -64,15 +64,18 @@ Problems I'm fixing w/ this:
 * Improve Search from Home page **DONE**
 * Search bar in nav **DONE FOR NOW**
 * Ellipis logout, and post song in nav. **DONE**
+* Sticky Nav 
 * Drafts/unlisted playlists for broken links. 
 * Profile. 
 * SCSS cleanup
 * Check if video is valid 
 * get background of video behind Play icon. 
 * Whimsical has no results but returns everything
-* Autocomplete on homepage
-* Autocomplete add tag should include Words document
+* Autocomplete on homepage **DONE!!**
+* Autocomplete add tag should include Words document **DONE!!**
 * Audio player fixed
 * Bug: Multiple comments, edit one. 
 * Move cards back to vertical but make smaller, cut excess and make two tab
 * Make home and music page the same thing with parallex z indes scrolling. 
+* Infinite scroll **DONE!!**
+* Bug with reaching end of infinite scroll **DONE!!**
