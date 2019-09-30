@@ -113,7 +113,6 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 85px;
   font-size: 20px;
   cursor: pointer; 
   &:hover{
@@ -129,15 +128,25 @@ body{
   justify-content: flex-end;
   align-items: center;
   &.active{
-    padding-right: 85px;
+  //  padding-right: 85px;
   }
   
+}
+
+.postNewSongModal{
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .headerLink, .dropdownEllipsis{
   margin-left: 10px; 
   color: #EEEBD0; 
   cursor: pointer; 
+}
+
+.lastHeaderLink{
+  margin-right: 85px;
 }
 
 .dropdownEllipsis{
@@ -240,7 +249,6 @@ body{
   background-repeat: no-repeat;
   border-width: 8px; 
   position: absolute; 
-  top: 150px;
   min-width: 400px;
   z-index: 3; 
   //background-image: url("http://www.westjerseyartillery.com/wp-content/uploads/2016/04/Parchment-Background.jpg")
