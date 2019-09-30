@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { getAllPostsAction, getPostsByIDAction, getAllTagsAction } from '../actions/linkActions';
@@ -14,27 +14,25 @@ import { getCurrentUserAction } from '../actions/authenticationActions';
 import useInfiniteScroll from "./useInfiniteScroll";
 import { filter } from 'minimatch';
 
-import BottomScrollListener from 'react-bottom-scroll-listener';
-import { useBottomScrollListener } from 'react-bottom-scroll-listener'
-
 function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   // const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [postsContent, setPostsContent] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState("");
   const [unfilteredPosts, setUnfilteredPosts] = useState("");
   const [loggedIn, setLoggedIn] = useState();
   const [modalOpen, setModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [allTags, setAllTags] = useState([]);
 
-  const [amountOfPosts, setAmountOfPosts] = useState(6);
+  const [amountOfPosts, setAmountOfPosts] = useState(9);
   /*
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   */
 
-  // const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
 
   function shuffle(a) {
@@ -70,12 +68,9 @@ function MusicPage(props) {
     props.history.push(location);
   }
 
-  useEffect(() => {
-    console.log(props.response);
-  }, [props.response])
 
   useEffect(() => {
-    if (unfilteredPosts) {
+    if (filteredPosts && unfilteredPosts) {
       let postsToTransform = unfilteredPosts;
       let finalizedPosts = postsToTransform;
 
@@ -120,7 +115,7 @@ function MusicPage(props) {
         </div>
       )
     }
-  }, [unfilteredPosts, props.response.dashboard.response, props.response.tags.response, amountOfPosts])
+  }, [filteredPosts, props.response.dashboard.response, props.response.tags.response, amountOfPosts])
 
   useEffect(() => {
     if (props.response.dashboard.response != undefined) {
@@ -129,7 +124,7 @@ function MusicPage(props) {
       if (props.response.dashboard.response.post) {
         setUnfilteredPosts(props.response.dashboard.response.post)
         //  console.log(props.response.dashboard.response.post);
-       // setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")))
+        setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")))
       }
     }
   }, [props.response.dashboard.response])
@@ -152,32 +147,23 @@ function MusicPage(props) {
     }
   }, [props.response.tags.response])
 
-  
-  const fetchMoreListItems = useCallback(() => {
-    console.log(unfilteredPosts);
-    if (amountOfPosts < unfilteredPosts.length) {
+  function fetchMoreListItems() {
+    if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
-        setAmountOfPosts(amountOfPosts + 3);
-     //   setIsFetching(false);
+          setAmountOfPosts(amountOfPosts + 3);
+          setIsFetching(false);
       }, 400);
     }
-  }, [unfilteredPosts, message, loggedIn, amountOfPosts])
+  }
 
-  useBottomScrollListener(fetchMoreListItems)
-  //const containerRef = useBottomScrollListener(fetchMoreListItems)
-  
-  // {postsContent}
-// {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
   return (
     <div>
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
-    
-       
       {postsContent}
-     
-    </div>
+      {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
+    </div >
   );
 }
 const mapStateToProps = (response) => ({ response });

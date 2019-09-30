@@ -84,5 +84,5 @@ Problems I'm fixing w/ this:
 * copy link
 * # of notes
 * Search by bad tag should return nothing.
-* bug w/ multi tag indexing for one result?
-* bug w/ endless scroll on scrolling to bottom of another page
+* bug w/ multi tag indexing for one result? 
+* bug w/ endless scroll on scrolling to bottom of another page **DONE!!**
