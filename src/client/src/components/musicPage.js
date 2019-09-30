@@ -22,7 +22,6 @@ function MusicPage(props) {
   // const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [postsContent, setPostsContent] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState("");
   const [unfilteredPosts, setUnfilteredPosts] = useState("");
   const [loggedIn, setLoggedIn] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -71,9 +70,12 @@ function MusicPage(props) {
     props.history.push(location);
   }
 
+  useEffect(() => {
+    console.log(props.response);
+  }, [props.response])
 
   useEffect(() => {
-    if (filteredPosts && unfilteredPosts) {
+    if (unfilteredPosts) {
       let postsToTransform = unfilteredPosts;
       let finalizedPosts = postsToTransform;
 
@@ -118,7 +120,7 @@ function MusicPage(props) {
         </div>
       )
     }
-  }, [filteredPosts, props.response.dashboard.response, props.response.tags.response, amountOfPosts])
+  }, [unfilteredPosts, props.response.dashboard.response, props.response.tags.response, amountOfPosts])
 
   useEffect(() => {
     if (props.response.dashboard.response != undefined) {
@@ -127,7 +129,7 @@ function MusicPage(props) {
       if (props.response.dashboard.response.post) {
         setUnfilteredPosts(props.response.dashboard.response.post)
         //  console.log(props.response.dashboard.response.post);
-        setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")))
+       // setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")))
       }
     }
   }, [props.response.dashboard.response])
@@ -152,23 +154,23 @@ function MusicPage(props) {
 
   
   const fetchMoreListItems = useCallback(() => {
-    console.log(filteredPosts);
-    console.log(amountOfPosts)
-    if (amountOfPosts < filteredPosts.length) {
+    console.log(unfilteredPosts);
+    if (amountOfPosts < unfilteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
         setAmountOfPosts(amountOfPosts + 3);
-        setIsFetching(false);
+     //   setIsFetching(false);
       }, 400);
     }
-  }, [props.alertOnBottom])
+  }, [unfilteredPosts, message, loggedIn, amountOfPosts])
 
-  const containerRef = useBottomScrollListener(fetchMoreListItems)
   useBottomScrollListener(fetchMoreListItems)
+  //const containerRef = useBottomScrollListener(fetchMoreListItems)
+  
   // {postsContent}
 // {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
   return (
-    <div ref={containerRef}>
+    <div>
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
     
