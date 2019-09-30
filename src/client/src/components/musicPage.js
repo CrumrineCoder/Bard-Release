@@ -26,7 +26,7 @@ function MusicPage(props) {
   const [currentUser, setCurrentUser] = useState("");
   const [allTags, setAllTags] = useState([]);
 
-  const [amountOfPosts, setAmountOfPosts] = useState(1);
+  const [amountOfPosts, setAmountOfPosts] = useState(6);
   /*
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
