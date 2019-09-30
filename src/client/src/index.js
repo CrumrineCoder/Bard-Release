@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import App from './container/App'
 
 import './Buttons.scss';
+import './Loading.scss';
 import './App.scss';
 
 

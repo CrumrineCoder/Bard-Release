@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { getAllPostsAction, getPostsByIDAction, getAllTagsAction } from '../actions/linkActions';
@@ -26,7 +26,7 @@ function MusicPage(props) {
   const [currentUser, setCurrentUser] = useState("");
   const [allTags, setAllTags] = useState([]);
 
-  const [amountOfPosts, setAmountOfPosts] = useState(9);
+  const [amountOfPosts, setAmountOfPosts] = useState(1);
   /*
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -151,8 +151,8 @@ function MusicPage(props) {
     if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
-          setAmountOfPosts(amountOfPosts + 3);
-          setIsFetching(false);
+        setAmountOfPosts(amountOfPosts + 3);
+        setIsFetching(false);
       }, 400);
     }
   }
@@ -162,7 +162,20 @@ function MusicPage(props) {
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}
-      {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
+      {isFetching && (amountOfPosts < finalizedLength) &&
+        <Fragment>
+          <div class="cs-loader">
+            <div class="cs-loader-inner">
+              <label>	●</label>
+              <label>	●</label>
+              <label>	●</label>
+              <label>	●</label>
+              <label>	●</label>
+              <label>	●</label>
+            </div>
+          </div>
+        </Fragment>
+      }
     </div >
   );
 }
