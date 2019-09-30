@@ -6,6 +6,7 @@ import logo from "../assets/bardLogoVersion3.png"
 
 import { postAction, turnonOverlayAction, toggleOverlayAction, turnoffOverlayAction } from '../actions/linkActions';
 import { getCurrentUserAction } from '../actions/authenticationActions';
+import ScrollButton from "./ScrollButton.js"
 
 function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -16,6 +17,7 @@ function Header(props) {
   const [source, setSource] = useState("");
   const node = useRef();
 
+  
 
   function onHandlePost(event) {
     event.preventDefault();
@@ -122,6 +124,7 @@ function Header(props) {
           <img src={logo} className="headerLogo" />
           <span className="headerName">Bardic Inspiration</span>
         </div>
+        <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
         <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
           <Link onClick={() => handleNonOverlayButton()} className="headerLink" to=''>Home</Link>
           <Link onClick={() => handleNonOverlayButton()} className="headerLink" to='music'>Music</Link>

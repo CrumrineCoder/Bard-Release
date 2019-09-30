@@ -75,7 +75,7 @@ body{
   font-family: 'Metamorphous', cursive;
 //  width: 100%; 
   display: flex; 
-  justify-content: center;
+ // justify-content: center;
   //width: 100vw; 
   position: relative; 
   width: 100%;
@@ -90,8 +90,12 @@ body{
 }
 
 .headerLogoContainer{
-  margin-right: auto; 
-  display: flex; 
+//  margin-right: auto; 
+ // display: flex; 
+ flex: 1;          /* shorthand for: flex-grow: 1, flex-shrink: 1, flex-basis: 0 */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .headerLogo{
@@ -104,10 +108,26 @@ body{
   padding-left: 5px; 
 }
 
+.scrollToTopHeaderButton{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 85px;
+  font-size: 20px;
+  cursor: pointer; 
+  &:hover{
+    color: #ffbf00;
+  }
+}
 .headerLinks{
   //float: right; 
   //padding-right: 30px;
   padding-top: 7px;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   &.active{
     padding-right: 85px;
   }
@@ -362,7 +382,7 @@ body{
    word-wrap: break-word;
    overflow-wrap: break-word;
    max-width: 350px;
-   margin: 0 auto; 
+   margin: 5px auto; 
 }
 
 .commentEditArea{
