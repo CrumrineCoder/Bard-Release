@@ -83,3 +83,5 @@ Problems I'm fixing w/ this:
 * Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. 
 * copy link
 * # of notes
+* bug w/ multi tag indexing for one result?
+* bug w/ endless scroll on scrolling to bottom of another page

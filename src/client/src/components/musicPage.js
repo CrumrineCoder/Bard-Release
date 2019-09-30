@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { getAllPostsAction, getPostsByIDAction, getAllTagsAction } from '../actions/linkActions';
@@ -13,6 +13,9 @@ import { checkCookie } from '../utils/cookies';
 import { getCurrentUserAction } from '../actions/authenticationActions';
 import useInfiniteScroll from "./useInfiniteScroll";
 import { filter } from 'minimatch';
+
+import BottomScrollListener from 'react-bottom-scroll-listener';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
 function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -32,7 +35,7 @@ function MusicPage(props) {
   const [isFetching, setIsFetching] = useState(false);
   */
 
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  // const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
 
   function shuffle(a) {
@@ -147,23 +150,32 @@ function MusicPage(props) {
     }
   }, [props.response.tags.response])
 
-  function fetchMoreListItems() {
+  
+  const fetchMoreListItems = useCallback(() => {
+    console.log(filteredPosts);
+    console.log(amountOfPosts)
     if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
-          setAmountOfPosts(amountOfPosts + 3);
-          setIsFetching(false);
+        setAmountOfPosts(amountOfPosts + 3);
+        setIsFetching(false);
       }, 400);
     }
-  }
+  }, [props.alertOnBottom])
 
+  const containerRef = useBottomScrollListener(fetchMoreListItems)
+  useBottomScrollListener(fetchMoreListItems)
+  // {postsContent}
+// {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
   return (
-    <div>
+    <div ref={containerRef}>
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
+    
+       
       {postsContent}
-      {isFetching && (amountOfPosts < finalizedLength) && 'Fetching more list items...'}
-    </div >
+     
+    </div>
   );
 }
 const mapStateToProps = (response) => ({ response });

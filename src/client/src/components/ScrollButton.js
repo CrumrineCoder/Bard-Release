@@ -22,7 +22,7 @@ class ScrollButton extends React.Component {
 
     render() {
         return (
-            <i class="fas fa-arrow-circle-up scrollToTopHeaderButton" onClick={() => { this.scrollToTop(); }}></i>
+            <i className="fas fa-arrow-circle-up scrollToTopHeaderButton" onClick={() => { this.scrollToTop(); }}></i>
         )
     }
 }

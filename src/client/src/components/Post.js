@@ -137,7 +137,7 @@ function Post(props) {
               }
             }
           )}
-          {tagLength < visualTags.length && <i class="fas fa-arrow-circle-right showMoreTags" onClick={e => showMoreTags()}></i>}
+          {tagLength < visualTags.length && <i className="fas fa-arrow-circle-right showMoreTags" onClick={e => showMoreTags()}></i>}
         </div>
       )
     }
@@ -320,6 +320,11 @@ function Post(props) {
       
       <    button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
           */
+
+
+          /*    {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>}
+        */
   return (
     <div className="borderImage postContainer">
       {overlay &&
@@ -330,8 +335,7 @@ function Post(props) {
       }
 
       <div className="postVideoContainer">
-        {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
-        </iframe>}
+     
       </div>
 
       <div className="postVideoContainer">
@@ -360,7 +364,7 @@ function Post(props) {
           <>
             <div className="postVideoIcons">
               {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit postEditButton iconAction editIcon"></i>}
-              <i onClick={() => setOverlay(true)} class="fas fa-link editIcon iconAction"></i>
+              <i onClick={() => setOverlay(true)} className="fas fa-link editIcon iconAction"></i>
             </div>
             <div className="postVideoHeader">
               <h3>{props.post.source}</h3>

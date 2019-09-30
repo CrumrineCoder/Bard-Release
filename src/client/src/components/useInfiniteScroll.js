@@ -10,6 +10,7 @@ const useInfiniteScroll = (callback) => {
   }, []);
   */
     const handleOnDocumentBottom = useCallback(() => {
+      console.log("handle");
       //  console.log('I am at bottom! ' + Math.round(performance.now()))
         setIsFetching(true);
         if (callback) {
@@ -19,6 +20,7 @@ const useInfiniteScroll = (callback) => {
     }, [callback])
     useBottomScrollListener(handleOnDocumentBottom);
     useEffect(() => {
+        console.log(isFetching);
         if (!isFetching) return;
         callback(() => {
      //       console.log('called back');
