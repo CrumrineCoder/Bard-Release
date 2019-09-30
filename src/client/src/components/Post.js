@@ -123,7 +123,7 @@ function Post(props) {
             function (tag) {
               if (tag.emails.indexOf(props.currentUser) != -1) {
                 return (
-                  <li className="tagBubble borderImage smallTagBubble editableTagBubble" onClick={e => removeUserFromTag(tag)} key={tag._id}>
+                  <li className="tagBubble borderImage removeBubble smallTagBubble editableTagBubble" onClick={e => removeUserFromTag(tag)} key={tag._id}>
                     {tag.text}
                     <i className="fas fa-times iconAction removeIcon"></i>
                   </li>
@@ -169,7 +169,7 @@ function Post(props) {
                   )
                 } else {
                   return (
-                    <li className="commentArea" key={comment._id + index}>
+                    <li className="commentArea commentEditArea" key={comment._id + index}>
                       {comment.text}
                       <span className="commentIcons">
                         <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
@@ -180,7 +180,7 @@ function Post(props) {
                 }
               } else {
                 return (
-                  <li key={comment._id + index}>
+                  <li className="commentArea" key={comment._id + index}>
                     {comment.text}
                   </li>
                 )
@@ -274,7 +274,7 @@ function Post(props) {
       setExistingTags(
         <div className="tagBubbleSuggestionContainer">
           {flattenedTags.map(tag =>
-            <li onClick={() => onHandleTag(tag)} className="tagBubbleSuggestion tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
+            <li onClick={() => onHandleTag(tag)} className="tagBubbleSuggestion addBubble tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
               {tag}
               <i className="fas fa-plus tagBubbleIcon"></i>
             </li>
