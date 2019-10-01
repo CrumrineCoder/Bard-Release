@@ -90,3 +90,4 @@ Problems I'm fixing w/ this:
 * React smart scroll across components.
 * Blacklist songs for yourself
 * Fix overlay for when the user is posting a new song, it shouldn't fire and shouldn't allow clicking behind it.
+* Don't log out users

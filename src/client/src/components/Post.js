@@ -15,7 +15,7 @@ function Post(props) {
   const [tagToAdd, setTagToAdd] = useState("");
   const [existingTags, setExistingTags] = useState("");
   const [commentToAdd, setCommentToAdd] = useState("");
-  const [tagLength, setTagLength] = useState(7);
+  const [tagLength, setTagLength] = useState(10);
   const [visualTags, setVisualTags] = useState("");
   const [commentUpdatedText, setCommentUpdatedText] = useState("");
   const [openCommentEdit, setOpenCommentEdit] = useState(false);
@@ -293,7 +293,7 @@ function Post(props) {
   }
 
   function showMoreTags() {
-    setTagLength(tagLength + 5)
+    setTagLength(tagLength + 10)
   }
 
   function onHandleTag(tag) {
