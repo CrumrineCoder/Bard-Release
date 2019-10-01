@@ -371,8 +371,8 @@ body{
   //grid-auto-rows: 1fr;
   // hor
   //grid-auto-rows: minmax(min-content, max-content); //
-  grid-column-gap: 5px;
-  grid-row-gap: 25px;
+  grid-column-gap: 15px;
+  grid-row-gap: 40px;
 }
 
 .postLink{
@@ -503,11 +503,11 @@ body{
 
 .musicPageContainer{
   background-image: url(https://i.ytimg.com/vi/8oOUT3j3r70/maxresdefault.jpg);
-  width: 100vw;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 20px;
 }
 
 .flexHomePageContainer{
