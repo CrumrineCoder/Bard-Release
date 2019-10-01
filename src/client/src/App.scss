@@ -118,11 +118,24 @@ body{
   padding-left: 5px; 
 }
 
-.scrollToTopHeaderButton{
+.scrollContainer{
+  font-size: 10px;  
+  position: relative; 
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.scrollContainerText{
+  position: absolute;
+  top: 25px; 
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.scrollToTopHeaderButton{
   font-size: 20px;
   cursor: pointer; 
   &:hover{
@@ -483,7 +496,8 @@ body{
 //  font-family: 'Pirata One', cursive; 
   background: rgba(0, 0, 0, 0.804);
   border-radius: 25px; 
-  width: 700px;
+  max-width: 700px;
+  width: 95%;
 }
 
 .homePageSearchInput, .homePageSearchButton{
