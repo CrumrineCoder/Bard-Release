@@ -1,11 +1,8 @@
 import * as types from '../actions';
 
-export default function searchTags(state = [], action) {
+export default function searchTags(state = {}, action) {
     // console.log("tset");
     let response = action.response;
-      console.log(state);
-      console.log(response);
-      console.log(action);
     switch (action.type) {
         case types.ADD_SEARCH_TAGS:
        /*     if(state.response){
@@ -13,8 +10,7 @@ export default function searchTags(state = [], action) {
             } else{
                 return { ...state, response: { overlay: true } };
             } */
-            console.log(response);
-            console.log(state.response);
+            return {...state, response: {tag: action.post} }
         default:
             return state;
     }

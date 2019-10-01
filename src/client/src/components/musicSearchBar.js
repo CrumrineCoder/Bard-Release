@@ -150,6 +150,15 @@ function MusicSearchBar(props) {
         }
     }, [])
 
+    useEffect(() => {
+        if(props.response.searchTags){
+            if(props.response.searchTags.response){
+                console.log(props.response.searchTags.response.tag);
+                onSearchTag(props.response.searchTags.response.tag);
+            }
+        }
+    }, [props.response.searchTags])
+
     return (
         <div className="musicSearchAreaContainer">
             <div>

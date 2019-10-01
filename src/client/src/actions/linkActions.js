@@ -127,7 +127,6 @@ export const getAllTagsAction = () => {
 
 
 export const addSearchTagAction = (post) => {
-  console.log(post);
   return{
     type: types.ADD_SEARCH_TAGS,
     post

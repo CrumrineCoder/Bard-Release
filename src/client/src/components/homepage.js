@@ -16,7 +16,7 @@ function HomePage(props) {
             pathname: '/music',
             state: tag
         }) */
-        addSearchTagAction(tag);
+        props.dispatch(addSearchTagAction(tag));
     }
 
     function shuffle(a) {
