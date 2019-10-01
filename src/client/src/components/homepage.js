@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAllTagsAction, checkTagsAction } from '../actions/linkActions';
+import { getAllTagsAction, checkTagsAction, addSearchTagAction } from '../actions/linkActions';
 
 function HomePage(props) {
     const [isSuccess, setIsSuccess] = useState(false);
@@ -12,10 +12,11 @@ function HomePage(props) {
     const [recommendedTags, setRecommendedTags] = useState([]);
 
     function submitTag(tag) {
-        props.history.push({
+       /* props.history.push({
             pathname: '/music',
             state: tag
-        })
+        }) */
+        addSearchTagAction(tag);
     }
 
     function shuffle(a) {

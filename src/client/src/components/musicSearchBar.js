@@ -113,7 +113,6 @@ function MusicSearchBar(props) {
             if (props.response.dashboard.response.message == "Successfully created new post.") {
                 props.dispatch(getAllPostsAction());
                 props.dispatch(turnoffOverlayAction());
-                //     props.dispatch(turnoffOverlayAction());
             }
 
             setIsSuccess(props.response.dashboard.response.success);

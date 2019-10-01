@@ -29,13 +29,13 @@ function App(props) {
     }
 
   }, [props.store.overlay])
-
+//onClick={() => props.dispatch(turnoffOverlayAction())} 
   return (
     <HashRouter>
       <div id="app">
         <Header setOverlay={setOverlay} overlay={overlay} />
 
-        <div onClick={() => props.dispatch(turnoffOverlayAction())} className={overlay ? "appContainer active" : "appContainer"}>
+        <div className={overlay ? "appContainer active" : "appContainer"}>
           <Switch>
             <Route path='/' exact={true} component={HomepageContainer} />
             <Route path='/login' component={LoginPage} />

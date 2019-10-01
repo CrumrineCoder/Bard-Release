@@ -108,12 +108,12 @@ function Header(props) {
     if (props.location.pathname != "/music") {
       props.history.push('/music');
     }
-    props.dispatch(toggleOverlayAction());
+   props.dispatch(toggleOverlayAction());
   }
 
   function handleNonOverlayButton() {
     if (props.overlay) {
-      props.dispatch(turnoffOverlayAction());
+     props.dispatch(turnoffOverlayAction());
     }
   }
 
