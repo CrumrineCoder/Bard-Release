@@ -9,10 +9,8 @@ import {
 import { connect } from 'react-redux';
 
 import PrivateRoute from './privateRoute';
-import HomePage from '../components/homepage';
 import LoginPage from '../components/loginPage';
 import RegisterPage from '../components/registerPage';
-import MusicPage from '../components/musicPage';
 import Header from '../components/Header';
 import { turnoffOverlayAction } from '../actions/linkActions';
 
@@ -40,7 +38,6 @@ function App(props) {
             <Route path='/' exact={true} component={HomepageContainer} />
             <Route path='/login' component={LoginPage} />
             <Route path='/register' component={RegisterPage} />
-            <Route path='/music' component={MusicPage} />
           </Switch>
         </div>
       </div>

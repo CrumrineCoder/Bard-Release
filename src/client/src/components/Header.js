@@ -127,7 +127,6 @@ function Header(props) {
         <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
         <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
           <Link onClick={() => handleNonOverlayButton()} className="headerLink" to=''>Home</Link>
-          <Link onClick={() => handleNonOverlayButton()} className={isSuccess ? "headerLink lastHeaderLink" : "headerLink" } to='music'>Music</Link>
           {isSuccess ?
             <>
               <i onClick={() => handleOverlayButton()} className="far fa-plus-square headerAddPost"></i>
