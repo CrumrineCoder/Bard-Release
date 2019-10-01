@@ -65,7 +65,7 @@ Problems I'm fixing w/ this:
 * Improve Search from Home page **DONE**
 * Search bar in nav **DONE FOR NOW**
 * Ellipis logout, and post song in nav. **DONE**
-* Sticky Nav 
+* Sticky Nav **DONE!!**
 * Drafts/unlisted playlists for broken links. 
 * Profile. 
 * SCSS cleanup

@@ -162,7 +162,7 @@ function MusicPage(props) {
   }
 
   return (
-    <div>
+    <div className="musicPageContainer">
       <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}

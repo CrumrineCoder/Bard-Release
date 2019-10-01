@@ -16,6 +16,8 @@ import MusicPage from '../components/musicPage';
 import Header from '../components/Header';
 import { turnoffOverlayAction } from '../actions/linkActions';
 
+import HomepageContainer from './HomepageContainer';
+
 function App(props) {
   const [overlay, setOverlay] = useState(false);
 
@@ -35,7 +37,7 @@ function App(props) {
 
         <div onClick={() => props.dispatch(turnoffOverlayAction())} className={overlay ? "appContainer active" : "appContainer"}>
           <Switch>
-            <Route path='/' exact={true} component={HomePage} />
+            <Route path='/' exact={true} component={HomepageContainer} />
             <Route path='/login' component={LoginPage} />
             <Route path='/register' component={RegisterPage} />
             <Route path='/music' component={MusicPage} />
