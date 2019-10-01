@@ -11,7 +11,7 @@ useEffect(() => {
 }, []);
 */
   const handleOnDocumentBottom = useCallback(() => {
-    console.log('I am at bottom! ' + Math.round(performance.now()));
+  //  console.log('I am at bottom! ' + Math.round(performance.now()));
     setIsFetching(false);
     setIsFetching(true);
     if (callback) {
@@ -22,7 +22,7 @@ useEffect(() => {
   useBottomScrollListener(handleOnDocumentBottom);
   useEffect(() => {
     if (!isFetching) return;
-    console.log("true");
+//    console.log("true");
     callback(() => {
       //       console.log('called back');
     });

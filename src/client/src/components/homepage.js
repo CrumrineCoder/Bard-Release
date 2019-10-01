@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getAllTagsAction, checkTagsAction, addSearchTagAction } from '../actions/linkActions';
+import MusicSearchBar from './musicSearchBar';
 
 function HomePage(props) {
     const [isSuccess, setIsSuccess] = useState(false);
@@ -80,14 +81,8 @@ function HomePage(props) {
             setAutocompleteTags(<></>);
         }
     }, [tag])
-
-    return (
-        <div className="flexHomePageContainer">
-            <div className="homePage">
-
-                <h1 className="homePageHeader">Bardic Inspiration</h1>
-                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
-                <div className="musicSearchContainer">
+/*
+<div className="musicSearchContainer">
                     <input className="homePageSearchInput borderImage" placeholder="Search by tag" value={tag} onChange={e => setTag(e.target.value)} ></input>
                     {autocompleteTagsLength > 0 && autocompleteTags}
                 </div>
@@ -101,6 +96,14 @@ function HomePage(props) {
                         )
                     }
                 )}
+                */
+    return (
+        <div className="flexHomePageContainer">
+            <div className="homePage">
+
+                <h1 className="homePageHeader">Bardic Inspiration</h1>
+                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
+                <MusicSearchBar></MusicSearchBar>
                 <button className="homePageSearchButton borderImage btn-pumpkin" onClick={submitTag}>Explore</button>
             </div>
         </div>

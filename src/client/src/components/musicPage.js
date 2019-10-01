@@ -152,8 +152,6 @@ function MusicPage(props) {
   }, [props.response.tags.response])
 
   function fetchMoreListItems() {
-    console.log(amountOfPosts);
-    console.log(filteredPosts.length);
     if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
@@ -165,13 +163,12 @@ function MusicPage(props) {
 
   return (
     <div className="musicPageContainer">
-      <MusicSearchBar></MusicSearchBar>
       <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} redirect={redirect}></LoginModal>
       {postsContent}
       {isFetching && (amountOfPosts < finalizedLength) &&
         <Fragment>
-          <div class="cs-loader">
-            <div class="cs-loader-inner">
+          <div className="cs-loader">
+            <div className="cs-loader-inner">
               <label>	●</label>
               <label>	●</label>
               <label>	●</label>

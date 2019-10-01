@@ -343,6 +343,8 @@ body{
   //padding: 10px; 
  // max-width: 30%;
   color: rgb(37, 37, 37); 
+  width: 100%;
+  max-width: 600px;
  // border: 1px solid rgb(37, 37, 37); 
   border-radius: 5px;
   background: white; 
@@ -377,6 +379,7 @@ body{
   //grid-auto-rows: minmax(min-content, max-content); //
   grid-column-gap: 15px;
   grid-row-gap: 40px;
+  justify-items: center; 
 }
 
 .postLink{
@@ -463,6 +466,7 @@ body{
 //  font-family: 'Pirata One', cursive; 
   background: rgba(0, 0, 0, 0.804);
   border-radius: 25px; 
+  max-width: 95%;
 }
 
 .homePageSearchInput, .homePageSearchButton{
@@ -511,7 +515,7 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 20px;
+  padding: 0px 20px 50px 20px;
   height: 100%;
 }
 
@@ -521,7 +525,7 @@ body{
   justify-content: center;
   background-image: url("https://i.ytimg.com/vi/8oOUT3j3r70/maxresdefault.jpg");
   width: 100vw; 
-  height: 100vh; 
+  height: calc(100vh - 60px); 
   /*position: absolute; 
   top: 0px;
   left: 0px; */
@@ -685,6 +689,8 @@ body{
   height: 100%;
   z-index: 5;
   position: absolute; 
+
+
 
   display: flex; // make us of Flexbox
   align-items: center; // does vertically center the desired content
