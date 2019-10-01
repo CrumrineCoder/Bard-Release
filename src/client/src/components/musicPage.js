@@ -85,17 +85,21 @@ function MusicPage(props) {
           }
         }
       }
-
-      if (props.response.dashboard.response) {
-        if (props.response.dashboard.response.message == "Search by tag done." && props.response.dashboard.response.tag.length == 0) {
+     // console.log(props.response.dashboard.response);
+    //  console.log(props.response.tags.response);
+      if (props.response.tags.response) {
+        if (props.response.tags.response.message == "Search by tag done." && props.response.tags.response.tag.length == 0) {
+        //  console.log("true");
           setPostsContent(
             <h1 className="noPostsDisclaimer">There are no posts to display for this search.</h1>
           )
-        } else if (props.response.dashboard.response.message != "Check sources done." && props.response.dashboard.response.message != "Check tags done.") {
+          return; 
+        } else if (props.response.tags.response.message != "Check sources done." && props.response.tags.response.message != "Check tags done.") {
           if (finalizedPosts.length == 0) {
             setPostsContent(
               <h1 className="noPostsDisclaimer">There are no posts to display for this search and filter.</h1>
             )
+            return;
           } else {
             //     console.log("Redisplay")
             //   console.log(allTags);

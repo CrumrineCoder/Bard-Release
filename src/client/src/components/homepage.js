@@ -93,7 +93,7 @@ function HomePage(props) {
                 {recommendedTags.slice(0, 5).map(
                     function (tag) {
                         return (
-                            <li className="tagBubble borderImage smallTagBubble editableTagBubble" onClick={() => { submitTag(tag._id) }} key={tag._id}>
+                            <li className="tagBubble borderImage smallTagBubble addBubble editableTagBubble" onClick={() => { submitTag(tag._id) }} key={tag._id}>
                                 {tag._id}
                                 <i className="fas fa-plus iconAction"></i>
                             </li>

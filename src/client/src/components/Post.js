@@ -323,6 +323,7 @@ function Post(props) {
 
 
   /*  
+  
 */
   return (
     <div className="borderImage postContainer">
@@ -334,7 +335,7 @@ function Post(props) {
       }
 
       <div className="postVideoContainer">
-        {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
+       {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
         </iframe>}
       </div>
 

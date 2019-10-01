@@ -60,9 +60,13 @@ module.exports = (app) => {
 
     app.post('/api/tags/searchPostsByTag/', (req, res) => {
         // let tags = req.params.tag.split(",");
-        //console.log(req.body);
+        let search = {};
         let findPosts = {}; 
-        findPosts["$all"] = req.body;
+        if(req.body.length){
+            findPosts["$all"] = req.body;
+            search["tags.text"] =  findPosts
+        } 
+        
         /*
         if(req.body.exclusiveTags.length > 0){
             findPosts["$all"] = req.body.exclusiveTags
@@ -71,9 +75,7 @@ module.exports = (app) => {
             findPosts["$in"] =  req.body.inclusiveTags
         }
         */
-        Tags.find({
-            "tags.text": findPosts
-        }, function (error, tag) {
+        Tags.find(search, function (error, tag) {
             //      console.log(tag);
             if (error) throw error;
 
@@ -186,8 +188,8 @@ module.exports = (app) => {
     //POST new user route (optional, everyone has access)
     app.post('/api/tags/removeUserFromTag', checkToken, (req, res, next) => {
         let { tag, _id } = req.body;
-        console.log(tag);
-        console.log(req.body.user);
+      //  console.log(tag);
+      //  console.log(req.body.user);
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
             Tags.findOneAndUpdate({
                 "tags._id": req.body.tag
@@ -202,7 +204,7 @@ module.exports = (app) => {
                     
                 },
                 function (error, tag) {
-                    console.log(tag);
+             //       console.log(tag);
                     if (tag.tags[0].emails.length == 1) {
                         Tags.findOneAndUpdate({
                             "postID": req.body.postID

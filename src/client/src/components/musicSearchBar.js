@@ -76,7 +76,9 @@ function MusicSearchBar(props) {
         if (newTags.length) {
             props.dispatch(searchPostsByTag(newTags))
         } else {
-            props.dispatch(getAllPostsAction());
+           // console.log("tears")
+            //props.dispatch(getAllPostsAction());
+            props.dispatch(searchPostsByTag(newTags))
             setSuggestedTags([]);
         }
     }
