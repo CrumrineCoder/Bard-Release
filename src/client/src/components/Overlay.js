@@ -1,33 +1,21 @@
 
 import React, { useState, useEffect, useRef, Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { checkCookie } from '../utils/cookies';
-import logo from "../assets/bardLogoVersion3.png"
 
-import { postAction, turnonOverlayAction, toggleOverlayAction, turnoffOverlayAction } from '../actions/linkActions';
+import { postAction, turnoffOverlayAction } from '../actions/linkActions';
 import { getCurrentUserAction } from '../actions/authenticationActions';
-import ScrollButton from "./ScrollButton.js"
 
 function Overlay(props) {
     
     const [showDropdown, setShowDropdown] = useState(false);
     const [existingSources, setExistingSources] = useState("");
     const [source, setSource] = useState("");
-    const node = useRef();
-
-
 
     function onHandlePost(event) {
         event.preventDefault();
 
         let link = event.target.link.value;
-
-        //let videoID = link.split('v=')[1];
-
-
-        // console.log("https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=" + videoID);
-
         let source = event.target.source.value;
         let name = event.target.name.value;
 
@@ -39,37 +27,16 @@ function Overlay(props) {
         props.dispatch(postAction(data));
     }
 
-    const handleClickOutside = e => {
-        if (node.current.contains(e.target)) {
-            // inside click
-            return;
-        }
-        // outside click
-        setShowDropdown(false);
-    };
-
     useEffect(() => {
         props.dispatch(getCurrentUserAction())
     }, [])
 
     useEffect(() => {
-        console.log(props);
         if(props.backendData.overlay.response){
             setShowDropdown(props.backendData.overlay.response.overlay);
         }
     }, [props.backendData.overlay])
 
-    useEffect(() => {
-        if (showDropdown) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [showDropdown]);
 
     return (
         <Fragment>
@@ -96,7 +63,7 @@ function Overlay(props) {
                     </form>
                     {existingSources}
                 </div>
-                <div onClick={()=>{setShowDropdown(false)}} className="overlayYellow"></div>
+                <div onClick={()=>{props.dispatch(turnoffOverlayAction())}} className="overlayYellow"></div>
                 </Fragment>
             }
         </Fragment>

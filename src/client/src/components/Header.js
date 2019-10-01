@@ -11,43 +11,7 @@ import ScrollButton from "./ScrollButton.js"
 function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [loggedIn, setLoggedIn] = useState();
-  const [message, setMessage] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [existingSources, setExistingSources] = useState("");
-  const [source, setSource] = useState("");
-  const node = useRef();
-
-  
-
-  function onHandlePost(event) {
-    event.preventDefault();
-
-    let link = event.target.link.value;
-
-    //let videoID = link.split('v=')[1];
-
-
-    // console.log("https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=" + videoID);
-
-    let source = event.target.source.value;
-    let name = event.target.name.value;
-
-    const data = {
-      link,
-      source,
-      name
-    };
-    props.dispatch(postAction(data));
-  }
-
-  const handleClickOutside = e => {
-    if (node.current.contains(e.target)) {
-      // inside click
-      return;
-    }
-    // outside click
-    setShowDropdown(false);
-  };
 
   useEffect(() => {
     props.dispatch(getCurrentUserAction())
@@ -55,29 +19,6 @@ function Header(props) {
   }, [])
 
   useEffect(() => {
-    if (showDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showDropdown]);
-
-
-  useEffect(() => {
-
-    /* if(props.overlay){
-       props.setOverlay(props)
-     }*/
-    /* if (props.response.dashboard) {
-        console.log(props.store.dashboard.response);
-        if (props.response.dashboard.response.message == "Successfully created new post.") {
-          props.setOverlay(false);
-        }
-      } */
     if (props.backendData.login.user) {
       if (props.backendData.login.user.message == "User login" && props.backendData.login.user.token != undefined) {
         setIsSuccess(props.backendData.login.user.success);
@@ -86,23 +27,6 @@ function Header(props) {
       }
     }
   }, [props.backendData.login.user])
-  /*
-    useEffect(() => {
-      console.log(props.response);
-      if (props.response.dashboard.response) {
-        if (props.response.dashboard.response.message == "Check sources done.") {
-          setExistingSources(
-            <div>
-              {props.response.dashboard.response.source.map(source =>
-                <li key={source._id}>
-                  {source._id}
-                </li>
-              )}
-            </div>)
-        }
-      }
-    }, [props]) */
-  // 
 
   function handleOverlayButton() {
     /*if (props.location.pathname != "/music") {
@@ -142,7 +66,7 @@ function Header(props) {
           }
         </div>
         {showDropdown &&
-          <div ref={node} onClick={() => handleNonOverlayButton()} className="headerEllipsisDropdown">
+          <div onClick={() => handleNonOverlayButton()} className="headerEllipsisDropdown">
             <div className="headerEllipsisDropdownItem">
               <Link onClick={() => setShowDropdown(false)} className="headerLink" to='login'>
                 <i className="fas fa-sign-out-alt ellipsisIcon"></i>Logout
