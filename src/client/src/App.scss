@@ -65,7 +65,11 @@ body{
   background: #d3b14d;
   color: #EEEBD0; 
   margin: 0px; 
-
+  background-image: url(https://i.ytimg.com/vi/8oOUT3j3r70/maxresdefault.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   //51626a
   // ad3f26
   //d3b14d
@@ -508,6 +512,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   padding: 20px;
+  height: 100%;
 }
 
 .flexHomePageContainer{
