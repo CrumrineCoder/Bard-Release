@@ -105,9 +105,9 @@ function Header(props) {
   // 
 
   function handleOverlayButton() {
-    if (props.location.pathname != "/music") {
+    /*if (props.location.pathname != "/music") {
       props.history.push('/music');
-    }
+    } */
    props.dispatch(toggleOverlayAction());
   }
 
@@ -126,7 +126,9 @@ function Header(props) {
         </div>
         <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
         <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
-          <Link onClick={() => handleNonOverlayButton()} className="headerLink" to=''>Home</Link>
+  
+          <Link onClick={() => handleNonOverlayButton()} className={isSuccess ? "headerLink lastHeaderLink" : "headerLink" } to=''>Home</Link>
+         
           {isSuccess ?
             <>
               <i onClick={() => handleOverlayButton()} className="far fa-plus-square headerAddPost"></i>
@@ -146,29 +148,6 @@ function Header(props) {
                 <i className="fas fa-sign-out-alt ellipsisIcon"></i>Logout
             </Link>
             </div>
-          </div>
-        }
-        {props.overlay &&
-          <div className="dashboardTool postNewSongModal borderImage">
-            <h3 className="dashboardToolHeader">Post a new song</h3>
-            <form onSubmit={onHandlePost}>
-              <div className="dashboardToolLabel">
-                <label htmlFor="link">Link <input required placeholder="https://www.youtube.com/watch?v=J5FFDj7vH6E" className="dashboardToolInput borderImage" autoComplete="off" type="link" name="link" id="link" />
-                </label>
-              </div>
-              <div className="dashboardToolLabel">
-                <label htmlFor="source">Source <input required placeholder="Chrono Trigger" className="dashboardToolInput borderImage" autoComplete="off" value={source} onChange={e => setSource(e.target.value)} type="source" name="source" id="source" />
-                </label>
-              </div>
-              <div className="dashboardToolLabel">
-                <label htmlFor="name">Name <input required placeholder="Frog's Theme" className="dashboardToolInput borderImage" autoComplete="off" type="name" name="name" id="name" />
-                </label>
-              </div>
-              <div>
-                <button className="btn btn-post btn-centered borderImage" type="submit">Post Song</button>
-              </div>
-            </form>
-            {existingSources}
           </div>
         }
       </div>

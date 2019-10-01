@@ -30,7 +30,7 @@ function LoginPage(props) {
     if (isSuccess && props.store.login.user.success) {
       setCookie('token', props.store.login.user.token, 1);
       //setIsSuccess(false);
-      props.history.push('/music')
+      props.history.push('/')
     }
   }, [isSuccess])
 

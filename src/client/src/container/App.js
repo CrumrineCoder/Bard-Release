@@ -12,6 +12,7 @@ import PrivateRoute from './privateRoute';
 import LoginPage from '../components/loginPage';
 import RegisterPage from '../components/registerPage';
 import Header from '../components/Header';
+import Overlay from '../components/Overlay';
 import { turnoffOverlayAction } from '../actions/linkActions';
 
 import HomepageContainer from './HomepageContainer';
@@ -32,8 +33,8 @@ function App(props) {
     <HashRouter>
       <div id="app">
         <Header setOverlay={setOverlay} overlay={overlay} />
-
-        <div className={overlay ? "appContainer active" : "appContainer"}>
+        <Overlay></Overlay>
+        <div className={overlay ? "appContainer" : "appContainer"}>
           <Switch>
             <Route path='/' exact={true} component={HomepageContainer} />
             <Route path='/login' component={LoginPage} />
