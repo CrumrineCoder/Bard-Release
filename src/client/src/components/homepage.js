@@ -98,15 +98,7 @@ function HomePage(props) {
                 )}
                 */
     return (
-        <div className="flexHomePageContainer">
-            <div className="homePage">
-
-                <h1 className="homePageHeader">Bardic Inspiration</h1>
-                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
-                <MusicSearchBar></MusicSearchBar>
-                <button className="homePageSearchButton borderImage btn-pumpkin" onClick={submitTag}>Explore</button>
-            </div>
-        </div>
+       <div></div>
     );
 }
 const mapStateToProps = (response) => ({ response });

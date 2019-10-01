@@ -76,7 +76,7 @@ function MusicSearchBar(props) {
         if (newTags.length) {
             props.dispatch(searchPostsByTag(newTags))
         } else {
-           // console.log("tears")
+            // console.log("tears")
             //props.dispatch(getAllPostsAction());
             props.dispatch(searchPostsByTag(newTags))
             setSuggestedTags([]);
@@ -124,7 +124,7 @@ function MusicSearchBar(props) {
     useEffect(() => {
         if (props.response.tags) {
             if (props.response.tags.response) {
-           //     console.log(props.response.tags.response);
+                //     console.log(props.response.tags.response);
                 if (props.response.tags.response.message == "Check tags done." && hasSearched) {
                     setAutocompleteTagsLength(props.response.tags.response.tag.length);
                     setAutocompleteTags(
@@ -151,8 +151,8 @@ function MusicSearchBar(props) {
     }, [])
 
     useEffect(() => {
-        if(props.response.searchTags){
-            if(props.response.searchTags.response){
+        if (props.response.searchTags) {
+            if (props.response.searchTags.response) {
                 console.log(props.response.searchTags.response.tag);
                 onSearchTag(props.response.searchTags.response.tag);
             }
@@ -160,33 +160,41 @@ function MusicSearchBar(props) {
     }, [props.response.searchTags])
 
     return (
-        <div className="musicSearchAreaContainer">
-            <div>
-                {searchTags.map(tag =>
-                    <li key={tag} className="tagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
-                        {tag}
-                        <i className="fas fa-minus tagBubbleIcon"></i>
-                    </li>
-                )}
-            </div>
-            <div className="musicSearchContainer">
-                <div className="musicSearchBarContainer">
-                    <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
-                    <input className="dashboardToolInput borderImage" placeholder="Search by tag" onKeyDown={_handleKeyDown} autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
-                    {tagToAdd != "" &&
-                        <i className="fas fa-times musicSearchBarCancelIcon" onClick={() => { setTagToAdd("") }}></i>
-                    }
+        <div className="flexHomePageContainer">
+            <div className="homePage">
+
+                <h1 className="homePageHeader">Bardic Inspiration</h1>
+                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
+                <div className="musicSearchAreaContainer">
+                    <div>
+                        {searchTags.map(tag =>
+                            <li key={tag} className="tagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
+                                {tag}
+                                <i className="fas fa-minus tagBubbleIcon"></i>
+                            </li>
+                        )}
+                    </div>
+                    <div className="musicSearchContainer">
+                        <div className="musicSearchBarContainer">
+                            <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
+                            <input className="dashboardToolInput borderImage" placeholder="Search by tag" onKeyDown={_handleKeyDown} autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
+                            {tagToAdd != "" &&
+                                <i className="fas fa-times musicSearchBarCancelIcon" onClick={() => { setTagToAdd("") }}></i>
+                            }
+                        </div>
+                        {autocompleteTagsLength > 0 && autocompleteTags}
+                    </div>
+                    <ul>
+                        {suggestedTags.map(tag =>
+                            <li key={tag} className="tagBubble borderImage addBubble editableTagBubble" onClick={() => { onSearchTag(tag) }}>
+                                {tag}
+                                <i className="fas fa-plus tagBubbleIcon"></i>
+                            </li>
+                        )}
+                    </ul>
                 </div>
-                {autocompleteTagsLength > 0 && autocompleteTags}
+                <button className="homePageSearchButton borderImage btn-pumpkin" onClick={()=>{onSearchTag()}}>Explore</button>
             </div>
-            <ul>
-                {suggestedTags.map(tag =>
-                    <li key={tag} className="tagBubble borderImage addBubble editableTagBubble" onClick={() => { onSearchTag(tag) }}>
-                        {tag}
-                        <i className="fas fa-plus tagBubbleIcon"></i>
-                    </li>
-                )}
-            </ul>
         </div>
     )
 }

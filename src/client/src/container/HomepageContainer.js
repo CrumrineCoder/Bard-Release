@@ -8,15 +8,15 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Homepage from "../components/homepage.js"
 import MusicPage from "../components/musicPage.js"
+import MusicSearchBar from "../components/musicSearchBar.js"
 
 
 function HomepageContainer(props) {
 
   return (
     <Fragment>
-        <Homepage></Homepage>
+        <MusicSearchBar></MusicSearchBar>
         <MusicPage></MusicPage>
     </Fragment>
   );
