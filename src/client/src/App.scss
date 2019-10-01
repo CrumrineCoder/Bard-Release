@@ -467,6 +467,7 @@ body{
   background: rgba(0, 0, 0, 0.804);
   border-radius: 25px; 
   max-width: 95%;
+  width: 700px;
 }
 
 .homePageSearchInput, .homePageSearchButton{
@@ -510,13 +511,16 @@ body{
 }
 
 .musicPageContainer{
-  background-image: url(https://i.ytimg.com/vi/8oOUT3j3r70/maxresdefault.jpg);
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 0px 20px 50px 20px;
+  margin: 0px 10px 50px 10px; 
+  padding: 20px;
   height: 100%;
+  background: rgba(0, 0, 0, 0.804);
+  border-radius: 25px;
+}
+
+#hasSearchedModifier{
+  height: auto; 
+  padding: 50px 0px;
 }
 
 .flexHomePageContainer{
@@ -533,11 +537,6 @@ body{
   max-height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-
-  background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .loginModalContainer{
@@ -773,6 +772,10 @@ body{
   }
 }
 
+.removeTagBubbleContainer{
+  padding-bottom: 10px;
+}
+
 .tagBubbleSuggestionContainer{
   margin-top: 5px;
 }
@@ -780,7 +783,8 @@ body{
 .tagBubble{
   background: white; 
   color: black; 
-  padding: 10px 15px 10px 25px; 
+ // padding: 10px 15px 10px 25px; 
+  padding: 5px 10px 5px 10px;
   display: inline-block;
   margin: 5px;
 

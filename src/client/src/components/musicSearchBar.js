@@ -59,6 +59,7 @@ function MusicSearchBar(props) {
                     inclusiveTags = inclusiveTags.filter((el) => !newTags.includes(el));
                     inclusiveTags = [...new Set(inclusiveTags)];
                     setSuggestedTags(inclusiveTags);
+                    setHasSearched(true);
                 }
             }
         }
@@ -98,7 +99,6 @@ function MusicSearchBar(props) {
                     searchTag
                 };
                 props.dispatch(checkTagsAction(data));
-                setHasSearched(true);
             }
 
         } else {
@@ -125,7 +125,7 @@ function MusicSearchBar(props) {
         if (props.response.tags) {
             if (props.response.tags.response) {
                 //     console.log(props.response.tags.response);
-                if (props.response.tags.response.message == "Check tags done." && hasSearched) {
+                if (props.response.tags.response.message == "Check tags done.") {
                     setAutocompleteTagsLength(props.response.tags.response.tag.length);
                     setAutocompleteTags(
                         <ul className="tagSuggestionsContainer borderImage">
@@ -160,15 +160,18 @@ function MusicSearchBar(props) {
     }, [props.response.searchTags])
 
     return (
-        <div className="flexHomePageContainer">
+        <div className="flexHomePageContainer" id={hasSearched && "hasSearchedModifier"}>
             <div className="homePage">
-
-                <h1 className="homePageHeader">Bardic Inspiration</h1>
-                <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
+                {!hasSearched &&
+                    <div className="homePageHeaderContainer">
+                        <h1 className="homePageHeader">Bardic Inspiration</h1>
+                        <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
+                    </div>
+                }
                 <div className="musicSearchAreaContainer">
-                    <div>
+                    <div className="removeTagBubbleContainer">
                         {searchTags.map(tag =>
-                            <li key={tag} className="tagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
+                            <li key={tag} className="tagBubble smallTagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
                                 {tag}
                                 <i className="fas fa-minus tagBubbleIcon"></i>
                             </li>
@@ -193,7 +196,7 @@ function MusicSearchBar(props) {
                         )}
                     </ul>
                 </div>
-                <button className="homePageSearchButton borderImage btn-pumpkin" onClick={()=>{onSearchTag()}}>Explore</button>
+                <button className="homePageSearchButton borderImage btn-pumpkin" onClick={() => { onSearchTag() }}>Explore</button>
             </div>
         </div>
     )
