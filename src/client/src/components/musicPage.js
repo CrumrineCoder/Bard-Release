@@ -31,7 +31,7 @@ function MusicPage(props) {
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   */
-
+  
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
 
@@ -152,6 +152,8 @@ function MusicPage(props) {
   }, [props.response.tags.response])
 
   function fetchMoreListItems() {
+    console.log(amountOfPosts);
+    console.log(filteredPosts.length);
     if (amountOfPosts < filteredPosts.length) {
       setTimeout(() => {
         //   console.log("more posts");
