@@ -171,7 +171,7 @@ function MusicSearchBar(props) {
     }, [])
 
     return (
-        <div className="flexHomePageContainer" id={hasSearched ? "hasSearchedModifier searchBar" : "searchBar"}>
+        <div className={hasSearched ? "flexHomePageContainer hasSearchedModifier" : "flexHomePageContainer"} id="searchBar">
             <div className="homePage">
                 {!hasSearched &&
                     <div className="homePageHeaderContainer">
