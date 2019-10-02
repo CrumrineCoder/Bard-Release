@@ -331,7 +331,7 @@ function Post(props) {
     if (copied) {
       const timer = setTimeout(() => {
         setCopied(false);
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [copied])
@@ -340,9 +340,9 @@ function Post(props) {
     <div className="borderImage postContainer">
       {copied && <p className="postContainerOverlayPasteMessage">copied!</p>}
       {overlay &&
-        <div className="postContainerOverlay">
+        <div className="postContainerOverlay" onClick={() => setOverlay(false)}>
           <p className="postContainerOverlayCancel marginLeftIcon fas fa-times" onClick={() => setOverlay(false)}></p>
-          <input className="postLink postContainerOverlayLink inputLinkOverlay" readOnly="readonly" value={props.post.link} />
+          <input onClick={() => { navigator.clipboard.writeText(props.post.link); setOverlay(false); setCopied(true) }} className="postLink postContainerOverlayLink inputLinkOverlay" readOnly="readonly" value={props.post.link} />
           <i onClick={() => { navigator.clipboard.writeText(props.post.link); setOverlay(false); setCopied(true) }} className="postContainerOverlayPaste fas fa-clipboard" />
         </div>
       }

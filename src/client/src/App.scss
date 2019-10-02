@@ -677,20 +677,33 @@ body{
 
 .postContainerOverlayPasteMessage{
   text-transform: uppercase;
-  color: #ffbf00;
+  color: #ffd967;
   margin: 0px;
-  top: 2px;
+  top: 43%;
   position: absolute;
-  font-size: 10px;
+  font-size: 14px;
   background: black;
-  padding: 2px 5px;
+  padding: 6px 15px;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
   z-index: 5; 
   border-radius: 25px;
+  border: 1px solid #ffbf00;
+  animation: opacityOnAndOff 2000ms normal forwards;
 }
 
+@keyframes opacityOnAndOff {
+  0% {
+      opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
 
 .removeIcon{
   &:hover{
