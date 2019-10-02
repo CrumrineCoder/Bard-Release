@@ -14,5 +14,5 @@ const tagCategories = {
     "quiet": ["low-key", "relaxing", "comfy", "chill", "somber", "slow", "breath", "sleep"],
     "loud": ["brutal", "industrial", "neglect", "primal", "war"]
 }
-
+// dry
 export default tagCategories;

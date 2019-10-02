@@ -19,9 +19,19 @@ function MusicSearchBar(props) {
 
     const [hasSearched, setHasSearched] = useState(false);
 
+    const [recommendedTags, setRecommendedTags] = useState([]);
+
     String.prototype.isEmpty = function () {
         return (this.length === 0 || !this.trim());
     };
+
+    function shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
 
     function onSearchTag(tag) {
         let localTagToAdd;
@@ -136,6 +146,12 @@ function MusicSearchBar(props) {
                             )}
                         </ul>)
                 }
+                if (props.response.tags.response.message == "Get all tags done.") {
+                    if (props.response.tags.response.tag.length > 0) {
+                        let returnedArray = shuffle(props.response.tags.response.tag);
+                        setRecommendedTags(returnedArray);
+                    }
+                }
             }
         }
     }, [props.response.tags])
@@ -196,6 +212,16 @@ function MusicSearchBar(props) {
                         )}
                     </ul>
                 </div>
+                {!hasSearched && recommendedTags.slice(0, 5).map(
+                    function (tag) {
+                        return (
+                            <li className="tagBubble borderImage smallTagBubble addBubble editableTagBubble" onClick={() => { onSearchTag(tag._id) }} key={tag._id}>
+                                {tag._id}
+                                <i className="fas fa-plus iconAction"></i>
+                            </li>
+                        )
+                    }
+                )}
                 <button className="homePageSearchButton borderImage btn-pumpkin" onClick={() => { onSearchTag() }}>Explore</button>
             </div>
         </div>
