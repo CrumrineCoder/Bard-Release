@@ -89,7 +89,7 @@ Problems I'm fixing w/ this:
 * Highlight tags that are being searched for
 * Scroll speed, if it would take too long just go faster. 
 * Blacklist songs for yourself
-* Fix overlay for when the user is posting a new song, it shouldn't fire and shouldn't allow clicking behind it.
+* Fix overlay for when the user is posting a new song, it shouldn't fire and shouldn't allow clicking behind it. **DONE!!**
 * Don't log out users
 * Formatting issue of songs. 
 * Don't kill server on updating
