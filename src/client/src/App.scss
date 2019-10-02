@@ -139,6 +139,14 @@ body{
   position: relative; 
 }
 
+.inputLinkOverlay{
+  background:none;
+  border:0;
+  color:#ff0000
+}
+
+
+
 .postChooseSectionNoteNumber{
   position: absolute;
   top: -14px;
@@ -756,11 +764,27 @@ body{
   }
 }
 
+.postContainerOverlayPaste{
+  position: absolute;
+  top: 55%; 
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  text-transform: uppercase;
+  cursor: pointer; 
+  color: white;
+  &:hover{
+    color: #ffbf00;
+  }
+  font-size: 30px;
+}
+
 .postContainerOverlayLink{
   cursor: pointer; 
   color: white;
-  width: 75%;
+  width: 95%;
   font-size: 12px;
+  text-align: center;
   &:hover{
     color: #ffbf00;
   }

@@ -87,7 +87,7 @@ Problems I'm fixing w/ this:
 * bug w/ multi tag indexing for one result? **DONE!!** 
 * bug w/ endless scroll on scrolling to bottom of another page **DONE!!**
 * Highlight tags that are being searched for
-* Scroll speed, if it would take too long just go faster. 
+* Scroll speed, if it would take too long just go faster. **DONE!!**
 * Blacklist songs for yourself
 * Fix overlay for when the user is posting a new song, it shouldn't fire and shouldn't allow clicking behind it. **DONE!!**
 * Don't log out users

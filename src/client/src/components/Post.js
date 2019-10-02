@@ -323,14 +323,15 @@ function Post(props) {
 
 
   /*  
-         
+       <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>    
 */
   return (
     <div className="borderImage postContainer">
       {overlay &&
         <div className="postContainerOverlay">
           <p className="postContainerOverlayCancel fas fa-times" onClick={() => setOverlay(false)}></p>
-          <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>
+          <input className="postLink postContainerOverlayLink inputLinkOverlay" readOnly="readonly" value={props.post.link} />
+          <i onClick={() => {navigator.clipboard.writeText(props.post.link)}} className="postContainerOverlayPaste fas fa-clipboard" />
         </div>
       }
 
