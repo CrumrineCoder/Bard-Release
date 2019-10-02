@@ -44,6 +44,9 @@ function MusicSearchBar(props) {
                 let checkTags = newTags.map(str => str.replace(/\s/g, ''));
                 checkTags = checkTags.filter(Boolean);
                 if (checkTags.length) {
+                    let returnedArray = shuffle(recommendedTags);
+                    setRecommendedTags(returnedArray);
+                    
                     newTags = newTags.filter(function (el) {
                         return el != null;
                     });
@@ -70,6 +73,7 @@ function MusicSearchBar(props) {
                     inclusiveTags = [...new Set(inclusiveTags)];
                     setSuggestedTags(inclusiveTags);
                     setHasSearched(true);
+                    
                 }
             }
         }
@@ -165,15 +169,6 @@ function MusicSearchBar(props) {
             }
         }
     }, [])
-
-    useEffect(() => {
-        if (props.response.searchTags) {
-            if (props.response.searchTags.response) {
-                console.log(props.response.searchTags.response.tag);
-                onSearchTag(props.response.searchTags.response.tag);
-            }
-        }
-    }, [props.response.searchTags])
 
     return (
         <div className="flexHomePageContainer" id={hasSearched ? "hasSearchedModifier" : ""}>
