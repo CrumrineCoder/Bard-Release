@@ -277,7 +277,7 @@ function Post(props) {
           {flattenedTags.map(tag =>
             <li onClick={() => onHandleTag(tag)} className="tagBubbleSuggestion addBubble tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
               {tag}
-              <i className="fas fa-plus tagBubbleIcon"></i>
+              <i className="fas fa-plus marginLeftIcon tagBubbleIcon"></i>
             </li>
           )}
         </div>
