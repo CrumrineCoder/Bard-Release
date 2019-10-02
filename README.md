@@ -81,7 +81,7 @@ Problems I'm fixing w/ this:
 * Bug with reaching end of infinite scroll **DONE!!** 
 * Default instead of youtube iframe with a generated preview? 
 * Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. 
-* copy link with button
+* copy link with button **DONE!!**
 * number of notes on Notes tab **DONE!!**
 * Search by bad tag should return nothing. **DONE!!**
 * bug w/ multi tag indexing for one result? **DONE!!** 
