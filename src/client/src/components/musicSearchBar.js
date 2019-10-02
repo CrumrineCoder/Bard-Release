@@ -176,7 +176,7 @@ function MusicSearchBar(props) {
                 {!hasSearched &&
                     <div className="homePageHeaderContainer">
                         <h1 className="homePageHeader">Bardic Inspiration</h1>
-                        <h2 className="homePageSubHeader">Find music for your upcoming tabletop session</h2>
+                        <h2 className="homePageSubHeader">Find and add music for your upcoming tabletop session</h2>
                     </div>
                 }
                 <div className="musicSearchAreaContainer">
