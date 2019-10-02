@@ -74,7 +74,7 @@ Problems I'm fixing w/ this:
 * Autocomplete on homepage **DONE!!**
 * Autocomplete add tag should include Words document **DONE!!**
 * Audio player fixed position?
-* Bug: Multiple comments, edit one. 
+* Bug: Multiple comments, edit one. **DONE!!**
 * Move cards back to vertical but make smaller, cut excess and make two tabl **DONE!**
 * Make home and music page the same thing with parallex z indes scrolling. 
 * Infinite scroll **DONE!!**
@@ -92,3 +92,4 @@ Problems I'm fixing w/ this:
 * Fix overlay for when the user is posting a new song, it shouldn't fire and shouldn't allow clicking behind it.
 * Don't log out users
 * Formatting issue of songs. 
+* Don't kill server on updating

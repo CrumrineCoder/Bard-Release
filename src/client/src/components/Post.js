@@ -157,7 +157,7 @@ function Post(props) {
           {comments.map(
             function (comment, index) {
               if (comment.email == (props.currentUser)) {
-                if (openCommentEdit) {
+                if (openCommentEdit == comment._id) {
                   return (
                     <label htmlFor="commentToBeEdited">
                       <textarea autoFocus className="postCommentField borderImage" value={commentUpdatedText} rows="5" cols="25" autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
@@ -172,7 +172,7 @@ function Post(props) {
                     <li className="commentArea commentEditArea" key={comment._id + index}>
                       {comment.text}
                       <span className="commentIcons">
-                        <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(true); setCommentUpdatedText(comment.text) }}></i>
+                        <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(comment._id); setCommentUpdatedText(comment.text) }}></i>
                         <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
                       </span>
                     </li>
