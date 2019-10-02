@@ -379,7 +379,7 @@ function Post(props) {
             <div className="postVideoIcons">
               {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit marginIcon postEditButton iconAction editIcon"></i>}
 
-              <i onClick={() => setOverlay(true)} className="fas fa-link editIcon iconAction"></i>
+              <i onClick={() => { navigator.clipboard.writeText(props.post.link); setCopied(true) }} className="fas fa-link editIcon iconAction"></i>
             </div>
             <div className="postVideoHeader">
               <h3>{props.post.source}</h3>
@@ -405,7 +405,7 @@ function Post(props) {
           {props.loggedIn ?
             <div className="postDashboardContainer">
               <div className="dashboardToolLabel">
-                <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon fas fa-plus-square"></i>
+                <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
               </div>
               {existingTags}
             </div>
