@@ -378,7 +378,9 @@ function Post(props) {
       <div className="postChooseSectionContainer">
         <span className={section == "tags" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("tags")}>Tags</span>
 
-        <span className={section == "notes" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("notes")}>Notes</span>
+        <span className={section == "notes" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("notes")}>
+          {comments && <p className="postChooseSectionNoteNumber">{comments.length > 9 ? "9+" : comments.length}</p>}
+          Notes</span>
       </div>
 
       {section == "tags" ?

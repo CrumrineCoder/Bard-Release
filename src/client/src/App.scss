@@ -135,6 +135,22 @@ body{
   transform: translateX(-50%);
 }
 
+.postChooseSectionLink{
+  position: relative; 
+}
+
+.postChooseSectionNoteNumber{
+  position: absolute;
+  top: -14px;
+  left: 3px;
+  background: rgb(37, 37, 37); 
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  color: white;
+  font-size: 10px;  
+}
+
 .scrollToTopHeaderButton{
   font-size: 20px;
   cursor: pointer; 
@@ -335,7 +351,7 @@ body{
   font-weight: bold; 
   cursor: pointer; 
   span:nth-child(2){
-    margin-left: 15px; 
+    margin-left: 30px;
   }
   .active{
     border-bottom: 3px solid #e0b73c;
@@ -346,7 +362,7 @@ body{
   span{
     position: relative;
     display:inline-block;
-    padding: 0px 10px 5px 10px;
+    padding: 0px 20px 5px 20px;
 		text-decoration: none;
     text-transform: uppercase;
     //background: #d3b14d4a;

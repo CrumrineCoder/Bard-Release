@@ -82,7 +82,7 @@ Problems I'm fixing w/ this:
 * Default instead of youtube iframe with a generated preview? 
 * Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. 
 * copy link with button
-* # of notes on Notes tab
+* number of notes on Notes tab **DONE!!**
 * Search by bad tag should return nothing. **DONE!!**
 * bug w/ multi tag indexing for one result? **DONE!!** 
 * bug w/ endless scroll on scrolling to bottom of another page **DONE!!**
@@ -93,3 +93,4 @@ Problems I'm fixing w/ this:
 * Don't log out users
 * Formatting issue of songs. 
 * Don't kill server on updating
+* Close autocomplete
