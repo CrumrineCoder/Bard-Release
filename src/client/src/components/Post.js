@@ -30,6 +30,7 @@ function Post(props) {
   const [section, setSection] = useState("tags");
 
   const [overlay, setOverlay] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   function getCommentsForOnePost(postId) {
 
@@ -125,7 +126,7 @@ function Post(props) {
                 return (
                   <li className="tagBubble borderImage removeBubble smallTagBubble editableTagBubble" onClick={e => removeUserFromTag(tag)} key={tag._id}>
                     {tag.text}
-                    <i className="fas fa-times iconAction removeIcon"></i>
+                    <i className="fas fa-times marginLeftIcon iconAction removeIcon"></i>
                   </li>
                 )
               } else {
@@ -172,8 +173,8 @@ function Post(props) {
                     <li className="commentArea commentEditArea" key={comment._id + index}>
                       {comment.text}
                       <span className="commentIcons">
-                        <i className="fas fa-edit iconAction editIcon" onClick={() => { setOpenCommentEdit(comment._id); setCommentUpdatedText(comment.text) }}></i>
-                        <i className="fas fa-times iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
+                        <i className="fas fa-edit marginLeftIcon iconAction editIcon" onClick={() => { setOpenCommentEdit(comment._id); setCommentUpdatedText(comment.text) }}></i>
+                        <i className="fas fa-times marginLeftIcon iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
                       </span>
                     </li>
                   )
@@ -325,13 +326,24 @@ function Post(props) {
   /*  
        <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>    
 */
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied])
+
   return (
     <div className="borderImage postContainer">
+      {copied && <p className="postContainerOverlayPasteMessage">copied!</p>}
       {overlay &&
         <div className="postContainerOverlay">
-          <p className="postContainerOverlayCancel fas fa-times" onClick={() => setOverlay(false)}></p>
+          <p className="postContainerOverlayCancel marginLeftIcon fas fa-times" onClick={() => setOverlay(false)}></p>
           <input className="postLink postContainerOverlayLink inputLinkOverlay" readOnly="readonly" value={props.post.link} />
-          <i onClick={() => {navigator.clipboard.writeText(props.post.link)}} className="postContainerOverlayPaste fas fa-clipboard" />
+          <i onClick={() => { navigator.clipboard.writeText(props.post.link); setOverlay(false); setCopied(true) }} className="postContainerOverlayPaste fas fa-clipboard" />
         </div>
       }
 
@@ -365,7 +377,8 @@ function Post(props) {
           :
           <>
             <div className="postVideoIcons">
-              {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit postEditButton iconAction editIcon"></i>}
+              {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit marginIcon postEditButton iconAction editIcon"></i>}
+
               <i onClick={() => setOverlay(true)} className="fas fa-link editIcon iconAction"></i>
             </div>
             <div className="postVideoHeader">

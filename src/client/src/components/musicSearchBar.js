@@ -184,7 +184,7 @@ function MusicSearchBar(props) {
                         {searchTags.map(tag =>
                             <li key={tag} className="tagBubble smallTagBubble borderImage removeBubble editableTagBubble" onClick={() => { removeTag(tag) }}>
                                 {tag}
-                                <i className="fas fa-minus tagBubbleIcon"></i>
+                                <i className="fas fa-minus marginLeftIcon tagBubbleIcon"></i>
                             </li>
                         )}
                     </div>
@@ -193,7 +193,7 @@ function MusicSearchBar(props) {
                             <i className="fas fa-search musicSearchBarIcon" onClick={() => { onSearchTag() }}></i>
                             <input className="dashboardToolInput borderImage" placeholder="Search by tag" onKeyDown={_handleKeyDown} autoComplete="off" value={tagToAdd} onChange={e => setTagToAdd(e.target.value)} type="searchTag" name="searchTag" id="searchTag" />
                             {tagToAdd != "" &&
-                                <i className="fas fa-times musicSearchBarCancelIcon" onClick={() => { setTagToAdd("") }}></i>
+                                <i className="fas fa-times marginLeftIcon musicSearchBarCancelIcon" onClick={() => { setTagToAdd("") }}></i>
                             }
                         </div>
                         {autocompleteTagsLength > 0 && autocompleteTags}
@@ -202,7 +202,7 @@ function MusicSearchBar(props) {
                         {suggestedTags.map(tag =>
                             <li key={tag} className="tagBubble borderImage addBubble editableTagBubble" onClick={() => { onSearchTag(tag) }}>
                                 {tag}
-                                <i className="fas fa-plus tagBubbleIcon"></i>
+                                <i className="fas fa-plus marginLeftIcon tagBubbleIcon"></i>
                             </li>
                         )}
                     </ul>
@@ -212,7 +212,7 @@ function MusicSearchBar(props) {
                         return (
                             <li className="tagBubble borderImage smallTagBubble addBubble editableTagBubble" onClick={() => { onSearchTag(tag._id) }} key={tag._id}>
                                 {tag._id}
-                                <i className="fas fa-plus iconAction"></i>
+                                <i className="fas fa-plus marginLeftIcon iconAction"></i>
                             </li>
                         )
                     }
