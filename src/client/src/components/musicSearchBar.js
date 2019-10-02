@@ -212,7 +212,7 @@ function MusicSearchBar(props) {
                         )}
                     </ul>
                 </div>
-                {!hasSearched && recommendedTags.slice(0, 5).map(
+                {searchTags.length < 1 && recommendedTags.slice(0, 5).map(
                     function (tag) {
                         return (
                             <li className="tagBubble borderImage smallTagBubble addBubble editableTagBubble" onClick={() => { onSearchTag(tag._id) }} key={tag._id}>
