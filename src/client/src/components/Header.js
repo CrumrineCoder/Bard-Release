@@ -8,6 +8,8 @@ import { postAction, turnonOverlayAction, toggleOverlayAction, turnoffOverlayAct
 import { getCurrentUserAction } from '../actions/authenticationActions';
 import ScrollButton from "./ScrollButton.js"
 
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+
 function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [loggedIn, setLoggedIn] = useState();
@@ -32,12 +34,12 @@ function Header(props) {
     /*if (props.location.pathname != "/music") {
       props.history.push('/music');
     } */
-   props.dispatch(toggleOverlayAction());
+    props.dispatch(toggleOverlayAction());
   }
 
   function handleNonOverlayButton() {
     if (props.overlay) {
-     props.dispatch(turnoffOverlayAction());
+      props.dispatch(turnoffOverlayAction());
     }
   }
 
@@ -48,11 +50,22 @@ function Header(props) {
           <img src={logo} className="headerLogo" />
           <span className="headerName">Bardic Inspiration</span>
         </div>
-        <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
+        <ScrollLink
+          activeClass="active"
+          to="searchBar"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="scrollContainer"
+        >
+            <i className="fas fa-arrow-circle-up scrollToTopHeaderButton"></i>
+            <span className="scrollContainerText">Back to Top</span>
+        </ScrollLink>
         <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
-  
-          <Link onClick={() => handleNonOverlayButton()} className={isSuccess ? "headerLink lastHeaderLink" : "headerLink" } to=''>Home</Link>
-         
+
+          <Link onClick={() => handleNonOverlayButton()} className={isSuccess ? "headerLink lastHeaderLink" : "headerLink"} to=''>Home</Link>
+
           {isSuccess ?
             <>
               <i onClick={() => handleOverlayButton()} className="far fa-plus-square headerAddPost"></i>

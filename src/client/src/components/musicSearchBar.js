@@ -46,7 +46,7 @@ function MusicSearchBar(props) {
                 if (checkTags.length) {
                     let returnedArray = shuffle(recommendedTags);
                     setRecommendedTags(returnedArray);
-                    
+
                     newTags = newTags.filter(function (el) {
                         return el != null;
                     });
@@ -171,7 +171,7 @@ function MusicSearchBar(props) {
     }, [])
 
     return (
-        <div className="flexHomePageContainer" id={hasSearched ? "hasSearchedModifier" : ""}>
+        <div className="flexHomePageContainer" id={hasSearched ? "hasSearchedModifier searchBar" : "searchBar"}>
             <div className="homePage">
                 {!hasSearched &&
                     <div className="homePageHeaderContainer">
