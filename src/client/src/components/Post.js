@@ -300,7 +300,8 @@ function Post(props) {
   function getHQ(link) {
     //let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
     let id = getID(link)
-    let embedLink = "https://img.youtube.com/vi/" + id + "/maxresdefault.jpg";
+    let embedLink = "https://img.youtube.com/vi/" + id + "/mqdefault.jpg";
+   // console.log(embedLink);
     // https://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg
     //embedLink += "?autoplay=1"
     return embedLink;
