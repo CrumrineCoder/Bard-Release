@@ -114,10 +114,10 @@ module.exports = (app) => {
         }).sort({ _id: -1 });
     });
 
-    app.get('/api/posts/getPostById/:id', (req, res) => {
-        //    console.log(req.body);
+    app.post('/api/posts/getPostById', (req, res) => {
         //  console.log(req.params)
-        let ids = req.params.id.split(",");
+       // let ids = req.body.split(",");
+       let ids = req.body;
         Posts.find({
             "_id": { "$in": ids }
         }, function (error, post) {

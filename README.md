@@ -38,7 +38,7 @@ Problems I'm fixing w/ this:
 * Song-boards
 * Check sources doesn't need to call the backend everytime. 
 * all tags should be checked in lowercase, even if written in upper.
-* Close all songs that are playing when the user searches. 
+* Close all songs that are playing when the user searches. **DONE!!**
 * Register User message issue **DONE!!**
 * Home Page **DONE!!**
 * Button styling **DONE!!**
@@ -76,10 +76,10 @@ Problems I'm fixing w/ this:
 * Audio player fixed position?
 * Bug: Multiple comments, edit one. **DONE!!**
 * Move cards back to vertical but make smaller, cut excess and make two tabl **DONE!**
-* Make home and music page the same thing with parallex z indes scrolling. 
+* Make home and music page the same thing with parallex z indes scrolling. **DONE!!**
 * Infinite scroll **DONE!!**
 * Bug with reaching end of infinite scroll **DONE!!** 
-* Default instead of youtube iframe with a generated preview? 
+* Default instead of youtube iframe with a generated preview? **DONE!!**
 * Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. 
 * copy link with button **DONE!!**
 * number of notes on Notes tab **DONE!!**
@@ -90,7 +90,7 @@ Problems I'm fixing w/ this:
 * Scroll speed, if it would take too long just go faster. **DONE!!**
 * Blacklist songs for yourself
 * Fix overlay for when the user is posting a new song, it shouldn't fire and shouldn't allow clicking behind it. **DONE!!**
-* Don't log out users
+* Don't log out users **DONE!!**
 * Formatting issue of songs. 
 * Don't kill server on updating
 * Close autocomplete

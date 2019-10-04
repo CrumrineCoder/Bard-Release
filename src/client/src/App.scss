@@ -283,12 +283,18 @@ body{
 
 .videoPreviewIcon{
   position: absolute;
-  top: 50%; 
+  top: 30px; 
   left: 50%; 
   transform: translate(-50%, -50%); 
   color: white;
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer; 
+  background: black; 
+  padding: 5px 20px;
+  border: 1px solid #ffc516;
+  &:hover{
+    color: #ffc516;
+  }
 }
 
 .dashboardToolsContainer{
