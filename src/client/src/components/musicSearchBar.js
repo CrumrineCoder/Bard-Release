@@ -107,6 +107,7 @@ function MusicSearchBar(props) {
 
     useEffect(() => {
         let searchTag = tagToAdd.toLowerCase().trim();
+        console.log(searchTag);
         if (searchTag) {
             if (searchTag.length > 0) {
                 const data = {
@@ -116,6 +117,7 @@ function MusicSearchBar(props) {
             }
 
         } else {
+            console.log("test");
             setAutocompleteTagsLength(0);
             setAutocompleteTags(<></>);
         }
@@ -138,8 +140,8 @@ function MusicSearchBar(props) {
     useEffect(() => {
         if (props.response.tags) {
             if (props.response.tags.response) {
-                //     console.log(props.response.tags.response);
-                if (props.response.tags.response.message == "Check tags done.") {
+                console.log(props.response.tags.response);
+                if (props.response.tags.response.message == "Check tags done." && tagToAdd) {
                     setAutocompleteTagsLength(props.response.tags.response.tag.length);
                     setAutocompleteTags(
                         <ul className="tagSuggestionsContainer borderImage">
