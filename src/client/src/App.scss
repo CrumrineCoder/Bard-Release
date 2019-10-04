@@ -270,6 +270,27 @@ body{
   padding: 20px; 
 }
 
+.videoPreviewContainer{
+  position: relative; 
+  width: 350px;
+  height: 150px;
+}
+
+.videoPreview{
+  width: 350px;
+  height: 150px;
+}
+
+.videoPreviewIcon{
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  color: white;
+  font-size: 30px;
+  cursor: pointer; 
+}
+
 .dashboardToolsContainer{
   display: grid;
   overflow: hidden;
@@ -474,12 +495,12 @@ body{
   width: 95%;
   margin: 10px auto; 
 }
-
+/*
 .videoIframe{
   margin: 10px auto;
   display: block;
 }
-
+*/
 .container {
   position: relative;
 }
@@ -680,7 +701,7 @@ body{
   text-transform: uppercase;
   color: #ffd967;
   margin: 0px;
-  top: 175px;
+  top: 165px;
   position: absolute;
   font-size: 14px;
   background: black;
@@ -751,7 +772,7 @@ body{
 .postVideoIcons{
   position: absolute;
   top: 0px;
-
+  margin-top: 10px;
   .iconAction:nth-of-type(2){
     margin-left: 30px;
   }
@@ -831,6 +852,7 @@ body{
   align-items: center;
   flex-direction: column;
   text-align: center;
+  margin-bottom: 10px;
   a{
     font-size: 12px; 
   }

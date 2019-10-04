@@ -287,8 +287,21 @@ function Post(props) {
     }
   }, [tagToAdd, allTags])
 
+  function getID(str) {
+    return str.split('v=')[1];
+  }
+
   function getEmbed(link) {
     let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+    embedLink += "?autoplay=1";
+    return embedLink;
+  }
+
+  function getHQ(link) {
+    //let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+    let id = getID(link)
+    let embedLink = "https://img.youtube.com/vi/" + id + "/maxresdefault.jpg";
+    // https://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg
     //embedLink += "?autoplay=1"
     return embedLink;
   }
@@ -348,8 +361,14 @@ function Post(props) {
       }
 
       <div className="postVideoContainer">
-        {<iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture">
-        </iframe>}
+
+        {playVideo ?
+          <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">    </iframe> :
+          <div onClick={() => setPlayVideo(true)} className="videoPreviewContainer">
+            <img className="videoPreview" src={getHQ(props.post.link)} />
+            <i className="fa fa-play videoPreviewIcon" />
+          </div>
+        }
       </div>
 
       <div className="postVideoContainer">
@@ -397,38 +416,39 @@ function Post(props) {
           Notes</span>
       </div>
 
-      {section == "tags" ?
-        <div className="postVideoContainer">
-          {tagChain}
+      {
+        section == "tags" ?
+          <div className="postVideoContainer">
+            {tagChain}
 
 
-          {props.loggedIn ?
-            <div className="postDashboardContainer">
-              <div className="dashboardToolLabel">
-                <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
+            {props.loggedIn ?
+              <div className="postDashboardContainer">
+                <div className="dashboardToolLabel">
+                  <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
+                </div>
+                {existingTags}
               </div>
-              {existingTags}
-            </div>
-            : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-        </div>
-        :
-        <div className="postCommentContainer">
-          {commentChain}
-          {props.loggedIn ?
-            <form className="postDashboardContainer" onSubmit={onHandleComment}>
-              <div>
-                <label htmlFor="comment"></label>
-                <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
-                  onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
-              </div>
-              <div>
-                <button className="btn btn-post btn-centered borderImage" type="submit">Post Note</button>
-              </div>
-            </form>
-            : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Note</button>}
-        </div>
+              : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
+          </div>
+          :
+          <div className="postCommentContainer">
+            {commentChain}
+            {props.loggedIn ?
+              <form className="postDashboardContainer" onSubmit={onHandleComment}>
+                <div>
+                  <label htmlFor="comment"></label>
+                  <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
+                    onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
+                </div>
+                <div>
+                  <button className="btn btn-post btn-centered borderImage" type="submit">Post Note</button>
+                </div>
+              </form>
+              : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Note</button>}
+          </div>
       }
-    </div>
+    </div >
   );
 }
 const mapStateToProps = (response) => ({ response });

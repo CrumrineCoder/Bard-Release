@@ -157,7 +157,7 @@ function MusicPage(props) {
         //   console.log("more posts");
         setAmountOfPosts(amountOfPosts + 3);
         setIsFetching(false);
-      }, 400);
+      }, 0);
     }
   }
 

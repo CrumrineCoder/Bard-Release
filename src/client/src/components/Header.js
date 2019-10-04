@@ -8,7 +8,7 @@ import { postAction, turnonOverlayAction, toggleOverlayAction, turnoffOverlayAct
 import { getCurrentUserAction } from '../actions/authenticationActions';
 import ScrollButton from "./ScrollButton.js"
 
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import { Link as ScrollLink} from "react-scroll";
 
 function Header(props) {
   const [isSuccess, setIsSuccess] = useState(false);

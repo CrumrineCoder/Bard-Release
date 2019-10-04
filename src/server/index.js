@@ -113,7 +113,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser())
 
-app.use(session({ secret: process.env.SECRET, cookie: { maxAge: 60000, secure: false }, resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SECRET, cookie: { secure: false }, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());

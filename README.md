@@ -94,3 +94,4 @@ Problems I'm fixing w/ this:
 * Formatting issue of songs. 
 * Don't kill server on updating
 * Close autocomplete
+* Search for songs
