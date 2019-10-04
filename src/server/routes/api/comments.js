@@ -80,7 +80,7 @@ module.exports = (app) => {
             postID: req.params.id
         }, function (error, comment) {
             if (error) throw error;
-            console.log(comment);
+        //    console.log(comment);
             if (!comment) {
                 return res.send(httpResponse.onCommentsNotFound);
             }

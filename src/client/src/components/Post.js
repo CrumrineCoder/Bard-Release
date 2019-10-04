@@ -63,7 +63,6 @@ function Post(props) {
   }, [props.response.comments.response])
 
   useEffect(() => {
-    //  console.log(props.response.tags.response);
     if (props.response.tags.response) {
       // console.log(props.response.tags.response.tag);
       if (props.response.tags.response.tag) {
@@ -77,10 +76,9 @@ function Post(props) {
             }
           }
         }
-      } else if (props.response.tags.response.message == "Tag added.") {
+      } else if (props.response.tags.response.message == "Tag added." && props.response.tags.response.id == props.post._id) {
         getTagsForOnePost(props.post._id)
-      } else if (props.response.tags.response.message == "Tag removed.") {
-        //  console.log("true");
+      } else if (props.response.tags.response.message == "Tag removed." && props.response.tags.response.id == props.post._id) {
         getTagsForOnePost(props.post._id)
       }
     }
@@ -216,32 +214,6 @@ function Post(props) {
     getTagsForOnePost(props.post._id);
     getCommentsForOnePost(props.post._id);
   }, [])
-
-  function flatten(array, mutable) {
-    var toString = Object.prototype.toString;
-    var arrayTypeStr = '[object Array]';
-
-    var result = [];
-    var nodes = (mutable && array) || array.slice();
-    var node;
-
-    if (!array.length) {
-      return result;
-    }
-
-    node = nodes.pop();
-
-    do {
-      if (toString.call(node) === arrayTypeStr) {
-        nodes.push.apply(nodes, node);
-      } else {
-        result.push(node);
-      }
-    } while (nodes.length && (node = nodes.pop()) !== undefined);
-
-    result.reverse(); // we reverse result to restore the original order
-    return result;
-  }
 
   function _handleKeyDown(e) {
     //  props.dispatch(turnoffOverlayAction());

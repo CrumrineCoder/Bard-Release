@@ -61,12 +61,12 @@ module.exports = (app) => {
     app.post('/api/tags/searchPostsByTag/', (req, res) => {
         // let tags = req.params.tag.split(",");
         let search = {};
-        let findPosts = {}; 
-        if(req.body.length){
+        let findPosts = {};
+        if (req.body.length) {
             findPosts["$all"] = req.body;
-            search["tags.text"] =  findPosts
-        } 
-        
+            search["tags.text"] = findPosts
+        }
+
         /*
         if(req.body.exclusiveTags.length > 0){
             findPosts["$all"] = req.body.exclusiveTags
@@ -84,7 +84,7 @@ module.exports = (app) => {
             }
 
             return res.json({ success: true, tag, message: "Search by tag done." })
-        }) 
+        })
     });
 
     app.get("/api/tags/checkTags/:tagToFind", (req, res) => {
@@ -130,7 +130,7 @@ module.exports = (app) => {
                     emails: [email],
                     text: tag
                 }
-        //        console.log(tagToInsert);
+                //        console.log(tagToInsert);
                 Tags.findOneAndUpdate(
                     {
                         postID: _id,
@@ -167,7 +167,9 @@ module.exports = (app) => {
                                         console.log(error);
                                         return res.json(httpResponses.onTagSaveError);
                                     }
-                                    res.json(httpResponses.onTagSaveSuccess);
+                                    let response = httpResponses.onTagSaveSuccess;
+                                    response["id"] = _id;
+                                    res.json(response);
                                 }
                             )
                         } else {
@@ -175,7 +177,9 @@ module.exports = (app) => {
                                 console.log(error);
                                 return res.json(httpResponses.onTagSaveError);
                             }
-                            res.json(httpResponses.onTagSaveSuccess);
+                            let response = httpResponses.onTagSaveSuccess;
+                            response["id"] = _id;
+                            res.json(response);
                         }
                     }
                 )
@@ -188,8 +192,7 @@ module.exports = (app) => {
     //POST new user route (optional, everyone has access)
     app.post('/api/tags/removeUserFromTag', checkToken, (req, res, next) => {
         let { tag, _id } = req.body;
-      //  console.log(tag);
-      //  console.log(req.body.user);
+        //  console.log(tag);
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
             Tags.findOneAndUpdate({
                 "tags._id": req.body.tag
@@ -201,10 +204,10 @@ module.exports = (app) => {
                 },
                 {
                     useFindAndModify: false
-                    
+
                 },
                 function (error, tag) {
-             //       console.log(tag);
+                    //       console.log(tag);
                     if (tag.tags[0].emails.length == 1) {
                         Tags.findOneAndUpdate({
                             "postID": req.body.postID
@@ -225,76 +228,11 @@ module.exports = (app) => {
                         console.log(error);
                         return res.json(httpResponses.onTagRemoveError);
                     }
-                    res.json(httpResponses.onTagRemoveSuccess);
-                    /*  if (error) throw error;
-          
-                      if (!tag) {
-                          return res.send(httpResponse.onTagsNotFound);
-                      }
-          
-                      return res.json({ success: true, tag, message: "Check tags done." }) */
+                    //res.json(httpResponses.onTagRemoveSuccess);
+                    let response = httpResponses.onTagRemoveSuccess;
+                    response["id"] = req.body.postID;
+                    res.json(response);
                 })
-            /* if (err) {
-                 //If error send Forbidden (403)
-                 console.log('ERROR: Could not connect to the protected route');
-                 res.sendStatus(403);
-             } else {
-                 let user = authorizedData.user;
-                 let email = user.email;
- 
-                 let tagToInsert = {
-                     emails: [email],
-                     text: tag
-                 }
- 
-                 Tags.findOneAndUpdate(
-                     {
-                         postID: _id,
-                         "tags.emails": { "$nin": [email] },
-                         "tags.text": tag
-                     },
-                     {
-                         "$push": {
-                             "tags.$.emails": email
-                         }
-                     },
-                     {
-                         useFindAndModify: false
-                     },
-                     function (error, success) {
-                         if (success === null || success === undefined) {
-                             Tags.findOneAndUpdate(
-                                 {
-                                     _id: _id,
-                                     "tags.text": { "$ne": tag }
-                                 },
-                                 {
-                                     postID: _id,
-                                     $addToSet: {
-                                         tags: tagToInsert
-                                     }
-                                 },
-                                 {
-                                     upsert: true,
-                                     useFindAndModify: false
-                                 },
-                                 function (error, success) {
-                                     if (error) {
-                                         return res.json(httpResponses.onTagSaveError);
-                                     }
-                                     res.json(httpResponses.onTagSaveSuccess);
-                                 }
-                             )
-                         } else {
-                             if (error) {
-                                 return res.json(httpResponses.onTagSaveError);
-                             }
-                             res.json(httpResponses.onTagSaveSuccess);
-                         }
-                     }
-                 )
-             } */
         })
     });
-
 }
