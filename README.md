@@ -80,7 +80,7 @@ Problems I'm fixing w/ this:
 * Infinite scroll **DONE!!**
 * Bug with reaching end of infinite scroll **DONE!!** 
 * Default instead of youtube iframe with a generated preview? **DONE!!**
-* Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. 
+* Optimization, getting all tags for each post probably isn't good. Might want to move to its own component. **done for now**
 * copy link with button **DONE!!**
 * number of notes on Notes tab **DONE!!**
 * Search by bad tag should return nothing. **DONE!!**
@@ -93,5 +93,5 @@ Problems I'm fixing w/ this:
 * Don't log out users **DONE!!**
 * Formatting issue of songs. 
 * Don't kill server on updating
-* Close autocomplete
+* Close autocomplete **DONE!!**
 * Search for songs

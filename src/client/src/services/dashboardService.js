@@ -207,7 +207,7 @@ export const searchPostsByTagService = (request) => {
     },
     body: JSON.stringify(request.post)
   };
-  console.log(parameters);
+
   return fetch(GET_API_ENDPOINT, parameters)
     .then(response => {
       return response.clone().json();

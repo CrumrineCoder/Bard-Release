@@ -118,6 +118,7 @@ function MusicPage(props) {
           )}
         </div>
       )
+
     }
   }, [filteredPosts, props.response.dashboard.response, props.response.tags.response, amountOfPosts])
 
@@ -128,7 +129,8 @@ function MusicPage(props) {
       if (props.response.dashboard.response.post) {
         setUnfilteredPosts(props.response.dashboard.response.post)
         //  console.log(props.response.dashboard.response.post);
-        setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")))
+        setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")));
+        setAmountOfPosts(6);
       }
     }
   }, [props.response.dashboard.response])
