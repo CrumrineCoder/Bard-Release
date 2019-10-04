@@ -274,24 +274,26 @@ body{
   position: relative; 
   width: 350px;
   height: 150px;
+  background: black;
 }
 
 .videoPreview{
   width: 350px;
   height: 150px;
+  opacity: .3;
 }
 
 .videoPreviewIcon{
   position: absolute;
-  top: 30px; 
+  top: 50%; 
   left: 50%; 
   transform: translate(-50%, -50%); 
   color: white;
-  font-size: 20px;
+  font-size: 30px;
   cursor: pointer; 
-  background: black; 
+ /* background: black; 
   padding: 5px 20px;
-  border: 1px solid #ffc516;
+  border: 1px solid #ffc516; */
   &:hover{
     color: #ffc516;
   }
