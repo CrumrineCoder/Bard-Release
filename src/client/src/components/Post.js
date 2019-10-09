@@ -391,7 +391,7 @@ function Post(props) {
 
       {
         section == "tags" ?
-          <div className="postVideoContainer">
+          <div className="postTagContainer">
             {tagChain}
 
 
