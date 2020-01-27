@@ -28,10 +28,12 @@ const tagCategories = {
 // heist
 // beach episode
 // ascension
+// descension
 // alien
 // cosmic
 // chant
-//disorienting
+// disorienting
+// surprised
 // charge
 // choir
 // techno
@@ -47,4 +49,5 @@ const tagCategories = {
 // mountain
 // panic
 // ruins
+// enemy approaching
 export default tagCategories;

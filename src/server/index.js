@@ -11,11 +11,7 @@ const errorHandler = require('errorhandler');
 
 var MongoClient = require('mongodb').MongoClient
 
-
 require('dotenv').config();
-
-
-
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -113,7 +109,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser())
 
-app.use(session({ secret: process.env.SECRET, cookie: { secure: false }, resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SECRET, cookie: { secure: false, expires: new Date(253402300000000) }, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
