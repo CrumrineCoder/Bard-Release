@@ -23,7 +23,7 @@ Problems I'm fixing w/ this:
 * 404
 * Loading screen
 * Routing Issue, 404 on refresh **DONE!!**
-* Bug with updating the posts - the newest one plays the video. hotfixed by reloading all posts when a new one is added. 
+* Bug with updating the posts - the newest one plays the video. hotfixed by reloading all posts when a new one is added.  *EHHH!*
 * Filter general tags **DONE!! (make optional)**
 * Get suggested tags **DONE!!**
 * Hide / progressively(infinite) comments
@@ -50,7 +50,7 @@ Problems I'm fixing w/ this:
 * Readd Words counter functionality **DONE!!!**
 * If no results are returned by the search, tell the user instead of showing them results they don't want. **DONE!!**
 * Empty comment / tag message Be the first to commment/tag! **DONE!!**
-* Figure out color scheme
+* Figure out color scheme **DONE!!**
 * Sort out the response system ***KINDA DONE!***
 * Fix success inconsistency in header, need to sort out the response and redux structure
 * Kill server on change, getting eardarinuse 8080 **DONE!**
@@ -59,7 +59,7 @@ Problems I'm fixing w/ this:
 * Reset password
 * There are No Tags Yet bug when searching for 'Western' in general tab **DONE!!**
 * Inclusive vs Exclusive tag search **DONE!!**
-* Inclusive & Exclusive "Apply" and "Clear" buttons -Irrelevant-
+* Inclusive & Exclusive "Apply" and "Clear" buttons *Irrelevant*
 * Responsive
 * Comment formatting & turn into notes **DONE!!**
 * Improve Search from Home page **DONE**
@@ -95,3 +95,6 @@ Problems I'm fixing w/ this:
 * Don't kill server on updating
 * Close autocomplete **DONE!!**
 * Search for songs
+* Filter tags
+* BPM
+* Stop site from logging out user automtatically after 1 hr.  **DONE!!**

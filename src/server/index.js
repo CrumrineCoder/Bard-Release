@@ -109,10 +109,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser())
 
-app.use(session({ secret: process.env.SECRET, cookie: { secure: false, expires: new Date(253402300000000) }, resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SECRET, maxAge: Date.now() + (30 * 86400 * 1000) , cookie: { secure: false, expires: new Date(253402300000000), maxAge: 9999999999  }, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session({
+    secret : process.env.SECRET,
+    cookie:{_expires : 9999999999}, // time im ms
+    }));
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
