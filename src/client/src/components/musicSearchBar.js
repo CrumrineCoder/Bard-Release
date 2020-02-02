@@ -88,12 +88,13 @@ function MusicSearchBar(props) {
         }
         setSearchTags(newTags);
 
+        props.dispatch(searchPostsByTag(newTags))
         if (newTags.length) {
-            props.dispatch(searchPostsByTag(newTags))
+      //      props.dispatch(searchPostsByTag(newTags))
         } else {
             // console.log("tears")
             //props.dispatch(getAllPostsAction());
-            props.dispatch(searchPostsByTag(newTags))
+        //    props.dispatch(searchPostsByTag(newTags))
             setSuggestedTags([]);
         }
     }

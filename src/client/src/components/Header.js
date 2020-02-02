@@ -22,7 +22,7 @@ function Header(props) {
 
   useEffect(() => {
     if (props.backendData.login.user) {
-      if (props.backendData.login.user.message == "User login" && props.backendData.login.user.token != undefined) {
+      if (props.backendData.login.user.token != undefined) {
         setIsSuccess(props.backendData.login.user.success);
       } else {
         setIsSuccess(checkCookie() != null);
