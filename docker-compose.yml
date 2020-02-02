@@ -1,10 +1,9 @@
 version: "3"
 services:
     Both:
-        container_name: awesome_web
+        container_name: bard
         build: .
-        image: vikasraj/awesome_web
+        image: taming/bard
         ports:
             - "3000:3000"
-        volumes:
-            - ./app:/usr/src/app
+        command: npm run client

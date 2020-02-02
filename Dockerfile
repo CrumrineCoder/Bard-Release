@@ -18,7 +18,7 @@ COPY . .
 
 EXPOSE 8080
 EXPOSE 3000
-CMD ["webpack-dev-server --mode development --devtool inline-source-map --hot"]
+#CMD webpack-dev-server --mode development --devtool inline-source-map --hot
 #CMD ["ls"]
 #CMD [ "node", "src/server/index.js" ]
 #CMD [ "npm", "run", "build" ]
