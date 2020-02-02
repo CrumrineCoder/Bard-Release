@@ -27,7 +27,7 @@ export function* loginSaga(payload) {
 }
 
 export function* getCurrentUserSaga(payload) {
-  //console.log(payload);
+  console.log(payload);
   try {
     const response = yield call(getCurrentUserService, payload);
     //console.log(response);

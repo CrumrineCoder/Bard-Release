@@ -47,7 +47,8 @@ export const getCurrentUserService = (request) => {
   //console.log(request);
   const LOGIN_API_ENDPOINT = '/api/users/current';
   let authToken = getCookie('token');
-  //console.log(authToken);
+
+  console.log(authToken);
   //console.log(authToken.slice(4, authToken.length));
   //let token = "Bearer " + authToken.slice(4, authToken.length);
   let token = "Bearer authToken";

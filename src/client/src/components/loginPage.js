@@ -28,7 +28,7 @@ function LoginPage(props) {
 
   useEffect(() => {
     if (isSuccess && props.store.login.user.success) {
-      setCookie('token', props.store.login.user.token, 1);
+      setCookie('token', props.store.login.user.token, 99999999);
       //setIsSuccess(false);
       props.history.push('/')
     }

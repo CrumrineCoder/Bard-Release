@@ -13,7 +13,7 @@ function RegisterPage(props) {
   useEffect(() => {
     if (requestSent) {
       if (message == "User registered.") {
-        setCookie('token', props.response.register.response.token, 1);
+        setCookie('token', props.response.register.response.token, 99999999);
         props.history.push('/login')
       }
     }

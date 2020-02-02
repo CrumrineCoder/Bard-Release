@@ -22,6 +22,7 @@ function Header(props) {
 
   useEffect(() => {
     if (props.backendData.login.user) {
+      console.log(props.backendData.login.user)
       if (props.backendData.login.user.token != undefined) {
         setIsSuccess(props.backendData.login.user.success);
       } else {
