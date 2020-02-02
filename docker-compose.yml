@@ -6,4 +6,4 @@ services:
         image: taming/bard
         ports:
             - "3000:3000"
-        command: npm run client
+        command: npm run dev
