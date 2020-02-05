@@ -111,6 +111,7 @@ function MusicPage(props) {
       //    console.log(allTags);
       setFinalizedLength(finalizedPosts.length);
       let cut = finalizedPosts.slice(0, amountOfPosts);
+     
       setPostsContent(
         <div className="posts">
           {cut.map(post =>
@@ -127,6 +128,7 @@ function MusicPage(props) {
       setIsSuccess(props.response.dashboard.response.success);
       setMessage(props.response.dashboard.response.message);
       if (props.response.dashboard.response.post) {
+        console.log(props.response.dashboard.response)
         setUnfilteredPosts(props.response.dashboard.response.post)
         //  console.log(props.response.dashboard.response.post);
         setFilteredPosts(props.response.dashboard.response.post.map(post => post.link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")));

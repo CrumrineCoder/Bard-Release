@@ -127,6 +127,7 @@ module.exports = (app) => {
             if (!post) {
                 return res.send(httpResponse.onPostsNotFound);
             }
+            post.reverse();
 
             return res.json({ success: true, post, message: "Posts found." })
         })

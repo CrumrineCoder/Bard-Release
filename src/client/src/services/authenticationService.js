@@ -13,11 +13,11 @@ export const registerUserService = (request) => {
 
   return fetch(REGISTER_API_ENDPOINT, parameters)
     .then(response => {
-      console.log(response.clone().json())
+   //   console.log(response.clone().json())
       return response.clone().json();
     })
     .then(json => {
-      console.log(json);
+    //  console.log(json);
       return json;
     });
 };
@@ -48,7 +48,7 @@ export const getCurrentUserService = (request) => {
   const LOGIN_API_ENDPOINT = '/api/users/current';
   let authToken = getCookie('token');
 
-  console.log(authToken);
+  //console.log(authToken);
   //console.log(authToken.slice(4, authToken.length));
   //let token = "Bearer " + authToken.slice(4, authToken.length);
   let token = "Bearer authToken";
