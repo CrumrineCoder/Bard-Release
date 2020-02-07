@@ -76,7 +76,8 @@ function MusicPage(props) {
   useEffect(() => {
     if (filteredPosts && unfilteredPosts) {
       let postsToTransform = unfilteredPosts;
-      let finalizedPosts = postsToTransform;
+      //  let finalizedPosts = postsToTransform;
+      let finalizedPosts;
 
       if (props.response.tags.response) {
         console.log(props.response.tags.response);
@@ -108,7 +109,7 @@ function MusicPage(props) {
           props.response.tags.response.message != "Check sources done." &&
           props.response.tags.response.message != "Check tags done."
         ) {
-          if (finalizedPosts.length == 0) {
+          if (postsToTransform.length == 0) {
             setPostsContent(
               <h1 className="noPostsDisclaimer">
                 There are no posts to display for this search and filter.
@@ -123,9 +124,20 @@ function MusicPage(props) {
       }
       //  console.log("bottom");
       //    console.log(allTags);
+      let sources = sourcesToFilterBy.split(",");
+      console.log(sources);
+      if (postsToTransform) {
+        finalizedPosts = postsToTransform.filter(function(post) {
+          return sources.indexOf(post.source) != -1;
+        });
+        console.log(unfilteredPosts);
+        console.log(finalizedPosts);
+      }
+
       setFinalizedLength(finalizedPosts.length);
+
       let cut = finalizedPosts.slice(0, amountOfPosts);
-      console.log(cut)
+      console.log(cut);
       setPostsContent(
         <div className="posts">
           {cut.map(post => (
@@ -145,7 +157,8 @@ function MusicPage(props) {
     filteredPosts,
     props.response.dashboard.response,
     props.response.tags.response,
-    amountOfPosts
+    amountOfPosts,
+    sourcesToFilterBy
   ]);
 
   useEffect(() => {
@@ -155,7 +168,7 @@ function MusicPage(props) {
       if (props.response.dashboard.response.post) {
         //    console.log(props.response.dashboard.response)
         setUnfilteredPosts(props.response.dashboard.response.post);
-         console.log(props.response.dashboard.response.post);
+        // console.log(props.response.dashboard.response.post);
         setFilteredPosts(
           props.response.dashboard.response.post.map(post =>
             post.link.replace(
@@ -204,25 +217,7 @@ function MusicPage(props) {
     }
   }
 
-  useEffect(() => {
-    let sources = sourcesToFilterBy.split(",");
-    console.log(sources);
-    if (unfilteredPosts) {
-      let postsWithSourceInThem = unfilteredPosts.filter(function(post) {
-        return sources.indexOf(post.source) != -1;
-      });
-      console.log(unfilteredPosts);
-      console.log(postsWithSourceInThem);
-      setFilteredPosts(
-        postsWithSourceInThem.map(post =>
-          post.link.replace(
-            "https://www.youtube.com/watch?v=",
-            "https://www.youtube.com/embed/"
-          )
-        )
-      )
-    }
-  }, [sourcesToFilterBy]);
+  useEffect(() => {}, [sourcesToFilterBy]);
 
   return (
     <div className="musicPageContainer">
