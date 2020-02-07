@@ -125,15 +125,22 @@ function MusicPage(props) {
       //  console.log("bottom");
       //    console.log(allTags);
       let sources = sourcesToFilterBy.split(",");
+      sources = sources.map(function(value) {
+        return value.toLowerCase().replace(/\s+/g, "");
+      });
       console.log(sources);
       if (postsToTransform) {
-        finalizedPosts = postsToTransform.filter(function(post) {
-          return sources.indexOf(post.source) != -1;
+        let postsWithSourceInThem = postsToTransform.filter(function(post) {
+          return sources.indexOf(post.source.toLowerCase().replace(/\s+/g, "")) != -1;
         });
-        console.log(unfilteredPosts);
-        console.log(finalizedPosts);
+        if (postsWithSourceInThem.length) {
+          finalizedPosts = postsWithSourceInThem;
+        } else {
+          finalizedPosts = postsToTransform;
+        }
       }
-
+      console.log(postsToTransform);
+      console.log(finalizedPosts);
       setFinalizedLength(finalizedPosts.length);
 
       let cut = finalizedPosts.slice(0, amountOfPosts);
