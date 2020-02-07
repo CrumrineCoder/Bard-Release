@@ -80,7 +80,6 @@ function MusicPage(props) {
       let finalizedPosts;
 
       if (props.response.tags.response) {
-        console.log(props.response.tags.response);
         if (props.response.tags.response.message == "Get all tags done.") {
           if (props.response.tags.response.tag) {
             if (props.response.tags.response.tag.length > 0) {
@@ -128,7 +127,6 @@ function MusicPage(props) {
       sources = sources.map(function(value) {
         return value.toLowerCase().replace(/\s+/g, "");
       });
-      console.log(sources);
       if (postsToTransform) {
         let postsWithSourceInThem = postsToTransform.filter(function(post) {
           return sources.indexOf(post.source.toLowerCase().replace(/\s+/g, "")) != -1;
@@ -139,12 +137,10 @@ function MusicPage(props) {
           finalizedPosts = postsToTransform;
         }
       }
-      console.log(postsToTransform);
-      console.log(finalizedPosts);
       setFinalizedLength(finalizedPosts.length);
 
       let cut = finalizedPosts.slice(0, amountOfPosts);
-      console.log(cut);
+
       setPostsContent(
         <div className="posts">
           {cut.map(post => (
@@ -235,7 +231,7 @@ function MusicPage(props) {
       ></LoginModal>
       <div className="musicSearchContainer">
         <input
-          className="homePageSearchInput borderImage"
+          className="musicListingSourceSearchBar borderImage"
           placeholder="Search by sources [separated by commas]"
           onKeyDown={_handleKeyDown}
           autoComplete="off"
