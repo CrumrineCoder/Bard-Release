@@ -15,7 +15,7 @@ Problems I'm fixing w/ this:
 * Autocomplete tags & sources **DONE!!**
 * Message functionality for when the user posts the same links, 403s, etc.
 * Sorting
-* Why is the sorting reversed when the user searches?
+* Why is the sorting reversed when the user searches? **DONE**
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. **DONE**
 * Delete & edit tags & posts **DONE!!!**
