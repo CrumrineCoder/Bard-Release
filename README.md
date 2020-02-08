@@ -99,3 +99,4 @@ Problems I'm fixing w/ this:
 * BPM
 * Show all Tags mode
 * Stop site from logging out user automtatically after 1 hr.  **DONE!!**
+* Call the backend for only the visible, not every single song. 

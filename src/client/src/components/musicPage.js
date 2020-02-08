@@ -40,7 +40,6 @@ function MusicPage(props) {
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
-  const [sorting, setSorting] = useState("newest");
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -169,47 +168,25 @@ function MusicPage(props) {
   ]);
 
   useEffect(() => {
-    console.log(sorting);
     if (props.response.dashboard.response != undefined) {
-      console.log(sorting);
       setIsSuccess(props.response.dashboard.response.success);
       setMessage(props.response.dashboard.response.message);
       if (props.response.dashboard.response.post) {
-        console.log(sorting);
-        console.log(props.response.dashboard.response.post[0])
         //    console.log(props.response.dashboard.response)
-        if (sorting) {
-          if (sorting == "newest") {
-            setUnfilteredPosts(props.response.dashboard.response.post);
-            setFilteredPosts(
-              props.response.dashboard.response.post.map(post =>
-                post.link.replace(
-                  "https://www.youtube.com/watch?v=",
-                  "https://www.youtube.com/embed/"
-                )
-              )
-            );
-          } else if (sorting == "oldest") {
-            let test = props.response.dashboard.response.post.reverse();
-            console.log(test[0])
-            setUnfilteredPosts(test);
-            setFilteredPosts(
-              test.map(post =>
-                post.link.replace(
-                  "https://www.youtube.com/watch?v=",
-                  "https://www.youtube.com/embed/"
-                )
-              )
-            );
-          }
-        }
-
+        setUnfilteredPosts(props.response.dashboard.response.post);
+        setFilteredPosts(
+          props.response.dashboard.response.post.map(post =>
+            post.link.replace(
+              "https://www.youtube.com/watch?v=",
+              "https://www.youtube.com/embed/"
+            )
+          )
+        );
         // console.log(props.response.dashboard.response.post);
-    
         setAmountOfPosts(6);
       }
     }
-  }, [props.response.dashboard.response, sorting]);
+  }, [props.response.dashboard.response]);
 
   useEffect(() => {
     //  console.log(props.response.tags.response)
@@ -239,10 +216,19 @@ function MusicPage(props) {
     }
   }
 
-  function handleChangeSorting(event) {
-    console.log(event);
-    console.log(event.target.value);
-    setSorting(event.target.value);
+  function reverseSorting() {
+    let temp = unfilteredPosts.reverse()
+    setFilteredPosts(
+      temp
+        .reverse()
+        .map(post =>
+          post.link.replace(
+            "https://www.youtube.com/watch?v=",
+            "https://www.youtube.com/embed/"
+          )
+        )
+    );
+    setUnfilteredPosts(temp.reverse());
   }
 
   function _handleKeyDown(e) {
@@ -274,10 +260,7 @@ function MusicPage(props) {
           id="searchSource"
         ></input>
       </div>
-      <select value={sorting} onChange={handleChangeSorting}> 
-        <option  value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
-      </select>
+      <button onClick={reverseSorting}>Reverse Sorting</button>
       {postsContent}
       {isFetching && amountOfPosts < finalizedLength && (
         <Fragment>
