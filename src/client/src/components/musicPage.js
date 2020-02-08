@@ -40,7 +40,7 @@ function MusicPage(props) {
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
-  const [sorting, setSorting] = useState("oldest")
+  const [sorting, setSorting] = useState("newest");
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -76,10 +76,7 @@ function MusicPage(props) {
 
   useEffect(() => {
     if (filteredPosts && unfilteredPosts) {
-
-
-
-     let postsToTransform = unfilteredPosts;
+      let postsToTransform = unfilteredPosts;
 
       //  let finalizedPosts = postsToTransform;
       let finalizedPosts;
@@ -134,7 +131,9 @@ function MusicPage(props) {
       });
       if (postsToTransform) {
         let postsWithSourceInThem = postsToTransform.filter(function(post) {
-          return sources.indexOf(post.source.toLowerCase().replace(/\s+/g, "")) != -1;
+          return (
+            sources.indexOf(post.source.toLowerCase().replace(/\s+/g, "")) != -1
+          );
         });
         if (postsWithSourceInThem.length) {
           finalizedPosts = postsWithSourceInThem;
@@ -144,9 +143,8 @@ function MusicPage(props) {
       }
       setFinalizedLength(finalizedPosts.length);
 
-
       let cut = finalizedPosts.slice(0, amountOfPosts);
-   
+
       setPostsContent(
         <div className="posts">
           {cut.map(post => (
@@ -171,34 +169,47 @@ function MusicPage(props) {
   ]);
 
   useEffect(() => {
+    console.log(sorting);
     if (props.response.dashboard.response != undefined) {
+      console.log(sorting);
       setIsSuccess(props.response.dashboard.response.success);
       setMessage(props.response.dashboard.response.message);
       if (props.response.dashboard.response.post) {
+        console.log(sorting);
+        console.log(props.response.dashboard.response.post[0])
         //    console.log(props.response.dashboard.response)
-        if(sorting){
-          if(sorting == "newest"){
+        if (sorting) {
+          if (sorting == "newest") {
             setUnfilteredPosts(props.response.dashboard.response.post);
-          }
-          else if(sorting == "oldest"){
+            setFilteredPosts(
+              props.response.dashboard.response.post.map(post =>
+                post.link.replace(
+                  "https://www.youtube.com/watch?v=",
+                  "https://www.youtube.com/embed/"
+                )
+              )
+            );
+          } else if (sorting == "oldest") {
             let test = props.response.dashboard.response.post.reverse();
+            console.log(test[0])
             setUnfilteredPosts(test);
+            setFilteredPosts(
+              test.map(post =>
+                post.link.replace(
+                  "https://www.youtube.com/watch?v=",
+                  "https://www.youtube.com/embed/"
+                )
+              )
+            );
           }
         }
-        
+
         // console.log(props.response.dashboard.response.post);
-        setFilteredPosts(
-          props.response.dashboard.response.post.map(post =>
-            post.link.replace(
-              "https://www.youtube.com/watch?v=",
-              "https://www.youtube.com/embed/"
-            )
-          )
-        );
+    
         setAmountOfPosts(6);
       }
     }
-  }, [props.response.dashboard.response]);
+  }, [props.response.dashboard.response, sorting]);
 
   useEffect(() => {
     //  console.log(props.response.tags.response)
@@ -226,6 +237,12 @@ function MusicPage(props) {
         setIsFetching(false);
       }, 0);
     }
+  }
+
+  function handleChangeSorting(event) {
+    console.log(event);
+    console.log(event.target.value);
+    setSorting(event.target.value);
   }
 
   function _handleKeyDown(e) {
@@ -257,6 +274,10 @@ function MusicPage(props) {
           id="searchSource"
         ></input>
       </div>
+      <select value={sorting} onChange={handleChangeSorting}> 
+        <option  value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+      </select>
       {postsContent}
       {isFetching && amountOfPosts < finalizedLength && (
         <Fragment>
