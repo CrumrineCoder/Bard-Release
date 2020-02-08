@@ -260,7 +260,7 @@ function MusicPage(props) {
           id="searchSource"
         ></input>
       </div>
-      <button onClick={reverseSorting}>Reverse Sorting</button>
+      <button className="reverseSortingButton borderImage btn-pumpkin" onClick={reverseSorting}><i className="fas fa-sort"></i> Reverse Sorting</button>
       {postsContent}
       {isFetching && amountOfPosts < finalizedLength && (
         <Fragment>

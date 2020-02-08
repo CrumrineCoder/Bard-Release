@@ -530,6 +530,11 @@ body {
   }
 }
 
+.reverseSortingButton{
+  margin: 15px auto;
+  display: block;
+  cursor: pointer;
+}
 // HOMEPAGE
 
 .homePage {
@@ -909,7 +914,7 @@ body {
 }
 
 .musicListingSourceSearchBar {
-  margin: 0px auto 30px;
+  margin: 0px auto;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   display: block;
   border-width: 7px;

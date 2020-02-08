@@ -14,7 +14,7 @@ Problems I'm fixing w/ this:
 * No updating YT links / getting extended versions
 * Autocomplete tags & sources **DONE!!**
 * Message functionality for when the user posts the same links, 403s, etc.
-* Sorting
+* Sorting **DONE** [Can do more later tho, this is just reversing it, but maybe by amount of tags?]
 * Why is the sorting reversed when the user searches? **DONE**
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. **DONE**
