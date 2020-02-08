@@ -97,4 +97,5 @@ Problems I'm fixing w/ this:
 * Search for songs
 * Filter tags
 * BPM
+* Show all Tags mode
 * Stop site from logging out user automtatically after 1 hr.  **DONE!!**

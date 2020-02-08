@@ -40,6 +40,7 @@ function MusicPage(props) {
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
+  const [sorting, setSorting] = useState("oldest")
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -75,7 +76,11 @@ function MusicPage(props) {
 
   useEffect(() => {
     if (filteredPosts && unfilteredPosts) {
-      let postsToTransform = unfilteredPosts;
+
+
+
+     let postsToTransform = unfilteredPosts;
+
       //  let finalizedPosts = postsToTransform;
       let finalizedPosts;
 
@@ -139,8 +144,9 @@ function MusicPage(props) {
       }
       setFinalizedLength(finalizedPosts.length);
 
-      let cut = finalizedPosts.slice(0, amountOfPosts);
 
+      let cut = finalizedPosts.slice(0, amountOfPosts);
+   
       setPostsContent(
         <div className="posts">
           {cut.map(post => (
@@ -170,7 +176,16 @@ function MusicPage(props) {
       setMessage(props.response.dashboard.response.message);
       if (props.response.dashboard.response.post) {
         //    console.log(props.response.dashboard.response)
-        setUnfilteredPosts(props.response.dashboard.response.post);
+        if(sorting){
+          if(sorting == "newest"){
+            setUnfilteredPosts(props.response.dashboard.response.post);
+          }
+          else if(sorting == "oldest"){
+            let test = props.response.dashboard.response.post.reverse();
+            setUnfilteredPosts(test);
+          }
+        }
+        
         // console.log(props.response.dashboard.response.post);
         setFilteredPosts(
           props.response.dashboard.response.post.map(post =>

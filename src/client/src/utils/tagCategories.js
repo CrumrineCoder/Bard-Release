@@ -23,7 +23,7 @@ const tagCategories = {
 // tranquil
 // disturbing   
 // creepy
-// giving chills    
+// haunting
 // excited
 // heist
 // beach episode
@@ -50,4 +50,5 @@ const tagCategories = {
 // panic
 // ruins
 // enemy approaching
+// underwater
 export default tagCategories;
