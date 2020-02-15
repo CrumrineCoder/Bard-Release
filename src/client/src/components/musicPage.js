@@ -29,6 +29,7 @@ function MusicPage(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [allTags, setAllTags] = useState([]);
+  const [alphabetAllTags, setAlphabetAllTags] = useState([]);
 
   const [sourcesToFilterBy, setSourcesToFilterBy] = useState("");
 
@@ -69,6 +70,11 @@ function MusicPage(props) {
     }
   }, [props.response.login.user]);
 
+  useEffect(() => {
+   console.log("alphabet")
+   console.log(alphabetAllTags[0])
+  }, [alphabetAllTags]);
+
   function redirect(location) {
     props.history.push(location);
   }
@@ -84,6 +90,21 @@ function MusicPage(props) {
         if (props.response.tags.response.message == "Get all tags done.") {
           if (props.response.tags.response.tag) {
             if (props.response.tags.response.tag.length > 0) {
+              let sorted = props.response.tags.response.tag.sort(function(
+                a,
+                b
+              ) {
+                if (a._id < b._id) {
+                  return -1;
+                }
+                if (a._id > b._id) {
+                  return 1;
+                }
+                return 0;
+              });
+              console.log(sorted[0])
+              console.log(sorted[5])
+              setAlphabetAllTags(sorted.slice());
               let returnedArray = shuffle(props.response.tags.response.tag);
               //   console.log(returnedArray);
               setAllTags(returnedArray);
@@ -217,7 +238,7 @@ function MusicPage(props) {
   }
 
   function reverseSorting() {
-    let temp = unfilteredPosts.reverse()
+    let temp = unfilteredPosts.reverse();
     setFilteredPosts(
       temp
         .reverse()
@@ -260,7 +281,27 @@ function MusicPage(props) {
           id="searchSource"
         ></input>
       </div>
-      <button className="reverseSortingButton borderImage btn-pumpkin" onClick={reverseSorting}><i className="fas fa-sort"></i> Reverse Sorting</button>
+      <button
+        className="reverseSortingButton borderImage btn-pumpkin"
+        onClick={reverseSorting}
+      >
+        <i className="fas fa-sort"></i> Reverse Sorting
+      </button>
+      {alphabetAllTags.map(function(tag) {
+        return (
+          <li
+            className="tagBubble borderImage smallTagBubble addBubble editableTagBubble"
+            onClick={() => {
+              submitTag(tag._id);
+            }}
+            key={tag._id}
+          >
+            {tag._id}
+            <i className="fas fa-plus iconAction"></i>
+          </li>
+        );
+      })}
+    
       {postsContent}
       {isFetching && amountOfPosts < finalizedLength && (
         <Fragment>
