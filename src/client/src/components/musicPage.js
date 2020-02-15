@@ -34,6 +34,7 @@ function MusicPage(props) {
   const [sourcesToFilterBy, setSourcesToFilterBy] = useState("");
 
   const [amountOfPosts, setAmountOfPosts] = useState(6);
+  const [showAllTags, setShowAllTags] = useState(false)
   /*
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -71,8 +72,8 @@ function MusicPage(props) {
   }, [props.response.login.user]);
 
   useEffect(() => {
-   console.log("alphabet")
-   console.log(alphabetAllTags[0])
+    console.log("alphabet");
+    console.log(alphabetAllTags[0]);
   }, [alphabetAllTags]);
 
   function redirect(location) {
@@ -102,8 +103,8 @@ function MusicPage(props) {
                 }
                 return 0;
               });
-              console.log(sorted[0])
-              console.log(sorted[5])
+              console.log(sorted[0]);
+              console.log(sorted[5]);
               setAlphabetAllTags(sorted.slice());
               let returnedArray = shuffle(props.response.tags.response.tag);
               //   console.log(returnedArray);
@@ -260,9 +261,27 @@ function MusicPage(props) {
   }
 
   useEffect(() => {}, [sourcesToFilterBy]);
-
+/*
+ <div className="allTagContainer">
+        {alphabetAllTags.map(function(tag) {
+          return (
+            <li
+              className="tagBubble borderImage smallTagBubble addBubble editableTagBubble"
+              onClick={() => {
+                submitTag(tag._id);
+              }}
+              key={tag._id}
+            >
+              {tag._id}
+              <i className="fas fa-plus iconAction"></i>
+            </li>
+          );
+        })}
+      </div>
+      */
   return (
     <div className="musicPageContainer">
+     
       <LoginModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
@@ -287,21 +306,26 @@ function MusicPage(props) {
       >
         <i className="fas fa-sort"></i> Reverse Sorting
       </button>
-      {alphabetAllTags.map(function(tag) {
-        return (
-          <li
-            className="tagBubble borderImage smallTagBubble addBubble editableTagBubble"
-            onClick={() => {
-              submitTag(tag._id);
-            }}
-            key={tag._id}
-          >
-            {tag._id}
-            <i className="fas fa-plus iconAction"></i>
-          </li>
-        );
-      })}
-    
+      <button
+        className="reverseSortingButton borderImage btn-pumpkin"
+        onClick={() => {setShowAllTags(!showAllTags)}}
+      >
+       <i class="fas fa-tags"></i> All Tags
+      </button>
+      {showAllTags && alphabetAllTags.map(function(tag) {
+          return (
+            <li
+              className="tagBubble borderImage smallTagBubble addBubble editableTagBubble"
+              onClick={() => {
+                submitTag(tag._id);
+              }}
+              key={tag._id}
+            >
+              {tag._id}
+              <i className="fas fa-plus iconAction"></i>
+            </li>
+          );
+        })}
       {postsContent}
       {isFetching && amountOfPosts < finalizedLength && (
         <Fragment>

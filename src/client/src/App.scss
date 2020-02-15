@@ -1016,3 +1016,14 @@ body {
   transform: translate(300%);
   transition: transform 300ms ease-in-out;
 }
+
+.allTagContainer{
+  position: fixed;
+  right: 0; 
+  top: 60px;
+  z-index: 100;
+  width: 300px;
+  overflow-y: scroll;
+  height: 100%;
+  background: black;
+}
