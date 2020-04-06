@@ -71,11 +71,6 @@ function MusicPage(props) {
     }
   }, [props.response.login.user]);
 
-  useEffect(() => {
-    console.log("alphabet");
-    console.log(alphabetAllTags[0]);
-  }, [alphabetAllTags]);
-
   function redirect(location) {
     props.history.push(location);
   }
@@ -103,8 +98,6 @@ function MusicPage(props) {
                 }
                 return 0;
               });
-              console.log(sorted[0]);
-              console.log(sorted[5]);
               setAlphabetAllTags(sorted.slice());
               let returnedArray = shuffle(props.response.tags.response.tag);
               //   console.log(returnedArray);

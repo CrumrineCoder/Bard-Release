@@ -16,6 +16,7 @@ Problems I'm fixing w/ this:
 * Message functionality for when the user posts the same links, 403s, etc.
 * Sorting **DONE** [Can do more later tho, this is just reversing it, but maybe by amount of tags?]
 * Why is the sorting reversed when the user searches? **DONE**
+* Random Sorting
 * Handle non-Youtube links (like soundcloud)
 * Break up dashboard & its reducer. **DONE**
 * Delete & edit tags & posts **DONE!!!**
@@ -97,7 +98,7 @@ Problems I'm fixing w/ this:
 * Search for songs
 * Filter tags
 * BPM
-* Show all Tags mode
+* Show all Tags mode **DONE!!**
 * Stop site from logging out user automtatically after 1 hr.  **DONE!!**
 * Call the backend for only the visible, not every single song. 
 * Source list or something; autocomplete. 
