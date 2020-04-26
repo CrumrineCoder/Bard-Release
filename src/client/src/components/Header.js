@@ -17,6 +17,7 @@ function Header(props) {
 
   useEffect(() => {
     props.dispatch(getCurrentUserAction())
+    console.log(checkCookie())
     setLoggedIn(checkCookie() != null)
   }, [])
 
@@ -30,6 +31,10 @@ function Header(props) {
       }
     }
   }, [props.backendData.login.user])
+
+  useEffect(() => {
+    console.log(loggedIn)
+  }, [loggedIn])
 
   function handleOverlayButton() {
     /*if (props.location.pathname != "/music") {
@@ -63,11 +68,11 @@ function Header(props) {
             <i className="fas fa-arrow-circle-up scrollToTopHeaderButton"></i>
             <span className="scrollContainerText">Back to Top</span>
         </ScrollLink>
-        <div className={isSuccess ? "headerLinks active" : "headerLinks"}>
+        <div className={loggedIn ? "headerLinks active" : "headerLinks"}>
 
-          <Link onClick={() => handleNonOverlayButton()} className={isSuccess ? "headerLink lastHeaderLink" : "headerLink"} to=''>Home</Link>
+          <Link onClick={() => handleNonOverlayButton()} className={loggedIn ? "headerLink lastHeaderLink" : "headerLink"} to=''>Home</Link>
 
-          {isSuccess ?
+          {loggedIn ?
             <>
               <i onClick={() => handleOverlayButton()} className="far fa-plus-square headerAddPost"></i>
               <i onClick={() => setShowDropdown(!showDropdown)} className={showDropdown ? "fas fa-ellipsis-h dropdownEllipsis active  " : "fas fa-ellipsis-h dropdownEllipsis"}></i>

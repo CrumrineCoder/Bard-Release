@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction, editPostAction } from '../actions/linkActions';
 import tagCategories from "../utils/tagCategories";
+import { getCurrentUserAction } from '../actions/authenticationActions';
+import { checkCookie } from '../utils/cookies';
 
 function Post(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -19,6 +21,7 @@ function Post(props) {
   const [visualTags, setVisualTags] = useState("");
   const [commentUpdatedText, setCommentUpdatedText] = useState("");
   const [openCommentEdit, setOpenCommentEdit] = useState(false);
+  const [loggedIn, setLoggedIn] = useState();
 
   const [postUpdatedLink, setPostUpdatedLink] = useState(props.post.link);
   const [postUpdatedSource, setPostUpdatedSource] = useState(props.post.source);
@@ -61,6 +64,22 @@ function Post(props) {
 
     }
   }, [props.response.comments.response])
+
+  useEffect(() => {
+    props.dispatch(getCurrentUserAction())
+    setLoggedIn(checkCookie() != null)
+  }, [])
+
+  useEffect(() => {
+    if (props.response.login.user) {
+  //    console.log(props.backendData.login.user)
+      if (props.response.login.user.token != undefined) {
+        setIsSuccess(props.response.login.user.success);
+      } else {
+        setIsSuccess(checkCookie() != null);
+      }
+    }
+  }, [props.response.login.user])
 
   useEffect(() => {
     if (props.response.tags.response) {
@@ -395,7 +414,7 @@ function Post(props) {
             {tagChain}
 
 
-            {props.loggedIn ?
+            {loggedIn ?
               <div className="postDashboardContainer">
                 <div className="dashboardToolLabel">
                   <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
@@ -407,7 +426,7 @@ function Post(props) {
           :
           <div className="postCommentContainer">
             {commentChain}
-            {props.loggedIn ?
+            {loggedIn ?
               <form className="postDashboardContainer" onSubmit={onHandleComment}>
                 <div>
                   <label htmlFor="comment"></label>

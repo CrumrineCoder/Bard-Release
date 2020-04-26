@@ -158,7 +158,6 @@ module.exports = (app) => {
   }); */
   app.get('/api/users/current', checkToken, (req, res, next) => {
     jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
-      //    console.log(authorizedData)
       if (authorizedData) {
         let user = authorizedData.user.email;
         // return authorizedData.user.email;
