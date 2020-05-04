@@ -102,3 +102,8 @@ Problems I'm fixing w/ this:
 * Stop site from logging out user automtatically after 1 hr.  **DONE!!**
 * Call the backend for only the visible, not every single song. 
 * Source list or something; autocomplete. 
+* Sort tags by popularity
+* Iterations - tag a song as Final Fantasy 8 or 7, or Silent Hill 1, or 2 etc.
+
+Bugs:
+* Entering "winter\" breaks the textbox when adding a tag because of regular expressions
