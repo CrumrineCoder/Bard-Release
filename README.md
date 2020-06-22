@@ -104,6 +104,7 @@ Problems I'm fixing w/ this:
 * Source list or something; autocomplete. 
 * Sort tags by popularity
 * Iterations - tag a song as Final Fantasy 8 or 7, or Silent Hill 1, or 2 etc.
+* Longer BG music for stock stuff - playlist support
 
 Bugs:
 * Entering "winter\" breaks the textbox when adding a tag because of regular expressions

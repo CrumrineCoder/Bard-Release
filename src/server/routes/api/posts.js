@@ -52,8 +52,13 @@ module.exports = (app) => {
     app.post('/api/posts/createPost', checkToken, (req, res, next) => {
         let { link, source, name } = req.body;
         jwt.verify(req.token, process.env.SECRET, (err, authorizedData) => {
+            console.log("Test")
+            console.log(req.token)
+            console.log(process.env.SECRET)
+            console.log(authorizedData)
             if (err) {
                 //If error send Forbidden (403)
+                console.log(err)
                 console.log('ERROR: Could not connect to the protected route');
                 res.sendStatus(403);
             } else {
