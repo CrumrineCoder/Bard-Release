@@ -308,14 +308,14 @@ function MusicPage(props) {
       {showAllTags && alphabetAllTags.map(function(tag) {
           return (
             <li
-              className="tagBubble borderImage smallTagBubble addBubble editableTagBubble"
+              className="tagBubble borderImage smallTagBubble"
               onClick={() => {
                 submitTag(tag._id);
               }}
               key={tag._id}
             >
               {tag._id}
-              <i className="fas fa-plus iconAction"></i>
+             
             </li>
           );
         })}
