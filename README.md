@@ -108,3 +108,4 @@ Problems I'm fixing w/ this:
 
 Bugs:
 * Entering "winter\" breaks the textbox when adding a tag because of regular expressions
+* Don't reload the entire page when updating a link
