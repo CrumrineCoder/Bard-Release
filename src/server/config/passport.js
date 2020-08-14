@@ -6,10 +6,6 @@ const passportJWT = require("passport-jwt");
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy = passportJWT.Strategy;
 
-
-
-
-
 const Users = mongoose.model('Users');
 
 require('dotenv').config();
