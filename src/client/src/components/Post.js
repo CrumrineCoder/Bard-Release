@@ -1,10 +1,20 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, Fragment } from "react";
+import { connect } from "react-redux";
 
-import { getAllPostsAction, commentAction, getAllCommentsForOnePostAction, getAllTagsForOnePostAction, tagAction, removeUserFromTagAction, deleteCommentAction, editCommentAction, editPostAction } from '../actions/linkActions';
+import {
+  getAllPostsAction,
+  commentAction,
+  getAllCommentsForOnePostAction,
+  getAllTagsForOnePostAction,
+  tagAction,
+  removeUserFromTagAction,
+  deleteCommentAction,
+  editCommentAction,
+  editPostAction
+} from "../actions/linkActions";
 import tagCategories from "../utils/tagCategories";
-import { getCurrentUserAction } from '../actions/authenticationActions';
-import { checkCookie } from '../utils/cookies';
+import { getCurrentUserAction } from "../actions/authenticationActions";
+import { checkCookie } from "../utils/cookies";
 
 function Post(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -13,7 +23,7 @@ function Post(props) {
   const [tagChain, setTagChain] = useState("");
   const [playVideo, setPlayVideo] = useState(false);
   const [tags, setTags] = useState("");
-  const [comments, setComments] = useState("")
+  const [comments, setComments] = useState("");
   const [tagToAdd, setTagToAdd] = useState("");
   const [existingTags, setExistingTags] = useState("");
   const [commentToAdd, setCommentToAdd] = useState("");
@@ -28,7 +38,7 @@ function Post(props) {
   const [postUpdatedName, setPostUpdatedName] = useState(props.post.name);
   const [openPostEdit, setOpenPostEdit] = useState(false);
 
-  const [allTags, setAllTags] = useState([])
+  const [allTags, setAllTags] = useState([]);
 
   const [section, setSection] = useState("tags");
 
@@ -36,7 +46,6 @@ function Post(props) {
   const [copied, setCopied] = useState(false);
 
   function getCommentsForOnePost(postId) {
-
     props.dispatch(getAllCommentsForOnePostAction(postId));
   }
 
@@ -47,39 +56,38 @@ function Post(props) {
   useEffect(() => {
     if (props.response.comments.response) {
       if (props.response.comments.response.message == "Comment added.") {
-        getCommentsForOnePost(props.post._id)
+        getCommentsForOnePost(props.post._id);
       }
 
       if (props.response.comments.response.comment) {
         if (props.response.comments.response.comment.length > 0) {
-          if (props.response.comments.response.comment[0].postID == props.post._id) {
+          if (
+            props.response.comments.response.comment[0].postID == props.post._id
+          ) {
             setComments(props.response.comments.response.comment[0].comments);
             if (props.response.comments.response.comment[0].comments) {
-
             }
           }
         }
       }
-
-
     }
-  }, [props.response.comments.response])
+  }, [props.response.comments.response]);
 
   useEffect(() => {
-    props.dispatch(getCurrentUserAction())
-    setLoggedIn(checkCookie() != null)
-  }, [])
+    props.dispatch(getCurrentUserAction());
+    setLoggedIn(checkCookie() != null);
+  }, []);
 
   useEffect(() => {
     if (props.response.login.user) {
-  //    console.log(props.backendData.login.user)
+      //    console.log(props.backendData.login.user)
       if (props.response.login.user.token != undefined) {
         setIsSuccess(props.response.login.user.success);
       } else {
         setIsSuccess(checkCookie() != null);
       }
     }
-  }, [props.response.login.user])
+  }, [props.response.login.user]);
 
   useEffect(() => {
     if (props.response.tags.response) {
@@ -88,20 +96,24 @@ function Post(props) {
         if (props.response.tags.response.message == "Tags for post done.") {
           if (props.response.tags.response.tag.length > 0) {
             if (props.response.tags.response.tag[0].postID == props.post._id) {
-
-              setTags(props.response.tags.response.tag[0].tags)
+              setTags(props.response.tags.response.tag[0].tags);
               setVisualTags(props.response.tags.response.tag[0].tags);
-
             }
           }
         }
-      } else if (props.response.tags.response.message == "Tag added." && props.response.tags.response.id == props.post._id) {
-        getTagsForOnePost(props.post._id)
-      } else if (props.response.tags.response.message == "Tag removed." && props.response.tags.response.id == props.post._id) {
-        getTagsForOnePost(props.post._id)
+      } else if (
+        props.response.tags.response.message == "Tag added." &&
+        props.response.tags.response.id == props.post._id
+      ) {
+        getTagsForOnePost(props.post._id);
+      } else if (
+        props.response.tags.response.message == "Tag removed." &&
+        props.response.tags.response.id == props.post._id
+      ) {
+        getTagsForOnePost(props.post._id);
       }
     }
-  }, [props.response.tags.response])
+  }, [props.response.tags.response]);
   function removeUserFromTag(tag) {
     /*
     let category = tags.find(function (el) {
@@ -111,7 +123,14 @@ function Post(props) {
       props.dispatch(removeUserFromTagAction({ tag: category._id, user: props.currentUser, postID: props.post._id, text: category.text }));
     }
     */
-    props.dispatch(removeUserFromTagAction({ tag: tag._id, user: props.currentUser, postID: props.post._id, text: tag.text }))
+    props.dispatch(
+      removeUserFromTagAction({
+        tag: tag._id,
+        user: props.currentUser,
+        postID: props.post._id,
+        text: tag.text
+      })
+    );
   }
 
   function deleteComment(comment) {
@@ -137,84 +156,124 @@ function Post(props) {
     if (visualTags.length > 0) {
       setTagChain(
         <div className="postsTags">
-          {visualTags.slice(0, tagLength).map(
-            function (tag) {
-              if (tag.emails.indexOf(props.currentUser) != -1) {
-                return (
-                  <li className="tagBubble borderImage removeBubble smallTagBubble editableTagBubble" onClick={e => removeUserFromTag(tag)} key={tag._id}>
-                    {tag.text}
-                    <i className="fas fa-times marginLeftIcon iconAction removeIcon"></i>
-                  </li>
-                )
-              } else {
-                return (
-                  <li className="tagBubble borderImage smallTagBubble" key={tag._id}>
-                    {tag.text}
-                  </li>
-                )
-              }
+          {visualTags.slice(0, tagLength).map(function(tag) {
+            if (tag.emails.indexOf(props.currentUser) != -1) {
+              return (
+                <li
+                  className="tagBubble borderImage removeBubble smallTagBubble editableTagBubble"
+                  onClick={e => removeUserFromTag(tag)}
+                  key={tag._id}
+                >
+                  {tag.text}
+                  <i className="fas fa-times marginLeftIcon iconAction removeIcon"></i>
+                </li>
+              );
+            } else {
+              return (
+                <li
+                  className="tagBubble borderImage smallTagBubble"
+                  key={tag._id}
+                >
+                  {tag.text}
+                </li>
+              );
             }
+          })}
+          {tagLength < visualTags.length && (
+            <i
+              className="fas fa-arrow-circle-right showMoreTags"
+              onClick={e => showMoreTags()}
+            ></i>
           )}
-          {tagLength < visualTags.length && <i className="fas fa-arrow-circle-right showMoreTags" onClick={e => showMoreTags()}></i>}
         </div>
-      )
-    }
-    else {
+      );
+    } else {
       setTagChain(
-        <p className="noContentDisclaimer">
-          There are no tags yet.
-        </p>
-      )
+        <p className="noContentDisclaimer">There are no tags yet.</p>
+      );
     }
-  }, [visualTags, tagLength])
+  }, [visualTags, tagLength]);
 
   useEffect(() => {
     if (comments.length > 0) {
       setCommentChain(
         <div className="postsComments">
-          {comments.map(
-            function (comment, index) {
-              if (comment.email == (props.currentUser)) {
-                if (openCommentEdit == comment._id) {
-                  return (
-                    <label htmlFor="commentToBeEdited">
-                      <textarea autoFocus className="postCommentField borderImage" value={commentUpdatedText} rows="5" cols="25" autoComplete="off" onChange={e => setCommentUpdatedText(e.target.value)} type="commentToBeEdited" name="commentToBeEdited" id="commentToBeEdited" />
-                      <div className="editCommentButtonContainer">
-                        <button className="btn btn-post smallBtn borderImage" onClick={() => { editComment(comment) }}>Update</button>
-                        <button className="btn btn-vermillion smallBtn borderImage" onClick={() => { setOpenCommentEdit(false) }} >Cancel</button>
-                      </div>
-                    </label>
-                  )
-                } else {
-                  return (
-                    <li className="commentArea commentEditArea" key={comment._id + index}>
-                      {comment.text}
-                      <span className="commentIcons">
-                        <i className="fas fa-edit marginLeftIcon iconAction editIcon" onClick={() => { setOpenCommentEdit(comment._id); setCommentUpdatedText(comment.text) }}></i>
-                        <i className="fas fa-times marginLeftIcon iconAction removeIcon" onClick={() => deleteComment(comment)}></i>
-                      </span>
-                    </li>
-                  )
-                }
+          {comments.map(function(comment, index) {
+            if (comment.email == props.currentUser) {
+              if (openCommentEdit == comment._id) {
+                return (
+                  <label htmlFor="commentToBeEdited">
+                    <textarea
+                      autoFocus
+                      className="postCommentField borderImage"
+                      value={commentUpdatedText}
+                      rows="5"
+                      cols="25"
+                      autoComplete="off"
+                      onChange={e => setCommentUpdatedText(e.target.value)}
+                      type="commentToBeEdited"
+                      name="commentToBeEdited"
+                      id="commentToBeEdited"
+                    />
+                    <div className="editCommentButtonContainer">
+                      <button
+                        className="btn btn-post smallBtn borderImage"
+                        onClick={() => {
+                          editComment(comment);
+                        }}
+                      >
+                        Update
+                      </button>
+                      <button
+                        className="btn btn-vermillion smallBtn borderImage"
+                        onClick={() => {
+                          setOpenCommentEdit(false);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </label>
+                );
               } else {
                 return (
-                  <li className="commentArea" key={comment._id + index}>
+                  <li
+                    className="commentArea commentEditArea"
+                    key={comment._id + index}
+                  >
                     {comment.text}
+                    <span className="commentIcons">
+                      <i
+                        className="fas fa-edit marginLeftIcon iconAction editIcon"
+                        onClick={() => {
+                          setOpenCommentEdit(comment._id);
+                          setCommentUpdatedText(comment.text);
+                        }}
+                      ></i>
+                      <i
+                        className="fas fa-times marginLeftIcon iconAction removeIcon"
+                        onClick={() => deleteComment(comment)}
+                      ></i>
+                    </span>
                   </li>
-                )
+                );
               }
+            } else {
+              return (
+                <li className="commentArea" key={comment._id + index}>
+                  {comment.text}
+                </li>
+              );
             }
-          )}
+          })}
         </div>
-      )
+      );
     } else {
       setCommentChain(
-        <p className="noContentDisclaimer">
-          There are no notes yet.
-        </p>
-      )
+        <p className="noContentDisclaimer">There are no notes yet.</p>
+      );
     }
-  }, [comments, openCommentEdit, commentUpdatedText])
+  }, [comments, openCommentEdit, commentUpdatedText]);
 
   function onHandleComment(event) {
     event.preventDefault();
@@ -226,17 +285,17 @@ function Post(props) {
     };
     props.dispatch(commentAction(data));
     props.dispatch(getAllPostsAction());
-    setCommentToAdd("")
+    setCommentToAdd("");
   }
 
   useEffect(() => {
     getTagsForOnePost(props.post._id);
     getCommentsForOnePost(props.post._id);
-  }, [])
+  }, []);
 
   function _handleKeyDown(e) {
     //  props.dispatch(turnoffOverlayAction());
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       onHandleTag();
     }
   }
@@ -244,67 +303,76 @@ function Post(props) {
   useEffect(() => {
     let newArr = allTags.concat(props.allTags);
     //   console.log(props.allTags);
-    newArr = props.allTags.map(function (i) {
+    newArr = props.allTags.map(function(i) {
       return i._id;
     });
-    // console.log(newArr); 
+    // console.log(newArr);
     setAllTags(newArr);
-  }, [props.allTags])
+  }, [props.allTags]);
 
   useEffect(() => {
     if (tagToAdd.length > 0) {
-      var re = new RegExp("^" + tagToAdd)
+      var re = new RegExp("^" + tagToAdd);
 
       let nestedTags = [];
       for (var i = 0; i < Object.keys(tagCategories).length; i++) {
-        nestedTags.push(Object.values(tagCategories)[i].filter(value => re.test(value)));
+        nestedTags.push(
+          Object.values(tagCategories)[i].filter(value => re.test(value))
+        );
       }
       nestedTags.push(allTags);
       let flattenedTags = nestedTags.flat(Infinity);
-      flattenedTags = flattenedTags.filter((tag) => tag.startsWith(tagToAdd));
+      flattenedTags = flattenedTags.filter(tag => tag.startsWith(tagToAdd));
       flattenedTags = [...new Set(flattenedTags)];
       setExistingTags(
         <div className="tagBubbleSuggestionContainer">
-          {flattenedTags.map(tag =>
-            <li onClick={() => onHandleTag(tag)} className="tagBubbleSuggestion addBubble tagBubble smallTagBubble borderImage editableTagBubble" key={tag}>
+          {flattenedTags.map(tag => (
+            <li
+              onClick={() => onHandleTag(tag)}
+              className="tagBubbleSuggestion addBubble tagBubble smallTagBubble borderImage editableTagBubble"
+              key={tag}
+            >
               {tag}
               <i className="fas fa-plus marginLeftIcon tagBubbleIcon"></i>
             </li>
-          )}
+          ))}
         </div>
-      )
+      );
     } else {
-      setExistingTags()
+      setExistingTags();
     }
-  }, [tagToAdd, allTags])
+  }, [tagToAdd, allTags]);
 
   function getID(str) {
-    return str.split('v=')[1];
+    return str.split("v=")[1];
   }
 
   function getEmbed(link) {
-    let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+    let embedLink = link.replace(
+      "https://www.youtube.com/watch?v=",
+      "https://www.youtube.com/embed/"
+    );
     embedLink += "?autoplay=1";
     return embedLink;
   }
 
   function getHQ(link) {
     //let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-    let id = getID(link)
+    let id = getID(link);
     let embedLink = "https://img.youtube.com/vi/" + id + "/mqdefault.jpg";
-   // console.log(embedLink);
+    // console.log(embedLink);
     // https://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg
     //embedLink += "?autoplay=1"
     return embedLink;
   }
 
   function showMoreTags() {
-    setTagLength(tagLength + 10)
+    setTagLength(tagLength + 10);
   }
 
   function onHandleTag(tag) {
     let localTagToAdd;
-    tag != undefined ? localTagToAdd = tag : localTagToAdd = tagToAdd;
+    tag != undefined ? (localTagToAdd = tag) : (localTagToAdd = tagToAdd);
     if (localTagToAdd != undefined && localTagToAdd != "") {
       localTagToAdd = localTagToAdd.toLowerCase();
       let _id = props.post._id;
@@ -314,7 +382,7 @@ function Post(props) {
       };
       props.dispatch(tagAction(data));
     }
-    setTagToAdd("")
+    setTagToAdd("");
   }
   /*
   <i className={playVideo ? "fas fa-stop iconAction videoIcon" : "fas fa-play iconAction videoIcon"} onClick={() => setPlayVideo(!playVideo)}></i>
@@ -327,7 +395,6 @@ function Post(props) {
       <    button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
           */
 
-
   /*  
        <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>    
 */
@@ -339,109 +406,260 @@ function Post(props) {
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [copied])
+  }, [copied]);
 
   return (
     <div className="borderImage postContainer">
       {copied && <p className="postContainerOverlayPasteMessage">copied!</p>}
-      {overlay &&
+      {overlay && (
         <div className="postContainerOverlay" onClick={() => setOverlay(false)}>
-          <p className="postContainerOverlayCancel marginLeftIcon fas fa-times" onClick={() => setOverlay(false)}></p>
-          <input onClick={() => { navigator.clipboard.writeText(props.post.link); setOverlay(false); setCopied(true) }} className="postLink postContainerOverlayLink inputLinkOverlay" readOnly="readonly" value={props.post.link} />
-          <i onClick={() => { navigator.clipboard.writeText(props.post.link); setOverlay(false); setCopied(true) }} className="postContainerOverlayPaste fas fa-clipboard" />
+          <p
+            className="postContainerOverlayCancel marginLeftIcon fas fa-times"
+            onClick={() => setOverlay(false)}
+          ></p>
+          <input
+            onClick={() => {
+              navigator.clipboard.writeText(props.post.link);
+              setOverlay(false);
+              setCopied(true);
+            }}
+            className="postLink postContainerOverlayLink inputLinkOverlay"
+            readOnly="readonly"
+            value={props.post.link}
+          />
+          <i
+            onClick={() => {
+              navigator.clipboard.writeText(props.post.link);
+              setOverlay(false);
+              setCopied(true);
+            }}
+            className="postContainerOverlayPaste fas fa-clipboard"
+          />
         </div>
-      }
+      )}
 
       <div className="postVideoContainer">
-
-        {playVideo ?
-          <iframe className="videoIframe" width="350" height="150" src={getEmbed(props.post.link)} frameBorder="0" allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture">    </iframe> :
-          <div onClick={() => setPlayVideo(true)} className="videoPreviewContainer">
+        {playVideo ? (
+          <iframe
+            className="videoIframe"
+            width="350"
+            height="150"
+            src={getEmbed(props.post.link)}
+            frameBorder="0"
+            allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          >
+            {" "}
+          </iframe>
+        ) : (
+          <div
+            onClick={() => setPlayVideo(true)}
+            className="videoPreviewContainer"
+          >
             <img className="videoPreview" src={getHQ(props.post.link)} />
             <i className="fa fa-play videoPreviewIcon" />
           </div>
-        }
+        )}
       </div>
 
       <div className="postVideoContainer">
-        {openPostEdit ?
+        {openPostEdit ? (
           <>
             <div className="updatePostForm">
               <div className="dashboardToolLabel">
-                <label htmlFor="link">Link <input className="dashboardToolInput borderImage" value={postUpdatedLink} onChange={e => setPostUpdatedLink(e.target.value)} autoComplete="off" type="link" name="link" id="link" />
+                <label htmlFor="link">
+                  Link{" "}
+                  <input
+                    className="dashboardToolInput borderImage"
+                    value={postUpdatedLink}
+                    onChange={e => setPostUpdatedLink(e.target.value)}
+                    autoComplete="off"
+                    type="link"
+                    name="link"
+                    id="link"
+                  />
                 </label>
               </div>
               <div className="dashboardToolLabel">
-                <label htmlFor="source">Source <input className="dashboardToolInput borderImage" value={postUpdatedSource} onChange={e => setPostUpdatedSource(e.target.value)} autoComplete="off" type="source" name="source" id="source" />
+                <label htmlFor="source">
+                  Source{" "}
+                  <input
+                    className="dashboardToolInput borderImage"
+                    value={postUpdatedSource}
+                    onChange={e => setPostUpdatedSource(e.target.value)}
+                    autoComplete="off"
+                    type="source"
+                    name="source"
+                    id="source"
+                  />
                 </label>
               </div>
               <div className="dashboardToolLabel">
-                <label htmlFor="name">Name <input className="dashboardToolInput borderImage" value={postUpdatedName} onChange={e => setPostUpdatedName(e.target.value)} autoComplete="off" type="name" name="name" id="name" />
+                <label htmlFor="name">
+                  Name{" "}
+                  <input
+                    className="dashboardToolInput borderImage"
+                    value={postUpdatedName}
+                    onChange={e => setPostUpdatedName(e.target.value)}
+                    autoComplete="off"
+                    type="name"
+                    name="name"
+                    id="name"
+                  />
                 </label>
               </div>
               <div>
-                <button className="btn btn-post smallBtn borderImage" onClick={() => editPost()} type="submit">Update</button>
-                <button className="btn btn-vermillion smallBtn borderImage" onClick={() => setOpenPostEdit(false)}>Cancel</button>
+                <button
+                  className="btn btn-post smallBtn borderImage"
+                  onClick={() => editPost()}
+                  type="submit"
+                >
+                  Update
+                </button>
+                <button
+                  className="btn btn-vermillion smallBtn borderImage"
+                  onClick={() => setOpenPostEdit(false)}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </>
-          :
+        ) : (
           <>
             <div className="postVideoIcons">
-              {props.post.email == props.currentUser && <i onClick={() => { setOpenPostEdit(true) }} className="fas fa-edit marginIcon postEditButton iconAction editIcon"></i>}
+              {props.post.email == props.currentUser && (
+                <>
+                  <i
+                    onClick={() => {
+                      updateLinkAutomatically();
+                    }}
+                    className="fas fa-sync marginIcon postEditButton iconAction editIcon"
+                  ></i>
+                  <i
+                    onClick={() => {
+                      setOpenPostEdit(true);
+                    }}
+                    className="fas fa-edit marginIcon postEditButton iconAction editIcon"
+                  ></i>
+                </>
+              )}
 
-              <i onClick={() => { navigator.clipboard.writeText(props.post.link); setCopied(true) }} className="fas fa-link editIcon iconAction"></i>
+              <i
+                onClick={() => {
+                  navigator.clipboard.writeText(props.post.link);
+                  setCopied(true);
+                }}
+                className="fas fa-link editIcon iconAction"
+              ></i>
             </div>
             <div className="postVideoHeader">
               <h3>{props.post.source}</h3>
               <h4>{props.post.name}</h4>
             </div>
           </>
-        }
+        )}
       </div>
 
       <div className="postChooseSectionContainer">
-        <span className={section == "tags" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("tags")}>Tags</span>
+        <span
+          className={
+            section == "tags"
+              ? "postChooseSectionLink active"
+              : "postChooseSectionLink"
+          }
+          onClick={() => setSection("tags")}
+        >
+          Tags
+        </span>
 
-        <span className={section == "notes" ? "postChooseSectionLink active" : "postChooseSectionLink"} onClick={() => setSection("notes")}>
-          {comments.length > 0 && <p className="postChooseSectionNoteNumber">{comments.length > 9 ? "9+" : comments.length}</p>}
-          Notes</span>
+        <span
+          className={
+            section == "notes"
+              ? "postChooseSectionLink active"
+              : "postChooseSectionLink"
+          }
+          onClick={() => setSection("notes")}
+        >
+          {comments.length > 0 && (
+            <p className="postChooseSectionNoteNumber">
+              {comments.length > 9 ? "9+" : comments.length}
+            </p>
+          )}
+          Notes
+        </span>
       </div>
 
-      {
-        section == "tags" ?
-          <div className="postTagContainer">
-            {tagChain}
+      {section == "tags" ? (
+        <div className="postTagContainer">
+          {tagChain}
 
-
-            {loggedIn ?
-              <div className="postDashboardContainer">
-                <div className="dashboardToolLabel">
-                  <input className="dashboardToolInput borderImage" placeholder={allTags[3]} onKeyDown={_handleKeyDown} value={tagToAdd} autoComplete="off" onChange={e => setTagToAdd(e.target.value)} type="tag" name="tag" id="tag" /> <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
-                </div>
-                {existingTags}
+          {loggedIn ? (
+            <div className="postDashboardContainer">
+              <div className="dashboardToolLabel">
+                <input
+                  className="dashboardToolInput borderImage"
+                  placeholder={allTags[3]}
+                  onKeyDown={_handleKeyDown}
+                  value={tagToAdd}
+                  autoComplete="off"
+                  onChange={e => setTagToAdd(e.target.value)}
+                  type="tag"
+                  name="tag"
+                  id="tag"
+                />{" "}
+                <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
               </div>
-              : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Tag</button>}
-          </div>
-          :
-          <div className="postCommentContainer">
-            {commentChain}
-            {loggedIn ?
-              <form className="postDashboardContainer" onSubmit={onHandleComment}>
-                <div>
-                  <label htmlFor="comment"></label>
-                  <textarea className="postCommentField borderImage" rows="5" cols="30" placeholder="Use in source, how it worked in a game or theorization, specifics of emotions" value={commentToAdd}
-                    onChange={e => setCommentToAdd(e.target.value)} type="comment" name="comment" id="comment" />
-                </div>
-                <div>
-                  <button className="btn btn-post btn-centered borderImage" type="submit">Post Note</button>
-                </div>
-              </form>
-              : <button className="btn-post loginPromptButton borderImage" onClick={e => props.setModalOpen(true)}>Add a Note</button>}
-          </div>
-      }
-    </div >
+              {existingTags}
+            </div>
+          ) : (
+            <button
+              className="btn-post loginPromptButton borderImage"
+              onClick={e => props.setModalOpen(true)}
+            >
+              Add a Tag
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="postCommentContainer">
+          {commentChain}
+          {loggedIn ? (
+            <form className="postDashboardContainer" onSubmit={onHandleComment}>
+              <div>
+                <label htmlFor="comment"></label>
+                <textarea
+                  className="postCommentField borderImage"
+                  rows="5"
+                  cols="30"
+                  placeholder="Use in source, how it worked in a game or theorization, specifics of emotions"
+                  value={commentToAdd}
+                  onChange={e => setCommentToAdd(e.target.value)}
+                  type="comment"
+                  name="comment"
+                  id="comment"
+                />
+              </div>
+              <div>
+                <button
+                  className="btn btn-post btn-centered borderImage"
+                  type="submit"
+                >
+                  Post Note
+                </button>
+              </div>
+            </form>
+          ) : (
+            <button
+              className="btn-post loginPromptButton borderImage"
+              onClick={e => props.setModalOpen(true)}
+            >
+              Add a Note
+            </button>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
-const mapStateToProps = (response) => ({ response });
+const mapStateToProps = response => ({ response });
 export default connect(mapStateToProps)(Post);
