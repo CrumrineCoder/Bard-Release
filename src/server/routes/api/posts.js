@@ -119,6 +119,21 @@ module.exports = (app) => {
         }).sort({ _id: -1 });
     });
 
+    app.post('/api/posts/updateLink', (req, res) => {
+       /* Posts.find({
+        }, function (error, post) {
+            if (error) throw error;
+
+            if (!post) {
+                return res.send(httpResponse.onPostsNotFound);
+            }
+
+            return res.json({ success: true, post, message: "Get all posts done." });
+
+        }).sort({ _id: -1 });*/
+        console.log(req.body.post);
+    });
+
     app.post('/api/posts/getPostById', (req, res) => {
         //  console.log(req.params)
        // let ids = req.body.split(",");

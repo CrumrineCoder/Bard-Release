@@ -383,3 +383,30 @@ export const editPostService = (request) => {
       return json;
     });
 };
+
+export const updateLinkService = (request) => {
+  const POST_API_ENDPOINT = '/api/posts/updateLink';
+  let authToken = getCookie('token');
+  const parameters = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      credentials: 'include',
+      withCredentials: true,
+      'Authorization': 'Bearer' + authToken
+    },
+    body: JSON.stringify(request),
+    credentials: "same-origin"
+    // credientials: 'include'
+  };
+
+  return fetch(POST_API_ENDPOINT, parameters)
+    .then(response => {
+      //     console.log(response.clone().json())
+      return response.clone().json();
+    })
+    .then(json => {
+      //     console.log(json);
+      return json;
+    });
+};

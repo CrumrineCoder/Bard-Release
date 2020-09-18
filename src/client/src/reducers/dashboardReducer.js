@@ -30,6 +30,10 @@ export default function (state = [], action) {
       return { ...state, response };
     case types.EDIT_POST_ERROR:
       return { ...state, response };
+    case types.UPDATE_LINK_SUCCESS:
+      return { ...state, response };
+    case types.UPDATE_LINK_ERROR:
+      return { ...state, response };
     default:
       return state;
   }

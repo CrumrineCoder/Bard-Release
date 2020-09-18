@@ -132,3 +132,10 @@ export const addSearchTagAction = (post) => {
     post
   }
 }
+
+export const updateLinkAction = (post) => {
+  return{
+    type: types.UPDATE_LINK,
+    post
+  }
+}

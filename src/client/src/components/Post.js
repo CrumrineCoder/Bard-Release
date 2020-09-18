@@ -10,7 +10,8 @@ import {
   removeUserFromTagAction,
   deleteCommentAction,
   editCommentAction,
-  editPostAction
+  editPostAction,
+  updateLinkAction
 } from "../actions/linkActions";
 import tagCategories from "../utils/tagCategories";
 import { getCurrentUserAction } from "../actions/authenticationActions";
@@ -342,6 +343,10 @@ function Post(props) {
       setExistingTags();
     }
   }, [tagToAdd, allTags]);
+
+  function updateLinkAutomatically(){
+    props.dispatch(updateLinkAction(postUpdatedSource + " " + postUpdatedName))
+  }
 
   function getID(str) {
     return str.split("v=")[1];
