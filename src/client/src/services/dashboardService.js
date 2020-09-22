@@ -385,6 +385,7 @@ export const editPostService = (request) => {
 };
 
 export const updateLinkService = (request) => {
+  /*
   const POST_API_ENDPOINT = '/api/posts/updateLink';
   let authToken = getCookie('token');
   const parameters = {
@@ -409,4 +410,64 @@ export const updateLinkService = (request) => {
       //     console.log(json);
       return json;
     });
+    */
+   /*
+
+  function authenticate() {
+    return gapi.auth2.getAuthInstance()
+        .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+        .then(function() { console.log("Sign-in successful"); },
+              function(err) { console.error("Error signing in", err); });
+  }
+  function loadClient() {
+    gapi.client.setApiKey("YOUR_API_KEY");
+    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+  function execute() {
+    return gapi.client.youtube.search.list({
+      "part": [
+        "snippet"
+      ],
+      "order": "viewCount",
+      "q": "skateboarding dog",
+      "type": [
+        "video"
+      ],
+      "videoDefinition": "high"
+    })
+        .then(function(response) {
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+  gapi.load("client:auth2", function() {
+    gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
+  });
+</script>
+<button onclick="authenticate().then(loadClient)">authorize and load</button>
+<button onclick="execute()">execute</button>
+
+*/
+   AIzaSyCAglv8k8kyXAz-DE49anq18KoMcSZAFJQ
+  const GET_API_ENDPOINT = 'https://www.googleapis.com/youtube/v3/search"
+  let authToken = getCookie('token');
+  const parameters = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer' + authToken
+    }
+  };
+
+  return fetch(GET_API_ENDPOINT, parameters)
+    .then(response => {
+      return response.clone().json();
+    })
+    .then(json => {
+      //     console.log(json);
+      return json;
+    });
+   
 };
