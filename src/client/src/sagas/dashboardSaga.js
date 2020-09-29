@@ -154,6 +154,7 @@ export function* editPostSaga(payload) {
 }
 
 export function* updateLinkSaga(payload) {
+  console.log("Testing 123")
   try {
     const response = yield call(updateLinkService, payload);
     yield put({ type: types.UPDATE_LINK_SUCCESS, response });

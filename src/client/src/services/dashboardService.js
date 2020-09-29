@@ -1,16 +1,16 @@
-import { getCookie } from '../utils/cookies';
+import { getCookie } from "../utils/cookies";
 
-export const postService = (request) => {
+export const postService = request => {
   //   console.log(request);
-  const POST_API_ENDPOINT = '/api/posts/createPost';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/posts/createPost";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -28,17 +28,17 @@ export const postService = (request) => {
     });
 };
 
-export const commentService = (request) => {
+export const commentService = request => {
   //   console.log(request);
-  const POST_API_ENDPOINT = '/api/comments/postComment';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/comments/postComment";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -56,14 +56,14 @@ export const commentService = (request) => {
     });
 };
 
-export const getAllPostsService = (request) => {
-  const GET_API_ENDPOINT = '/api/posts/getAllPosts';
-  let authToken = getCookie('token');
+export const getAllPostsService = request => {
+  const GET_API_ENDPOINT = "/api/posts/getAllPosts";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     }
   };
 
@@ -78,15 +78,15 @@ export const getAllPostsService = (request) => {
     });
 };
 
-export const getPostsByIDService = (request) => {
+export const getPostsByIDService = request => {
   //  console.log(request);
-  const POST_API_ENDPOINT = '/api/posts/getPostById/';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/posts/getPostById/";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post)
   };
@@ -101,16 +101,14 @@ export const getPostsByIDService = (request) => {
     });
 };
 
-
-
-export const getAllCommentsForOnePost = (request) => {
-  const GET_API_ENDPOINT = '/api/comments/getCommentsForPost/' + request.post;
-  let authToken = getCookie('token');
+export const getAllCommentsForOnePost = request => {
+  const GET_API_ENDPOINT = "/api/comments/getCommentsForPost/" + request.post;
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     }
   };
 
@@ -125,14 +123,14 @@ export const getAllCommentsForOnePost = (request) => {
     });
 };
 
-export const getAllTagsForOnePost = (request) => {
-  const GET_API_ENDPOINT = '/api/tags/getTagsForPost/' + request.post;
-  let authToken = getCookie('token');
+export const getAllTagsForOnePost = request => {
+  const GET_API_ENDPOINT = "/api/tags/getTagsForPost/" + request.post;
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     }
   };
 
@@ -146,17 +144,16 @@ export const getAllTagsForOnePost = (request) => {
     });
 };
 
-
-export const checkTagService = (request) => {
+export const checkTagService = request => {
   //console.log(request);
 
-  const GET_API_ENDPOINT = '/api/tags/checkTags/' + request.post.searchTag;
-  let authToken = getCookie('token');
+  const GET_API_ENDPOINT = "/api/tags/checkTags/" + request.post.searchTag;
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     }
   };
 
@@ -170,17 +167,16 @@ export const checkTagService = (request) => {
     });
 };
 
-
-export const getAllTagsService = (request) => {
+export const getAllTagsService = request => {
   //console.log(request);
 
-  const GET_API_ENDPOINT = '/api/tags/getAllTags/'
-  let authToken = getCookie('token');
+  const GET_API_ENDPOINT = "/api/tags/getAllTags/";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     }
   };
 
@@ -194,16 +190,16 @@ export const getAllTagsService = (request) => {
     });
 };
 
-export const searchPostsByTagService = (request) => {
+export const searchPostsByTagService = request => {
   //  console.log(request);
   //const GET_API_ENDPOINT = '/api/tags/searchPostsByTag/' + request.post.searchTag;
-  const GET_API_ENDPOINT = '/api/tags/searchPostsByTag/';
-  let authToken = getCookie('token');
+  const GET_API_ENDPOINT = "/api/tags/searchPostsByTag/";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post)
   };
@@ -218,17 +214,17 @@ export const searchPostsByTagService = (request) => {
     });
 };
 
-export const postTagService = (request) => {
+export const postTagService = request => {
   //   console.log(request);
-  const POST_API_ENDPOINT = '/api/tags/postTag';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/tags/postTag";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -246,16 +242,17 @@ export const postTagService = (request) => {
     });
 };
 
-export const checkSourceService = (request) => {
+export const checkSourceService = request => {
   // console.log(request);
 
-  const GET_API_ENDPOINT = '/api/posts/checkSource/' + request.post.searchSource;
-  let authToken = getCookie('token');
+  const GET_API_ENDPOINT =
+    "/api/posts/checkSource/" + request.post.searchSource;
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + authToken
     }
   };
 
@@ -269,17 +266,17 @@ export const checkSourceService = (request) => {
     });
 };
 
-export const removeUserFromTagService = (request) => {
+export const removeUserFromTagService = request => {
   //   console.log(request);
-  const POST_API_ENDPOINT = '/api/tags/removeUserFromTag';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/tags/removeUserFromTag";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -297,18 +294,17 @@ export const removeUserFromTagService = (request) => {
     });
 };
 
-
-export const deleteCommentService = (request) => {
+export const deleteCommentService = request => {
   //   console.log(request);
-  const POST_API_ENDPOINT = '/api/comments/deleteComment';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/comments/deleteComment";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -326,19 +322,17 @@ export const deleteCommentService = (request) => {
     });
 };
 
-
-
-export const editCommentService = (request) => {
+export const editCommentService = request => {
   //console.log(request);
-  const POST_API_ENDPOINT = '/api/comments/editComment';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/comments/editComment";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -356,17 +350,17 @@ export const editCommentService = (request) => {
     });
 };
 
-export const editPostService = (request) => {
+export const editPostService = request => {
   //console.log(request);
-  const POST_API_ENDPOINT = '/api/posts/editPost';
-  let authToken = getCookie('token');
+  const POST_API_ENDPOINT = "/api/posts/editPost";
+  let authToken = getCookie("token");
   const parameters = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      credentials: 'include',
+      "Content-Type": "application/json",
+      credentials: "include",
       withCredentials: true,
-      'Authorization': 'Bearer' + authToken
+      Authorization: "Bearer" + authToken
     },
     body: JSON.stringify(request.post),
     credentials: "same-origin"
@@ -384,7 +378,7 @@ export const editPostService = (request) => {
     });
 };
 
-export const updateLinkService = (request) => {
+export const updateLinkService = request => {
   /*
   const POST_API_ENDPOINT = '/api/posts/updateLink';
   let authToken = getCookie('token');
@@ -411,7 +405,7 @@ export const updateLinkService = (request) => {
       return json;
     });
     */
-   /*
+  /*
 
   function authenticate() {
     return gapi.auth2.getAuthInstance()
@@ -450,24 +444,54 @@ export const updateLinkService = (request) => {
 <button onclick="execute()">execute</button>
 
 */
-   AIzaSyCAglv8k8kyXAz-DE49anq18KoMcSZAFJQ
-  const GET_API_ENDPOINT = 'https://www.googleapis.com/youtube/v3/search"
-  let authToken = getCookie('token');
-  const parameters = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + authToken
-    }
-  };
-
-  return fetch(GET_API_ENDPOINT, parameters)
+  console.log("test");
+  console.log(request)
+  const GET_API_ENDPOINT =
+    "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=" + request.post.source + " " + request.post.name + "&type=video&key=AIzaSyCMpnY6u8uVUzDunfsI_DvAUxDwqRDE9o8";
+    console.log(GET_API_ENDPOINT)
+  /*
+  return fetch(GET_API_ENDPOINT)
     .then(response => {
       return response.clone().json();
     })
     .then(json => {
-      //     console.log(json);
+      console.log(json.items[0].id.videoId);
       return json;
     });
-   
+  */
+  fetch(GET_API_ENDPOINT)
+    .then(response => {
+      return response.clone().json();
+    })
+    .then(json => {
+      console.log(json.items[0].id.videoId);
+      //return json;
+      let newPost = request.post;
+      newPost.link = "https://www.youtube.com/watch?v=" + json.items[0].id.videoId; 
+      console.log(newPost)
+      const POST_API_ENDPOINT = "/api/posts/editPost";
+      let authToken = getCookie("token");
+      const parameters = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include",
+          withCredentials: true,
+          Authorization: "Bearer" + authToken
+        },
+        body: JSON.stringify(newPost),
+        credentials: "same-origin"
+        // credientials: 'include'
+      };
+
+      return fetch(POST_API_ENDPOINT, parameters)
+        .then(response => {
+          //     console.log(response.clone().json())
+          return response.clone().json();
+        })
+        .then(json => {
+          //     console.log(json);
+          return json;
+        });
+    });
 };

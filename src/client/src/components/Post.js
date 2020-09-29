@@ -345,7 +345,12 @@ function Post(props) {
   }, [tagToAdd, allTags]);
 
   function updateLinkAutomatically(){
-    props.dispatch(updateLinkAction(postUpdatedSource + " " + postUpdatedName))
+    //console.log("TestupdateLinkAutomatically")
+    let updatedPost = props.post;
+    console.log(updatedPost)
+    // postUpdatedSource + " " + postUpdatedName, 
+    props.dispatch(updateLinkAction(updatedPost))
+    
   }
 
   function getID(str) {

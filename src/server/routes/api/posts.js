@@ -131,7 +131,7 @@ module.exports = (app) => {
             return res.json({ success: true, post, message: "Get all posts done." });
 
         }).sort({ _id: -1 });*/
-        console.log(req.body.post);
+        console.log(req.body);
     });
 
     app.post('/api/posts/getPostById', (req, res) => {
