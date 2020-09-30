@@ -130,7 +130,7 @@ module.exports = (app) => {
             } else if (!user.validatePassword(password)) {
               return res.json(httpResponse.onAuthenticationFail);
             } else {
-              jwt.sign({ user }, process.env.SECRET, {expiresIn: '7d'}, (err, token) => {
+            jwt.sign({ user }, process.env.SECRET, {/*expiresIn: '7d'*/}, (err, token) => {
                 if (err) { console.log(err) }
                 return res.json({ success: true, token: 'JWT ' + token, message: "User login" });
               });

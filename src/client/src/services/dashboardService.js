@@ -447,7 +447,7 @@ export const updateLinkService = request => {
   console.log("test");
   console.log(request)
   const GET_API_ENDPOINT =
-    "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=" + request.post.source + " " + request.post.name + "&type=video&key=AIzaSyCMpnY6u8uVUzDunfsI_DvAUxDwqRDE9o8";
+    "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=" + request.post.source + " " + request.post.name + " ost&type=video&key=AIzaSyCMpnY6u8uVUzDunfsI_DvAUxDwqRDE9o8";
     console.log(GET_API_ENDPOINT)
   /*
   return fetch(GET_API_ENDPOINT)

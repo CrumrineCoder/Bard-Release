@@ -350,6 +350,7 @@ function Post(props) {
     console.log(updatedPost)
     // postUpdatedSource + " " + postUpdatedName, 
     props.dispatch(updateLinkAction(updatedPost))
+    //props.dispatch(getAllPostsAction());
     
   }
 
