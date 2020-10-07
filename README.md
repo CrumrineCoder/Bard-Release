@@ -3,6 +3,9 @@
 User Stories to work on:
 * Need a way to be "casual" with it; eg. a list to just play in the bg without thinking about every song.
 
+Currently: 
+* Breaking apart Post.js so I can more easily edit it
+
 Features to Add:
 * Song-boards
 * Chrome Add-On to add a song from a Youtube page and tag it
@@ -28,6 +31,7 @@ Features to Add:
 * Tag upvotes? 
 * Reset password
 * Admin accounts
+* Recommended Tags
 
 Improvements:
 * Don't reload all posts when updating one
@@ -46,6 +50,7 @@ Improvements:
 * Responsive
 * Video game OST vs songs
 * all tags should be checked in lowercase, even if written in upper.
+* Don't clear sources when searching for a tag
 
 Bugs:
 * Entering "winter\" breaks the textbox when adding a tag because of regular expressions

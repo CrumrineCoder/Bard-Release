@@ -9,7 +9,7 @@ import {
 
 import InfiniteScroll from "react-infinite-scroller";
 
-import Post from "./Post";
+import Post from "../container/Post";
 import MusicSearchBar from "./musicSearchBar";
 import LoginModal from "./loginModal";
 
