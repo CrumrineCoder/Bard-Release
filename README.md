@@ -5,6 +5,8 @@ User Stories to work on:
 
 Currently: 
 * Breaking apart Post.js so I can more easily edit it
+* Keep source when searching for tag
+* Don't get every post for all posts
 
 Features to Add:
 * Song-boards

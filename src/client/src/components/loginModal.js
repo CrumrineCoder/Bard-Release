@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, {  } from 'react';
 
-import { registerUserAction } from '../actions/authenticationActions';
-import { setCookie } from '../utils/cookies';
 
 function LoginModal(props) {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [message, setMessage] = useState("");
   return (
     <>
     <div className={props.modalOpen ? "loginModalDarkness openModal" : "loginModalDarkness"} onClick={e =>props.setModalOpen(false)}></div>
@@ -21,5 +15,4 @@ function LoginModal(props) {
     </>
   )
 }
-const mapStateToProps = (response) => ({ response });
-export default connect(mapStateToProps)(LoginModal);
+export default (LoginModal);

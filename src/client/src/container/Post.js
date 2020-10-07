@@ -13,9 +13,13 @@ import {
   editPostAction,
   updateLinkAction
 } from "../actions/linkActions";
+
+import  VideoPost  from "../components/postComponents/videoPost"
+
 import tagCategories from "../utils/tagCategories";
 import { getCurrentUserAction } from "../actions/authenticationActions";
 import { checkCookie } from "../utils/cookies";
+
 
 function Post(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -43,7 +47,6 @@ function Post(props) {
 
   const [section, setSection] = useState("tags");
 
-  const [overlay, setOverlay] = useState(false);
   const [copied, setCopied] = useState(false);
 
   function getCommentsForOnePost(postId) {
@@ -295,7 +298,6 @@ function Post(props) {
   }, []);
 
   function _handleKeyDown(e) {
-    //  props.dispatch(turnoffOverlayAction());
     if (e.key === "Enter") {
       onHandleTag();
     }
@@ -354,28 +356,7 @@ function Post(props) {
     
   }
 
-  function getID(str) {
-    return str.split("v=")[1];
-  }
 
-  function getEmbed(link) {
-    let embedLink = link.replace(
-      "https://www.youtube.com/watch?v=",
-      "https://www.youtube.com/embed/"
-    );
-    embedLink += "?autoplay=1";
-    return embedLink;
-  }
-
-  function getHQ(link) {
-    //let embedLink = link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-    let id = getID(link);
-    let embedLink = "https://img.youtube.com/vi/" + id + "/mqdefault.jpg";
-    // console.log(embedLink);
-    // https://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg
-    //embedLink += "?autoplay=1"
-    return embedLink;
-  }
 
   function showMoreTags() {
     setTagLength(tagLength + 10);
@@ -406,10 +387,6 @@ function Post(props) {
       <    button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
           */
 
-  /*  
-       <a className="postLink postContainerOverlayLink" href={props.post.link} target="_blank">{props.post.link}</a>    
-*/
-
   useEffect(() => {
     if (copied) {
       const timer = setTimeout(() => {
@@ -422,56 +399,8 @@ function Post(props) {
   return (
     <div className="borderImage postContainer">
       {copied && <p className="postContainerOverlayPasteMessage">copied!</p>}
-      {overlay && (
-        <div className="postContainerOverlay" onClick={() => setOverlay(false)}>
-          <p
-            className="postContainerOverlayCancel marginLeftIcon fas fa-times"
-            onClick={() => setOverlay(false)}
-          ></p>
-          <input
-            onClick={() => {
-              navigator.clipboard.writeText(props.post.link);
-              setOverlay(false);
-              setCopied(true);
-            }}
-            className="postLink postContainerOverlayLink inputLinkOverlay"
-            readOnly="readonly"
-            value={props.post.link}
-          />
-          <i
-            onClick={() => {
-              navigator.clipboard.writeText(props.post.link);
-              setOverlay(false);
-              setCopied(true);
-            }}
-            className="postContainerOverlayPaste fas fa-clipboard"
-          />
-        </div>
-      )}
 
-      <div className="postVideoContainer">
-        {playVideo ? (
-          <iframe
-            className="videoIframe"
-            width="350"
-            height="150"
-            src={getEmbed(props.post.link)}
-            frameBorder="0"
-            allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture"
-          >
-            {" "}
-          </iframe>
-        ) : (
-          <div
-            onClick={() => setPlayVideo(true)}
-            className="videoPreviewContainer"
-          >
-            <img className="videoPreview" src={getHQ(props.post.link)} />
-            <i className="fa fa-play videoPreviewIcon" />
-          </div>
-        )}
-      </div>
-
+      <VideoPost playVideo={playVideo} link={props.post.link} setPlayVideo={setPlayVideo}/>
       <div className="postVideoContainer">
         {openPostEdit ? (
           <>
