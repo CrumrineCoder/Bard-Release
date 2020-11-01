@@ -1,7 +1,6 @@
 import React from 'react';
 
 function videoPost(props) {
-
   function getHQ(link) {
     let id = getID(link);
     let embedLink = "https://img.youtube.com/vi/" + id + "/mqdefault.jpg";
@@ -19,7 +18,6 @@ function videoPost(props) {
     embedLink += "?autoplay=1";
     return embedLink;
   }
-
   return (
     <div className="postVideoContainer">
         {props.playVideo ? (

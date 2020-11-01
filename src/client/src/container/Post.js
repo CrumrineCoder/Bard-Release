@@ -14,13 +14,15 @@ import {
   updateLinkAction
 } from "../actions/linkActions";
 
-import  VideoPost  from "../components/postComponents/videoPost"
-import EditPost from "../components/postComponents/editPost"
+import VideoPost from "../components/postComponents/videoPost";
+import EditPost from "../components/postComponents/editPost";
+import VideoIcons from "../components/postComponents/videoIcons";
+import SectionHeaders from "../components/postComponents/sectionHeaders";
+import VideoTags from "../components/postComponents/videoTags";
 
 import tagCategories from "../utils/tagCategories";
 import { getCurrentUserAction } from "../actions/authenticationActions";
 import { checkCookie } from "../utils/cookies";
-
 
 function Post(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -298,12 +300,6 @@ function Post(props) {
     getCommentsForOnePost(props.post._id);
   }, []);
 
-  function _handleKeyDown(e) {
-    if (e.key === "Enter") {
-      onHandleTag();
-    }
-  }
-
   useEffect(() => {
     let newArr = allTags.concat(props.allTags);
     //   console.log(props.allTags);
@@ -347,17 +343,14 @@ function Post(props) {
     }
   }, [tagToAdd, allTags]);
 
-  function updateLinkAutomatically(){
+  function updateLinkAutomatically() {
     //console.log("TestupdateLinkAutomatically")
     let updatedPost = props.post;
-    console.log(updatedPost)
-    // postUpdatedSource + " " + postUpdatedName, 
-    props.dispatch(updateLinkAction(updatedPost))
+    console.log(updatedPost);
+    // postUpdatedSource + " " + postUpdatedName,
+    props.dispatch(updateLinkAction(updatedPost));
     //props.dispatch(getAllPostsAction());
-    
   }
-
-
 
   function showMoreTags() {
     setTagLength(tagLength + 10);
@@ -365,7 +358,7 @@ function Post(props) {
 
   function onHandleTag(tag) {
     let localTagToAdd;
-    tag != undefined ? (localTagToAdd = tag) : (localTagToAdd = tagToAdd);
+    (tag != undefined && typeof tag != "object") ? (localTagToAdd = tag) : (localTagToAdd = tagToAdd);
     if (localTagToAdd != undefined && localTagToAdd != "") {
       localTagToAdd = localTagToAdd.toLowerCase();
       let _id = props.post._id;
@@ -401,111 +394,54 @@ function Post(props) {
     <div className="borderImage postContainer">
       {copied && <p className="postContainerOverlayPasteMessage">copied!</p>}
 
-      <VideoPost playVideo={playVideo} link={props.post.link} setPlayVideo={setPlayVideo}/>
+      <VideoPost
+        playVideo={playVideo}
+        link={props.post.link}
+        setPlayVideo={setPlayVideo}
+      />
       <div className="postVideoContainer">
         {openPostEdit ? (
           <>
-            <EditPost setPostUpdatedName={setPostUpdatedName} setPostUpdatedLink={setPostUpdatedLink} setOpenPostEdit={setOpenPostEdit} setPostUpdatedSource={setPostUpdatedSource}
-            editPost={editPost} 
-            postUpdatedName={postUpdatedName} link={postUpdatedLink} postUpdatedSource={postUpdatedSource}
+            <EditPost
+              setPostUpdatedName={setPostUpdatedName}
+              setPostUpdatedLink={setPostUpdatedLink}
+              setOpenPostEdit={setOpenPostEdit}
+              setPostUpdatedSource={setPostUpdatedSource}
+              editPost={editPost}
+              postUpdatedName={postUpdatedName}
+              link={postUpdatedLink}
+              postUpdatedSource={postUpdatedSource}
             ></EditPost>
           </>
         ) : (
-          <>
-            <div className="postVideoIcons">
-              {props.post.email == props.currentUser && (
-                <>
-                  <i
-                    onClick={() => {
-                      updateLinkAutomatically();
-                    }}
-                    className="fas fa-sync marginIcon postEditButton iconAction editIcon"
-                  ></i>
-                  <i
-                    onClick={() => {
-                      setOpenPostEdit(true);
-                    }}
-                    className="fas fa-edit marginIcon postEditButton iconAction editIcon"
-                  ></i>
-                </>
-              )}
-
-              <i
-                onClick={() => {
-                  navigator.clipboard.writeText(props.post.link);
-                  setCopied(true);
-                }}
-                className="fas fa-link editIcon iconAction"
-              ></i>
-            </div>
-            <div className="postVideoHeader">
-              <h3>{props.post.source}</h3>
-              <h4>{props.post.name}</h4>
-            </div>
-          </>
+          <VideoIcons
+            currentUser={props.currentUser}
+            email={props.post.email}
+            updateLinkAutomatically={updateLinkAutomatically}
+            setOpenPostEdit={setOpenPostEdit}
+            source={props.post.source}
+            name={props.post.name}
+            link={props.post.link}
+          ></VideoIcons>
         )}
       </div>
-
-      <div className="postChooseSectionContainer">
-        <span
-          className={
-            section == "tags"
-              ? "postChooseSectionLink active"
-              : "postChooseSectionLink"
-          }
-          onClick={() => setSection("tags")}
-        >
-          Tags
-        </span>
-
-        <span
-          className={
-            section == "notes"
-              ? "postChooseSectionLink active"
-              : "postChooseSectionLink"
-          }
-          onClick={() => setSection("notes")}
-        >
-          {comments.length > 0 && (
-            <p className="postChooseSectionNoteNumber">
-              {comments.length > 9 ? "9+" : comments.length}
-            </p>
-          )}
-          Notes
-        </span>
-      </div>
+      <SectionHeaders
+        setSection={setSection}
+        section={section}
+        comments={comments}
+      ></SectionHeaders>
 
       {section == "tags" ? (
-        <div className="postTagContainer">
-          {tagChain}
-
-          {loggedIn ? (
-            <div className="postDashboardContainer">
-              <div className="dashboardToolLabel">
-                <input
-                  className="dashboardToolInput borderImage"
-                  placeholder={allTags[3]}
-                  onKeyDown={_handleKeyDown}
-                  value={tagToAdd}
-                  autoComplete="off"
-                  onChange={e => setTagToAdd(e.target.value)}
-                  type="tag"
-                  name="tag"
-                  id="tag"
-                />{" "}
-                <i className="addTagIcon marginLeftIcon fas fa-plus-square"></i>
-              </div>
-              {existingTags}
-            </div>
-          ) : (
-            <button
-              className="btn-post loginPromptButton borderImage"
-              onClick={e => props.setModalOpen(true)}
-            >
-              Add a Tag
-            </button>
-          )}
-        </div>
+        <VideoTags
+          tagChain={tagChain}
+          loggedIn={loggedIn}
+          placeholderTag={allTags[3]}
+          onHandleTag={onHandleTag}
+          tagToAdd={tagToAdd}
+          setTagToAdd={setTagToAdd}
+          existingTag={existingTags}
+          setModalOpen={props.setModalOpen}
+        ></VideoTags>
       ) : (
         <div className="postCommentContainer">
           {commentChain}

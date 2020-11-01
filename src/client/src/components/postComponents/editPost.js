@@ -1,6 +1,6 @@
 import React from "react";
 
-function videoPost(props) {
+function editPost(props) {
   return (
     <div className="updatePostForm">
       <div className="dashboardToolLabel">
@@ -63,4 +63,4 @@ function videoPost(props) {
     </div>
   );
 }
-export default videoPost;
+export default editPost;
