@@ -15,6 +15,7 @@ import {
 } from "../actions/linkActions";
 
 import  VideoPost  from "../components/postComponents/videoPost"
+import EditPost from "../components/postComponents/editPost"
 
 import tagCategories from "../utils/tagCategories";
 import { getCurrentUserAction } from "../actions/authenticationActions";
@@ -404,65 +405,10 @@ function Post(props) {
       <div className="postVideoContainer">
         {openPostEdit ? (
           <>
-            <div className="updatePostForm">
-              <div className="dashboardToolLabel">
-                <label htmlFor="link">
-                  Link{" "}
-                  <input
-                    className="dashboardToolInput borderImage"
-                    value={postUpdatedLink}
-                    onChange={e => setPostUpdatedLink(e.target.value)}
-                    autoComplete="off"
-                    type="link"
-                    name="link"
-                    id="link"
-                  />
-                </label>
-              </div>
-              <div className="dashboardToolLabel">
-                <label htmlFor="source">
-                  Source{" "}
-                  <input
-                    className="dashboardToolInput borderImage"
-                    value={postUpdatedSource}
-                    onChange={e => setPostUpdatedSource(e.target.value)}
-                    autoComplete="off"
-                    type="source"
-                    name="source"
-                    id="source"
-                  />
-                </label>
-              </div>
-              <div className="dashboardToolLabel">
-                <label htmlFor="name">
-                  Name{" "}
-                  <input
-                    className="dashboardToolInput borderImage"
-                    value={postUpdatedName}
-                    onChange={e => setPostUpdatedName(e.target.value)}
-                    autoComplete="off"
-                    type="name"
-                    name="name"
-                    id="name"
-                  />
-                </label>
-              </div>
-              <div>
-                <button
-                  className="btn btn-post smallBtn borderImage"
-                  onClick={() => editPost()}
-                  type="submit"
-                >
-                  Update
-                </button>
-                <button
-                  className="btn btn-vermillion smallBtn borderImage"
-                  onClick={() => setOpenPostEdit(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+            <EditPost setPostUpdatedName={setPostUpdatedName} setPostUpdatedLink={setPostUpdatedLink} setOpenPostEdit={setOpenPostEdit} setPostUpdatedSource={setPostUpdatedSource}
+            editPost={editPost} 
+            postUpdatedName={postUpdatedName} link={postUpdatedLink} postUpdatedSource={postUpdatedSource}
+            ></EditPost>
           </>
         ) : (
           <>

@@ -8,6 +8,31 @@ Currently:
 * Keep source when searching for tag
 * Don't get every post for all posts
 
+Improvements:
+* Don't reload all posts when updating one
+* Iterations - tag a song as Final Fantasy 8 or 7, or Silent Hill 1, or 2 etc.
+* Handle non-Youtube links (like soundcloud)
+* Only get tags when needed, don't get all at once.
+* Loading screens
+* Highlight tags that are being searched for
+* Sort tags by popularity
+* Formatting issue of songs. 
+* Drafts/unlisted playlists for broken links. 
+* SCSS cleanup
+* Check if video is valid 
+* Break down Post component
+* Check sources doesn't need to call the backend everytime. 
+* Responsive
+* Video game OST vs songs
+* all tags should be checked in lowercase, even if written in upper.
+* Don't clear sources when searching for a tag
+
+Bugs:
+* Entering "winter\" breaks the textbox when adding a tag because of regular expressions
+* 404
+* Whimsical has no results but returns everything
+* Fix success inconsistency in header, need to sort out the response and redux structure
+
 Features to Add:
 * Song-boards
 * Chrome Add-On to add a song from a Youtube page and tag it
@@ -34,31 +59,6 @@ Features to Add:
 * Reset password
 * Admin accounts
 * Recommended Tags
-
-Improvements:
-* Don't reload all posts when updating one
-* Iterations - tag a song as Final Fantasy 8 or 7, or Silent Hill 1, or 2 etc.
-* Handle non-Youtube links (like soundcloud)
-* Only get tags when needed, don't get all at once.
-* Loading screens
-* Highlight tags that are being searched for
-* Sort tags by popularity
-* Formatting issue of songs. 
-* Drafts/unlisted playlists for broken links. 
-* SCSS cleanup
-* Check if video is valid 
-* Break down Post component
-* Check sources doesn't need to call the backend everytime. 
-* Responsive
-* Video game OST vs songs
-* all tags should be checked in lowercase, even if written in upper.
-* Don't clear sources when searching for a tag
-
-Bugs:
-* Entering "winter\" breaks the textbox when adding a tag because of regular expressions
-* 404
-* Whimsical has no results but returns everything
-* Fix success inconsistency in header, need to sort out the response and redux structure
 
 **DONE!!**
 * Show all Tags mode 
