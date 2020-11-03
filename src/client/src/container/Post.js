@@ -5,7 +5,6 @@ import {
   getAllCommentsForOnePostAction,
   getAllTagsForOnePostAction,
   tagAction,
-  removeUserFromTagAction,
   editPostAction,
   updateLinkAction
 } from "../actions/linkActions";
@@ -17,6 +16,7 @@ import SectionHeaders from "../components/postComponents/sectionHeaders";
 import VideoTags from "../components/postComponents/videoTags";
 import VideoComments from "../components/postComponents/videoComments";
 import VideoCommentBlock from "../components/postComponents/videoCommentBlock";
+import VideoTagBlock from "../components/postComponents/videoTagBlock";
 
 import tagCategories from "../utils/tagCategories";
 import { getCurrentUserAction } from "../actions/authenticationActions";
@@ -39,7 +39,6 @@ function Post(props) {
   const [tagLength, setTagLength] = useState(10);
   const [visualTags, setVisualTags] = useState("");
 
-
   const [loggedIn, setLoggedIn] = useState();
 
   const [postUpdatedLink, setPostUpdatedLink] = useState(props.post.link);
@@ -53,8 +52,50 @@ function Post(props) {
 
   const [copied, setCopied] = useState(false);
 
-  function getTagsForOnePost(postId) {
-    props.dispatch(getAllTagsForOnePostAction(postId));
+  useEffect(() => {
+    props.dispatch(getCurrentUserAction());
+    setLoggedIn(checkCookie() != null);
+  }, []);
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied]);
+
+  useEffect(() => {
+    if (props.response.login.user) {
+      //    console.log(props.backendData.login.user)
+      if (props.response.login.user.token != undefined) {
+        setIsSuccess(props.response.login.user.success);
+      } else {
+        setIsSuccess(checkCookie() != null);
+      }
+    }
+  }, [props.response.login.user]);
+
+  function editPost() {
+    let updatedPost = props.post;
+    updatedPost["link"] = postUpdatedLink;
+    updatedPost["source"] = postUpdatedSource;
+    updatedPost["name"] = postUpdatedName;
+    props.dispatch(editPostAction(updatedPost));
+    setOpenPostEdit(false);
+  }
+
+  useEffect(() => {
+    getTagsForOnePost(props.post._id);
+    getCommentsForOnePost(props.post._id);
+  }, []);
+
+  function updateLinkAutomatically() {
+    let updatedPost = props.post;
+    // postUpdatedSource + " " + postUpdatedName,
+    props.dispatch(updateLinkAction(updatedPost));
+    //props.dispatch(getAllPostsAction());
   }
 
   function getCommentsForOnePost(postId) {
@@ -65,12 +106,12 @@ function Post(props) {
     if (comments.length > 0) {
       setCommentChain(
         <VideoCommentBlock
-            comments={comments}
-            currentUser={props.currentUser}
-            openCommentEdit={openCommentEdit}
-            commentUpdatedText={commentUpdatedText}
-            setCommentUpdatedText={setCommentUpdatedText}
-            setOpenCommentEdit={setOpenCommentEdit}
+          comments={comments}
+          currentUser={props.currentUser}
+          openCommentEdit={openCommentEdit}
+          commentUpdatedText={commentUpdatedText}
+          setCommentUpdatedText={setCommentUpdatedText}
+          setOpenCommentEdit={setOpenCommentEdit}
         ></VideoCommentBlock>
       );
     } else {
@@ -100,21 +141,9 @@ function Post(props) {
     }
   }, [props.response.comments.response]);
 
-  useEffect(() => {
-    props.dispatch(getCurrentUserAction());
-    setLoggedIn(checkCookie() != null);
-  }, []);
-
-  useEffect(() => {
-    if (props.response.login.user) {
-      //    console.log(props.backendData.login.user)
-      if (props.response.login.user.token != undefined) {
-        setIsSuccess(props.response.login.user.success);
-      } else {
-        setIsSuccess(checkCookie() != null);
-      }
-    }
-  }, [props.response.login.user]);
+  function getTagsForOnePost(postId) {
+    props.dispatch(getAllTagsForOnePostAction(postId));
+  }
 
   useEffect(() => {
     if (props.response.tags.response) {
@@ -141,70 +170,17 @@ function Post(props) {
       }
     }
   }, [props.response.tags.response]);
-  function removeUserFromTag(tag) {
-    /*
-    let category = tags.find(function (el) {
-      return el.text === tag.category;
-    })
-    if (category) {
-      props.dispatch(removeUserFromTagAction({ tag: category._id, user: props.currentUser, postID: props.post._id, text: category.text }));
-    }
-    */
-    props.dispatch(
-      removeUserFromTagAction({
-        tag: tag._id,
-        user: props.currentUser,
-        postID: props.post._id,
-        text: tag.text
-      })
-    );
-  }
-
-
-
-  function editPost() {
-    let updatedPost = props.post;
-    updatedPost["link"] = postUpdatedLink;
-    updatedPost["source"] = postUpdatedSource;
-    updatedPost["name"] = postUpdatedName;
-    props.dispatch(editPostAction(updatedPost));
-    setOpenPostEdit(false);
-  }
 
   useEffect(() => {
     if (visualTags.length > 0) {
       setTagChain(
-        <div className="postsTags">
-          {visualTags.slice(0, tagLength).map(function(tag) {
-            if (tag.emails.indexOf(props.currentUser) != -1) {
-              return (
-                <li
-                  className="tagBubble borderImage removeBubble smallTagBubble editableTagBubble"
-                  onClick={e => removeUserFromTag(tag)}
-                  key={tag._id}
-                >
-                  {tag.text}
-                  <i className="fas fa-times marginLeftIcon iconAction removeIcon"></i>
-                </li>
-              );
-            } else {
-              return (
-                <li
-                  className="tagBubble borderImage smallTagBubble"
-                  key={tag._id}
-                >
-                  {tag.text}
-                </li>
-              );
-            }
-          })}
-          {tagLength < visualTags.length && (
-            <i
-              className="fas fa-arrow-circle-right showMoreTags"
-              onClick={e => showMoreTags()}
-            ></i>
-          )}
-        </div>
+        <VideoTagBlock
+          visualTags={visualTags}
+          tagLength={tagLength}
+          currentUser={props.currentUser}
+          postID={props.post._id}
+          showMoreTags={showMoreTags}
+        ></VideoTagBlock>
       );
     } else {
       setTagChain(
@@ -214,17 +190,10 @@ function Post(props) {
   }, [visualTags, tagLength]);
 
   useEffect(() => {
-    getTagsForOnePost(props.post._id);
-    getCommentsForOnePost(props.post._id);
-  }, []);
-
-  useEffect(() => {
     let newArr = allTags.concat(props.allTags);
-    //   console.log(props.allTags);
     newArr = props.allTags.map(function(i) {
       return i._id;
     });
-    // console.log(newArr);
     setAllTags(newArr);
   }, [props.allTags]);
 
@@ -261,22 +230,15 @@ function Post(props) {
     }
   }, [tagToAdd, allTags]);
 
-  function updateLinkAutomatically() {
-    //console.log("TestupdateLinkAutomatically")
-    let updatedPost = props.post;
-    console.log(updatedPost);
-    // postUpdatedSource + " " + postUpdatedName,
-    props.dispatch(updateLinkAction(updatedPost));
-    //props.dispatch(getAllPostsAction());
-  }
-
   function showMoreTags() {
     setTagLength(tagLength + 10);
   }
 
   function onHandleTag(tag) {
     let localTagToAdd;
-    (tag != undefined && typeof tag != "object") ? (localTagToAdd = tag) : (localTagToAdd = tagToAdd);
+    tag != undefined && typeof tag != "object"
+      ? (localTagToAdd = tag)
+      : (localTagToAdd = tagToAdd);
     if (localTagToAdd != undefined && localTagToAdd != "") {
       localTagToAdd = localTagToAdd.toLowerCase();
       let _id = props.post._id;
@@ -298,15 +260,6 @@ function Post(props) {
       
       <    button onClick={() => onHandleTag()} className="btn btn-post btn-centered borderImage" type="submit">Post Tag</button>
           */
-
-  useEffect(() => {
-    if (copied) {
-      const timer = setTimeout(() => {
-        setCopied(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [copied]);
 
   return (
     <div className="borderImage postContainer">
@@ -368,8 +321,7 @@ function Post(props) {
           setModalOpen={props.setModalOpen}
           commentChain={commentChain}
           postID={props.post._id}
-        >
-        </VideoComments>
+        ></VideoComments>
       )}
     </div>
   );

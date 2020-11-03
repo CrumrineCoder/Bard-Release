@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -21,10 +21,6 @@ function videoComments(props) {
     props.dispatch(getAllPostsAction());
     setCommentToAdd("");
   }
-
-  useEffect(() => {
-    console.log(props);
-  }, []);
 
   return (
     <div className="postCommentContainer">

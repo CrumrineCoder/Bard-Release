@@ -4,7 +4,6 @@ User Stories to work on:
 * Need a way to be "casual" with it; eg. a list to just play in the bg without thinking about every song.
 
 Currently: 
-* Breaking apart Post.js so I can more easily edit it
 * Keep source when searching for tag
 * Don't get every post for all posts
 * Fix login state for NAV
