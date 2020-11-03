@@ -1,15 +1,11 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import {
-  getAllPostsAction,
-  commentAction,
   getAllCommentsForOnePostAction,
   getAllTagsForOnePostAction,
   tagAction,
   removeUserFromTagAction,
-  deleteCommentAction,
-  editCommentAction,
   editPostAction,
   updateLinkAction
 } from "../actions/linkActions";
@@ -19,26 +15,31 @@ import EditPost from "../components/postComponents/editPost";
 import VideoIcons from "../components/postComponents/videoIcons";
 import SectionHeaders from "../components/postComponents/sectionHeaders";
 import VideoTags from "../components/postComponents/videoTags";
+import VideoComments from "../components/postComponents/videoComments";
+import VideoCommentBlock from "../components/postComponents/videoCommentBlock";
 
 import tagCategories from "../utils/tagCategories";
 import { getCurrentUserAction } from "../actions/authenticationActions";
 import { checkCookie } from "../utils/cookies";
 
 function Post(props) {
+  const [commentUpdatedText, setCommentUpdatedText] = useState("");
+  const [commentChain, setCommentChain] = useState("");
+
+  const [openCommentEdit, setOpenCommentEdit] = useState(false);
+  const [comments, setComments] = useState("");
+
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
-  const [commentChain, setCommentChain] = useState("");
   const [tagChain, setTagChain] = useState("");
   const [playVideo, setPlayVideo] = useState(false);
   const [tags, setTags] = useState("");
-  const [comments, setComments] = useState("");
   const [tagToAdd, setTagToAdd] = useState("");
   const [existingTags, setExistingTags] = useState("");
-  const [commentToAdd, setCommentToAdd] = useState("");
   const [tagLength, setTagLength] = useState(10);
   const [visualTags, setVisualTags] = useState("");
-  const [commentUpdatedText, setCommentUpdatedText] = useState("");
-  const [openCommentEdit, setOpenCommentEdit] = useState(false);
+
+
   const [loggedIn, setLoggedIn] = useState();
 
   const [postUpdatedLink, setPostUpdatedLink] = useState(props.post.link);
@@ -52,13 +53,32 @@ function Post(props) {
 
   const [copied, setCopied] = useState(false);
 
+  function getTagsForOnePost(postId) {
+    props.dispatch(getAllTagsForOnePostAction(postId));
+  }
+
   function getCommentsForOnePost(postId) {
     props.dispatch(getAllCommentsForOnePostAction(postId));
   }
 
-  function getTagsForOnePost(postId) {
-    props.dispatch(getAllTagsForOnePostAction(postId));
-  }
+  useEffect(() => {
+    if (comments.length > 0) {
+      setCommentChain(
+        <VideoCommentBlock
+            comments={comments}
+            currentUser={props.currentUser}
+            openCommentEdit={openCommentEdit}
+            commentUpdatedText={commentUpdatedText}
+            setCommentUpdatedText={setCommentUpdatedText}
+            setOpenCommentEdit={setOpenCommentEdit}
+        ></VideoCommentBlock>
+      );
+    } else {
+      setCommentChain(
+        <p className="noContentDisclaimer">There are no notes yet.</p>
+      );
+    }
+  }, [comments, openCommentEdit, commentUpdatedText]);
 
   useEffect(() => {
     if (props.response.comments.response) {
@@ -140,15 +160,7 @@ function Post(props) {
     );
   }
 
-  function deleteComment(comment) {
-    props.dispatch(deleteCommentAction(comment));
-  }
 
-  function editComment(comment) {
-    comment["text"] = commentUpdatedText;
-    props.dispatch(editCommentAction(comment));
-    setOpenCommentEdit(false);
-  }
 
   function editPost() {
     let updatedPost = props.post;
@@ -200,100 +212,6 @@ function Post(props) {
       );
     }
   }, [visualTags, tagLength]);
-
-  useEffect(() => {
-    if (comments.length > 0) {
-      setCommentChain(
-        <div className="postsComments">
-          {comments.map(function(comment, index) {
-            if (comment.email == props.currentUser) {
-              if (openCommentEdit == comment._id) {
-                return (
-                  <label htmlFor="commentToBeEdited">
-                    <textarea
-                      autoFocus
-                      className="postCommentField borderImage"
-                      value={commentUpdatedText}
-                      rows="5"
-                      cols="25"
-                      autoComplete="off"
-                      onChange={e => setCommentUpdatedText(e.target.value)}
-                      type="commentToBeEdited"
-                      name="commentToBeEdited"
-                      id="commentToBeEdited"
-                    />
-                    <div className="editCommentButtonContainer">
-                      <button
-                        className="btn btn-post smallBtn borderImage"
-                        onClick={() => {
-                          editComment(comment);
-                        }}
-                      >
-                        Update
-                      </button>
-                      <button
-                        className="btn btn-vermillion smallBtn borderImage"
-                        onClick={() => {
-                          setOpenCommentEdit(false);
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </label>
-                );
-              } else {
-                return (
-                  <li
-                    className="commentArea commentEditArea"
-                    key={comment._id + index}
-                  >
-                    {comment.text}
-                    <span className="commentIcons">
-                      <i
-                        className="fas fa-edit marginLeftIcon iconAction editIcon"
-                        onClick={() => {
-                          setOpenCommentEdit(comment._id);
-                          setCommentUpdatedText(comment.text);
-                        }}
-                      ></i>
-                      <i
-                        className="fas fa-times marginLeftIcon iconAction removeIcon"
-                        onClick={() => deleteComment(comment)}
-                      ></i>
-                    </span>
-                  </li>
-                );
-              }
-            } else {
-              return (
-                <li className="commentArea" key={comment._id + index}>
-                  {comment.text}
-                </li>
-              );
-            }
-          })}
-        </div>
-      );
-    } else {
-      setCommentChain(
-        <p className="noContentDisclaimer">There are no notes yet.</p>
-      );
-    }
-  }, [comments, openCommentEdit, commentUpdatedText]);
-
-  function onHandleComment(event) {
-    event.preventDefault();
-    let comment = event.target.comment.value;
-    let _id = props.post._id;
-    const data = {
-      comment,
-      _id
-    };
-    props.dispatch(commentAction(data));
-    props.dispatch(getAllPostsAction());
-    setCommentToAdd("");
-  }
 
   useEffect(() => {
     getTagsForOnePost(props.post._id);
@@ -430,7 +348,7 @@ function Post(props) {
         section={section}
         comments={comments}
       ></SectionHeaders>
-
+      {loggedIn}
       {section == "tags" ? (
         <VideoTags
           tagChain={tagChain}
@@ -443,42 +361,15 @@ function Post(props) {
           setModalOpen={props.setModalOpen}
         ></VideoTags>
       ) : (
-        <div className="postCommentContainer">
-          {commentChain}
-          {loggedIn ? (
-            <form className="postDashboardContainer" onSubmit={onHandleComment}>
-              <div>
-                <label htmlFor="comment"></label>
-                <textarea
-                  className="postCommentField borderImage"
-                  rows="5"
-                  cols="30"
-                  placeholder="Use in source, how it worked in a game or theorization, specifics of emotions"
-                  value={commentToAdd}
-                  onChange={e => setCommentToAdd(e.target.value)}
-                  type="comment"
-                  name="comment"
-                  id="comment"
-                />
-              </div>
-              <div>
-                <button
-                  className="btn btn-post btn-centered borderImage"
-                  type="submit"
-                >
-                  Post Note
-                </button>
-              </div>
-            </form>
-          ) : (
-            <button
-              className="btn-post loginPromptButton borderImage"
-              onClick={e => props.setModalOpen(true)}
-            >
-              Add a Note
-            </button>
-          )}
-        </div>
+        <VideoComments
+          comments={comments}
+          currentUser={props.currentUser}
+          loggedIn={loggedIn}
+          setModalOpen={props.setModalOpen}
+          commentChain={commentChain}
+          postID={props.post._id}
+        >
+        </VideoComments>
       )}
     </div>
   );
