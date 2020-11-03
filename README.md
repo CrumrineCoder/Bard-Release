@@ -7,9 +7,9 @@ Currently:
 * Keep source when searching for tag
 * Don't get every post for all posts
 * Fix login state for NAV
+* Don't reload all posts when updating one
 
 Improvements:
-* Don't reload all posts when updating one
 * Iterations - tag a song as Final Fantasy 8 or 7, or Silent Hill 1, or 2 etc.
 * Handle non-Youtube links (like soundcloud)
 * Only get tags when needed, don't get all at once.

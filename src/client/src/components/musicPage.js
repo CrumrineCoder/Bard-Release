@@ -7,16 +7,13 @@ import {
   getAllTagsAction
 } from "../actions/linkActions";
 
-import InfiniteScroll from "react-infinite-scroller";
 
 import Post from "../container/Post";
-import MusicSearchBar from "./musicSearchBar";
 import LoginModal from "./loginModal";
 
 import { checkCookie } from "../utils/cookies";
 import { getCurrentUserAction } from "../actions/authenticationActions";
 import useInfiniteScroll from "./useInfiniteScroll";
-import { filter } from "minimatch";
 
 function MusicPage(props) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -35,10 +32,6 @@ function MusicPage(props) {
 
   const [amountOfPosts, setAmountOfPosts] = useState(6);
   const [showAllTags, setShowAllTags] = useState(false)
-  /*
-  const [loading, setLoading] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
-  */
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
@@ -247,9 +240,7 @@ function MusicPage(props) {
   }
 
   function _handleKeyDown(e) {
-    //  props.dispatch(turnoffOverlayAction());
     if (e.key === "Enter") {
-      onSearchTag();
     }
   }
 
@@ -280,6 +271,7 @@ function MusicPage(props) {
         setModalOpen={setModalOpen}
         redirect={redirect}
       ></LoginModal>
+      
       <div className="musicSearchContainer">
         <input
           className="musicListingSourceSearchBar borderImage"
