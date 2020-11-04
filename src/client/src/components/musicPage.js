@@ -7,9 +7,9 @@ import {
   getAllTagsAction
 } from "../actions/linkActions";
 
-
 import Post from "../container/Post";
 import LoginModal from "./loginModal";
+import SourceSearchBlock from "./musicPageComponents/sourceSearchBlock";
 
 import { checkCookie } from "../utils/cookies";
 import { getCurrentUserAction } from "../actions/authenticationActions";
@@ -31,7 +31,7 @@ function MusicPage(props) {
   const [sourcesToFilterBy, setSourcesToFilterBy] = useState("");
 
   const [amountOfPosts, setAmountOfPosts] = useState(6);
-  const [showAllTags, setShowAllTags] = useState(false)
+  const [showAllTags, setShowAllTags] = useState(false);
 
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [finalizedLength, setFinalizedLength] = useState(0);
@@ -44,6 +44,42 @@ function MusicPage(props) {
     return a;
   }
 
+  function redirect(location) {
+    props.history.push(location);
+  }
+
+  function fetchMoreListItems() {
+    if (amountOfPosts < filteredPosts.length) {
+      setTimeout(() => {
+        //   console.log("more posts");
+        setAmountOfPosts(amountOfPosts + 3);
+        setIsFetching(false);
+      }, 0);
+    }
+  }
+
+  function reverseSorting() {
+    console.log("test");
+    let temp = unfilteredPosts.reverse();
+    setFilteredPosts(
+      temp
+        .reverse()
+        .map(post =>
+          post.link.replace(
+            "https://www.youtube.com/watch?v=",
+            "https://www.youtube.com/embed/"
+          )
+        )
+    );
+    setUnfilteredPosts(temp.reverse());
+  }
+
+  function _handleKeyDown(e) {
+    if (e.key === "Enter") {
+    }
+  }
+
+  // On initial load, get the current user, check if we're logged in, get all posts, and get all tags.
   useEffect(() => {
     props.dispatch(getCurrentUserAction());
     setLoggedIn(checkCookie() != null);
@@ -54,6 +90,7 @@ function MusicPage(props) {
     props.dispatch(getAllTagsAction(data));
   }, []);
 
+  // Whenever the global user changes, change the current user.
   useEffect(() => {
     if (props.response.login) {
       if (props.response.login.user) {
@@ -64,15 +101,9 @@ function MusicPage(props) {
     }
   }, [props.response.login.user]);
 
-  function redirect(location) {
-    props.history.push(location);
-  }
-
   useEffect(() => {
     if (filteredPosts && unfilteredPosts) {
       let postsToTransform = unfilteredPosts;
-
-      //  let finalizedPosts = postsToTransform;
       let finalizedPosts;
 
       if (props.response.tags.response) {
@@ -93,20 +124,17 @@ function MusicPage(props) {
               });
               setAlphabetAllTags(sorted.slice());
               let returnedArray = shuffle(props.response.tags.response.tag);
-              //   console.log(returnedArray);
               setAllTags(returnedArray);
             }
           }
         }
       }
-      // console.log(props.response.dashboard.response);
-      //  console.log(props.response.tags.response);
+
       if (props.response.tags.response) {
         if (
           props.response.tags.response.message == "Search by tag done." &&
           props.response.tags.response.tag.length == 0
         ) {
-          //  console.log("true");
           setPostsContent(
             <h1 className="noPostsDisclaimer">
               There are no posts to display for this search.
@@ -130,9 +158,8 @@ function MusicPage(props) {
           }
         }
       }
-      //  console.log("bottom");
-      //    console.log(allTags);
       let sources = sourcesToFilterBy.split(",");
+
       sources = sources.map(function(value) {
         return value.toLowerCase().replace(/\s+/g, "");
       });
@@ -144,6 +171,13 @@ function MusicPage(props) {
         });
         if (postsWithSourceInThem.length) {
           finalizedPosts = postsWithSourceInThem;
+        } else if (sources[0].replace('""', '').length != 0) {
+          setPostsContent(
+            <h1 className="noPostsDisclaimer">
+              There are no posts to display for this source.
+            </h1>
+          );
+          return;
         } else {
           finalizedPosts = postsToTransform;
         }
@@ -151,7 +185,6 @@ function MusicPage(props) {
       setFinalizedLength(finalizedPosts.length);
 
       let cut = finalizedPosts.slice(0, amountOfPosts);
-
       setPostsContent(
         <div className="posts">
           {cut.map(post => (
@@ -180,7 +213,6 @@ function MusicPage(props) {
       setIsSuccess(props.response.dashboard.response.success);
       setMessage(props.response.dashboard.response.message);
       if (props.response.dashboard.response.post) {
-        //    console.log(props.response.dashboard.response)
         setUnfilteredPosts(props.response.dashboard.response.post);
         setFilteredPosts(
           props.response.dashboard.response.post.map(post =>
@@ -190,23 +222,19 @@ function MusicPage(props) {
             )
           )
         );
-        // console.log(props.response.dashboard.response.post);
         setAmountOfPosts(6);
       }
     }
   }, [props.response.dashboard.response]);
 
   useEffect(() => {
-    //  console.log(props.response.tags.response)
     if (props.response.tags.response) {
       if (props.response.tags.response.message == "Search by tag done.") {
-        // console.log("HEYA HERE'S THE TAGS", props.response.tags.response.tag);
-
         let postIDs = props.response.tags.response.tag.map(function(a) {
           return a.postID;
         });
-        //    console.log(postIDs);
         if (postIDs.length > 0) {
+          console.log("tag");
           props.dispatch(getPostsByIDAction(postIDs));
         } // else do something
         // Now we have the post IDs, we have to find all posts by ID.
@@ -214,103 +242,26 @@ function MusicPage(props) {
     }
   }, [props.response.tags.response]);
 
-  function fetchMoreListItems() {
-    if (amountOfPosts < filteredPosts.length) {
-      setTimeout(() => {
-        //   console.log("more posts");
-        setAmountOfPosts(amountOfPosts + 3);
-        setIsFetching(false);
-      }, 0);
-    }
-  }
-
-  function reverseSorting() {
-    let temp = unfilteredPosts.reverse();
-    setFilteredPosts(
-      temp
-        .reverse()
-        .map(post =>
-          post.link.replace(
-            "https://www.youtube.com/watch?v=",
-            "https://www.youtube.com/embed/"
-          )
-        )
-    );
-    setUnfilteredPosts(temp.reverse());
-  }
-
-  function _handleKeyDown(e) {
-    if (e.key === "Enter") {
-    }
-  }
-
   useEffect(() => {}, [sourcesToFilterBy]);
-/*
- <div className="allTagContainer">
-        {alphabetAllTags.map(function(tag) {
-          return (
-            <li
-              className="tagBubble borderImage smallTagBubble addBubble editableTagBubble"
-              onClick={() => {
-                submitTag(tag._id);
-              }}
-              key={tag._id}
-            >
-              {tag._id}
-              <i className="fas fa-plus iconAction"></i>
-            </li>
-          );
-        })}
-      </div>
-      */
+
   return (
     <div className="musicPageContainer">
-     
       <LoginModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         redirect={redirect}
       ></LoginModal>
-      
-      <div className="musicSearchContainer">
-        <input
-          className="musicListingSourceSearchBar borderImage"
-          placeholder="Search by sources [separated by commas]"
-          onKeyDown={_handleKeyDown}
-          autoComplete="off"
-          value={sourcesToFilterBy}
-          onChange={e => setSourcesToFilterBy(e.target.value)}
-          type="searchSource"
-          name="searchSource"
-          id="searchSource"
-        ></input>
-      </div>
-      <button
-        className="reverseSortingButton borderImage btn-pumpkin"
-        onClick={reverseSorting}
-      >
-        <i className="fas fa-sort"></i> Reverse Sorting
-      </button>
-      <button
-        className="reverseSortingButton borderImage btn-pumpkin"
-        onClick={() => {setShowAllTags(!showAllTags)}}
-      >
-       <i class="fas fa-tags"></i> All Tags
-      </button>
-      {showAllTags && alphabetAllTags.map(function(tag) {
-          return (
-            <li
-              className="tagBubble borderImage smallTagBubble"
-              onClick={() => {
-                submitTag(tag._id);
-              }}
-              key={tag._id}
-            >
-              {tag._id}
-             
-            </li>
-          );
-        })}
+
+      <SourceSearchBlock
+        setSourcesToFilterBy={setSourcesToFilterBy}
+        _handleKeyDown={_handleKeyDown}
+        sourcesToFilterBy={sourcesToFilterBy}
+        setShowAllTags={setShowAllTags}
+        showAllTags={showAllTags}
+        alphabetAllTags={alphabetAllTags}
+        reverseSorting={reverseSorting}
+      ></SourceSearchBlock>
+
       {postsContent}
       {isFetching && amountOfPosts < finalizedLength && (
         <Fragment>

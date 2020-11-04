@@ -12,10 +12,6 @@ function HomePage(props) {
     const [recommendedTags, setRecommendedTags] = useState([]);
 
     function submitTag(tag) {
-       /* props.history.push({
-            pathname: '/music',
-            state: tag
-        }) */
         props.dispatch(addSearchTagAction(tag));
     }
 

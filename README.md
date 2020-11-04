@@ -4,12 +4,25 @@ User Stories to work on:
 * Need a way to be "casual" with it; eg. a list to just play in the bg without thinking about every song.
 
 Currently: 
-* Keep source when searching for tag
 * Don't get every post for all posts
-* Fix login state for NAV
+* Fix login state for NAV (B/c we don't reload it everytime the user logs in and out, we don't get the new data)
+  useEffect(() => {
+    if (props.response.login) {
+      if (props.response.login.user) {
+        if (props.response.login.user.user) {
+          setCurrentUser(props.response.login.user.user);
+        }
+      }
+    }
+  }, [props.response.login.user]);
 * Don't reload all posts when updating one
 
 Improvements:
+* The main page should only have 90% height, indication of the posts below. 
+* Sort by Alphabetical sources
+* Show all sources avaliable.
+* Autocomplete sources
+* Reload post after getting a new link
 * Iterations - tag a song as Final Fantasy 8 or 7, or Silent Hill 1, or 2 etc.
 * Handle non-Youtube links (like soundcloud)
 * Only get tags when needed, don't get all at once.
@@ -61,6 +74,8 @@ Features to Add:
 * Recommended Tags
 
 **DONE!!**
+* Keep source when searching for tag
+* Break apart Post.js
 * Show all Tags mode 
 * Stop site from logging out user automtatically after 1 hr. 
 * Close autocomplete 
